@@ -1,1 +1,1 @@
-console.log("Kleine Deutschwelt");
+console.log("Willkommen bei Kleine Deutschwelt!");
