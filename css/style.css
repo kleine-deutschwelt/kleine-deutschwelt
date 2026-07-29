@@ -1,0 +1,41 @@
+/* Kleine Deutschwelt – stilul principal */
+
+:root {
+  --background: #fffaf1;
+  --navy: #0c3553;
+  --navy-light: #164d70;
+
+  --yellow: #ffd45a;
+  --orange: #ff9f43;
+  --coral: #ff6b57;
+  --green: #8bcf73;
+  --blue: #79c5ef;
+  --purple: #b798e6;
+  --pink: #f5a4bd;
+
+  --text: #17324d;
+  --white: #ffffff;
+  --shadow: 0 10px 28px rgba(53, 63, 75, 0.12);
+  --radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+  font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+}
+
+button,
+a {
+  font-family: inherit;
+}
