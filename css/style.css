@@ -1,41 +1,1668 @@
-/* Kleine Deutschwelt – stilul principal */
+/* ==================================================
+   KLEINE DEUTSCHWELT
+   Home Page
+================================================== */
+
+
+/* ---------- VARIABILE BRAND ---------- */
 
 :root {
-  --background: #fffaf1;
-  --navy: #0c3553;
-  --navy-light: #164d70;
+    --navy: #082f4f;
+    --navy-light: #12486d;
 
-  --yellow: #ffd45a;
-  --orange: #ff9f43;
-  --coral: #ff6b57;
-  --green: #8bcf73;
-  --blue: #79c5ef;
-  --purple: #b798e6;
-  --pink: #f5a4bd;
+    --red: #f0442f;
+    --red-dark: #d92e20;
 
-  --text: #17324d;
-  --white: #ffffff;
-  --shadow: 0 10px 28px rgba(53, 63, 75, 0.12);
-  --radius: 24px;
+    --yellow: #ffd452;
+    --yellow-dark: #f5b91c;
+
+    --blue: #59b8ef;
+    --blue-light: #dff4ff;
+
+    --green: #53aa3c;
+    --purple: #8b4fc5;
+    --orange: #ff8a2a;
+    --pink: #ed5d8d;
+
+    --cream: #fff9ef;
+    --cream-dark: #f7edda;
+    --white: #ffffff;
+
+    --text: #17334a;
+    --muted: #607386;
+
+    --sidebar-width: 250px;
+
+    --radius-small: 14px;
+    --radius-medium: 22px;
+    --radius-large: 30px;
+
+    --shadow-small:
+        0 5px 14px rgba(27, 55, 80, 0.08);
+
+    --shadow-medium:
+        0 12px 30px rgba(27, 55, 80, 0.12);
+
+    --shadow-large:
+        0 18px 45px rgba(27, 55, 80, 0.16);
 }
 
+
+/* ---------- RESET ---------- */
+
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
 }
 
 body {
-  margin: 0;
-  min-height: 100vh;
-  background: var(--background);
-  color: var(--text);
-  font-family: "Comic Sans MS", "Trebuchet MS", Arial, sans-serif;
+    min-height: 100vh;
+
+    font-family:
+        "Nunito",
+        Arial,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(117, 205, 255, 0.22),
+            transparent 35%
+        ),
+        var(--cream);
+
+    overflow-x: hidden;
 }
 
-button,
+img {
+    max-width: 100%;
+}
+
 a {
-  font-family: inherit;
+    color: inherit;
+}
+
+
+/* ---------- MENIU MOBIL ---------- */
+
+.menu-toggle {
+    display: none;
+}
+
+.mobile-header {
+    display: none;
+}
+
+.sidebar-overlay {
+    display: none;
+}
+
+
+/* ==================================================
+   SIDEBAR
+================================================== */
+
+.sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+    bottom: 0;
+
+    width: var(--sidebar-width);
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 20px 18px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #082f4f 0%,
+            #06283f 100%
+        );
+
+    color: var(--white);
+
+    border-radius: 0 28px 28px 0;
+
+    box-shadow:
+        10px 0 35px rgba(6, 40, 63, 0.18);
+
+    overflow-y: auto;
+
+    z-index: 1000;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 10px;
+}
+
+.sidebar-top {
+    position: relative;
+}
+
+.sidebar-logo {
+    display: block;
+
+    padding: 8px 6px 18px;
+
+    text-align: center;
+}
+
+.sidebar-logo img {
+    width: 200px;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.sidebar-close {
+    display: none;
+}
+
+
+/* ---------- NAVIGAȚIE ---------- */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+
+    gap: 6px;
+}
+
+.nav-link,
+.nav-section-title {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    min-height: 42px;
+
+    padding: 9px 12px;
+
+    font-family:
+        "Baloo 2",
+        "Nunito",
+        sans-serif;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    border-radius: 13px;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.94);
+
+    text-decoration: none;
+
+    transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.11);
+
+    transform: translateX(4px);
+}
+
+.nav-link.active {
+    color: var(--navy);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ffe777,
+            #ffc83d
+        );
+
+    box-shadow:
+        0 8px 20px rgba(255, 200, 61, 0.25);
+}
+
+.nav-link-highlight {
+    color: var(--yellow);
+
+    background: rgba(255, 255, 255, 0.07);
+}
+
+.nav-icon {
+    width: 24px;
+    flex-shrink: 0;
+
+    text-align: center;
+}
+
+.nav-arrow {
+    margin-left: auto;
+
+    font-size: 24px;
+}
+
+.nav-group {
+    margin: 4px 0;
+}
+
+.nav-section-title {
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.nav-submenu {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 2px;
+
+    margin: 2px 0 8px 11px;
+    padding-left: 13px;
+
+    border-left:
+        1px solid rgba(255, 255, 255, 0.14);
+}
+
+.nav-submenu a {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 7px 8px;
+
+    color: rgba(255, 255, 255, 0.9);
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.nav-submenu a:hover {
+    background: rgba(255, 255, 255, 0.1);
+
+    transform: translateX(4px);
+}
+
+.future-link {
+    opacity: 0.85;
+}
+
+
+/* ---------- BUTON REALIZĂRI ---------- */
+
+.achievements-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+    padding: 12px 15px;
+
+    color: var(--white);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #7947ba,
+            #a347ce
+        );
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 22px rgba(120, 70, 185, 0.28);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.achievements-button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 14px 28px rgba(120, 70, 185, 0.36);
+}
+
+.sidebar-decoration {
+    margin-top: auto;
+    padding-top: 25px;
+
+    color: var(--yellow);
+
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-align: center;
+}
+
+
+/* ==================================================
+   MAIN CONTENT
+================================================== */
+
+.main-content {
+    width: calc(100% - var(--sidebar-width));
+
+    margin-left: var(--sidebar-width);
+
+    padding: 18px 22px 30px;
+}
+
+
+/* ==================================================
+   BANNER
+================================================== */
+
+.home-banner {
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    background: var(--blue-light);
+
+    border-radius: var(--radius-large);
+
+    box-shadow: var(--shadow-medium);
+
+    overflow: hidden;
+}
+
+.home-banner img {
+    display: block;
+
+    width: 100%;
+    min-height: 230px;
+    max-height: 410px;
+
+    object-fit: cover;
+    object-position: center;
+}
+
+
+/* ==================================================
+   PANOURI DASHBOARD
+================================================== */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns:
+        minmax(380px, 1.65fr)
+        minmax(280px, 0.9fr)
+        minmax(250px, 0.9fr);
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+}
+
+.panel {
+    position: relative;
+
+    min-height: 275px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.98),
+            rgba(255, 250, 240, 0.98)
+        );
+
+    border:
+        1px solid rgba(230, 212, 184, 0.75);
+
+    border-radius: var(--radius-medium);
+
+    box-shadow: var(--shadow-small);
+
+    overflow: hidden;
+}
+
+
+/* ---------- WELCOME ---------- */
+
+.welcome-panel {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.1fr)
+        minmax(170px, 0.75fr);
+
+    align-items: center;
+
+    padding: 26px 20px 20px 30px;
+}
+
+.welcome-content {
+    position: relative;
+    z-index: 2;
+}
+
+.section-label,
+.eyebrow,
+.lesson-number,
+.chapter-tag {
+    display: inline-flex;
+
+    align-items: center;
+
+    width: fit-content;
+
+    color: var(--red-dark);
+
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.welcome-panel h1 {
+    max-width: 570px;
+
+    margin: 4px 0 12px;
+
+    color: var(--navy);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: clamp(27px, 2.2vw, 39px);
+    line-height: 1.04;
+}
+
+.welcome-panel p {
+    max-width: 540px;
+
+    margin-bottom: 19px;
+
+    color: #304b60;
+
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.65;
+}
+
+.primary-button {
+    display: inline-flex;
+    align-items: center;
+
+    gap: 9px;
+
+    padding: 13px 20px;
+
+    color: var(--white);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 17px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f94a35,
+            #e93121
+        );
+
+    border-radius: 13px;
+
+    box-shadow:
+        0 10px 22px rgba(232, 49, 33, 0.24);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.primary-button:hover {
+    transform: translateY(-3px) scale(1.02);
+
+    box-shadow:
+        0 14px 28px rgba(232, 49, 33, 0.32);
+}
+
+.welcome-image {
+    align-self: end;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+
+    min-height: 225px;
+}
+
+.welcome-image img {
+    width: 230px;
+    max-height: 245px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 10px 12px rgba(23, 51, 74, 0.12)
+        );
+
+    animation:
+        foxFloat 4s ease-in-out infinite;
+}
+
+
+/* ---------- PROGRES ---------- */
+
+.progress-panel {
+    padding: 22px;
+}
+
+.panel-heading {
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    margin-bottom: 18px;
+}
+
+.heading-icon {
+    font-size: 28px;
+}
+
+.panel-heading h2,
+.daily-goal-panel h2 {
+    color: var(--navy);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 22px;
+    line-height: 1.15;
+}
+
+.progress-list {
+    display: flex;
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.progress-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 12px;
+
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.progress-track {
+    height: 9px;
+
+    background: #ece6db;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+}
+
+.progress-value {
+    width: 0;
+    height: 100%;
+
+    background: var(--blue);
+
+    border-radius: inherit;
+
+    transition: width 0.8s ease;
+}
+
+.progress-starter {
+    width: 40%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #75bd39,
+            #4a9e2f
+        );
+}
+
+.progress-kapitel-1 {
+    width: 15%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #7598de,
+            #587ac7
+        );
+}
+
+
+/* ---------- OBIECTIV ZILNIC ---------- */
+
+.daily-goal-panel {
+    display: grid;
+
+    grid-template-columns:
+        minmax(130px, 0.95fr)
+        minmax(110px, 0.8fr);
+
+    align-items: end;
+
+    padding: 22px 10px 0 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #f0faff,
+            #dff4ff
+        );
+}
+
+.daily-goal-content {
+    align-self: start;
+}
+
+.daily-goal-panel h2 {
+    margin: 8px 0 13px;
+
+    font-size: 20px;
+}
+
+.minutes-circle {
+    width: 102px;
+    height: 102px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffefb,
+            #fff2d7
+        );
+
+    border:
+        1px solid rgba(232, 205, 157, 0.6);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 8px 18px rgba(55, 96, 126, 0.11);
+}
+
+.minutes-circle strong {
+    color: var(--red);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 41px;
+    line-height: 0.9;
+}
+
+.minutes-circle span {
+    color: var(--red-dark);
+
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.daily-goal-panel p {
+    color: var(--muted);
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.daily-goal-image {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.daily-goal-image img {
+    width: 180px;
+    max-height: 220px;
+
+    object-fit: contain;
+
+    filter:
+        drop-shadow(
+            0 10px 10px rgba(23, 51, 74, 0.12)
+        );
+}
+
+
+/* ==================================================
+   SECȚIUNI CURS
+================================================== */
+
+.course-section {
+    margin-top: 26px;
+
+    scroll-margin-top: 20px;
+}
+
+.section-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 22px;
+
+    margin-bottom: 12px;
+    padding: 0 6px;
+}
+
+.section-heading h2 {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    color: var(--navy);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 30px;
+    line-height: 1;
+}
+
+.section-heading p {
+    max-width: 480px;
+
+    color: var(--muted);
+
+    font-size: 14px;
+    font-weight: 700;
+    text-align: right;
+}
+
+
+/* ==================================================
+   CARDURI STARTER
+================================================== */
+
+.lesson-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, minmax(0, 1fr));
+
+    gap: 14px;
+}
+
+.lesson-card {
+    position: relative;
+
+    min-width: 0;
+    min-height: 275px;
+
+    display: flex;
+    flex-direction: column;
+
+    border:
+        1px solid rgba(28, 65, 89, 0.09);
+
+    border-radius: 18px;
+
+    box-shadow: var(--shadow-small);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.lesson-card:hover {
+    transform:
+        translateY(-7px)
+        scale(1.015);
+
+    box-shadow: var(--shadow-medium);
+}
+
+.lesson-card-image {
+    min-height: 102px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: clamp(34px, 3.2vw, 57px);
+    font-weight: 800;
+    letter-spacing: 2px;
+
+    background: rgba(255, 255, 255, 0.45);
+}
+
+.lesson-card-content {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 15px;
+}
+
+.lesson-card h3 {
+    margin: 3px 0 6px;
+
+    color: var(--navy);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 21px;
+    line-height: 1.1;
+}
+
+.lesson-card p {
+    flex: 1;
+
+    margin-bottom: 13px;
+
+    color: #405a6e;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.lesson-card a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    width: 100%;
+
+    padding: 9px 12px;
+
+    color: var(--white);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    background: var(--card-accent);
+
+    border-radius: 11px;
+
+    transition:
+        filter 0.2s ease,
+        transform 0.2s ease;
+}
+
+.lesson-card a:hover {
+    filter: brightness(1.07);
+
+    transform: scale(1.02);
+}
+
+.lesson-card a span {
+    font-size: 20px;
+    line-height: 1;
+}
+
+
+/* ---------- CULORI CARDURI ---------- */
+
+.card-green {
+    --card-accent: #4c9f27;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eff9d6,
+            #f8fce9
+        );
+}
+
+.card-yellow {
+    --card-accent: #f1ae00;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff0bd,
+            #fff8df
+        );
+}
+
+.card-blue {
+    --card-accent: #167dcc;
+
+    background:
+        linear-gradient(
+            180deg,
+            #dceeff,
+            #eff8ff
+        );
+}
+
+.card-purple {
+    --card-accent: #8445be;
+
+    background:
+        linear-gradient(
+            180deg,
+            #eadcff,
+            #f7f0ff
+        );
+}
+
+.card-orange {
+    --card-accent: #f26f16;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffe4c7,
+            #fff4e6
+        );
+}
+
+.card-mint {
+    --card-accent: #29944b;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d9f2df,
+            #effaf2
+        );
+}
+
+.card-red {
+    --card-accent: #ef4935;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffddd8,
+            #fff0ee
+        );
+}
+
+.card-pink {
+    --card-accent: #e84d80;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fbdce7,
+            #fff1f6
+        );
+}
+
+
+/* ==================================================
+   KAPITEL 1
+================================================== */
+
+.chapter-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.25fr
+        1.25fr
+        0.9fr
+        1fr;
+
+    gap: 14px;
+}
+
+.chapter-card {
+    position: relative;
+
+    min-height: 180px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 19px;
+
+    border:
+        1px solid rgba(28, 65, 89, 0.09);
+
+    border-radius: 19px;
+
+    box-shadow: var(--shadow-small);
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.chapter-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: var(--shadow-medium);
+}
+
+.chapter-family {
+    background:
+        linear-gradient(
+            135deg,
+            #dff4ff,
+            #eff9ff
+        );
+}
+
+.chapter-world {
+    background:
+        linear-gradient(
+            135deg,
+            #e1f6df,
+            #f0faee
+        );
+}
+
+.chapter-visual {
+    width: 115px;
+    min-width: 115px;
+    height: 115px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-right: 17px;
+
+    font-size: 55px;
+
+    background: rgba(255, 255, 255, 0.55);
+
+    border-radius: 50%;
+}
+
+.chapter-content {
+    display: flex;
+    flex-direction: column;
+
+    min-width: 0;
+}
+
+.chapter-content h3,
+.coming-soon-card h3,
+.tip-card h3 {
+    margin: 4px 0 7px;
+
+    color: var(--navy);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 21px;
+    line-height: 1.1;
+}
+
+.chapter-content p,
+.coming-soon-card p,
+.tip-card p {
+    margin-bottom: 11px;
+
+    color: #405a6e;
+
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.45;
+}
+
+.chapter-content a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 7px;
+
+    width: fit-content;
+
+    padding: 8px 14px;
+
+    color: var(--white);
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    background: var(--blue);
+
+    border-radius: 10px;
+}
+
+.chapter-world .chapter-content a {
+    background: #2a994a;
+}
+
+.coming-soon-card {
+    justify-content: center;
+
+    gap: 15px;
+
+    text-align: left;
+
+    background:
+        rgba(255, 255, 255, 0.55);
+
+    border:
+        2px dashed rgba(216, 144, 42, 0.55);
+
+    box-shadow: none;
+}
+
+.plus-icon {
+    width: 62px;
+    min-width: 62px;
+    height: 62px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #b57925;
+
+    font-size: 45px;
+    font-weight: 400;
+
+    border:
+        3px solid #b57925;
+
+    border-radius: 50%;
+}
+
+.tip-card {
+    align-items: stretch;
+
+    padding: 17px 10px 0 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #efe0ff,
+            #f9efff
+        );
+}
+
+.tip-content {
+    width: 62%;
+}
+
+.tip-card img {
+    position: absolute;
+
+    right: -2px;
+    bottom: -4px;
+
+    width: 120px;
+    max-height: 160px;
+
+    object-fit: contain;
+}
+
+
+/* ==================================================
+   FOOTER
+================================================== */
+
+.site-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 9px;
+
+    margin-top: 30px;
+    padding: 17px 10px 5px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.site-footer img {
+    width: 29px;
+    height: 29px;
+
+    object-fit: contain;
+}
+
+
+/* ==================================================
+   ANIMAȚII
+================================================== */
+
+@keyframes foxFloat {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* ==================================================
+   RESPONSIVE – LAPTOP
+================================================== */
+
+@media (max-width: 1350px) {
+
+    :root {
+        --sidebar-width: 230px;
+    }
+
+    .main-content {
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns:
+            minmax(360px, 1.5fr)
+            minmax(250px, 0.9fr);
+    }
+
+    .daily-goal-panel {
+        grid-column: span 2;
+        min-height: 230px;
+    }
+
+    .daily-goal-image img {
+        width: 190px;
+    }
+
+    .lesson-grid {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+
+    .chapter-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ==================================================
+   RESPONSIVE – TABLETĂ
+================================================== */
+
+@media (max-width: 1050px) {
+
+    .lesson-grid {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+    .welcome-panel {
+        grid-template-columns:
+            minmax(0, 1fr)
+            190px;
+    }
+
+    .welcome-image img {
+        width: 190px;
+    }
+}
+
+
+/* ==================================================
+   RESPONSIVE – TELEFON / TABLETĂ MICĂ
+================================================== */
+
+@media (max-width: 800px) {
+
+    body {
+        padding-top: 68px;
+    }
+
+    .mobile-header {
+        position: fixed;
+
+        top: 0;
+        left: 0;
+        right: 0;
+
+        height: 68px;
+
+        display: flex;
+        align-items: center;
+
+        gap: 13px;
+
+        padding: 8px 15px;
+
+        background:
+            linear-gradient(
+                135deg,
+                #082f4f,
+                #12486d
+            );
+
+        box-shadow:
+            0 7px 20px rgba(6, 40, 63, 0.22);
+
+        z-index: 1100;
+    }
+
+    .mobile-menu-button {
+        width: 43px;
+        height: 43px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        color: var(--navy);
+
+        font-size: 26px;
+
+        background: var(--yellow);
+
+        border-radius: 12px;
+
+        cursor: pointer;
+    }
+
+    .mobile-brand {
+        display: flex;
+        align-items: center;
+
+        gap: 9px;
+
+        color: var(--white);
+
+        font-family:
+            "Baloo 2",
+            sans-serif;
+
+        font-size: 20px;
+        font-weight: 700;
+
+        text-decoration: none;
+    }
+
+    .mobile-brand img {
+        width: 47px;
+        height: 47px;
+
+        object-fit: contain;
+    }
+
+    .sidebar {
+        width: min(290px, 86vw);
+
+        transform: translateX(-105%);
+
+        border-radius: 0 24px 24px 0;
+
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar-close {
+        position: absolute;
+
+        top: -2px;
+        right: -2px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 36px;
+        height: 36px;
+
+        color: var(--navy);
+
+        font-size: 27px;
+
+        background: var(--yellow);
+
+        border-radius: 50%;
+
+        cursor: pointer;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+
+        inset: 0;
+
+        display: block;
+
+        background:
+            rgba(4, 29, 47, 0.58);
+
+        opacity: 0;
+        visibility: hidden;
+
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+
+        z-index: 950;
+    }
+
+    .menu-toggle:checked ~ .sidebar {
+        transform: translateX(0);
+    }
+
+    .menu-toggle:checked ~ .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .main-content {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 13px;
+    }
+
+    .home-banner {
+        border-radius: 20px;
+    }
+
+    .home-banner img {
+        min-height: 180px;
+
+        object-position: center;
+    }
+
+    .dashboard-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .daily-goal-panel {
+        grid-column: auto;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .section-heading p {
+        text-align: left;
+    }
+
+    .chapter-grid {
+        grid-template-columns:
+            1fr;
+    }
+}
+
+
+/* ==================================================
+   RESPONSIVE – TELEFON
+================================================== */
+
+@media (max-width: 560px) {
+
+    .main-content {
+        padding: 10px;
+    }
+
+    .mobile-brand span {
+        font-size: 17px;
+    }
+
+    .home-banner img {
+        min-height: 145px;
+        max-height: 230px;
+    }
+
+    .welcome-panel {
+        display: flex;
+        flex-direction: column;
+
+        padding: 23px 20px 0;
+    }
+
+    .welcome-panel h1 {
+        font-size: 29px;
+    }
+
+    .welcome-image {
+        width: 100%;
+        min-height: 190px;
+    }
+
+    .welcome-image img {
+        width: 200px;
+        max-height: 205px;
+    }
+
+    .daily-goal-panel {
+        grid-template-columns:
+            1fr
+            120px;
+    }
+
+    .daily-goal-image img {
+        width: 135px;
+    }
+
+    .lesson-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .lesson-card {
+        min-height: 255px;
+    }
+
+    .lesson-card-image {
+        min-height: 92px;
+    }
+
+    .chapter-card {
+        min-height: 170px;
+    }
+
+    .chapter-visual {
+        width: 90px;
+        min-width: 90px;
+        height: 90px;
+
+        margin-right: 13px;
+
+        font-size: 44px;
+    }
+
+    .tip-card {
+        min-height: 195px;
+    }
+
+    .site-footer {
+        flex-direction: column;
+
+        gap: 4px;
+    }
 }
