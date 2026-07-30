@@ -1,841 +1,1026 @@
 <!DOCTYPE html>
 <html lang="de">
-
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <meta
-        name="description"
-        content="Kleine Deutschwelt – Deutsch lernen mit Spaß für Kinder."
-    >
+  <meta
+    name="description"
+    content="Kleine Deutschwelt – Deutsch lernen mit Spaß für Kinder."
+  >
 
-    <title>Kleine Deutschwelt</title>
+  <title>Kleine Deutschwelt – Deutsch lernen mit Spaß!</title>
 
-    <!-- Fonturi -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
-        rel="stylesheet"
-    >
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  >
 
-    <!-- Favicon -->
-    <link
-        rel="icon"
-        type="image/png"
-        href="assets/images/logo/logo-icon.png"
-    >
-
-    <!-- CSS -->
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
-    <!-- Control pentru meniul mobil -->
-    <input
-        type="checkbox"
-        id="menu-toggle"
-        class="menu-toggle"
-    >
+  <div class="app-shell">
 
+    <!-- ======================================================
+         SIDEBAR
+    ======================================================= -->
 
-    <!-- Bara mobilă -->
-    <header class="mobile-header">
+    <aside class="sidebar" id="sidebar">
 
-        <label
-            for="menu-toggle"
-            class="mobile-menu-button"
-            aria-label="Menü öffnen"
+      <div class="sidebar__brand">
+
+        <a
+          href="index.html"
+          class="sidebar__logo-link"
+          aria-label="Kleine Deutschwelt Home"
         >
-            ☰
-        </label>
-
-        <a href="index.html" class="mobile-brand">
-
-            <img
-                src="assets/images/logo/logo-icon.png"
-                alt="Kleine Deutschwelt"
-            >
-
-            <span>Kleine Deutschwelt</span>
-
+          <img
+            src="assets/images/logo/logo-full.svg"
+            alt="Kleine Deutschwelt"
+            class="sidebar__logo"
+          >
         </a>
 
-    </header>
+      </div>
 
 
-    <!-- Fundal întunecat pe mobil -->
-    <label
-        for="menu-toggle"
-        class="sidebar-overlay"
-    ></label>
+      <nav class="sidebar__navigation" aria-label="Hauptnavigation">
+
+        <!-- HOME -->
+
+        <a
+          href="index.html"
+          class="nav-item nav-item--active"
+          aria-current="page"
+        >
+          <img
+            src="assets/images/sidebar/home.svg"
+            alt=""
+            class="nav-item__icon"
+          >
+
+          <span class="nav-item__label">Home</span>
+        </a>
 
 
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
+        <!-- LERNREISE -->
 
-        <div class="sidebar-top">
+        <details class="nav-group" open>
 
-            <a href="index.html" class="sidebar-logo">
+          <summary class="nav-item nav-item--group">
 
-                <img
-                    src="assets/images/logo/logo-full.png"
-                    alt="Kleine Deutschwelt Logo"
-                >
-
-            </a>
-
-            <label
-                for="menu-toggle"
-                class="sidebar-close"
-                aria-label="Menü schließen"
+            <img
+              src="assets/images/sidebar/lernreise.svg"
+              alt=""
+              class="nav-item__icon"
             >
-                ×
-            </label>
 
-        </div>
+            <span class="nav-item__label">Lernreise</span>
 
+            <span class="nav-item__chevron" aria-hidden="true">
+              ›
+            </span>
 
-        <nav class="sidebar-nav">
-
-            <a
-                href="index.html"
-                class="nav-link active"
-            >
-                <span class="nav-icon">🏠</span>
-                <span>Home</span>
-            </a>
+          </summary>
 
 
-            <div class="nav-group">
+          <div class="nav-group__content">
 
-                <div class="nav-section-title">
+            <!-- A1.1 -->
 
-                    <span class="nav-icon">📖</span>
-                    <span>A1.1</span>
+            <details class="level-group" open>
 
-                </div>
+              <summary class="level-group__summary">
 
+                <span class="level-group__flag" aria-hidden="true">
+                  🇩🇪
+                </span>
 
-                <a
-                    href="#starter"
-                    class="nav-link nav-link-highlight"
+                <span>A1.1</span>
+
+                <span
+                  class="level-group__chevron"
+                  aria-hidden="true"
                 >
-                    <span class="nav-icon">⭐</span>
-                    <span>Starter</span>
+                  ›
+                </span>
+
+              </summary>
+
+
+              <div class="level-group__content">
+
+                <a href="#starter" class="subnav-item subnav-item--active">
+
+                  <img
+                    src="assets/images/sidebar/star.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Starter</span>
+
                 </a>
 
 
-                <div class="nav-submenu">
+                <a
+                  href="pages/vorstellung.html"
+                  class="subnav-item"
+                >
 
-                    <a href="pages/vorstellung.html">
-                        <span>👤</span>
-                        Vorstellung
-                    </a>
+                  <img
+                    src="assets/images/sidebar/vorstellung.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
 
-                    <a href="pages/begruessung.html">
-                        <span>👋</span>
-                        Begrüßung
-                    </a>
+                  <span>Vorstellung</span>
 
-                    <a href="pages/alphabet.html">
-                        <span>🔤</span>
-                        Alphabet
-                    </a>
-
-                    <a href="pages/wochentage.html">
-                        <span>📅</span>
-                        Wochentage
-                    </a>
-
-                    <a href="pages/monate.html">
-                        <span>🗓️</span>
-                        Monate
-                    </a>
-
-                    <a href="pages/jahreszeiten.html">
-                        <span>🍃</span>
-                        Jahreszeiten
-                    </a>
-
-                    <a href="pages/zahlen.html">
-                        <span>🔢</span>
-                        Zahlen 0–20
-                    </a>
-
-                    <a href="pages/farben.html">
-                        <span>🎨</span>
-                        Farben
-                    </a>
-
-                </div>
-
-            </div>
+                </a>
 
 
-            <a href="#kapitel-1" class="nav-link">
-                <span class="nav-icon">📖</span>
-                <span>Kapitel 1</span>
-                <span class="nav-arrow">›</span>
-            </a>
+                <a
+                  href="pages/begruessung.html"
+                  class="subnav-item"
+                >
 
-            <a href="#" class="nav-link future-link">
-                <span class="nav-icon">📖</span>
-                <span>Kapitel 2</span>
-                <span class="nav-arrow">›</span>
-            </a>
+                  <img
+                    src="assets/images/sidebar/begruessung.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
 
-            <a href="#" class="nav-link future-link">
-                <span class="nav-icon">📖</span>
-                <span>Kapitel 3</span>
-                <span class="nav-arrow">›</span>
-            </a>
+                  <span>Begrüßung</span>
 
-            <a href="#" class="nav-link future-link">
-                <span class="nav-icon">📖</span>
-                <span>Kapitel 4</span>
-                <span class="nav-arrow">›</span>
-            </a>
-
-            <a href="#" class="nav-link future-link">
-                <span class="nav-icon">📖</span>
-                <span>Kapitel 5</span>
-                <span class="nav-arrow">›</span>
-            </a>
-
-        </nav>
+                </a>
 
 
-        <a href="#" class="achievements-button">
+                <a
+                  href="pages/alphabet.html"
+                  class="subnav-item"
+                >
 
-            <span>🏆</span>
-            <span>Meine Erfolge</span>
+                  <img
+                    src="assets/images/sidebar/alphabet.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Alphabet</span>
+
+                </a>
+
+
+                <a
+                  href="pages/wochentage.html"
+                  class="subnav-item"
+                >
+
+                  <img
+                    src="assets/images/sidebar/wochentage.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Wochentage</span>
+
+                </a>
+
+
+                <a
+                  href="pages/monate.html"
+                  class="subnav-item"
+                >
+
+                  <img
+                    src="assets/images/sidebar/monate.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Monate</span>
+
+                </a>
+
+
+                <a
+                  href="pages/jahreszeiten.html"
+                  class="subnav-item"
+                >
+
+                  <img
+                    src="assets/images/sidebar/jahreszeiten.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Jahreszeiten</span>
+
+                </a>
+
+
+                <a
+                  href="pages/zahlen.html"
+                  class="subnav-item"
+                >
+
+                  <img
+                    src="assets/images/sidebar/zahlen.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Zahlen 0–20</span>
+
+                </a>
+
+
+                <a
+                  href="pages/farben.html"
+                  class="subnav-item"
+                >
+
+                  <img
+                    src="assets/images/sidebar/farben.svg"
+                    alt=""
+                    class="subnav-item__icon"
+                  >
+
+                  <span>Farben</span>
+
+                </a>
+
+              </div>
+            </details>
+
+
+            <!-- LEVELURI VIITOARE -->
+
+            <button class="future-level" type="button">
+              <span aria-hidden="true">🇩🇪</span>
+              <span>A1.2</span>
+              <span class="future-level__status">bald</span>
+            </button>
+
+            <button class="future-level" type="button">
+              <span aria-hidden="true">🇩🇪</span>
+              <span>A2.1</span>
+              <span class="future-level__status">bald</span>
+            </button>
+
+            <button class="future-level" type="button">
+              <span aria-hidden="true">🇩🇪</span>
+              <span>A2.2</span>
+              <span class="future-level__status">bald</span>
+            </button>
+
+          </div>
+        </details>
+
+
+        <!-- KAPITEL -->
+
+        <a href="#kapitel-1" class="nav-item">
+
+          <span class="nav-item__book" aria-hidden="true">📖</span>
+
+          <span class="nav-item__label">Kapitel 1</span>
+
+          <span class="nav-item__chevron" aria-hidden="true">›</span>
 
         </a>
 
 
-        <div class="sidebar-decoration">
-            ♡ · · · ✦ · · · ♡
+        <a href="#kapitel-2" class="nav-item">
+
+          <span class="nav-item__book" aria-hidden="true">📖</span>
+
+          <span class="nav-item__label">Kapitel 2</span>
+
+          <span class="nav-item__chevron" aria-hidden="true">›</span>
+
+        </a>
+
+
+        <a href="#kapitel-3" class="nav-item">
+
+          <span class="nav-item__book" aria-hidden="true">📖</span>
+
+          <span class="nav-item__label">Kapitel 3</span>
+
+          <span class="nav-item__chevron" aria-hidden="true">›</span>
+
+        </a>
+
+
+        <a href="#uebungen" class="nav-item">
+
+          <span class="nav-item__book" aria-hidden="true">✏️</span>
+
+          <span class="nav-item__label">Übungen</span>
+
+          <span class="nav-item__chevron" aria-hidden="true">›</span>
+
+        </a>
+
+
+        <a href="#tests" class="nav-item">
+
+          <img
+            src="assets/images/sidebar/trophy.svg"
+            alt=""
+            class="nav-item__icon"
+          >
+
+          <span class="nav-item__label">Tests</span>
+
+        </a>
+
+      </nav>
+
+
+      <!-- SIDEBAR BOTTOM -->
+
+      <div class="sidebar__bottom">
+
+        <a href="#erfolge" class="achievement-button">
+
+          <img
+            src="assets/images/sidebar/trophy.svg"
+            alt=""
+            class="achievement-button__icon"
+          >
+
+          <span>Meine Erfolge</span>
+
+        </a>
+
+        <div class="sidebar__trail" aria-hidden="true">
+          <span>♡</span>
+          <span>· · · · · · ·</span>
+          <span>✦</span>
         </div>
+
+      </div>
 
     </aside>
 
 
-    <!-- CONȚINUT PRINCIPAL -->
+    <!-- ======================================================
+         MAIN CONTENT
+    ======================================================= -->
+
     <main class="main-content">
 
-
-        <!-- BANNER -->
-        <section class="home-banner">
-
-            <img
-                src="assets/images/banners/home-banner.webp"
-                alt="Kleine Deutschwelt – Deutsch lernen mit Spaß"
-            >
-
-        </section>
-
-
-        <!-- DASHBOARD -->
-        <section class="dashboard-grid">
-
-
-            <!-- BUN VENIT -->
-            <article class="panel welcome-panel">
-
-                <div class="welcome-content">
-
-                    <span class="section-label">
-                        Hallo!
-                    </span>
-
-                    <h1>
-                        Willkommen in deiner kleinen Deutschwelt!
-                    </h1>
-
-                    <p>
-                        Hier lernst du Deutsch Schritt für Schritt
-                        mit interaktiven Übungen, Spielen, Bildern
-                        und spannenden Lektionen.
-                    </p>
-
-                    <a
-                        href="#starter"
-                        class="primary-button"
-                    >
-                        <span>🚀</span>
-                        Starte dein Abenteuer!
-                    </a>
-
-                </div>
-
-
-                <div class="welcome-image">
-
-                    <img
-                        src="assets/images/mascot/felix-reading.png"
-                        alt="Felix liest ein deutsches Buch"
-                    >
-
-                </div>
-
-            </article>
-
-
-            <!-- PROGRES -->
-            <article class="panel progress-panel">
-
-                <div class="panel-heading">
-
-                    <span class="heading-icon">📊</span>
-
-                    <div>
-                        <span class="eyebrow">
-                            Mein Kurs
-                        </span>
-
-                        <h2>Dein Fortschritt</h2>
-                    </div>
-
-                </div>
-
-
-                <div class="progress-list">
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>⭐ Starter</span>
-                            <strong>40%</strong>
-                        </div>
-
-                        <div class="progress-track">
-                            <div
-                                class="progress-value progress-starter"
-                            ></div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>📘 Kapitel 1</span>
-                            <strong>15%</strong>
-                        </div>
-
-                        <div class="progress-track">
-                            <div
-                                class="progress-value progress-kapitel-1"
-                            ></div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>📕 Kapitel 2</span>
-                            <strong>0%</strong>
-                        </div>
-
-                        <div class="progress-track">
-                            <div class="progress-value"></div>
-                        </div>
-
-                    </div>
-
-
-                    <div class="progress-item">
-
-                        <div class="progress-info">
-                            <span>📙 Kapitel 3</span>
-                            <strong>0%</strong>
-                        </div>
-
-                        <div class="progress-track">
-                            <div class="progress-value"></div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- OBIECTIV ZILNIC -->
-            <article class="panel daily-goal-panel">
-
-                <div class="daily-goal-content">
-
-                    <span class="section-label">
-                        🎯 Tägliches Ziel
-                    </span>
-
-                    <h2>
-                        Lerne jeden Tag ein bisschen!
-                    </h2>
-
-                    <div class="minutes-circle">
-
-                        <strong>15</strong>
-                        <span>Minuten</span>
-
-                    </div>
-
-                    <p>
-                        Kleine Schritte bringen große Erfolge.
-                    </p>
-
-                </div>
-
-
-                <div class="daily-goal-image">
-
-                    <img
-                        src="assets/images/mascot/felix-default.png"
-                        alt="Felix motiviert die Kinder"
-                    >
-
-                </div>
-
-            </article>
-
-        </section>
-
-
-        <!-- STARTER -->
-        <section
-            class="course-section"
-            id="starter"
+      <!-- MOBILE TOP BAR -->
+
+      <header class="mobile-header">
+
+        <button
+          class="mobile-menu-button"
+          type="button"
+          aria-label="Menü öffnen"
+          onclick="document.getElementById('sidebar').classList.toggle('sidebar--open')"
+        >
+          ☰
+        </button>
+
+        <img
+          src="assets/images/logo/logo-full.svg"
+          alt="Kleine Deutschwelt"
+          class="mobile-header__logo"
         >
 
-            <div class="section-heading">
+      </header>
 
-                <div>
 
-                    <span class="eyebrow">
-                        A1.1
-                    </span>
+      <!-- HERO BANNER -->
 
-                    <h2>
-                        <span>⭐</span>
-                        Starter
-                    </h2>
+      <section class="hero">
 
-                </div>
-
-                <p>
-                    Entdecke deine ersten Wörter und Sätze auf Deutsch.
-                </p>
-
-            </div>
-
-
-            <div class="lesson-grid starter-grid">
-
-
-                <!-- Vorstellung -->
-                <article class="lesson-card card-green">
-
-                    <div class="lesson-card-image">
-                        👧🧒
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 1
-                        </span>
-
-                        <h3>Vorstellung</h3>
-
-                        <p>
-                            Lerne, wie du dich auf Deutsch vorstellst.
-                        </p>
-
-                        <a href="pages/vorstellung.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Begrüßung -->
-                <article class="lesson-card card-yellow">
-
-                    <div class="lesson-card-image">
-                        👋
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 2
-                        </span>
-
-                        <h3>Begrüßung</h3>
-
-                        <p>
-                            Lerne, wie man auf Deutsch grüßt.
-                        </p>
-
-                        <a href="pages/begruessung.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Alphabet -->
-                <article class="lesson-card card-blue">
-
-                    <div class="lesson-card-image">
-                        ABC
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 3
-                        </span>
-
-                        <h3>Alphabet</h3>
-
-                        <p>
-                            Lerne das deutsche Alphabet.
-                        </p>
-
-                        <a href="pages/alphabet.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Wochentage -->
-                <article class="lesson-card card-purple">
-
-                    <div class="lesson-card-image">
-                        📅
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 4
-                        </span>
-
-                        <h3>Wochentage</h3>
-
-                        <p>
-                            Lerne die sieben Tage der Woche.
-                        </p>
-
-                        <a href="pages/wochentage.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Monate -->
-                <article class="lesson-card card-orange">
-
-                    <div class="lesson-card-image">
-                        JAN
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 5
-                        </span>
-
-                        <h3>Monate</h3>
-
-                        <p>
-                            Lerne die zwölf Monate.
-                        </p>
-
-                        <a href="pages/monate.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Jahreszeiten -->
-                <article class="lesson-card card-mint">
-
-                    <div class="lesson-card-image">
-                        🍂❄️
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 6
-                        </span>
-
-                        <h3>Jahreszeiten</h3>
-
-                        <p>
-                            Lerne die vier Jahreszeiten.
-                        </p>
-
-                        <a href="pages/jahreszeiten.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Zahlen -->
-                <article class="lesson-card card-red">
-
-                    <div class="lesson-card-image">
-                        123
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 7
-                        </span>
-
-                        <h3>Zahlen 0–20</h3>
-
-                        <p>
-                            Lerne die Zahlen von null bis zwanzig.
-                        </p>
-
-                        <a href="pages/zahlen.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Farben -->
-                <article class="lesson-card card-pink">
-
-                    <div class="lesson-card-image">
-                        🎨
-                    </div>
-
-                    <div class="lesson-card-content">
-
-                        <span class="lesson-number">
-                            Lektion 8
-                        </span>
-
-                        <h3>Farben</h3>
-
-                        <p>
-                            Entdecke die Farben auf Deutsch.
-                        </p>
-
-                        <a href="pages/farben.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- KAPITEL 1 -->
-        <section
-            class="course-section"
-            id="kapitel-1"
+        <img
+          src="assets/images/banners/home-banner.webp"
+          alt="Kleine Deutschwelt – Deutsch lernen mit Spaß"
+          class="hero__image"
         >
 
-            <div class="section-heading">
+        <div class="hero__actions">
 
-                <div>
+          <label class="search-box">
 
-                    <span class="eyebrow">
-                        A1.1
-                    </span>
+            <span class="search-box__icon" aria-hidden="true">⌕</span>
 
-                    <h2>
-                        <span>📖</span>
-                        Kapitel 1
-                    </h2>
-
-                </div>
-
-                <p>
-                    Sprich über deine Familie und deine Herkunft.
-                </p>
-
-            </div>
-
-
-            <div class="chapter-grid">
-
-
-                <!-- Meine Familie -->
-                <article class="chapter-card chapter-family">
-
-                    <div class="chapter-visual">
-                        👨‍👩‍👧‍👦
-                    </div>
-
-                    <div class="chapter-content">
-
-                        <span class="chapter-tag">
-                            Familie
-                        </span>
-
-                        <h3>Meine Familie</h3>
-
-                        <p>
-                            Lerne deine Familienmitglieder auf Deutsch kennen.
-                        </p>
-
-                        <a href="pages/meine-familie.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Woher kommst du -->
-                <article class="chapter-card chapter-world">
-
-                    <div class="chapter-visual">
-                        🌍
-                    </div>
-
-                    <div class="chapter-content">
-
-                        <span class="chapter-tag">
-                            Länder
-                        </span>
-
-                        <h3>Woher kommst du?</h3>
-
-                        <p>
-                            Lerne Länder, Sprachen und Nationalitäten.
-                        </p>
-
-                        <a href="pages/woher-kommst-du.html">
-                            Zur Lektion
-                            <span>›</span>
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Mai multe lecții -->
-                <article class="chapter-card coming-soon-card">
-
-                    <div class="plus-icon">
-                        +
-                    </div>
-
-                    <div>
-
-                        <h3>Weitere Lektionen</h3>
-
-                        <p>
-                            Neue Abenteuer in Kapitel 1 kommen bald!
-                        </p>
-
-                    </div>
-
-                </article>
-
-
-                <!-- Felix Tipp -->
-                <article class="chapter-card tip-card">
-
-                    <div class="tip-content">
-
-                        <span class="chapter-tag">
-                            💡 Felix' Tipp
-                        </span>
-
-                        <h3>Übung macht den Meister!</h3>
-
-                        <p>
-                            Wiederhole regelmäßig und hab Spaß dabei.
-                        </p>
-
-                    </div>
-
-                    <img
-                        src="assets/images/mascot/felix-default.png"
-                        alt="Felix gibt einen Lerntipp"
-                    >
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- FOOTER -->
-        <footer class="site-footer">
-
-            <img
-                src="assets/images/logo/logo-icon.png"
-                alt=""
+            <input
+              type="search"
+              placeholder="Suche nach Lektionen..."
+              aria-label="Suche nach Lektionen"
             >
 
-            <p>
-                © 2026 Kleine Deutschwelt –
-                Deutsch lernen mit Spaß! ❤️
+          </label>
+
+
+          <button
+            class="round-action"
+            type="button"
+            aria-label="Favoriten"
+          >
+            <img
+              src="assets/images/sidebar/star.svg"
+              alt=""
+            >
+          </button>
+
+
+          <button
+            class="round-action"
+            type="button"
+            aria-label="Erfolge"
+          >
+            <img
+              src="assets/images/sidebar/trophy.svg"
+              alt=""
+            >
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- DASHBOARD -->
+
+      <section class="dashboard-grid">
+
+        <!-- WILLKOMMEN -->
+
+        <article class="panel welcome-panel">
+
+          <div class="welcome-panel__content">
+
+            <p class="eyebrow">Willkommen in deiner Lernwelt</p>
+
+            <h1>Willkommen!</h1>
+
+            <p class="welcome-panel__text">
+              Hier lernst du Deutsch Schritt für Schritt mit
+              interaktiven Übungen, Spielen und Videos.
             </p>
 
-        </footer>
+            <a href="#starter" class="primary-button">
+
+              <span aria-hidden="true">🚀</span>
+
+              <span>Starte dein Abenteuer!</span>
+
+            </a>
+
+          </div>
+
+
+          <div class="welcome-panel__mascot">
+
+            <img
+              src="assets/images/mascot/felix-reading.webp"
+              alt="Felix liest ein Buch"
+            >
+
+          </div>
+
+        </article>
+
+
+        <!-- PROGRESS -->
+
+        <article class="panel progress-panel">
+
+          <header class="panel-heading">
+
+            <img
+              src="assets/images/sidebar/progress.svg"
+              alt=""
+              class="panel-heading__icon"
+            >
+
+            <h2>Dein Fortschritt</h2>
+
+          </header>
+
+
+          <div class="progress-list">
+
+            <div class="progress-item">
+
+              <div class="progress-item__top">
+                <span>⭐ Starter</span>
+                <strong>40%</strong>
+              </div>
+
+              <div class="progress-bar">
+                <span style="width: 40%"></span>
+              </div>
+
+            </div>
+
+
+            <div class="progress-item">
+
+              <div class="progress-item__top">
+                <span>📘 Kapitel 1</span>
+                <strong>15%</strong>
+              </div>
+
+              <div class="progress-bar progress-bar--blue">
+                <span style="width: 15%"></span>
+              </div>
+
+            </div>
+
+
+            <div class="progress-item">
+
+              <div class="progress-item__top">
+                <span>📙 Kapitel 2</span>
+                <strong>0%</strong>
+              </div>
+
+              <div class="progress-bar progress-bar--purple">
+                <span style="width: 0%"></span>
+              </div>
+
+            </div>
+
+
+            <div class="progress-item">
+
+              <div class="progress-item__top">
+                <span>📕 Kapitel 3</span>
+                <strong>0%</strong>
+              </div>
+
+              <div class="progress-bar progress-bar--orange">
+                <span style="width: 0%"></span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <!-- DAILY TARGET -->
+
+        <article class="panel target-panel">
+
+          <header class="panel-heading">
+
+            <img
+              src="assets/images/sidebar/target.svg"
+              alt=""
+              class="panel-heading__icon"
+            >
+
+            <h2>Tägliches Ziel</h2>
+
+          </header>
+
+
+          <div class="target-panel__body">
+
+            <div class="target-panel__text">
+
+              <p>
+                Lerne jeden Tag ein bisschen!
+              </p>
+
+              <div class="target-time">
+                <strong>15</strong>
+                <span>Minuten</span>
+              </div>
+
+            </div>
+
+
+            <img
+              src="assets/images/mascot/felix-success.webp"
+              alt="Felix motiviert dich"
+              class="target-panel__felix"
+            >
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- ======================================================
+           STARTER LESSONS
+      ======================================================= -->
+
+      <section class="lessons-section" id="starter">
+
+        <header class="section-heading">
+
+          <img
+            src="assets/images/sidebar/star.svg"
+            alt=""
+            class="section-heading__icon"
+          >
+
+          <div>
+            <p class="section-heading__eyebrow">Deine ersten Schritte</p>
+            <h2>Starter</h2>
+          </div>
+
+        </header>
+
+
+        <div class="lesson-grid">
+
+          <!-- VORSTELLUNG -->
+
+          <article class="lesson-card lesson-card--green">
+
+            <img
+              src="assets/images/cards/starter/card-vorstellung.webp"
+              alt="Vorstellung"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Lerne, dich auf Deutsch vorzustellen.
+              </p>
+
+              <a
+                href="pages/vorstellung.html"
+                class="lesson-button lesson-button--green"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- BEGRÜSSUNG -->
+
+          <article class="lesson-card lesson-card--yellow">
+
+            <img
+              src="assets/images/cards/starter/card-begruessung.webp"
+              alt="Begrüßung"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Lerne, wie man sich begrüßt und verabschiedet.
+              </p>
+
+              <a
+                href="pages/begruessung.html"
+                class="lesson-button lesson-button--yellow"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ALPHABET -->
+
+          <article class="lesson-card lesson-card--blue">
+
+            <img
+              src="assets/images/cards/starter/card-alphabet.webp"
+              alt="Alphabet"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Entdecke das deutsche Alphabet.
+              </p>
+
+              <a
+                href="pages/alphabet.html"
+                class="lesson-button lesson-button--blue"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- WOCHENTAGE -->
+
+          <article class="lesson-card lesson-card--purple">
+
+            <img
+              src="assets/images/cards/starter/card-wochentage.webp"
+              alt="Wochentage"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Lerne die sieben Tage der Woche.
+              </p>
+
+              <a
+                href="pages/wochentage.html"
+                class="lesson-button lesson-button--purple"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- MONATE -->
+
+          <article class="lesson-card lesson-card--orange">
+
+            <img
+              src="assets/images/cards/starter/card-monate.webp"
+              alt="Monate"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Lerne die zwölf Monate auf Deutsch.
+              </p>
+
+              <a
+                href="pages/monate.html"
+                class="lesson-button lesson-button--orange"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- JAHRESZEITEN -->
+
+          <article class="lesson-card lesson-card--mint">
+
+            <img
+              src="assets/images/cards/starter/card-jahreszeiten.webp"
+              alt="Jahreszeiten"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Entdecke Frühling, Sommer, Herbst und Winter.
+              </p>
+
+              <a
+                href="pages/jahreszeiten.html"
+                class="lesson-button lesson-button--mint"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- ZAHLEN -->
+
+          <article class="lesson-card lesson-card--pink">
+
+            <img
+              src="assets/images/cards/starter/card-zahlen.webp"
+              alt="Zahlen von 0 bis 20"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Lerne die Zahlen von null bis zwanzig.
+              </p>
+
+              <a
+                href="pages/zahlen.html"
+                class="lesson-button lesson-button--pink"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <!-- FARBEN -->
+
+          <article class="lesson-card lesson-card--rose">
+
+            <img
+              src="assets/images/cards/starter/card-farben.webp"
+              alt="Farben"
+              class="lesson-card__image"
+            >
+
+            <div class="lesson-card__content">
+
+              <p>
+                Lerne die Farben mit Bildern und Spielen.
+              </p>
+
+              <a
+                href="pages/farben.html"
+                class="lesson-button lesson-button--rose"
+              >
+                <span>Zur Lektion</span>
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+      <!-- ======================================================
+           KAPITEL 1
+      ======================================================= -->
+
+      <section class="chapter-section" id="kapitel-1">
+
+        <header class="section-heading">
+
+          <span class="section-heading__book" aria-hidden="true">
+            📖
+          </span>
+
+          <div>
+            <p class="section-heading__eyebrow">
+              Deine nächste Lernstation
+            </p>
+
+            <h2>Kapitel 1</h2>
+          </div>
+
+        </header>
+
+
+        <div class="chapter-grid">
+
+          <article class="chapter-card chapter-card--family">
+
+            <div class="chapter-card__icon">
+              👨‍👩‍👧‍👦
+            </div>
+
+            <div class="chapter-card__content">
+
+              <h3>Meine Familie</h3>
+
+              <p>
+                Lerne deine Familie auf Deutsch kennen.
+              </p>
+
+              <a href="pages/meine-familie.html">
+                Zur Lektion
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <article class="chapter-card chapter-card--country">
+
+            <div class="chapter-card__icon">
+              🌍
+            </div>
+
+            <div class="chapter-card__content">
+
+              <h3>Woher kommst du?</h3>
+
+              <p>
+                Entdecke Länder und Nationalitäten.
+              </p>
+
+              <a href="pages/woher-kommst-du.html">
+                Zur Lektion
+                <span aria-hidden="true">›</span>
+              </a>
+
+            </div>
+
+          </article>
+
+
+          <article class="chapter-card chapter-card--soon">
+
+            <div class="chapter-card__plus" aria-hidden="true">
+              +
+            </div>
+
+            <div>
+              <h3>Weitere Lektionen</h3>
+
+              <p>
+                Neue Abenteuer kommen bald!
+              </p>
+            </div>
+
+          </article>
+
+
+          <aside class="felix-tip">
+
+            <div class="felix-tip__content">
+
+              <span class="felix-tip__bulb" aria-hidden="true">
+                💡
+              </span>
+
+              <div>
+                <h3>Felix’ Tipp</h3>
+
+                <p>
+                  Übung macht den Meister! Wiederhole regelmäßig
+                  und hab Spaß dabei.
+                </p>
+              </div>
+
+            </div>
+
+
+            <img
+              src="assets/images/mascot/felix-teacher.webp"
+              alt="Felix gibt einen Lerntipp"
+              class="felix-tip__image"
+            >
+
+          </aside>
+
+        </div>
+
+      </section>
+
+
+      <!-- FOOTER -->
+
+      <footer class="site-footer">
+
+        <p>
+          © 2026 Kleine Deutschwelt · Deutsch lernen mit Spaß!
+          <span aria-hidden="true">❤</span>
+        </p>
+
+      </footer>
 
     </main>
+
+  </div>
 
 </body>
 </html>
