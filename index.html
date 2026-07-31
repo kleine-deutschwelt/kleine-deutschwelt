@@ -37,344 +37,200 @@
 
     <aside class="sidebar" id="sidebar">
 
-      <div class="sidebar__brand">
+  <!-- LOGO -->
+  <div class="sidebar__brand">
+    <a
+      href="index.html"
+      class="sidebar__logo-link"
+      aria-label="Kleine Deutschwelt Home"
+    >
+      <img
+        src="assets/images/logo/logo-full.svg"
+        alt="Kleine Deutschwelt"
+        class="sidebar__logo"
+      >
+    </a>
+  </div>
 
-        <a
-          href="index.html"
-          class="sidebar__logo-link"
-          aria-label="Kleine Deutschwelt Home"
+  <!-- NAVIGAȚIE -->
+  <nav class="sidebar__navigation" aria-label="Hauptnavigation">
+
+    <!-- HOME -->
+    <a
+      href="index.html"
+      class="nav-item nav-item--active"
+      aria-current="page"
+    >
+      <span class="nav-item__icon-box">
+        <img
+          src="assets/images/sidebar/home.svg"
+          alt=""
+          class="nav-item__icon"
         >
+      </span>
+
+      <span class="nav-item__label">Home</span>
+    </a>
+
+    <!-- LERNREISE -->
+    <details class="nav-group" open>
+
+      <summary class="nav-item nav-item--group">
+        <span class="nav-item__icon-box">
           <img
-            src="assets/images/logo/logo-full.svg"
-            alt="Kleine Deutschwelt"
-            class="sidebar__logo"
-          >
-        </a>
-
-      </div>
-
-
-      <nav class="sidebar__navigation" aria-label="Hauptnavigation">
-
-        <!-- HOME -->
-
-        <a
-          href="index.html"
-          class="nav-item nav-item--active"
-          aria-current="page"
-        >
-          <img
-            src="assets/images/sidebar/home.svg"
+            src="assets/images/sidebar/lernreise.svg"
             alt=""
             class="nav-item__icon"
           >
+        </span>
 
-          <span class="nav-item__label">Home</span>
-        </a>
+        <span class="nav-item__label">Lernreise</span>
+        <span class="nav-item__chevron" aria-hidden="true">›</span>
+      </summary>
 
+      <div class="nav-group__content">
 
-        <!-- LERNREISE -->
+        <!-- A1.1 -->
+        <details class="level-group" open>
 
-        <details class="nav-group" open>
-
-          <summary class="nav-item nav-item--group">
-
-            <img
-              src="assets/images/sidebar/lernreise.svg"
-              alt=""
-              class="nav-item__icon"
-            >
-
-            <span class="nav-item__label">Lernreise</span>
-
-            <span class="nav-item__chevron" aria-hidden="true">
-              ›
-            </span>
-
+          <summary class="level-group__summary">
+            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
+            <span class="level-group__name">A1.1</span>
+            <span class="level-group__chevron" aria-hidden="true">›</span>
           </summary>
 
+          <div class="level-group__content">
+            <a href="#starter" class="subnav-item subnav-item--active">
+              <span class="subnav-item__dot"></span>
+              <span>Starter</span>
+            </a>
 
-          <div class="nav-group__content">
+            <a href="#kapitel-1" class="subnav-item">
+              <span class="subnav-item__dot"></span>
+              <span>Kapitel 1</span>
+            </a>
 
-            <!-- A1.1 -->
+            <a href="#kapitel-2" class="subnav-item">
+              <span class="subnav-item__dot"></span>
+              <span>Kapitel 2</span>
+            </a>
 
-            <details class="level-group" open>
+            <a href="#kapitel-3" class="subnav-item">
+              <span class="subnav-item__dot"></span>
+              <span>Kapitel 3</span>
+            </a>
 
-              <summary class="level-group__summary">
+            <a href="#uebungen" class="subnav-item">
+              <span class="subnav-item__dot"></span>
+              <span>Übungen</span>
+            </a>
 
-                <span class="level-group__flag" aria-hidden="true">
-                  🇩🇪
-                </span>
-
-                <span>A1.1</span>
-
-                <span
-                  class="level-group__chevron"
-                  aria-hidden="true"
-                >
-                  ›
-                </span>
-
-              </summary>
-
-
-              <div class="level-group__content">
-
-                <a href="#starter" class="subnav-item subnav-item--active">
-
-                  <img
-                    src="assets/images/sidebar/star.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Starter</span>
-
-                </a>
-
-
-                <a
-                  href="pages/vorstellung.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/vorstellung.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Vorstellung</span>
-
-                </a>
-
-
-                <a
-                  href="pages/begruessung.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/begruessung.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Begrüßung</span>
-
-                </a>
-
-
-                <a
-                  href="pages/alphabet.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/alphabet.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Alphabet</span>
-
-                </a>
-
-
-                <a
-                  href="pages/wochentage.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/wochentage.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Wochentage</span>
-
-                </a>
-
-
-                <a
-                  href="pages/monate.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/monate.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Monate</span>
-
-                </a>
-
-
-                <a
-                  href="pages/jahreszeiten.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/jahreszeiten.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Jahreszeiten</span>
-
-                </a>
-
-
-                <a
-                  href="pages/zahlen.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/zahlen.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Zahlen 0–20</span>
-
-                </a>
-
-
-                <a
-                  href="pages/farben.html"
-                  class="subnav-item"
-                >
-
-                  <img
-                    src="assets/images/sidebar/farben.svg"
-                    alt=""
-                    class="subnav-item__icon"
-                  >
-
-                  <span>Farben</span>
-
-                </a>
-
-              </div>
-            </details>
-
-
-            <!-- LEVELURI VIITOARE -->
-
-            <button class="future-level" type="button">
-              <span aria-hidden="true">🇩🇪</span>
-              <span>A1.2</span>
-              <span class="future-level__status">bald</span>
-            </button>
-
-            <button class="future-level" type="button">
-              <span aria-hidden="true">🇩🇪</span>
-              <span>A2.1</span>
-              <span class="future-level__status">bald</span>
-            </button>
-
-            <button class="future-level" type="button">
-              <span aria-hidden="true">🇩🇪</span>
-              <span>A2.2</span>
-              <span class="future-level__status">bald</span>
-            </button>
-
+            <a href="#tests" class="subnav-item">
+              <span class="subnav-item__dot"></span>
+              <span>Tests</span>
+            </a>
           </div>
         </details>
 
+        <!-- A1.2 -->
+        <details class="level-group level-group--future">
 
-        <!-- KAPITEL -->
+          <summary class="level-group__summary">
+            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
+            <span class="level-group__name">A1.2</span>
+            <span class="level-group__status">bald</span>
+            <span class="level-group__chevron" aria-hidden="true">›</span>
+          </summary>
 
-        <a href="#kapitel-1" class="nav-item">
+          <div class="level-group__content">
+            <span class="subnav-item">Starter</span>
+            <span class="subnav-item">Kapitel 1</span>
+            <span class="subnav-item">Kapitel 2</span>
+            <span class="subnav-item">Kapitel 3</span>
+            <span class="subnav-item">Übungen</span>
+            <span class="subnav-item">Tests</span>
+          </div>
+        </details>
 
-          <span class="nav-item__book" aria-hidden="true">📖</span>
+        <!-- B1.1 -->
+        <details class="level-group level-group--future">
 
-          <span class="nav-item__label">Kapitel 1</span>
+          <summary class="level-group__summary">
+            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
+            <span class="level-group__name">B1.1</span>
+            <span class="level-group__status">bald</span>
+            <span class="level-group__chevron" aria-hidden="true">›</span>
+          </summary>
 
-          <span class="nav-item__chevron" aria-hidden="true">›</span>
+          <div class="level-group__content">
+            <span class="subnav-item">Starter</span>
+            <span class="subnav-item">Kapitel 1</span>
+            <span class="subnav-item">Kapitel 2</span>
+            <span class="subnav-item">Kapitel 3</span>
+            <span class="subnav-item">Übungen</span>
+            <span class="subnav-item">Tests</span>
+          </div>
+        </details>
 
-        </a>
+        <!-- B1.2 -->
+        <details class="level-group level-group--future">
 
+          <summary class="level-group__summary">
+            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
+            <span class="level-group__name">B1.2</span>
+            <span class="level-group__status">bald</span>
+            <span class="level-group__chevron" aria-hidden="true">›</span>
+          </summary>
 
-        <a href="#kapitel-2" class="nav-item">
-
-          <span class="nav-item__book" aria-hidden="true">📖</span>
-
-          <span class="nav-item__label">Kapitel 2</span>
-
-          <span class="nav-item__chevron" aria-hidden="true">›</span>
-
-        </a>
-
-
-        <a href="#kapitel-3" class="nav-item">
-
-          <span class="nav-item__book" aria-hidden="true">📖</span>
-
-          <span class="nav-item__label">Kapitel 3</span>
-
-          <span class="nav-item__chevron" aria-hidden="true">›</span>
-
-        </a>
-
-
-        <a href="#uebungen" class="nav-item">
-
-          <span class="nav-item__book" aria-hidden="true">✏️</span>
-
-          <span class="nav-item__label">Übungen</span>
-
-          <span class="nav-item__chevron" aria-hidden="true">›</span>
-
-        </a>
-
-
-        <a href="#tests" class="nav-item">
-
-          <img
-            src="assets/images/sidebar/trophy.svg"
-            alt=""
-            class="nav-item__icon"
-          >
-
-          <span class="nav-item__label">Tests</span>
-
-        </a>
-
-      </nav>
-
-
-      <!-- SIDEBAR BOTTOM -->
-
-      <div class="sidebar__bottom">
-
-        <a href="#erfolge" class="achievement-button">
-
-          <img
-            src="assets/images/sidebar/trophy.svg"
-            alt=""
-            class="achievement-button__icon"
-          >
-
-          <span>Meine Erfolge</span>
-
-        </a>
-
-        <div class="sidebar__trail" aria-hidden="true">
-          <span>♡</span>
-          <span>· · · · · · ·</span>
-          <span>✦</span>
-        </div>
+          <div class="level-group__content">
+            <span class="subnav-item">Starter</span>
+            <span class="subnav-item">Kapitel 1</span>
+            <span class="subnav-item">Kapitel 2</span>
+            <span class="subnav-item">Kapitel 3</span>
+            <span class="subnav-item">Übungen</span>
+            <span class="subnav-item">Tests</span>
+          </div>
+        </details>
 
       </div>
+    </details>
 
-    </aside>
+    <!-- TESTE -->
+    <a href="#tests" class="nav-item">
+      <span class="nav-item__icon-box">
+        <img
+          src="assets/images/sidebar/trophy.svg"
+          alt=""
+          class="nav-item__icon"
+        >
+      </span>
 
+      <span class="nav-item__label">Tests</span>
+    </a>
+
+  </nav>
+
+  <!-- PARTEA DE JOS -->
+  <div class="sidebar__bottom">
+
+    <a href="#erfolge" class="achievement-button">
+      <img
+        src="assets/images/sidebar/trophy.svg"
+        alt=""
+        class="achievement-button__icon"
+      >
+      <span>Meine Erfolge</span>
+    </a>
+
+    <div class="sidebar__trail" aria-hidden="true">
+      <span>♡</span>
+      <span>· · · · · · ·</span>
+      <span>✦</span>
+    </div>
+
+  </div>
+
+</aside>
 
     <!-- ======================================================
          MAIN CONTENT
