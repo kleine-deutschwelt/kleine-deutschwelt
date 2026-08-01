@@ -5,276 +5,319 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Kleine Deutschwelt – Deutsch lernen mit Spaß für Kinder.">
   <title>Kleine Deutschwelt – Deutsch lernen mit Spaß!</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
-
   <link rel="icon" type="image/webp" href="assets/images/logo/logo-icon.webp">
   <link rel="stylesheet" href="css/style.css">
 </head>
-
 <body>
   <div class="app-shell">
     <aside class="sidebar" id="sidebar">
-      <div class="sidebar__brand">
-        <a href="index.html" class="brand-link" aria-label="Kleine Deutschwelt Home">
-          <img src="assets/images/logo/logo-icon.webp" alt="Kleine Deutschwelt" class="brand-logo">
-          <span class="brand-name">Kleine<br>Deutschwelt</span>
-        </a>
-      </div>
+      <a class="brand" href="#home" data-show="home" aria-label="Kleine Deutschwelt Home">
+        <img src="assets/images/logo/logo-icon.webp" alt="Kleine Deutschwelt">
+        <span>Kleine<br>Deutschwelt</span>
+      </a>
 
-      <nav class="sidebar__nav" aria-label="Hauptnavigation">
-        <a href="index.html" class="nav-home nav-home--active" aria-current="page">
-          <img src="assets/images/sidebar/home.svg" alt="" aria-hidden="true">
+      <nav class="main-nav" aria-label="Hauptnavigation">
+        <button class="main-nav__button is-active" type="button" data-show="home">
+          <span class="main-nav__icon"><img src="assets/images/sidebar/home.svg" alt=""></span>
           <span>Home</span>
-        </a>
+        </button>
 
-        <details class="learning-tree" open>
-          <summary class="learning-tree__title">
-            <img src="assets/images/sidebar/lernreise.svg" alt="" aria-hidden="true">
-            <span>Lernreise</span>
-            <span class="chevron" aria-hidden="true">›</span>
-          </summary>
+        <button class="main-nav__button" id="journey-button" type="button" data-show="journey" aria-expanded="false">
+          <span class="main-nav__icon"><img src="assets/images/sidebar/lernreise.svg" alt=""></span>
+          <span>Lernreise</span>
+          <span class="nav-arrow" aria-hidden="true">›</span>
+        </button>
 
-          <div class="level-list" id="level-list"></div>
-        </details>
+        <div class="journey-tree" id="journey-tree" hidden></div>
       </nav>
 
-      <div class="sidebar__footer">
+      <div class="sidebar-note">
+        <span aria-hidden="true">★</span>
         <p>Deutsch lernen<br>mit Spaß!</p>
-        <span aria-hidden="true">● ─ ● ─ ★</span>
       </div>
     </aside>
 
-    <main class="main-content">
+    <main class="main-area">
       <header class="mobile-header">
-        <button class="menu-button" id="menu-button" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
-        <a href="index.html" class="mobile-brand">
-          <img src="assets/images/logo/logo-icon.webp" alt="">
-          <span>Kleine Deutschwelt</span>
-        </a>
+        <button id="mobile-menu" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+        <a href="#home" data-show="home"><img src="assets/images/logo/logo-icon.webp" alt=""><strong>Kleine Deutschwelt</strong></a>
       </header>
 
-      <section class="hero" aria-label="Willkommen">
-        <img src="assets/images/banners/home-banner.webp" alt="Kleine Deutschwelt – Deutsch lernen mit Spaß">
-        <div class="hero__overlay"></div>
-        <div class="hero__content">
-          <p class="hero__eyebrow"><span aria-hidden="true">🇩🇪</span> Kleine Deutschwelt</p>
-          <h1>Deutsch lernen<br>mit Spaß!</h1>
-          <p>Willkommen in deiner kleinen deutschen Welt!</p>
-          <a href="#lernreise-start" class="primary-button">Lernreise entdecken <span aria-hidden="true">→</span></a>
-        </div>
-      </section>
-
-      <section class="intro section" id="ueber-uns">
-        <div class="section-heading">
-          <span class="section-kicker">Willkommen!</span>
-          <h2>Eine kleine Welt voller Deutsch</h2>
-          <p>Kleine Deutschwelt îi ajută pe copii să descopere limba germană pas cu pas, prin imagini, sunete, jocuri și activități ușor de înțeles.</p>
-        </div>
-
-        <div class="intro-card">
-          <div>
-            <span class="speech-label">Hallo, kleine Deutschfreunde!</span>
-            <h3>Lernen, entdecken und Spaß haben</h3>
-            <p>Aici fiecare copil poate învăța în ritmul său. Lecțiile sunt colorate, prietenoase și concepute pentru a transforma învățarea într-o aventură.</p>
-            <a href="#angebote" class="text-link">Entdecke unsere Lernwelt <span aria-hidden="true">→</span></a>
+      <section class="page-view is-visible" id="home-view">
+        <section class="home-hero">
+          <img src="assets/images/banners/home-banner.webp" alt="Parc ilustrat cu peisaj și monumente germane">
+          <div class="home-hero__shade"></div>
+          <div class="home-hero__content">
+            <p><span aria-hidden="true">🇩🇪</span> Kleine Deutschwelt</p>
+            <h1>Deutsch lernen<br>mit Spaß!</h1>
+            <h2>Willkommen in deiner kleinen deutschen Welt!</h2>
+            <button class="red-button" type="button" data-show="journey">Lernreise entdecken <span>→</span></button>
           </div>
-          <img src="assets/images/mascot/felix-default.png" alt="Felix, ghidul Kleine Deutschwelt">
-        </div>
+        </section>
+
+        <section class="home-section welcome-section">
+          <div class="section-title">
+            <span>Herzlich willkommen!</span>
+            <h2>O călătorie prin limba și cultura germană</h2>
+            <p>Kleine Deutschwelt este un loc cald și prietenos, unde copiii descoperă limba germană prin imagini, sunete, jocuri și povești.</p>
+          </div>
+
+          <article class="felix-card">
+            <div>
+              <span class="small-label">Hallo! Ich bin Felix.</span>
+              <h3>Învățăm împreună, pas cu pas</h3>
+              <p>Felix îi însoțește pe copii prin fiecare activitate, le explică noțiunile noi și îi încurajează să continue.</p>
+              <button class="text-button" type="button" data-show="journey">Începe călătoria <span>→</span></button>
+            </div>
+            <img src="assets/images/mascot/felix-default.png" alt="Felix, ghidul Kleine Deutschwelt">
+          </article>
+        </section>
+
+        <section class="home-section benefit-section">
+          <div class="section-title">
+            <span>Was findest du hier?</span>
+            <h2>Descoperă lumea Kleine Deutschwelt</h2>
+          </div>
+          <div class="benefit-grid">
+            <article class="benefit benefit--gold"><div>📖</div><h3>Lecții ilustrate</h3><p>Explicații simple și imagini atractive pentru copii.</p></article>
+            <article class="benefit benefit--sky"><div>🎧</div><h3>Ascultare și vorbire</h3><p>Vocabular, expresii și pronunție în limba germană.</p></article>
+            <article class="benefit benefit--green"><div>🎮</div><h3>Jocuri și exerciții</h3><p>Activități interactive pentru consolidarea cunoștințelor.</p></article>
+            <article class="benefit benefit--rose"><div>🏆</div><h3>Provocări și teste</h3><p>Verificarea progresului într-un mod prietenos.</p></article>
+          </div>
+        </section>
+
+        <section class="home-section park-section">
+          <div class="park-copy">
+            <span class="small-label">Deutschland entdecken</span>
+            <h2>Limba germană prinde viață</h2>
+            <p>Pe parcursul lecțiilor, copiii întâlnesc orașe, castele, povești și simboluri din Germania. Fiecare oprire este o nouă aventură.</p>
+            <button class="red-button" type="button" data-show="journey">Zu den Lernwelten <span>→</span></button>
+          </div>
+          <div class="park-points" aria-label="Ce vom descoperi">
+            <article><span>🏰</span><strong>Castele</strong><small>Geschichte</small></article>
+            <article><span>🌳</span><strong>Natură</strong><small>Entdecken</small></article>
+            <article><span>🏛️</span><strong>Cultură</strong><small>Erleben</small></article>
+          </div>
+        </section>
+
+        <section class="home-section audience-section">
+          <div class="section-title"><span>Für alle</span><h2>Creată pentru copii, părinți și profesori</h2></div>
+          <div class="audience-grid">
+            <article><span>🧒</span><h3>Pentru copii</h3><p>Un spațiu colorat, sigur și ușor de explorat.</p></article>
+            <article><span>👨‍👩‍👧</span><h3>Pentru părinți</h3><p>Materiale educative adaptate vârstei copiilor.</p></article>
+            <article><span>👩‍🏫</span><h3>Pentru profesori</h3><p>Resurse care completează lecțiile de germană.</p></article>
+          </div>
+        </section>
+
+        <section class="home-section home-cta">
+          <div><span>Bist du bereit?</span><h2>Beginne deine Lernreise mit Felix!</h2><p>Alege un nivel și descoperă prima lecție.</p><button class="red-button" type="button" data-show="journey">Jetzt starten <span>→</span></button></div>
+          <img src="assets/images/mascot/felix-default.png" alt="Felix salută">
+        </section>
       </section>
 
-      <section class="features section" id="angebote">
-        <div class="section-heading">
-          <span class="section-kicker">Was findest du hier?</span>
-          <h2>Învățare pentru fiecare copil</h2>
-          <p>Activități variate, organizate clar și prezentate într-un mod prietenos.</p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card feature-card--yellow">
-            <span class="feature-icon" aria-hidden="true">📖</span>
-            <h3>Interaktive Lektionen</h3>
-            <p>Lecții ilustrate și explicații simple, potrivite pentru copii.</p>
-          </article>
-          <article class="feature-card feature-card--blue">
-            <span class="feature-icon" aria-hidden="true">🎧</span>
-            <h3>Hören & Sprechen</h3>
-            <p>Exerciții de ascultare, vocabular și pronunție în limba germană.</p>
-          </article>
-          <article class="feature-card feature-card--green">
-            <span class="feature-icon" aria-hidden="true">🎮</span>
-            <h3>Spiele & Übungen</h3>
-            <p>Jocuri și activități care consolidează ceea ce copilul a învățat.</p>
-          </article>
-          <article class="feature-card feature-card--red">
-            <span class="feature-icon" aria-hidden="true">🏆</span>
-            <h3>Tests & Erfolge</h3>
-            <p>Provocări prietenoase pentru verificarea cunoștințelor.</p>
-          </article>
-        </div>
+      <section class="page-view journey-page" id="journey-view" hidden>
+        <header class="page-banner">
+          <div><span>🦊 Lernreise</span><h1>Alege lumea pe care vrei să o descoperi</h1><p>Fiecare nivel este o nouă etapă în aventura ta prin limba germană.</p></div>
+          <img src="assets/images/mascot/felix-default.png" alt="Felix pregătit pentru călătorie">
+        </header>
+        <div class="level-card-grid" id="level-card-grid"></div>
       </section>
 
-      <section class="method section">
-        <div class="section-heading">
-          <span class="section-kicker">So lernen wir</span>
-          <h2>Trei pași spre limba germană</h2>
-        </div>
-
-        <div class="steps">
-          <article class="step-card">
-            <span class="step-number">1</span>
-            <h3>Entdecken</h3>
-            <p>Descoperim cuvinte și expresii noi.</p>
-          </article>
-          <span class="step-arrow" aria-hidden="true">→</span>
-          <article class="step-card">
-            <span class="step-number">2</span>
-            <h3>Üben</h3>
-            <p>Exersăm prin jocuri și activități.</p>
-          </article>
-          <span class="step-arrow" aria-hidden="true">→</span>
-          <article class="step-card">
-            <span class="step-number">3</span>
-            <h3>Anwenden</h3>
-            <p>Folosim germana în situații simple.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="audience section">
-        <div class="section-heading">
-          <span class="section-kicker">Für wen?</span>
-          <h2>O platformă pentru întreaga comunitate</h2>
-        </div>
-
-        <div class="audience-grid">
-          <article><span aria-hidden="true">🧒</span><h3>Pentru copii</h3><p>Un spațiu colorat și ușor de explorat.</p></article>
-          <article><span aria-hidden="true">👨‍👩‍👧</span><h3>Pentru părinți</h3><p>Materiale educative potrivite vârstei.</p></article>
-          <article><span aria-hidden="true">👩‍🏫</span><h3>Pentru profesori</h3><p>Resurse care completează lecțiile de germană.</p></article>
-        </div>
-      </section>
-
-      <section class="final-cta section" id="lernreise-start">
-        <div>
-          <span class="section-kicker">Bist du bereit?</span>
-          <h2>Beginne deine Lernreise mit Felix!</h2>
-          <p>Deschide meniul Lernreise și începe cu A1.1 → Starter.</p>
-          <button class="primary-button" id="open-learning" type="button">Jetzt starten <span aria-hidden="true">→</span></button>
-        </div>
-        <img src="assets/images/mascot/felix-wave.png" alt="Felix te invită să începi">
+      <section class="page-view detail-page" id="detail-view" hidden>
+        <button class="back-button" type="button" data-show="journey">← Înapoi la niveluri</button>
+        <header class="detail-header" id="detail-header"></header>
+        <div class="content-card-grid" id="content-card-grid"></div>
       </section>
 
       <footer class="site-footer">
         <img src="assets/images/logo/logo-icon.webp" alt="">
-        <div><strong>Kleine Deutschwelt</strong><p>Deutsch lernen mit Spaß!</p></div>
-        <p>© 2026 Kleine Deutschwelt</p>
+        <div><strong>Kleine Deutschwelt</strong><small>Deutsch lernen mit Spaß!</small></div>
+        <span>© 2026 Kleine Deutschwelt</span>
       </footer>
     </main>
   </div>
 
-  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+  <div class="backdrop" id="backdrop"></div>
 
   <script>
-    const starterItems = [
-      ["Starter", "#lernreise-start"],
-      ["Vorstellung", "pages/vorstellung.html"],
-      ["Begrüßung", "pages/begruessung.html"],
-      ["Alphabet", "pages/alphabet.html"],
-      ["Wochentage", "pages/wochentage.html"],
-      ["Monate", "pages/monate.html"],
-      ["Jahreszeiten", "pages/jahreszeiten.html"],
-      ["Zahlen", "pages/zahlen.html"],
-      ["Farben", "pages/farben.html"],
-      ["Übungen 1", "#"],
-      ["Übungen 2", "#"],
-      ["Prüfung", "#"]
+    const starterLessons = [
+      { title: "Vorstellung", icon: "assets/images/cards/starter/card-vorstellung.webp", href: "pages/vorstellung.html" },
+      { title: "Begrüßung", icon: "assets/images/cards/starter/card-begruessung.webp", href: "pages/begruessung.html" },
+      { title: "Alphabet", icon: "assets/images/cards/starter/card-alphabet.webp", href: "pages/alphabet.html" },
+      { title: "Wochentage", icon: "assets/images/cards/starter/card-wochentage.webp", href: "pages/wochentage.html" },
+      { title: "Monate", icon: "assets/images/cards/starter/card-monate.webp", href: "pages/monate.html" },
+      { title: "Jahreszeiten", icon: "assets/images/cards/starter/card-jahreszeiten.webp", href: "pages/jahreszeiten.html" },
+      { title: "Zahlen", icon: "assets/images/cards/starter/card-zahlen.webp", href: "pages/zahlen.html" },
+      { title: "Farben", icon: "assets/images/cards/starter/card-farben.webp", href: "pages/farben.html" },
+      { title: "Übungen 1", emoji: "✏️", soon: true },
+      { title: "Übungen 2", emoji: "🧩", soon: true },
+      { title: "Prüfung", emoji: "🏆", soon: true }
     ];
 
-    const lessonItems = [
-      "Lektion 1", "Lektion 2", "Lektion 3", "Lektion 4",
-      "Lektion 5", "Lektion 6", "Lektion 7", "Lektion 8",
-      "Übungen 1", "Übungen 2", "Prüfung"
+    const chapterLessons = [
+      ...Array.from({ length: 8 }, (_, index) => ({ title: `Lektion ${index + 1}`, emoji: ["📕","📗","📘","📙"][index % 4], soon: true })),
+      { title: "Übungen 1", emoji: "✏️", soon: true },
+      { title: "Übungen 2", emoji: "🧩", soon: true },
+      { title: "Prüfung", emoji: "🏆", soon: true }
     ];
 
     const levels = [
-      { name: "A1.1", active: true, starter: true },
-      { name: "A1.2", active: false },
-      { name: "A2.1", active: false },
-      { name: "A2.2", active: false }
+      { id: "a11", name: "A1.1", subtitle: "Erste Schritte", color: "gold", starter: true, soon: false },
+      { id: "a12", name: "A1.2", subtitle: "Grundlagen erweitern", color: "sky", soon: true },
+      { id: "a21", name: "A2.1", subtitle: "Sicherer sprechen", color: "green", soon: true },
+      { id: "a22", name: "A2.2", subtitle: "Deutsch im Alltag", color: "rose", soon: true }
     ];
 
-    function chapterMarkup(number, future = true) {
-      const lessons = lessonItems.map((item) => `
-        <span class="tree-link tree-link--disabled">
-          <span class="tree-dot"></span>${item}
-        </span>`).join("");
+    const chapterNames = ["Kapitel 1", "Kapitel 2", "Kapitel 3"];
+    const tree = document.getElementById("journey-tree");
 
+    function iconMarkup(item) {
+      return item.icon
+        ? `<img src="${item.icon}" alt="" loading="lazy">`
+        : `<span aria-hidden="true">${item.emoji || "⭐"}</span>`;
+    }
+
+    function lessonTreeItems(items, levelId, sectionId) {
+      return items.map((item, index) => `
+        <${item.href ? "a" : "button"}
+          ${item.href ? `href="${item.href}"` : 'type="button"'}
+          class="tree-lesson ${item.soon ? "is-soon" : ""}"
+          ${item.href ? "" : `data-open-detail="${levelId}" data-section="${sectionId}"`}>
+          <span class="tree-lesson__icon">${iconMarkup(item)}</span>
+          <span>${item.title}</span>
+          ${item.soon ? '<small>în curând</small>' : ""}
+        </${item.href ? "a" : "button"}>`).join("");
+    }
+
+    function chapterTree(level, chapter, number) {
       return `
-        <details class="chapter-group">
-          <summary class="chapter-summary">
-            <span class="book-icon" aria-hidden="true">📖</span>
-            <span>Kapitel ${number}</span>
-            ${future ? '<span class="soon-badge">în curând</span>' : ""}
-            <span class="chevron" aria-hidden="true">›</span>
+        <details class="tree-chapter">
+          <summary data-open-detail="${level.id}" data-section="chapter-${number}">
+            <span class="tree-section-icon">📖</span><span>${chapter}</span><small>în curând</small><b>›</b>
           </summary>
-          <div class="chapter-content">${lessons}</div>
+          <div>${lessonTreeItems(chapterLessons, level.id, `chapter-${number}`)}</div>
         </details>`;
     }
 
-    function starterMarkup() {
-      const items = starterItems.map(([name, href], index) => `
-        <a class="tree-link ${index === 0 ? "tree-link--active" : ""}" href="${href}">
-          <span class="tree-dot"></span>${name}
-        </a>`).join("");
-
-      return `
-        <details class="chapter-group" open>
-          <summary class="chapter-summary">
-            <span class="book-icon" aria-hidden="true">⭐</span>
-            <span>Starter</span>
-            <span class="chevron" aria-hidden="true">›</span>
-          </summary>
-          <div class="chapter-content">${items}</div>
-        </details>`;
-    }
-
-    document.getElementById("level-list").innerHTML = levels.map((level) => `
-      <details class="level-group ${level.active ? "level-group--active" : "level-group--future"}" ${level.active ? "open" : ""}>
-        <summary class="level-summary">
-          <span class="flag-icon" aria-hidden="true">🇩🇪</span>
-          <span>${level.name}</span>
-          ${level.active ? "" : '<span class="soon-badge">în curând</span>'}
-          <span class="chevron" aria-hidden="true">›</span>
+    tree.innerHTML = levels.map(level => `
+      <details class="tree-level">
+        <summary data-open-detail="${level.id}" data-section="level">
+          <span class="flag">🇩🇪</span><span>${level.name}</span>${level.soon ? "<small>în curând</small>" : ""}<b>›</b>
         </summary>
-        <div class="level-content">
-          ${level.starter ? starterMarkup() : ""}
-          ${chapterMarkup(1)}
-          ${chapterMarkup(2)}
-          ${chapterMarkup(3)}
+        <div class="tree-level__content">
+          ${level.starter ? `
+            <details class="tree-chapter">
+              <summary data-open-detail="${level.id}" data-section="starter">
+                <span class="tree-section-icon">⭐</span><span>Starter</span><b>›</b>
+              </summary>
+              <div>${lessonTreeItems(starterLessons, level.id, "starter")}</div>
+            </details>` : ""}
+          ${chapterNames.map((chapter, index) => chapterTree(level, chapter, index + 1)).join("")}
         </div>
       </details>`).join("");
 
-    const sidebar = document.getElementById("sidebar");
-    const menuButton = document.getElementById("menu-button");
-    const backdrop = document.getElementById("sidebar-backdrop");
+    document.getElementById("level-card-grid").innerHTML = levels.map(level => `
+      <button class="level-card level-card--${level.color}" type="button" data-open-detail="${level.id}" data-section="level">
+        <span class="level-card__flag">🇩🇪</span>
+        ${level.soon ? '<small>în curând</small>' : '<small>disponibil</small>'}
+        <strong>${level.name}</strong>
+        <span>${level.subtitle}</span>
+        <b>Deschide nivelul →</b>
+      </button>`).join("");
 
-    function setMenu(open) {
-      sidebar.classList.toggle("sidebar--open", open);
-      backdrop.classList.toggle("sidebar-backdrop--visible", open);
-      menuButton.setAttribute("aria-expanded", String(open));
+    const views = {
+      home: document.getElementById("home-view"),
+      journey: document.getElementById("journey-view"),
+      detail: document.getElementById("detail-view")
+    };
+    const sidebar = document.getElementById("sidebar");
+    const journeyButton = document.getElementById("journey-button");
+    const mobileMenu = document.getElementById("mobile-menu");
+    const backdrop = document.getElementById("backdrop");
+
+    function showView(name) {
+      Object.entries(views).forEach(([key, element]) => {
+        element.hidden = key !== name;
+        element.classList.toggle("is-visible", key === name);
+      });
+      document.querySelectorAll(".main-nav__button").forEach(button => button.classList.remove("is-active"));
+      document.querySelector(`.main-nav__button[data-show="${name === "home" ? "home" : "journey"}"]`)?.classList.add("is-active");
+      if (name === "journey") {
+        tree.hidden = false;
+        journeyButton.setAttribute("aria-expanded", "true");
+      }
+      if (name === "home") {
+        tree.hidden = true;
+        journeyButton.setAttribute("aria-expanded", "false");
+      }
+      closeMobileMenu();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    menuButton.addEventListener("click", () => setMenu(!sidebar.classList.contains("sidebar--open")));
-    backdrop.addEventListener("click", () => setMenu(false));
+    function openDetail(levelId, section = "level") {
+      const level = levels.find(item => item.id === levelId);
+      const isStarter = section === "starter";
+      const chapterNumber = Number(section.replace("chapter-", ""));
+      const sectionTitle = isStarter ? "Starter" : chapterNumber ? `Kapitel ${chapterNumber}` : level.name;
+      const items = isStarter ? starterLessons : chapterNumber ? chapterLessons : [
+        ...(level.starter ? [{ title: "Starter", emoji: "⭐", section: "starter" }] : []),
+        ...chapterNames.map((title, index) => ({ title, emoji: "📖", section: `chapter-${index + 1}`, soon: true }))
+      ];
 
-    document.getElementById("open-learning").addEventListener("click", () => {
-      if (window.matchMedia("(max-width: 900px)").matches) setMenu(true);
-      document.querySelector(".learning-tree").open = true;
-      document.querySelector(".level-group--active").open = true;
-      document.querySelector(".level-group--active").scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById("detail-header").innerHTML = `
+        <span class="detail-flag">🇩🇪</span>
+        <div><small>${level.name} · Kleine Deutschwelt</small><h1>${sectionTitle}</h1><p>${isStarter ? "Alege prima ta lecție de germană." : chapterNumber ? "Lecțiile acestui capitol vor fi disponibile în curând." : "Alege o etapă pentru a vedea lecțiile."}</p></div>`;
+
+      document.getElementById("content-card-grid").innerHTML = items.map(item => {
+        const canLink = Boolean(item.href);
+        const canOpen = Boolean(item.section);
+        const tag = canLink ? "a" : "button";
+        const action = canLink ? `href="${item.href}"` : `type="button" ${canOpen ? `data-open-detail="${level.id}" data-section="${item.section}"` : "disabled"}`;
+        return `<${tag} ${action} class="content-card ${item.soon ? "content-card--soon" : ""}">
+          <span class="content-card__visual">${iconMarkup(item)}</span>
+          <strong>${item.title}</strong>
+          ${item.soon ? "<small>în curând</small>" : "<small>Deschide lecția →</small>"}
+        </${tag}>`;
+      }).join("");
+
+      showView("detail");
+    }
+
+    document.addEventListener("click", event => {
+      const showButton = event.target.closest("[data-show]");
+      if (showButton) {
+        event.preventDefault();
+        const target = showButton.dataset.show;
+        if (target === "journey" && showButton === journeyButton && !tree.hidden) {
+          tree.hidden = true;
+          journeyButton.setAttribute("aria-expanded", "false");
+        } else {
+          showView(target);
+        }
+      }
+
+      const detailButton = event.target.closest("[data-open-detail]");
+      if (detailButton) {
+        if (detailButton.tagName !== "SUMMARY") event.preventDefault();
+        openDetail(detailButton.dataset.openDetail, detailButton.dataset.section);
+      }
     });
+
+    function closeMobileMenu() {
+      sidebar.classList.remove("sidebar--open");
+      backdrop.classList.remove("backdrop--visible");
+      mobileMenu.setAttribute("aria-expanded", "false");
+    }
+    mobileMenu.addEventListener("click", () => {
+      const open = !sidebar.classList.contains("sidebar--open");
+      sidebar.classList.toggle("sidebar--open", open);
+      backdrop.classList.toggle("backdrop--visible", open);
+      mobileMenu.setAttribute("aria-expanded", String(open));
+    });
+    backdrop.addEventListener("click", closeMobileMenu);
   </script>
 </body>
 </html>
