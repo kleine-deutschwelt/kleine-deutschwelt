@@ -2,881 +2,279 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Kleine Deutschwelt – Deutsch lernen mit Spaß für Kinder."
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kleine Deutschwelt – Deutsch lernen mit Spaß für Kinder.">
   <title>Kleine Deutschwelt – Deutsch lernen mit Spaß!</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  >
-
+  <link rel="icon" type="image/webp" href="assets/images/logo/logo-icon.webp">
   <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
   <div class="app-shell">
-
-    <!-- ======================================================
-         SIDEBAR
-    ======================================================= -->
-
     <aside class="sidebar" id="sidebar">
-
-  <!-- LOGO -->
-  <div class="sidebar__brand">
-    <a
-      href="index.html"
-      class="sidebar__logo-link"
-      aria-label="Kleine Deutschwelt Home"
-    >
-      <img
-        src="assets/images/logo/logo-icon.svg"
-        alt="Kleine Deutschwelt"
-        class="sidebar__logo"
-      >
-    </a>
-  </div>
-
-  <!-- NAVIGAȚIE -->
-  <nav class="sidebar__navigation" aria-label="Hauptnavigation">
-
-    <!-- HOME -->
-    <a
-      href="index.html"
-      class="nav-item nav-item--active"
-      aria-current="page"
-    >
-      <span class="nav-item__icon-box">
-        <img
-          src="assets/images/sidebar/home.svg"
-          alt=""
-          class="nav-item__icon"
-        >
-      </span>
-
-      <span class="nav-item__label">Home</span>
-    </a>
-
-    <!-- LERNREISE -->
-    <details class="nav-group" open>
-
-      <summary class="nav-item nav-item--group">
-        <span class="nav-item__icon-box">
-          <img
-            src="assets/images/sidebar/lernreise.svg"
-            alt=""
-            class="nav-item__icon"
-          >
-        </span>
-
-        <span class="nav-item__label">Lernreise</span>
-        <span class="nav-item__chevron" aria-hidden="true">›</span>
-      </summary>
-
-      <div class="nav-group__content">
-
-        <!-- A1.1 -->
-        <details class="level-group" open>
-
-          <summary class="level-group__summary">
-            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
-            <span class="level-group__name">A1.1</span>
-            <span class="level-group__chevron" aria-hidden="true">›</span>
-          </summary>
-
-          <div class="level-group__content">
-            <a href="#starter" class="subnav-item subnav-item--active">
-              <span class="subnav-item__dot"></span>
-              <span>Starter</span>
-            </a>
-
-            <a href="#kapitel-1" class="subnav-item">
-              <span class="subnav-item__dot"></span>
-              <span>Kapitel 1</span>
-            </a>
-
-            <a href="#kapitel-2" class="subnav-item">
-              <span class="subnav-item__dot"></span>
-              <span>Kapitel 2</span>
-            </a>
-
-            <a href="#kapitel-3" class="subnav-item">
-              <span class="subnav-item__dot"></span>
-              <span>Kapitel 3</span>
-            </a>
-
-            <a href="#uebungen" class="subnav-item">
-              <span class="subnav-item__dot"></span>
-              <span>Übungen</span>
-            </a>
-
-            <a href="#tests" class="subnav-item">
-              <span class="subnav-item__dot"></span>
-              <span>Tests</span>
-            </a>
-          </div>
-        </details>
-
-        <!-- A1.2 -->
-        <details class="level-group level-group--future">
-
-          <summary class="level-group__summary">
-            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
-            <span class="level-group__name">A1.2</span>
-            <span class="level-group__status">bald</span>
-            <span class="level-group__chevron" aria-hidden="true">›</span>
-          </summary>
-
-          <div class="level-group__content">
-            <span class="subnav-item">Starter</span>
-            <span class="subnav-item">Kapitel 1</span>
-            <span class="subnav-item">Kapitel 2</span>
-            <span class="subnav-item">Kapitel 3</span>
-            <span class="subnav-item">Übungen</span>
-            <span class="subnav-item">Tests</span>
-          </div>
-        </details>
-
-        <!-- B1.1 -->
-        <details class="level-group level-group--future">
-
-          <summary class="level-group__summary">
-            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
-            <span class="level-group__name">B1.1</span>
-            <span class="level-group__status">bald</span>
-            <span class="level-group__chevron" aria-hidden="true">›</span>
-          </summary>
-
-          <div class="level-group__content">
-            <span class="subnav-item">Starter</span>
-            <span class="subnav-item">Kapitel 1</span>
-            <span class="subnav-item">Kapitel 2</span>
-            <span class="subnav-item">Kapitel 3</span>
-            <span class="subnav-item">Übungen</span>
-            <span class="subnav-item">Tests</span>
-          </div>
-        </details>
-
-        <!-- B1.2 -->
-        <details class="level-group level-group--future">
-
-          <summary class="level-group__summary">
-            <span class="level-group__flag" aria-hidden="true">🇩🇪</span>
-            <span class="level-group__name">B1.2</span>
-            <span class="level-group__status">bald</span>
-            <span class="level-group__chevron" aria-hidden="true">›</span>
-          </summary>
-
-          <div class="level-group__content">
-            <span class="subnav-item">Starter</span>
-            <span class="subnav-item">Kapitel 1</span>
-            <span class="subnav-item">Kapitel 2</span>
-            <span class="subnav-item">Kapitel 3</span>
-            <span class="subnav-item">Übungen</span>
-            <span class="subnav-item">Tests</span>
-          </div>
-        </details>
-
+      <div class="sidebar__brand">
+        <a href="index.html" class="brand-link" aria-label="Kleine Deutschwelt Home">
+          <img src="assets/images/logo/logo-icon.webp" alt="Kleine Deutschwelt" class="brand-logo">
+          <span class="brand-name">Kleine<br>Deutschwelt</span>
+        </a>
       </div>
-    </details>
 
-    <!-- TESTE -->
-    <a href="#tests" class="nav-item">
-      <span class="nav-item__icon-box">
-        <img
-          src="assets/images/sidebar/trophy.svg"
-          alt=""
-          class="nav-item__icon"
-        >
-      </span>
+      <nav class="sidebar__nav" aria-label="Hauptnavigation">
+        <a href="index.html" class="nav-home nav-home--active" aria-current="page">
+          <img src="assets/images/sidebar/home.svg" alt="" aria-hidden="true">
+          <span>Home</span>
+        </a>
 
-      <span class="nav-item__label">Tests</span>
-    </a>
+        <details class="learning-tree" open>
+          <summary class="learning-tree__title">
+            <img src="assets/images/sidebar/lernreise.svg" alt="" aria-hidden="true">
+            <span>Lernreise</span>
+            <span class="chevron" aria-hidden="true">›</span>
+          </summary>
 
-  </nav>
+          <div class="level-list" id="level-list"></div>
+        </details>
+      </nav>
 
-  <!-- PARTEA DE JOS -->
-  <div class="sidebar__bottom">
-
-    <a href="#erfolge" class="achievement-button">
-      <img
-        src="assets/images/sidebar/trophy.svg"
-        alt=""
-        class="achievement-button__icon"
-      >
-      <span>Meine Erfolge</span>
-    </a>
-
-    <div class="sidebar__trail" aria-hidden="true">
-      <span>♡</span>
-      <span>· · · · · · ·</span>
-      <span>✦</span>
-    </div>
-
-  </div>
-
-</aside>
-
-    <!-- ======================================================
-         MAIN CONTENT
-    ======================================================= -->
+      <div class="sidebar__footer">
+        <p>Deutsch lernen<br>mit Spaß!</p>
+        <span aria-hidden="true">● ─ ● ─ ★</span>
+      </div>
+    </aside>
 
     <main class="main-content">
-
-      <!-- MOBILE TOP BAR -->
-
       <header class="mobile-header">
-
-        <button
-          class="mobile-menu-button"
-          type="button"
-          aria-label="Menü öffnen"
-          onclick="document.getElementById('sidebar').classList.toggle('sidebar--open')"
-        >
-          ☰
-        </button>
-
-        <img
-          src="assets/images/logo/logo-full.svg"
-          alt="Kleine Deutschwelt"
-          class="mobile-header__logo"
-        >
-
+        <button class="menu-button" id="menu-button" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+        <a href="index.html" class="mobile-brand">
+          <img src="assets/images/logo/logo-icon.webp" alt="">
+          <span>Kleine Deutschwelt</span>
+        </a>
       </header>
 
+      <section class="hero" aria-label="Willkommen">
+        <img src="assets/images/banners/home-banner.webp" alt="Kleine Deutschwelt – Deutsch lernen mit Spaß">
+        <div class="hero__overlay"></div>
+        <div class="hero__content">
+          <p class="hero__eyebrow"><span aria-hidden="true">🇩🇪</span> Kleine Deutschwelt</p>
+          <h1>Deutsch lernen<br>mit Spaß!</h1>
+          <p>Willkommen in deiner kleinen deutschen Welt!</p>
+          <a href="#lernreise-start" class="primary-button">Lernreise entdecken <span aria-hidden="true">→</span></a>
+        </div>
+      </section>
 
-      <!-- HERO BANNER -->
-
-      <section class="hero">
-
-        <img
-          src="assets/images/banners/home-banner.webp"
-          alt="Kleine Deutschwelt – Deutsch lernen mit Spaß"
-          class="hero__image"
-        >
-
-        <div class="hero__actions">
-
-          <label class="search-box">
-
-            <span class="search-box__icon" aria-hidden="true">⌕</span>
-
-            <input
-              type="search"
-              placeholder="Suche nach Lektionen..."
-              aria-label="Suche nach Lektionen"
-            >
-
-          </label>
-
-
-          <button
-            class="round-action"
-            type="button"
-            aria-label="Favoriten"
-          >
-            <img
-              src="assets/images/sidebar/star.svg"
-              alt=""
-            >
-          </button>
-
-
-          <button
-            class="round-action"
-            type="button"
-            aria-label="Erfolge"
-          >
-            <img
-              src="assets/images/sidebar/trophy.svg"
-              alt=""
-            >
-          </button>
-
+      <section class="intro section" id="ueber-uns">
+        <div class="section-heading">
+          <span class="section-kicker">Willkommen!</span>
+          <h2>Eine kleine Welt voller Deutsch</h2>
+          <p>Kleine Deutschwelt îi ajută pe copii să descopere limba germană pas cu pas, prin imagini, sunete, jocuri și activități ușor de înțeles.</p>
         </div>
 
-      </section>
-
-
-      <!-- DASHBOARD -->
-
-      <section class="dashboard-grid">
-
-        <!-- WILLKOMMEN -->
-
-        <article class="panel welcome-panel">
-
-          <div class="welcome-panel__content">
-
-            <p class="eyebrow">Willkommen in deiner Lernwelt</p>
-
-            <h1>Willkommen!</h1>
-
-            <p class="welcome-panel__text">
-              Hier lernst du Deutsch Schritt für Schritt mit
-              interaktiven Übungen, Spielen und Videos.
-            </p>
-
-            <a href="#starter" class="primary-button">
-
-              <span aria-hidden="true">🚀</span>
-
-              <span>Starte dein Abenteuer!</span>
-
-            </a>
-
-          </div>
-
-
-          <div class="welcome-panel__mascot">
-
-            <img
-              src="assets/images/mascot/felix-reading.webp"
-              alt="Felix liest ein Buch"
-            >
-
-          </div>
-
-        </article>
-
-
-        <!-- PROGRESS -->
-
-        <article class="panel progress-panel">
-
-          <header class="panel-heading">
-
-            <img
-              src="assets/images/sidebar/progress.svg"
-              alt=""
-              class="panel-heading__icon"
-            >
-
-            <h2>Dein Fortschritt</h2>
-
-          </header>
-
-
-          <div class="progress-list">
-
-            <div class="progress-item">
-
-              <div class="progress-item__top">
-                <span>⭐ Starter</span>
-                <strong>40%</strong>
-              </div>
-
-              <div class="progress-bar">
-                <span style="width: 40%"></span>
-              </div>
-
-            </div>
-
-
-            <div class="progress-item">
-
-              <div class="progress-item__top">
-                <span>📘 Kapitel 1</span>
-                <strong>15%</strong>
-              </div>
-
-              <div class="progress-bar progress-bar--blue">
-                <span style="width: 15%"></span>
-              </div>
-
-            </div>
-
-
-            <div class="progress-item">
-
-              <div class="progress-item__top">
-                <span>📙 Kapitel 2</span>
-                <strong>0%</strong>
-              </div>
-
-              <div class="progress-bar progress-bar--purple">
-                <span style="width: 0%"></span>
-              </div>
-
-            </div>
-
-
-            <div class="progress-item">
-
-              <div class="progress-item__top">
-                <span>📕 Kapitel 3</span>
-                <strong>0%</strong>
-              </div>
-
-              <div class="progress-bar progress-bar--orange">
-                <span style="width: 0%"></span>
-              </div>
-
-            </div>
-
-          </div>
-
-        </article>
-
-
-        <!-- DAILY TARGET -->
-
-        <article class="panel target-panel">
-
-          <header class="panel-heading">
-
-            <img
-              src="assets/images/sidebar/target.svg"
-              alt=""
-              class="panel-heading__icon"
-            >
-
-            <h2>Tägliches Ziel</h2>
-
-          </header>
-
-
-          <div class="target-panel__body">
-
-            <div class="target-panel__text">
-
-              <p>
-                Lerne jeden Tag ein bisschen!
-              </p>
-
-              <div class="target-time">
-                <strong>15</strong>
-                <span>Minuten</span>
-              </div>
-
-            </div>
-
-
-            <img
-              src="assets/images/mascot/felix-success.webp"
-              alt="Felix motiviert dich"
-              class="target-panel__felix"
-            >
-
-          </div>
-
-        </article>
-
-      </section>
-
-
-      <!-- ======================================================
-           STARTER LESSONS
-      ======================================================= -->
-
-      <section class="lessons-section" id="starter">
-
-        <header class="section-heading">
-
-          <img
-            src="assets/images/sidebar/star.svg"
-            alt=""
-            class="section-heading__icon"
-          >
-
+        <div class="intro-card">
           <div>
-            <p class="section-heading__eyebrow">Deine ersten Schritte</p>
-            <h2>Starter</h2>
+            <span class="speech-label">Hallo, kleine Deutschfreunde!</span>
+            <h3>Lernen, entdecken und Spaß haben</h3>
+            <p>Aici fiecare copil poate învăța în ritmul său. Lecțiile sunt colorate, prietenoase și concepute pentru a transforma învățarea într-o aventură.</p>
+            <a href="#angebote" class="text-link">Entdecke unsere Lernwelt <span aria-hidden="true">→</span></a>
           </div>
-
-        </header>
-
-
-        <div class="lesson-grid">
-
-          <!-- VORSTELLUNG -->
-
-          <article class="lesson-card lesson-card--green">
-
-            <img
-              src="assets/images/cards/starter/card-vorstellung.webp"
-              alt="Vorstellung"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Lerne, dich auf Deutsch vorzustellen.
-              </p>
-
-              <a
-                href="pages/vorstellung.html"
-                class="lesson-button lesson-button--green"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- BEGRÜSSUNG -->
-
-          <article class="lesson-card lesson-card--yellow">
-
-            <img
-              src="assets/images/cards/starter/card-begruessung.webp"
-              alt="Begrüßung"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Lerne, wie man sich begrüßt und verabschiedet.
-              </p>
-
-              <a
-                href="pages/begruessung.html"
-                class="lesson-button lesson-button--yellow"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- ALPHABET -->
-
-          <article class="lesson-card lesson-card--blue">
-
-            <img
-              src="assets/images/cards/starter/card-alphabet.webp"
-              alt="Alphabet"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Entdecke das deutsche Alphabet.
-              </p>
-
-              <a
-                href="pages/alphabet.html"
-                class="lesson-button lesson-button--blue"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- WOCHENTAGE -->
-
-          <article class="lesson-card lesson-card--purple">
-
-            <img
-              src="assets/images/cards/starter/card-wochentage.webp"
-              alt="Wochentage"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Lerne die sieben Tage der Woche.
-              </p>
-
-              <a
-                href="pages/wochentage.html"
-                class="lesson-button lesson-button--purple"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- MONATE -->
-
-          <article class="lesson-card lesson-card--orange">
-
-            <img
-              src="assets/images/cards/starter/card-monate.webp"
-              alt="Monate"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Lerne die zwölf Monate auf Deutsch.
-              </p>
-
-              <a
-                href="pages/monate.html"
-                class="lesson-button lesson-button--orange"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- JAHRESZEITEN -->
-
-          <article class="lesson-card lesson-card--mint">
-
-            <img
-              src="assets/images/cards/starter/card-jahreszeiten.webp"
-              alt="Jahreszeiten"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Entdecke Frühling, Sommer, Herbst und Winter.
-              </p>
-
-              <a
-                href="pages/jahreszeiten.html"
-                class="lesson-button lesson-button--mint"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- ZAHLEN -->
-
-          <article class="lesson-card lesson-card--pink">
-
-            <img
-              src="assets/images/cards/starter/card-zahlen.webp"
-              alt="Zahlen von 0 bis 20"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Lerne die Zahlen von null bis zwanzig.
-              </p>
-
-              <a
-                href="pages/zahlen.html"
-                class="lesson-button lesson-button--pink"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <!-- FARBEN -->
-
-          <article class="lesson-card lesson-card--rose">
-
-            <img
-              src="assets/images/cards/starter/card-farben.webp"
-              alt="Farben"
-              class="lesson-card__image"
-            >
-
-            <div class="lesson-card__content">
-
-              <p>
-                Lerne die Farben mit Bildern und Spielen.
-              </p>
-
-              <a
-                href="pages/farben.html"
-                class="lesson-button lesson-button--rose"
-              >
-                <span>Zur Lektion</span>
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
+          <img src="assets/images/mascot/felix-default.png" alt="Felix, ghidul Kleine Deutschwelt">
         </div>
-
       </section>
 
-
-      <!-- ======================================================
-           KAPITEL 1
-      ======================================================= -->
-
-      <section class="chapter-section" id="kapitel-1">
-
-        <header class="section-heading">
-
-          <span class="section-heading__book" aria-hidden="true">
-            📖
-          </span>
-
-          <div>
-            <p class="section-heading__eyebrow">
-              Deine nächste Lernstation
-            </p>
-
-            <h2>Kapitel 1</h2>
-          </div>
-
-        </header>
-
-
-        <div class="chapter-grid">
-
-          <article class="chapter-card chapter-card--family">
-
-            <div class="chapter-card__icon">
-              👨‍👩‍👧‍👦
-            </div>
-
-            <div class="chapter-card__content">
-
-              <h3>Meine Familie</h3>
-
-              <p>
-                Lerne deine Familie auf Deutsch kennen.
-              </p>
-
-              <a href="pages/meine-familie.html">
-                Zur Lektion
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <article class="chapter-card chapter-card--country">
-
-            <div class="chapter-card__icon">
-              🌍
-            </div>
-
-            <div class="chapter-card__content">
-
-              <h3>Woher kommst du?</h3>
-
-              <p>
-                Entdecke Länder und Nationalitäten.
-              </p>
-
-              <a href="pages/woher-kommst-du.html">
-                Zur Lektion
-                <span aria-hidden="true">›</span>
-              </a>
-
-            </div>
-
-          </article>
-
-
-          <article class="chapter-card chapter-card--soon">
-
-            <div class="chapter-card__plus" aria-hidden="true">
-              +
-            </div>
-
-            <div>
-              <h3>Weitere Lektionen</h3>
-
-              <p>
-                Neue Abenteuer kommen bald!
-              </p>
-            </div>
-
-          </article>
-
-
-          <aside class="felix-tip">
-
-            <div class="felix-tip__content">
-
-              <span class="felix-tip__bulb" aria-hidden="true">
-                💡
-              </span>
-
-              <div>
-                <h3>Felix’ Tipp</h3>
-
-                <p>
-                  Übung macht den Meister! Wiederhole regelmäßig
-                  und hab Spaß dabei.
-                </p>
-              </div>
-
-            </div>
-
-
-            <img
-              src="assets/images/mascot/felix-teacher.webp"
-              alt="Felix gibt einen Lerntipp"
-              class="felix-tip__image"
-            >
-
-          </aside>
-
+      <section class="features section" id="angebote">
+        <div class="section-heading">
+          <span class="section-kicker">Was findest du hier?</span>
+          <h2>Învățare pentru fiecare copil</h2>
+          <p>Activități variate, organizate clar și prezentate într-un mod prietenos.</p>
         </div>
 
+        <div class="feature-grid">
+          <article class="feature-card feature-card--yellow">
+            <span class="feature-icon" aria-hidden="true">📖</span>
+            <h3>Interaktive Lektionen</h3>
+            <p>Lecții ilustrate și explicații simple, potrivite pentru copii.</p>
+          </article>
+          <article class="feature-card feature-card--blue">
+            <span class="feature-icon" aria-hidden="true">🎧</span>
+            <h3>Hören & Sprechen</h3>
+            <p>Exerciții de ascultare, vocabular și pronunție în limba germană.</p>
+          </article>
+          <article class="feature-card feature-card--green">
+            <span class="feature-icon" aria-hidden="true">🎮</span>
+            <h3>Spiele & Übungen</h3>
+            <p>Jocuri și activități care consolidează ceea ce copilul a învățat.</p>
+          </article>
+          <article class="feature-card feature-card--red">
+            <span class="feature-icon" aria-hidden="true">🏆</span>
+            <h3>Tests & Erfolge</h3>
+            <p>Provocări prietenoase pentru verificarea cunoștințelor.</p>
+          </article>
+        </div>
       </section>
 
+      <section class="method section">
+        <div class="section-heading">
+          <span class="section-kicker">So lernen wir</span>
+          <h2>Trei pași spre limba germană</h2>
+        </div>
 
-      <!-- FOOTER -->
+        <div class="steps">
+          <article class="step-card">
+            <span class="step-number">1</span>
+            <h3>Entdecken</h3>
+            <p>Descoperim cuvinte și expresii noi.</p>
+          </article>
+          <span class="step-arrow" aria-hidden="true">→</span>
+          <article class="step-card">
+            <span class="step-number">2</span>
+            <h3>Üben</h3>
+            <p>Exersăm prin jocuri și activități.</p>
+          </article>
+          <span class="step-arrow" aria-hidden="true">→</span>
+          <article class="step-card">
+            <span class="step-number">3</span>
+            <h3>Anwenden</h3>
+            <p>Folosim germana în situații simple.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="audience section">
+        <div class="section-heading">
+          <span class="section-kicker">Für wen?</span>
+          <h2>O platformă pentru întreaga comunitate</h2>
+        </div>
+
+        <div class="audience-grid">
+          <article><span aria-hidden="true">🧒</span><h3>Pentru copii</h3><p>Un spațiu colorat și ușor de explorat.</p></article>
+          <article><span aria-hidden="true">👨‍👩‍👧</span><h3>Pentru părinți</h3><p>Materiale educative potrivite vârstei.</p></article>
+          <article><span aria-hidden="true">👩‍🏫</span><h3>Pentru profesori</h3><p>Resurse care completează lecțiile de germană.</p></article>
+        </div>
+      </section>
+
+      <section class="final-cta section" id="lernreise-start">
+        <div>
+          <span class="section-kicker">Bist du bereit?</span>
+          <h2>Beginne deine Lernreise mit Felix!</h2>
+          <p>Deschide meniul Lernreise și începe cu A1.1 → Starter.</p>
+          <button class="primary-button" id="open-learning" type="button">Jetzt starten <span aria-hidden="true">→</span></button>
+        </div>
+        <img src="assets/images/mascot/felix-wave.png" alt="Felix te invită să începi">
+      </section>
 
       <footer class="site-footer">
-
-        <p>
-          © 2026 Kleine Deutschwelt · Deutsch lernen mit Spaß!
-          <span aria-hidden="true">❤</span>
-        </p>
-
+        <img src="assets/images/logo/logo-icon.webp" alt="">
+        <div><strong>Kleine Deutschwelt</strong><p>Deutsch lernen mit Spaß!</p></div>
+        <p>© 2026 Kleine Deutschwelt</p>
       </footer>
-
     </main>
-
   </div>
 
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <script>
+    const starterItems = [
+      ["Starter", "#lernreise-start"],
+      ["Vorstellung", "pages/vorstellung.html"],
+      ["Begrüßung", "pages/begruessung.html"],
+      ["Alphabet", "pages/alphabet.html"],
+      ["Wochentage", "pages/wochentage.html"],
+      ["Monate", "pages/monate.html"],
+      ["Jahreszeiten", "pages/jahreszeiten.html"],
+      ["Zahlen", "pages/zahlen.html"],
+      ["Farben", "pages/farben.html"],
+      ["Übungen 1", "#"],
+      ["Übungen 2", "#"],
+      ["Prüfung", "#"]
+    ];
+
+    const lessonItems = [
+      "Lektion 1", "Lektion 2", "Lektion 3", "Lektion 4",
+      "Lektion 5", "Lektion 6", "Lektion 7", "Lektion 8",
+      "Übungen 1", "Übungen 2", "Prüfung"
+    ];
+
+    const levels = [
+      { name: "A1.1", active: true, starter: true },
+      { name: "A1.2", active: false },
+      { name: "A2.1", active: false },
+      { name: "A2.2", active: false }
+    ];
+
+    function chapterMarkup(number, future = true) {
+      const lessons = lessonItems.map((item) => `
+        <span class="tree-link tree-link--disabled">
+          <span class="tree-dot"></span>${item}
+        </span>`).join("");
+
+      return `
+        <details class="chapter-group">
+          <summary class="chapter-summary">
+            <span class="book-icon" aria-hidden="true">📖</span>
+            <span>Kapitel ${number}</span>
+            ${future ? '<span class="soon-badge">în curând</span>' : ""}
+            <span class="chevron" aria-hidden="true">›</span>
+          </summary>
+          <div class="chapter-content">${lessons}</div>
+        </details>`;
+    }
+
+    function starterMarkup() {
+      const items = starterItems.map(([name, href], index) => `
+        <a class="tree-link ${index === 0 ? "tree-link--active" : ""}" href="${href}">
+          <span class="tree-dot"></span>${name}
+        </a>`).join("");
+
+      return `
+        <details class="chapter-group" open>
+          <summary class="chapter-summary">
+            <span class="book-icon" aria-hidden="true">⭐</span>
+            <span>Starter</span>
+            <span class="chevron" aria-hidden="true">›</span>
+          </summary>
+          <div class="chapter-content">${items}</div>
+        </details>`;
+    }
+
+    document.getElementById("level-list").innerHTML = levels.map((level) => `
+      <details class="level-group ${level.active ? "level-group--active" : "level-group--future"}" ${level.active ? "open" : ""}>
+        <summary class="level-summary">
+          <span class="flag-icon" aria-hidden="true">🇩🇪</span>
+          <span>${level.name}</span>
+          ${level.active ? "" : '<span class="soon-badge">în curând</span>'}
+          <span class="chevron" aria-hidden="true">›</span>
+        </summary>
+        <div class="level-content">
+          ${level.starter ? starterMarkup() : ""}
+          ${chapterMarkup(1)}
+          ${chapterMarkup(2)}
+          ${chapterMarkup(3)}
+        </div>
+      </details>`).join("");
+
+    const sidebar = document.getElementById("sidebar");
+    const menuButton = document.getElementById("menu-button");
+    const backdrop = document.getElementById("sidebar-backdrop");
+
+    function setMenu(open) {
+      sidebar.classList.toggle("sidebar--open", open);
+      backdrop.classList.toggle("sidebar-backdrop--visible", open);
+      menuButton.setAttribute("aria-expanded", String(open));
+    }
+
+    menuButton.addEventListener("click", () => setMenu(!sidebar.classList.contains("sidebar--open")));
+    backdrop.addEventListener("click", () => setMenu(false));
+
+    document.getElementById("open-learning").addEventListener("click", () => {
+      if (window.matchMedia("(max-width: 900px)").matches) setMenu(true);
+      document.querySelector(".learning-tree").open = true;
+      document.querySelector(".level-group--active").open = true;
+      document.querySelector(".level-group--active").scrollIntoView({ behavior: "smooth", block: "center" });
+    });
+  </script>
 </body>
 </html>
