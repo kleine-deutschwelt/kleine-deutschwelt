@@ -5,20 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Lecție interactivă de limba germană despre culori pentru copii.">
   <title>Die Farben | Kleine Deutschwelt</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./farben.css">
 </head>
+
 <body>
   <header class="lesson-header">
     <a class="brand" href="../index.html" aria-label="Înapoi la Kleine Deutschwelt">
-      <span class="brand-mark">🦊</span>
+      <img src="../assets/images/mascot/felix-default.png" alt="" class="brand-felix">
       <span>Kleine Deutschwelt</span>
     </a>
+
     <div class="progress-wrap" aria-label="Progresul lecției">
       <span id="progressText">Lektionsfortschritt: 0%</span>
-      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+      <div class="progress-track">
+        <div id="progressBar" class="progress-bar"></div>
+      </div>
     </div>
   </header>
 
@@ -28,13 +33,261 @@
         <span class="eyebrow">A1.1 · Starter</span>
         <h1>Die Farben</h1>
         <p class="hero-subtitle">Astăzi învățăm 10 culori în limba germană!</p>
+
         <div class="speech-bubble">
           <strong>Hallo!</strong> Ich bin Felix. Heute lernen wir die Farben. Bist du bereit?
         </div>
-        <button class="primary-button" data-complete="intro" onclick="beginLesson()">Los geht’s! 🚀</button>
+
+        <button class="primary-button" type="button" onclick="beginLesson()">
+          Los geht’s! <span aria-hidden="true">🚀</span>
+        </button>
       </div>
-      <div class="felix-card" aria-label="Felix cu o paletă de culori">
-        <span class="felix">🦊</span>
+
+      <div class="felix-card">
+        <img
+          src="../assets/images/mascot/felix-default.png"
+          alt="Felix, ghidul lecției Die Farben"
+          class="hero-felix"
+        >
+        <span class="palette-decoration" aria-hidden="true">🎨</span>
+      </div>
+    </section>
+
+    <section class="section-card locked" id="vocabulary">
+      <div class="section-heading">
+        <span class="section-number">1</span>
+        <div>
+          <span class="kicker">Wortschatz</span>
+          <h2>Vocabularul ilustrat</h2>
+        </div>
+      </div>
+
+      <p class="instruction">Apasă pe 🔊, ascultă și repetă fiecare culoare.</p>
+      <div class="color-grid" id="colorGrid"></div>
+
+      <button class="secondary-button" type="button" onclick="finishVocabulary()">
+        Am repetat toate culorile ✓
+      </button>
+    </section>
+
+    <section class="section-card locked" id="examples">
+      <div class="section-heading">
+        <span class="section-number">2</span>
+        <div>
+          <span class="kicker">Beispiele</span>
+          <h2>Exemple vizuale</h2>
+        </div>
+      </div>
+
+      <p class="instruction">Privește imaginea, citește propoziția și ascultă pronunția.</p>
+      <div class="examples-grid" id="examplesGrid"></div>
+
+      <button class="secondary-button" type="button" onclick="completeSection('examples', 'activities')">
+        Am ascultat exemplele ✓
+      </button>
+    </section>
+
+    <section class="section-card locked" id="activities">
+      <div class="section-heading">
+        <span class="section-number">3</span>
+        <div>
+          <span class="kicker">Wir üben</span>
+          <h2>Activități</h2>
+        </div>
+      </div>
+
+      <article class="activity-box">
+        <h3>Activitatea 1: Alege culoarea corectă</h3>
+        <p>Welche Farbe hat die Sonne?</p>
+        <div class="choice-row" data-quiz="sun">
+          <button type="button" onclick="checkChoice(this, false)">blau</button>
+          <button type="button" onclick="checkChoice(this, true)">gelb</button>
+          <button type="button" onclick="checkChoice(this, false)">braun</button>
+        </div>
+        <p class="feedback" aria-live="polite"></p>
+      </article>
+
+      <article class="activity-box">
+        <h3>Activitatea 2: Completează propozițiile</h3>
+
+        <div class="fill-row">
+          <span>Die Karotte ist</span>
+          <select data-answer="orange" aria-label="Culoarea morcovului">
+            <option value="">— alege —</option>
+            <option value="rosa">rosa</option>
+            <option value="orange">orange</option>
+            <option value="schwarz">schwarz</option>
+          </select>
+          <span>.</span>
+        </div>
+
+        <div class="fill-row">
+          <span>Das Blatt ist</span>
+          <select data-answer="grün" aria-label="Culoarea frunzei">
+            <option value="">— alege —</option>
+            <option value="gelb">gelb</option>
+            <option value="grün">grün</option>
+            <option value="weiß">weiß</option>
+          </select>
+          <span>.</span>
+        </div>
+
+        <div class="fill-row">
+          <span>Der Bär ist</span>
+          <select data-answer="braun" aria-label="Culoarea ursului">
+            <option value="">— alege —</option>
+            <option value="braun">braun</option>
+            <option value="blau">blau</option>
+            <option value="lila">lila</option>
+          </select>
+          <span>.</span>
+        </div>
+
+        <button class="check-button" type="button" onclick="checkSelects()">
+          Răspuns prüfen
+        </button>
+        <p id="fillFeedback" class="feedback" aria-live="polite"></p>
+      </article>
+
+      <article class="activity-box">
+        <h3>Activitatea 3: Găsește obiectul</h3>
+        <p>Apasă pe obiectul care este <strong>rot</strong>.</p>
+
+        <div class="object-row">
+          <button type="button" onclick="checkObject(this, false)" aria-label="frunză verde">
+            <img src="../assets/images/lessons/farben/examples/blatt-gruen.webp" alt="Frunză verde">
+          </button>
+          <button type="button" onclick="checkObject(this, true)" aria-label="măr roșu">
+            <img src="../assets/images/lessons/farben/examples/apfel-rot.webp" alt="Măr roșu">
+          </button>
+          <button type="button" onclick="checkObject(this, false)" aria-label="iepure alb">
+            <img src="../assets/images/lessons/farben/examples/kaninchen-weiss.webp" alt="Iepure alb">
+          </button>
+        </div>
+        <p id="objectFeedback" class="feedback" aria-live="polite"></p>
+      </article>
+
+      <button
+        class="secondary-button"
+        id="activityDone"
+        type="button"
+        disabled
+        onclick="completeSection('activities', 'review')"
+      >
+        Continuă la recapitulare →
+      </button>
+    </section>
+
+    <section class="section-card locked" id="review">
+      <div class="section-heading">
+        <span class="section-number">4</span>
+        <div>
+          <span class="kicker">Wiederholung</span>
+          <h2>Recapitulare</h2>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <span id="reviewSwatch" class="review-swatch"></span>
+        <h3>Welche Farbe ist das?</h3>
+        <div id="reviewOptions" class="choice-row review-options"></div>
+        <p id="reviewFeedback" class="feedback" aria-live="polite"></p>
+        <p id="reviewCounter">Întrebarea 1 din 5</p>
+      </div>
+    </section>
+
+    <section class="section-card final-card locked" id="finish">
+      <div class="confetti" aria-hidden="true">⭐ 🎉 ⭐</div>
+
+      <img
+        src="../assets/images/mascot/felix-default.png"
+        alt="Felix te felicită"
+        class="final-felix"
+      >
+
+      <h2>Super gemacht!</h2>
+      <p>Du kennst jetzt die Farben!</p>
+      <p class="romanian">Bravo! Ai terminat lecția.</p>
+
+      <p id="diplomaMessage" class="diploma-message">
+        Obține 5/5 pentru a debloca mini-diploma.
+      </p>
+
+      <button
+        id="diplomaButton"
+        class="diploma-button"
+        type="button"
+        onclick="openDiploma()"
+        disabled
+      >
+        🏅 Farben-Meister
+      </button>
+
+      <button
+        id="retryTestButton"
+        class="retry-button hidden"
+        type="button"
+        onclick="retryReview()"
+      >
+        Reia testul ↻
+      </button>
+
+      <button class="primary-button" type="button" onclick="restartLesson()">
+        Reia întreaga lecție ↻
+      </button>
+    </section>
+
+    <div
+      id="diplomaModal"
+      class="diploma-modal"
+      aria-hidden="true"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="diplomaTitle"
+    >
+      <div class="diploma-overlay" onclick="closeDiploma()"></div>
+
+      <div class="diploma-window">
+        <button class="diploma-close" type="button" onclick="closeDiploma()" aria-label="Închide diploma">×</button>
+
+        <div id="miniDiploma" class="mini-diploma">
+          <div class="diploma-stars" aria-hidden="true">★ ★ ★</div>
+
+          <img
+            src="../assets/images/mascot/felix-default.png"
+            alt="Felix"
+            class="diploma-felix"
+          >
+
+          <p class="diploma-brand">Kleine Deutschwelt</p>
+          <h2 id="diplomaTitle">Mini-Diplom</h2>
+          <p class="diploma-intro">Diese Urkunde bestätigt den erfolgreichen Abschluss der Lektion</p>
+          <h3>Die Farben</h3>
+
+          <div class="diploma-result">
+            <span>Testergebnis</span>
+            <strong>5/5 · 100%</strong>
+          </div>
+
+          <p class="diploma-congratulations">Herzlichen Glückwunsch!</p>
+          <div class="diploma-badge">🏅 Farben-Meister</div>
+          <p id="diplomaDate" class="diploma-date"></p>
+        </div>
+
+        <div class="diploma-actions">
+          <button class="secondary-button compact-button" type="button" onclick="printDiploma()">
+            🖨️ Imprimă diploma
+          </button>
+          <button class="primary-button" type="button" onclick="closeDiploma()">Închide</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Mit Spaß Deutsch lernen · Kleine Deutschwelt</footer>
+  <script src="./farben.js"></script>
+</body>
+</html>        <span class="felix">🦊</span>
         <span class="palette">🎨</span>
       </div>
     </section>
