@@ -82,7 +82,24 @@ const reviewQuestions = [
   colors[8],
   colors[9]
 ];
+let currentAudio = null;
 
+function playAudio(audioPath) {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  currentAudio = new Audio(audioPath);
+
+  currentAudio.play().catch((error) => {
+    console.error(
+      "Fișierul audio nu a putut fi redat:",
+      audioPath,
+      error
+    );
+  });
+}
 /* Generează cele 10 carduri de vocabular */
 
 document.getElementById("colorGrid").innerHTML = colors
@@ -156,7 +173,10 @@ function speak(text) {
 
 function beginLesson() {
   completeSection("intro", "vocabulary");
-  speak("Hallo! Heute lernen wir die Farben!");
+
+  playAudio(
+    "../audio/farben/messages/intro-farben.mp3"
+  );
 }
 
 /* Finalizează vocabularul */
@@ -420,9 +440,9 @@ function finishReview() {
     block: "start"
   });
 
-  speak(
-    "Super gemacht! Du kennst jetzt die Farben!"
-  );
+  playAudio(
+  "../audio/farben/messages/super-gemacht.mp3"
+);
 }
 
 /* Repornește lecția */
