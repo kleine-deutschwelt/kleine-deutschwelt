@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lecție interactivă de germană: Vorstellung – Ich bin … / Das ist …">
+  <title>Vorstellung | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./vorstellung.css">
+</head>
+<body>
+  <header class="lesson-header">
+    <a class="brand" href="../index.html" aria-label="Înapoi la Kleine Deutschwelt">
+      <img src="../assets/images/mascot/felix-default.png" alt="" class="brand-felix">
+      <span>Kleine Deutschwelt</span>
+    </a>
+    <div class="progress-wrap" aria-label="Progresul lecției">
+      <span id="progressText">Lektionsfortschritt: 0%</span>
+      <div class="progress-track"><div id="progressBar" class="progress-bar"></div></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero section-card" id="start">
+      <div class="hero-copy">
+        <span class="eyebrow">A1.1 · Starter</span>
+        <h1>Vorstellung</h1>
+        <p class="hero-subtitle">Astăzi învățăm să ne prezentăm în limba germană!</p>
+        <div class="speech-bubble"><strong>Hallo!</strong> Heute lernen wir: <em>Ich bin …</em> und <em>Das ist …</em> Hör gut zu!</div>
+        <button class="primary-button" type="button" onclick="beginLesson()">Los geht’s! <span aria-hidden="true">🚀</span></button>
+      </div>
+      <div class="felix-card">
+        <img src="../assets/images/mascot/felix-default.png" alt="Felix, ghidul lecției Vorstellung" class="hero-felix">
+        <span class="hero-decoration" aria-hidden="true">👋</span>
+      </div>
+    </section>
+
+    <section class="section-card locked" id="dialogue">
+      <div class="section-heading">
+        <span class="section-number">1</span>
+        <div><span class="kicker">Hören und sprechen</span><h2>Ascultă dialogul</h2></div>
+      </div>
+      <p class="instruction">Privește imaginea, ascultă dialogul și repetă replicile.</p>
+      <img class="dialogue-scene" src="../assets/images/lessons/vorstellung/dialog-jonas-johanna-leonie.webp" alt="Jonas, Johanna și Leonie se salută">
+      <div class="dialogue-lines">
+        <div class="dialogue-line jonas-line"><strong>Jonas:</strong><span>Hallo, ich bin Jonas.</span></div>
+        <div class="dialogue-line johanna-line"><strong>Johanna:</strong><span>Hallo! Das ist Jonas und ich bin Johanna.</span></div>
+        <div class="dialogue-line leonie-line"><strong>Leonie:</strong><span>Hallo!</span></div>
+      </div>
+      <div class="audio-actions">
+        <button class="sound-action" type="button" onclick="playAudio('../audio/vorstellung/dialog/dialog-jonas-johanna-leonie.mp3')">🔊 Dialog anhören</button>
+        <button class="sound-action" type="button" onclick="playAudio('../audio/vorstellung/dialog/dialog-nachsprechen.mp3')">🔁 Hören und nachsprechen</button>
+      </div>
+      <button class="secondary-button" type="button" onclick="completeSection('dialogue', 'names')">Am ascultat și am repetat ✓</button>
+    </section>
+
+    <section class="section-card locked" id="names">
+      <div class="section-heading">
+        <span class="section-number">2</span>
+        <div><span class="kicker">Namen</span><h2>Ascultă numele</h2></div>
+      </div>
+      <p class="instruction">Ascultă și citește numele. Apoi ascultă selecția și apasă numele auzite.</p>
+      <button class="sound-action" type="button" onclick="playAudio('../audio/vorstellung/names/namen-alle.mp3')">🔊 Alle Namen hören</button>
+      <div id="nameGrid" class="name-grid"></div>
+      <button class="sound-action" type="button" onclick="startNameActivity()">🎧 Welche Namen hörst du?</button>
+      <p id="namesInstruction" class="activity-note">Apasă mai întâi butonul audio de mai sus.</p>
+      <button id="checkNamesButton" class="check-button" type="button" onclick="checkNames()" disabled>Răspuns prüfen</button>
+      <p id="namesFeedback" class="feedback" aria-live="polite"></p>
+      <button id="namesDone" class="secondary-button" type="button" onclick="completeSection('names', 'structures')" disabled>Continuă la structuri →</button>
+    </section>
+
+    <section class="section-card locked" id="structures">
+      <div class="section-heading">
+        <span class="section-number">3</span>
+        <div><span class="kicker">Ich bin … / Das ist …</span><h2>Înțelege structurile</h2></div>
+      </div>
+      <div class="structure-grid">
+        <article class="structure-card">
+          <img src="../assets/images/lessons/vorstellung/ich-bin.webp" alt="Jonas se prezintă">
+          <h3>Ich bin Jonas.</h3><p>Eu sunt Jonas.</p>
+          <button class="mini-sound" type="button" onclick="playAudio('../audio/vorstellung/dialog/dialog-jonas-johanna-leonie.mp3')" aria-label="Ascultă Ich bin Jonas">🔊</button>
+        </article>
+        <article class="structure-card">
+          <img src="../assets/images/lessons/vorstellung/das-ist.webp" alt="Johanna îl prezintă pe Jonas">
+          <h3>Das ist Jonas.</h3><p>Acesta este Jonas.</p>
+          <button class="mini-sound" type="button" onclick="playAudio('../audio/vorstellung/dialog/dialog-nachsprechen.mp3')" aria-label="Ascultă Das ist Jonas">🔊</button>
+        </article>
+      </div>
+      <button class="secondary-button" type="button" onclick="completeSection('structures', 'activities')">Am înțeles diferența ✓</button>
+    </section>
+
+    <section class="section-card locked" id="activities">
+      <div class="section-heading">
+        <span class="section-number">4</span>
+        <div><span class="kicker">Wir üben</span><h2>Activități</h2></div>
+      </div>
+
+      <article class="activity-box">
+        <h3>Activitatea 1: Wer spricht?</h3>
+        <p>Ascultă dialogul. Cine spune: <strong>„Hallo, ich bin Jonas.”</strong>?</p>
+        <button class="small-audio" type="button" onclick="playAudio('../audio/vorstellung/dialog/dialog-jonas-johanna-leonie.mp3')">🔊 Ascultă</button>
+        <div class="portrait-row">
+          <button type="button" onclick="checkSpeaker(this, true)"><img src="../assets/images/lessons/vorstellung/jonas.webp" alt="Jonas"><span>Jonas</span></button>
+          <button type="button" onclick="checkSpeaker(this, false)"><img src="../assets/images/lessons/vorstellung/johanna.webp" alt="Johanna"><span>Johanna</span></button>
+          <button type="button" onclick="checkSpeaker(this, false)"><img src="../assets/images/lessons/vorstellung/leonie.webp" alt="Leonie"><span>Leonie</span></button>
+        </div>
+        <p id="speakerFeedback" class="feedback" aria-live="polite"></p>
+      </article>
+
+      <article class="activity-box">
+        <h3>Activitatea 2: Completează dialogul</h3>
+        <div class="fill-row"><span>Hallo, ich</span><select data-answer="bin"><option value="">— alege —</option><option value="ist">ist</option><option value="bin">bin</option><option value="das">das</option></select><span>Jonas.</span></div>
+        <div class="fill-row"><span>Hallo!</span><select data-answer="Das"><option value="">— alege —</option><option value="Ich">Ich</option><option value="Das">Das</option><option value="Und">Und</option></select><span>ist Jonas.</span></div>
+        <div class="fill-row"><span>Und ich</span><select data-answer="bin"><option value="">— alege —</option><option value="ist">ist</option><option value="bin">bin</option><option value="das">das</option></select><span>Johanna.</span></div>
+        <button class="check-button" type="button" onclick="checkDialogueFill()">Răspuns prüfen</button>
+        <p id="fillFeedback" class="feedback" aria-live="polite"></p>
+      </article>
+
+      <article class="activity-box">
+        <h3>Activitatea 3: Ce se potrivește?</h3>
+        <p>Alege propoziția potrivită pentru imagine.</p>
+        <img class="activity-image" src="../assets/images/lessons/vorstellung/das-ist.webp" alt="Un copil îl prezintă pe alt copil">
+        <div class="choice-row">
+          <button type="button" onclick="checkStructure(this, false)">Ich bin Jonas.</button>
+          <button type="button" onclick="checkStructure(this, true)">Das ist Jonas.</button>
+          <button type="button" onclick="checkStructure(this, false)">Hallo, Leonie.</button>
+        </div>
+        <p id="structureFeedback" class="feedback" aria-live="polite"></p>
+      </article>
+
+      <button id="activityDone" class="secondary-button" type="button" disabled onclick="completeSection('activities', 'review')">Continuă la recapitulare →</button>
+    </section>
+
+    <section class="section-card locked" id="review">
+      <div class="section-heading">
+        <span class="section-number">5</span>
+        <div><span class="kicker">Wiederholung</span><h2>Recapitulare</h2></div>
+      </div>
+      <div class="review-card">
+        <div id="reviewVisual" class="review-visual" aria-hidden="true">👋</div>
+        <h3 id="reviewQuestion">Frage</h3>
+        <div id="reviewOptions" class="choice-row review-options"></div>
+        <p id="reviewFeedback" class="feedback" aria-live="polite"></p>
+        <p id="reviewCounter">Întrebarea 1 din 5</p>
+      </div>
+    </section>
+
+    <section class="section-card final-card locked" id="finish">
+      <div class="confetti" aria-hidden="true">⭐ 🎉 ⭐</div>
+      <img src="../assets/images/mascot/felix-default.png" alt="Felix te felicită" class="final-felix">
+      <h2>Super gemacht!</h2>
+      <p>Du kannst dich jetzt vorstellen!</p>
+      <p class="romanian">Bravo! Ai terminat lecția.</p>
+      <p id="diplomaMessage" class="diploma-message">Obține 5/5 pentru a debloca mini-diploma.</p>
+      <button id="diplomaButton" class="diploma-button" type="button" onclick="openDiploma()" disabled>🏅 Vorstellungs-Meister</button>
+      <button id="retryTestButton" class="retry-button hidden" type="button" onclick="retryReview()">Reia testul ↻</button>
+      <button class="primary-button" type="button" onclick="restartLesson()">Reia întreaga lecție ↻</button>
+    </section>
+
+    <div id="diplomaModal" class="diploma-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="diplomaTitle">
+      <div class="diploma-overlay" onclick="closeDiploma()"></div>
+      <div class="diploma-window">
+        <button class="diploma-close" type="button" onclick="closeDiploma()" aria-label="Închide diploma">×</button>
+        <div id="miniDiploma" class="mini-diploma">
+          <div class="diploma-stars" aria-hidden="true">★ ★ ★</div>
+          <img src="../assets/images/mascot/felix-default.png" alt="Felix" class="diploma-felix">
+          <p class="diploma-brand">Kleine Deutschwelt</p>
+          <h2 id="diplomaTitle">Mini-Diplom</h2>
+          <p class="diploma-intro">Diese Urkunde bestätigt den erfolgreichen Abschluss der Lektion</p>
+          <h3>Vorstellung</h3>
+          <div class="diploma-result"><span>Testergebnis</span><strong>5/5 · 100%</strong></div>
+          <p class="diploma-congratulations">Herzlichen Glückwunsch!</p>
+          <div class="diploma-badge">🏅 Vorstellungs-Meister</div>
+          <p id="diplomaDate" class="diploma-date"></p>
+        </div>
+        <div class="diploma-actions">
+          <button class="secondary-button compact-button" type="button" onclick="printDiploma()">🖨️ Imprimă diploma</button>
+          <button class="primary-button" type="button" onclick="closeDiploma()">Închide</button>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer>Mit Spaß Deutsch lernen · Kleine Deutschwelt</footer>
+  <script src="./vorstellung.js"></script>
+</body>
+</html>
