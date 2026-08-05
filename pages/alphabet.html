@@ -1,1 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interaktive Deutschlektion zum deutschen Alphabet für Kinder.">
+  <title>Das deutsche Alphabet | Kleine Deutschwelt</title>
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./alphabet.css">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Zum Inhalt</a>
+
+  <header class="lesson-header">
+    <a class="brand" href="../index.html" aria-label="Kleine Deutschwelt – Startseite">
+      <img src="../assets/images/logo/logo-icon.webp" alt="" width="52" height="52">
+      <span>
+        <strong>Kleine Deutschwelt</strong>
+        <small>Deutsch lernen mit Spaß!</small>
+      </span>
+    </a>
+
+    <div class="header-actions">
+      <div class="lesson-progress" aria-label="Lektionsfortschritt">
+        <span id="progress-label">0 %</span>
+        <div class="progress-track" aria-hidden="true">
+          <span id="progress-bar"></span>
+        </div>
+      </div>
+      <a class="home-link" href="../index.html#starter">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.2 12 4l9 7.2v8.3a.5.5 0 0 1-.5.5h-5.3v-5.7H8.8V20H3.5a.5.5 0 0 1-.5-.5v-8.3Z"/></svg>
+        <span>Zurück</span>
+      </a>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero section-shell" id="start">
+      <div class="hero-copy">
+        <p class="eyebrow">Starter · Lektion</p>
+        <h1>Das deutsche Alphabet</h1>
+        <p class="hero-lead">Höre zu, sprich nach und entdecke die Buchstaben.</p>
+        <p class="translation">Ascultă, repetă și descoperă literele.</p>
+        <button class="primary-button audio-trigger" type="button" data-audio="../audio/alphabet/instructions/02-entdecke-das-alphabet.mp3">
+          <span class="sound-icon" aria-hidden="true"></span>
+          <span>Entdecke das Alphabet</span>
+        </button>
+      </div>
+      <img class="hero-felix" src="../assets/images/lessons/alphabet/felix/felix-alphabet.webp" alt="Felix zeigt auf eine Tafel mit den Buchstaben A, B und C.">
+    </section>
+
+    <nav class="lesson-nav section-shell" aria-label="Abschnitte der Lektion">
+      <a href="#dialog">Dialog</a>
+      <a href="#alphabet-board">Alphabet</a>
+      <a href="#discover">Buchstaben</a>
+      <a href="#spell-name">Mein Name</a>
+      <a href="#quiz">Mini-Test</a>
+    </nav>
+
+    <section class="lesson-section section-shell" id="dialog" data-progress-step="dialog">
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Aufgabe 3a</p>
+          <h2>Hör zu und lies mit.</h2>
+          <p class="translation">Ascultă și citește simultan.</p>
+        </div>
+        <button class="round-audio audio-trigger" type="button" data-audio="../audio/alphabet/instructions/01-hoer-zu-und-lies-mit.mp3" aria-label="Anweisung anhören">
+          <span class="sound-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="dialog-layout">
+        <img class="section-felix" src="../assets/images/lessons/alphabet/felix/felix-listening.webp" alt="Felix hört aufmerksam zu.">
+
+        <div class="dialog-card" id="dialog-card">
+          <div class="dialog-toolbar">
+            <button class="secondary-button audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a.mp3" data-dialog-all>
+              <span class="play-icon" aria-hidden="true"></span>
+              <span>Dialog hören</span>
+            </button>
+            <button class="text-button" type="button" id="translation-toggle" aria-expanded="false" aria-controls="dialog-translation">Übersetzung anzeigen</button>
+          </div>
+
+          <ol class="dialog-lines">
+            <li class="dialog-line speaker-red">
+              <span class="speaker-marker circle" aria-hidden="true"></span>
+              <span class="dialog-text">Ich bin Leonie.</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-01-ich-bin-leonie.mp3" aria-label="Ich bin Leonie anhören"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+            <li class="dialog-line speaker-green">
+              <span class="speaker-marker diamond" aria-hidden="true"></span>
+              <span class="dialog-text">Leonie!</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-02-leonie.mp3" aria-label="Leonie anhören"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+            <li class="dialog-line speaker-green">
+              <span class="speaker-marker diamond" aria-hidden="true"></span>
+              <span class="dialog-text">Wie schreibt man das?</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-03-wie-schreibt-man-das.mp3" aria-label="Wie schreibt man das anhören"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+            <li class="dialog-line speaker-red spelling-line">
+              <span class="speaker-marker circle" aria-hidden="true"></span>
+              <span class="dialog-text" aria-label="L e o n i e"><b>L</b><i>–</i><b>e</b><i>–</i><b>o</b><i>–</i><b>n</b><i>–</i><b>i</b><i>–</i><b>e</b>.</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-04-leonie-buchstabiert.mp3" aria-label="Leonie buchstabiert ihren Namen"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+            <li class="dialog-line speaker-green">
+              <span class="speaker-marker diamond" aria-hidden="true"></span>
+              <span class="dialog-text">Wie bitte?</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-05-wie-bitte.mp3" aria-label="Wie bitte anhören"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+            <li class="dialog-line speaker-red spelling-line">
+              <span class="speaker-marker circle" aria-hidden="true"></span>
+              <span class="dialog-text" aria-label="L e o n i e"><b>L</b><i>–</i><b>e</b><i>–</i><b>o</b><i>–</i><b>n</b><i>–</i><b>i</b><i>–</i><b>e</b>.</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-06-leonie-wiederholung.mp3" aria-label="Leonie wiederholt ihren Namen"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+            <li class="dialog-line speaker-green">
+              <span class="speaker-marker diamond" aria-hidden="true"></span>
+              <span class="dialog-text">Vielen Dank.</span>
+              <button class="line-audio audio-trigger" type="button" data-audio="../audio/alphabet/dialog/dialog-3a-07-vielen-dank.mp3" aria-label="Vielen Dank anhören"><span class="sound-icon" aria-hidden="true"></span></button>
+            </li>
+          </ol>
+
+          <div class="dialog-translation" id="dialog-translation" hidden>
+            <p>Eu sunt Leonie.</p>
+            <p>Leonie!</p>
+            <p>Cum se scrie?</p>
+            <p>L – e – o – n – i – e.</p>
+            <p>Poftim?</p>
+            <p>L – e – o – n – i – e.</p>
+            <p>Mulțumesc mult.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bridge-card">
+        <div>
+          <strong>Leonie buchstabiert ihren Namen.</strong>
+          <span>Leonie își spune numele pe litere.</span>
+        </div>
+        <a class="primary-button" href="#alphabet-board">Alphabet entdecken</a>
+      </div>
+    </section>
+
+    <section class="lesson-section section-shell" id="alphabet-board" data-progress-step="board">
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Das Alphabet</p>
+          <h2>Sieh dir die Buchstaben an.</h2>
+          <p class="translation">Privește literele alfabetului german.</p>
+        </div>
+        <button class="round-audio audio-trigger" type="button" data-audio="../audio/alphabet/instructions/02-entdecke-das-alphabet.mp3" aria-label="Anweisung anhören">
+          <span class="sound-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <figure class="alphabet-poster">
+        <img src="../assets/images/lessons/alphabet/alphabet-board.png" alt="Das deutsche Alphabet mit 30 Buchstaben und passenden Bildern." loading="lazy">
+        <figcaption>Das deutsche Alphabet: A–Z, Ä, Ö, Ü und ß</figcaption>
+      </figure>
+
+      <div class="center-actions">
+        <button class="secondary-button" type="button" id="play-alphabet">
+          <span class="play-icon" aria-hidden="true"></span>
+          <span>Alphabet hören</span>
+        </button>
+        <button class="text-button" type="button" id="stop-audio">Audio stoppen</button>
+      </div>
+    </section>
+
+    <section class="lesson-section section-shell" id="discover" data-progress-step="discover">
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Buchstaben entdecken</p>
+          <h2>Hör zu und sprich nach.</h2>
+          <p class="translation">Apasă o literă, ascultă și repetă.</p>
+        </div>
+        <button class="round-audio audio-trigger" type="button" data-audio="../audio/alphabet/instructions/03-hoer-zu-und-sprich-nach.mp3" aria-label="Anweisung anhören">
+          <span class="sound-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="discover-layout">
+        <div class="letters-grid" id="letters-grid" aria-label="Buchstaben auswählen"></div>
+
+        <article class="letter-detail" id="letter-detail" aria-live="polite">
+          <img class="detail-felix" src="../assets/images/lessons/alphabet/felix/felix-repeat.webp" alt="Felix ermuntert dich zum Nachsprechen.">
+          <div class="detail-content">
+            <span class="detail-letter" id="detail-letter">A a</span>
+            <div class="detail-audio-row">
+              <button class="audio-pill" type="button" id="play-letter"><span class="sound-icon" aria-hidden="true"></span><span>Buchstabe</span></button>
+              <button class="audio-pill" type="button" id="play-word"><span class="sound-icon" aria-hidden="true"></span><span>Wort</span></button>
+              <button class="audio-pill" type="button" id="play-sentence"><span class="sound-icon" aria-hidden="true"></span><span>Satz</span></button>
+            </div>
+            <p class="detail-word"><span class="article" id="detail-article">der</span> <strong id="detail-word">Apfel</strong></p>
+            <p class="detail-translation" id="detail-word-ro">mărul</p>
+            <div class="sentence-box">
+              <p id="detail-sentence">Das ist ein Apfel.</p>
+              <p id="detail-sentence-ro">Acesta este un măr.</p>
+            </div>
+            <button class="learned-button" type="button" id="mark-learned">Als geübt markieren</button>
+          </div>
+        </article>
+      </div>
+      <p class="learned-count" id="learned-count">0 von 30 Buchstaben geübt</p>
+    </section>
+
+    <section class="lesson-section section-shell" id="spell-name" data-progress-step="name">
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Du bist dran</p>
+          <h2>Buchstabiere deinen Namen.</h2>
+          <p class="translation">Scrie numele tău și ascultă literele.</p>
+        </div>
+        <button class="round-audio audio-trigger" type="button" data-audio="../audio/alphabet/instructions/05-buchstabiere-deinen-namen.mp3" aria-label="Anweisung anhören">
+          <span class="sound-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="name-card">
+        <img src="../assets/images/lessons/alphabet/felix/felix-spelling.webp" alt="Felix hält die Buchstaben des Namens Leonie.">
+        <div class="name-activity">
+          <label for="name-input">Mein Name ist:</label>
+          <div class="name-input-row">
+            <input id="name-input" type="text" maxlength="24" autocomplete="name" placeholder="Leonie">
+            <button class="primary-button" type="button" id="spell-button">Buchstabieren</button>
+          </div>
+          <div class="spelled-name" id="spelled-name" aria-live="polite"></div>
+          <p class="name-feedback" id="name-feedback"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="lesson-section section-shell" id="quiz" data-progress-step="quiz">
+      <div class="section-heading">
+        <div>
+          <p class="step-label">Mini-Test</p>
+          <h2>Wähle den richtigen Buchstaben.</h2>
+          <p class="translation">Ascultă și alege litera corectă. Testul are 5 întrebări.</p>
+        </div>
+        <button class="round-audio audio-trigger" type="button" data-audio="../audio/alphabet/instructions/04-waehle-den-richtigen-buchstaben.mp3" aria-label="Anweisung anhören">
+          <span class="sound-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+
+      <div class="quiz-card">
+        <img class="quiz-felix" src="../assets/images/lessons/alphabet/felix/felix-choose.webp" alt="Felix zeigt auf drei Buchstabenkarten.">
+        <div class="quiz-content" id="quiz-content">
+          <p class="quiz-counter" id="quiz-counter">Bereit?</p>
+          <h3 id="quiz-title">Teste dein Alphabetwissen.</h3>
+          <button class="quiz-listen" type="button" id="quiz-listen" hidden>
+            <span class="sound-icon" aria-hidden="true"></span>
+            <span>Buchstaben hören</span>
+          </button>
+          <div class="quiz-options" id="quiz-options"></div>
+          <p class="quiz-feedback" id="quiz-feedback" aria-live="polite"></p>
+          <button class="primary-button" type="button" id="quiz-start">Test starten</button>
+          <button class="primary-button" type="button" id="quiz-next" hidden>Weiter</button>
+        </div>
+      </div>
+
+      <div class="result-card" id="result-card" hidden>
+        <img src="../assets/images/lessons/alphabet/felix/felix-celebrate.webp" alt="Felix feiert mit erhobenen Armen und goldenen Sternen.">
+        <div>
+          <p class="result-score" id="result-score"></p>
+          <h3 id="result-title"></h3>
+          <p id="result-message"></p>
+          <div class="master-badge" id="master-badge" hidden>
+            <span>Alphabet-Meister</span>
+            <small>5 von 5 richtig</small>
+          </div>
+          <button class="secondary-button" type="button" id="quiz-restart">Noch einmal</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="lesson-footer">
+    <strong>Kleine Deutschwelt</strong>
+    <span>Deutsch lernen mit Spaß!</span>
+  </footer>
+
+  <div class="audio-status" id="audio-status" role="status" aria-live="polite"></div>
+  <script src="./alphabet.js"></script>
+</body>
+</html>
