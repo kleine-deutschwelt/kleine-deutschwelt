@@ -1,5 +1,3 @@
-"use strict";
-
 const AUDIO_ROOT = "../audio/alphabet";
 const STORAGE_KEY = "kdw-alphabet-progress-v1";
 
