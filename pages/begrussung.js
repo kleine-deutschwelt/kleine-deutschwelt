@@ -1,5 +1,3 @@
-"use strict";
-
 document.addEventListener("DOMContentLoaded", () => {
   const AUDIO_PATH = "../assets/audio/begrussung/";
   const audio = document.getElementById("lessonAudio");
