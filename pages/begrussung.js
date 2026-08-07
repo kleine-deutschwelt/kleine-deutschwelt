@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
     muted = !muted;
     audio.muted = muted;
     if (muted) audio.pause();
-    soundToggle.textContent = muted ? "🔇" : "🔊";
+    soundToggle.textContent = muted ? "ðŸ”‡" : "ðŸ”Š";
     soundToggle.setAttribute("aria-pressed", String(muted));
     soundToggle.setAttribute("aria-label", muted ? "Ton einschalten" : "Ton ausschalten");
   });
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelectorAll("[data-complete]").forEach((button) => {
       if (completedSteps.has(button.dataset.complete)) {
         button.classList.add("completed");
-        button.textContent = "✓ Geschafft!";
+        button.textContent = "âœ“ Geschafft!";
       }
     });
   };
@@ -74,12 +74,12 @@ document.addEventListener("DOMContentLoaded", () => {
     button.addEventListener("click", () => {
       markComplete(button.dataset.complete);
       button.classList.add("completed");
-      button.textContent = "✓ Geschafft!";
+      button.textContent = "âœ“ Geschafft!";
       playFile("success.mp3", button);
     });
   });
 
-  // Aktivität 2: Zuordnen.
+  // AktivitÃ¤t 2: Zuordnen.
   document.getElementById("checkMatches").addEventListener("click", () => {
     const cards = [...document.querySelectorAll(".match-card")];
     let correct = 0;
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const ok = select.value === card.dataset.answer;
       card.classList.toggle("correct", ok);
       card.classList.toggle("wrong", !ok);
-      state.textContent = ok ? "✓ Richtig!" : select.value ? "Noch einmal!" : "Bitte wählen.";
+      state.textContent = ok ? "âœ“ Richtig!" : select.value ? "Noch einmal!" : "Bitte wÃ¤hlen.";
       if (ok) correct++;
     });
     const result = document.getElementById("matchResult");
@@ -99,19 +99,19 @@ document.addEventListener("DOMContentLoaded", () => {
     if (correct === 4) markComplete(2);
   });
 
-  // Aktivität 3: Hallo oder Tschüss.
+  // AktivitÃ¤t 3: Hallo oder TschÃ¼ss.
   document.querySelectorAll("#quickChoice button").forEach((button) => {
     button.addEventListener("click", () => {
       const ok = button.dataset.choice === "Hallo!";
       const feedback = document.getElementById("quickFeedback");
-      feedback.textContent = ok ? "✓ Richtig! Sie sagen: Hallo!" : "Noch einmal. Sie treffen sich.";
+      feedback.textContent = ok ? "âœ“ Richtig! Sie sagen: Hallo!" : "Noch einmal. Sie treffen sich.";
       feedback.style.color = ok ? "#297943" : "#b83e31";
       playFile(ok ? "correct.mp3" : "try-again.mp3");
       if (ok) markComplete(3);
     });
   });
 
-  // Aktivität 4: Hör zu und wähle.
+  // AktivitÃ¤t 4: HÃ¶r zu und wÃ¤hle.
   const listeningItems = [
     { text: "Guten Morgen!", audio: "guten-morgen.mp3" },
     { text: "Guten Tag!", audio: "guten-tag.mp3" },
@@ -126,7 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const renderListening = () => {
     listeningAnswered = false;
     document.getElementById("listeningRound").textContent = `${listeningIndex + 1} / 4`;
-    document.getElementById("listeningScore").textContent = `${listeningScore} ⭐`;
+    document.getElementById("listeningScore").textContent = `${listeningScore} â­`;
     document.getElementById("listeningFeedback").textContent = "";
     document.getElementById("nextListening").classList.add("hidden");
     const options = document.getElementById("listeningOptions");
@@ -155,9 +155,9 @@ document.addEventListener("DOMContentLoaded", () => {
     feedback.textContent = ok ? "Richtig! Sehr gut!" : `Das war: ${current.text}`;
     feedback.className = "result-message " + (ok ? "good" : "bad");
     playFile(ok ? "correct.mp3" : "try-again.mp3");
-    document.getElementById("listeningScore").textContent = `${listeningScore} ⭐`;
+    document.getElementById("listeningScore").textContent = `${listeningScore} â­`;
     const next = document.getElementById("nextListening");
-    next.textContent = listeningIndex === 3 ? "Ergebnis zeigen" : "Weiter →";
+    next.textContent = listeningIndex === 3 ? "Ergebnis zeigen" : "Weiter â†’";
     next.classList.remove("hidden");
   };
 
@@ -172,10 +172,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Aktivität 5: Dialoge.
+  // AktivitÃ¤t 5: Dialoge.
   const dialogs = {
     meeting: { lines: ["Hallo, Mia!", "Hallo, Jonas!"], audio: "dialog-hallo.mp3" },
-    bye: { lines: ["Tschüss, Mia!", "Tschüss, Jonas!"], audio: "dialog-tschuess.mp3" },
+    bye: { lines: ["TschÃ¼ss, Mia!", "TschÃ¼ss, Jonas!"], audio: "dialog-tschuess.mp3" },
     formal: { lines: ["Auf Wiedersehen, Kinder!", "Auf Wiedersehen, Felix!"], audio: "dialog-auf-wiedersehen.mp3" }
   };
   document.querySelectorAll(".dialog-tabs button").forEach((tab) => {
@@ -194,11 +194,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Mini-Quiz.
   const quizQuestions = [
-    { visual: "🌅", question: "Es ist Morgen. Was sagst du?", options: ["Gute Nacht!", "Guten Morgen!", "Guten Abend!"], answer: "Guten Morgen!" },
-    { visual: "👋", question: "Du triffst einen Freund. Was sagst du?", options: ["Hallo!", "Tschüss!", "Gute Nacht!"], answer: "Hallo!" },
-    { visual: "🌙", question: "Du gehst schlafen. Was sagst du?", options: ["Guten Tag!", "Guten Morgen!", "Gute Nacht!"], answer: "Gute Nacht!" },
-    { visual: "🎒", question: "Du gehst nach Hause. Was sagst du zu deinem Freund?", options: ["Tschüss!", "Hallo!", "Guten Morgen!"], answer: "Tschüss!" },
-    { visual: "👩‍🏫", question: "Du verabschiedest dich höflich von der Lehrerin.", options: ["Hallo!", "Auf Wiedersehen!", "Gute Nacht!"], answer: "Auf Wiedersehen!" }
+    { visual: "ðŸŒ…", question: "Es ist Morgen. Was sagst du?", options: ["Gute Nacht!", "Guten Morgen!", "Guten Abend!"], answer: "Guten Morgen!" },
+    { visual: "ðŸ‘‹", question: "Du triffst einen Freund. Was sagst du?", options: ["Hallo!", "TschÃ¼ss!", "Gute Nacht!"], answer: "Hallo!" },
+    { visual: "ðŸŒ™", question: "Du gehst schlafen. Was sagst du?", options: ["Guten Tag!", "Guten Morgen!", "Gute Nacht!"], answer: "Gute Nacht!" },
+    { visual: "ðŸŽ’", question: "Du gehst nach Hause. Was sagst du zu deinem Freund?", options: ["TschÃ¼ss!", "Hallo!", "Guten Morgen!"], answer: "TschÃ¼ss!" },
+    { visual: "ðŸ‘©â€ðŸ«", question: "Du verabschiedest dich hÃ¶flich von der Lehrerin.", options: ["Hallo!", "Auf Wiedersehen!", "Gute Nacht!"], answer: "Auf Wiedersehen!" }
   ];
   let quizIndex = 0;
   let quizScore = 0;
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
     playFile(ok ? "correct.mp3" : "try-again.mp3");
     document.getElementById("quizScore").textContent = `${quizScore} Punkte`;
     const next = document.getElementById("nextQuiz");
-    next.textContent = quizIndex === 4 ? "Ergebnis" : "Nächste Frage →";
+    next.textContent = quizIndex === 4 ? "Ergebnis" : "NÃ¤chste Frage â†’";
     next.classList.remove("hidden");
   };
 
@@ -250,8 +250,8 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("quizBox").classList.add("hidden");
     document.getElementById("quizFinish").classList.remove("hidden");
     document.getElementById("finishTitle").textContent = quizScore === 5 ? "Perfekt!" : quizScore >= 3 ? "Sehr gut!" : "Gut versucht!";
-    document.getElementById("finishText").textContent = quizScore === 5 ? "Du bist ein Begrüßungs-Profi!" : "Übe noch einmal und sammle alle Sterne.";
-    document.getElementById("finishScore").textContent = `${quizScore} / 5 ${"⭐".repeat(quizScore)}`;
+    document.getElementById("finishText").textContent = quizScore === 5 ? "Du bist ein BegrÃ¼ÃŸungs-Profi!" : "Ãœbe noch einmal und sammle alle Sterne.";
+    document.getElementById("finishScore").textContent = `${quizScore} / 5 ${"â­".repeat(quizScore)}`;
     if (quizScore === 5) {
       markComplete(7);
       localStorage.setItem("begrussungBestScore", "5");
