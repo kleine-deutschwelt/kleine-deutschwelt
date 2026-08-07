@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interaktive Deutschlektion: Begrüßung und Verabschiedung">
+  <title>Begrüßung | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="begruessung.css">
+  <script src="begruessung.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#lesson">Zum Inhalt springen</a>
 
+  <header class="lesson-header">
+    <a class="brand" href="../index.html" aria-label="Zur Startseite">
+      <span class="brand-mark">🦊</span>
+      <span><strong>Kleine Deutschwelt</strong><small>Deutsch lernen mit Spaß!</small></span>
+    </a>
+    <div class="header-actions">
+      <div class="lesson-progress" aria-label="Lektionsfortschritt">
+        <span id="progressText">0 %</span>
+        <span class="progress-track"><span id="progressBar"></span></span>
+      </div>
+      <button class="icon-button" id="soundToggle" type="button" aria-label="Ton ausschalten" aria-pressed="false">🔊</button>
+      <a class="home-button" href="../index.html">⌂ <span>Home</span></a>
+    </div>
+  </header>
+
+  <main id="lesson">
+    <!-- Lecția începe cu bannerul cerut. -->
+    <section class="hero lesson-stage active" data-stage="0" aria-labelledby="lessonTitle">
+      <img src="../assets/images/lessons/begruessung/begruessung-banner.webp" alt="Felix begrüßt zwei Kinder auf dem Schulhof">
+      <div class="hero-overlay">
+        <span class="eyebrow">START · A1.1</span>
+        <h1 id="lessonTitle">Begrüßung</h1>
+        <p>Hallo! Guten Morgen! Tschüss!</p>
+        <button class="primary-button audio-trigger stage-next" type="button" data-audio="intro.mp3">
+          <span aria-hidden="true">▶</span> Lektion starten
+        </button>
+      </div>
+    </section>
+
+    <div class="stage-tracker" aria-label="Fortschritt in der Lektion">
+      <span id="stageLabel">Start</span>
+      <div class="stage-dots" aria-hidden="true">
+        <i class="current"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+    </div>
+
+    <section class="lesson-section lesson-stage" id="hoeren" data-step="1" data-stage="1">
+      <div class="section-heading">
+        <span class="section-number">1</span>
+        <div><p class="kicker">HÖREN UND SPRECHEN</p><h2>Hör zu und sprich nach.</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="hoer-zu.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+
+      <div class="greeting-grid">
+        <article class="greeting-card morning">
+          <img src="../assets/images/lessons/begruessung/guten-morgen.webp" alt="Ein Kind wacht am Morgen auf">
+          <div><span class="time-icon">🌅</span><h3>Guten Morgen!</h3><p>am Morgen</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="guten-morgen.mp3" aria-label="Guten Morgen anhören">🔊</button>
+        </article>
+        <article class="greeting-card daytime">
+          <img src="../assets/images/lessons/begruessung/guten-tag.webp" alt="Ein Kind begrüßt am Tag eine Lehrerin">
+          <div><span class="time-icon">☀️</span><h3>Guten Tag!</h3><p>am Tag</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="guten-tag.mp3" aria-label="Guten Tag anhören">🔊</button>
+        </article>
+        <article class="greeting-card evening">
+          <img src="../assets/images/lessons/begruessung/guten-abend.webp" alt="Ein Kind begrüßt am Abend eine Lehrerin">
+          <div><span class="time-icon">🌇</span><h3>Guten Abend!</h3><p>am Abend</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="guten-abend.mp3" aria-label="Guten Abend anhören">🔊</button>
+        </article>
+        <article class="greeting-card night">
+          <img src="../assets/images/lessons/begruessung/gute-nacht.webp" alt="Ein Kind schläft in der Nacht">
+          <div><span class="time-icon">🌙</span><h3>Gute Nacht!</h3><p>in der Nacht</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="gute-nacht.mp3" aria-label="Gute Nacht anhören">🔊</button>
+        </article>
+      </div>
+      <button class="done-button" type="button" data-complete="1">✓ Ich habe nachgesprochen</button>
+      <div class="stage-navigation"><button class="secondary-button stage-prev" type="button">← Zurück</button><button class="primary-button stage-next" type="button">Weiter →</button></div>
+    </section>
+
+    <section class="lesson-section lesson-stage soft-green" id="zuordnen" data-step="2" data-stage="2">
+      <div class="section-heading">
+        <span class="section-number">2</span>
+        <div><p class="kicker">WAS PASST ZUSAMMEN?</p><h2>Ordne die Begrüßungen zu.</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="was-passt.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <p class="section-help">Wähle unter jedem Bild die passende Begrüßung.</p>
+      <div class="match-grid" id="matchGrid">
+        <article class="match-card" data-answer="Guten Morgen!">
+          <img src="../assets/images/lessons/begruessung/guten-morgen.webp" alt="Morgenszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Guten Abend!</option><option>Gute Nacht!</option><option>Guten Morgen!</option><option>Guten Tag!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+        <article class="match-card" data-answer="Guten Tag!">
+          <img src="../assets/images/lessons/begruessung/guten-tag.webp" alt="Tagesszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Gute Nacht!</option><option>Guten Morgen!</option><option>Guten Tag!</option><option>Guten Abend!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+        <article class="match-card" data-answer="Guten Abend!">
+          <img src="../assets/images/lessons/begruessung/guten-abend.webp" alt="Abendszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Guten Tag!</option><option>Guten Abend!</option><option>Guten Morgen!</option><option>Gute Nacht!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+        <article class="match-card" data-answer="Gute Nacht!">
+          <img src="../assets/images/lessons/begruessung/gute-nacht.webp" alt="Nachtszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Guten Morgen!</option><option>Gute Nacht!</option><option>Guten Abend!</option><option>Guten Tag!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+      </div>
+      <div class="activity-actions"><button class="primary-button" id="checkMatches" type="button">Antworten prüfen</button><p id="matchResult" class="result-message" aria-live="polite"></p></div>
+      <div class="stage-navigation"><button class="secondary-button stage-prev" type="button">← Zurück</button><button class="primary-button stage-next" type="button">Weiter →</button></div>
+    </section>
+
+    <section class="lesson-section lesson-stage" id="hallo-tschuess" data-step="3" data-stage="3">
+      <div class="section-heading">
+        <span class="section-number">3</span>
+        <div><p class="kicker">TREFFEN UND VERABSCHIEDEN</p><h2>Hallo oder Tschüss?</h2></div>
+      </div>
+      <div class="scene-pair">
+        <article class="scene-card hello-card">
+          <img src="../assets/images/lessons/begruessung/hallo.webp" alt="Zwei Kinder treffen sich und winken">
+          <div class="scene-content"><span>👋</span><div><h3>Hallo!</h3><p>Wir treffen uns.</p></div><button class="round-audio audio-trigger" type="button" data-audio="hallo.mp3" aria-label="Hallo anhören">🔊</button></div>
+        </article>
+        <article class="scene-card bye-card">
+          <img src="../assets/images/lessons/begruessung/tschuess.webp" alt="Zwei Kinder gehen auseinander und winken">
+          <div class="scene-content"><span>🎒</span><div><h3>Tschüss!</h3><p>Wir verabschieden uns.</p></div><button class="round-audio audio-trigger" type="button" data-audio="tschuess.mp3" aria-label="Tschüss anhören">🔊</button></div>
+        </article>
+      </div>
+      <div class="quick-choice" id="quickChoice">
+        <p id="quickPrompt">Die Kinder treffen sich. Was sagen sie?</p>
+        <button type="button" data-choice="Hallo!">Hallo!</button>
+        <button type="button" data-choice="Tschüss!">Tschüss!</button>
+        <span id="quickFeedback" aria-live="polite"></span>
+      </div>
+      <div class="stage-navigation"><button class="secondary-button stage-prev" type="button">← Zurück</button><button class="primary-button stage-next" type="button">Weiter →</button></div>
+    </section>
+
+    <section class="lesson-section lesson-stage soft-blue" id="waehlen" data-step="4" data-stage="4">
+      <div class="section-heading">
+        <span class="section-number">4</span>
+        <div><p class="kicker">HÖREN UND WÄHLEN</p><h2>Was hörst du?</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="hoer-und-waehle.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <div class="listening-game">
+        <div class="listening-top"><span id="listeningRound">1 / 4</span><button class="big-listen" id="playListening" type="button"><span>🔊</span> Audio hören</button><span id="listeningScore">0 ⭐</span></div>
+        <div class="listening-options" id="listeningOptions"></div>
+        <p id="listeningFeedback" class="result-message" aria-live="polite"></p>
+        <button class="secondary-button hidden" id="nextListening" type="button">Weiter →</button>
+      </div>
+      <div class="stage-navigation"><button class="secondary-button stage-prev" type="button">← Zurück</button><button class="primary-button stage-next" type="button">Weiter zur nächsten Aufgabe →</button></div>
+    </section>
+
+    <section class="lesson-section lesson-stage" id="dialoge" data-step="5" data-stage="5">
+      <div class="section-heading">
+        <span class="section-number">5</span>
+        <div><p class="kicker">MINI-DIALOGE</p><h2>Hör zu und sprich mit.</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="dialog-aufgabe.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <div class="dialog-tabs" role="tablist" aria-label="Dialog auswählen">
+        <button class="active" type="button" role="tab" aria-selected="true" data-dialog="meeting">Treffen</button>
+        <button type="button" role="tab" aria-selected="false" data-dialog="bye">Tschüss</button>
+        <button type="button" role="tab" aria-selected="false" data-dialog="formal">Auf Wiedersehen</button>
+      </div>
+      <div class="dialog-stage" id="dialogStage">
+        <div class="speaker child-a"><span>👧</span><p>Hallo, Mia!</p></div>
+        <div class="speaker child-b"><span>👦</span><p>Hallo, Jonas!</p></div>
+        <button class="primary-button audio-trigger" type="button" id="dialogAudio" data-audio="dialog-hallo.mp3">▶ Dialog hören</button>
+      </div>
+      <button class="done-button" type="button" data-complete="5">✓ Wir haben den Dialog gesprochen</button>
+      <div class="stage-navigation"><button class="secondary-button stage-prev" type="button">← Zurück</button><button class="primary-button stage-next" type="button">Weiter →</button></div>
+    </section>
+
+    <section class="lesson-section lesson-stage song-section" id="lied" data-step="6" data-stage="6">
+      <div class="section-heading">
+        <span class="section-number">6</span>
+        <div><p class="kicker">HÖR ZU UND SING MIT</p><h2>Das Begrüßungslied</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="sing-mit.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <div class="song-layout">
+        <img src="../assets/images/lessons/begruessung/begruessung-lied.webp" alt="Felix und Kinder singen in der Klasse">
+        <div class="lyrics-card">
+          <span class="music-notes">♪ ♫ ♪</span>
+          <p>Hallo, hallo, guten Morgen!</p>
+          <p>Hallo, hallo, guten Tag!</p>
+          <p>Guten Abend, gute Nacht,</p>
+          <p>Tschüss, bis bald, das hat Spaß gemacht!</p>
+          <button class="song-button audio-trigger" type="button" data-audio="begruessung-lied.mp3"><span>▶</span> Lied abspielen</button>
+          <small>Das Lied wird zweimal wiederholt.</small>
+        </div>
+      </div>
+      <button class="done-button" type="button" data-complete="6">✓ Ich habe mitgesungen</button>
+      <div class="stage-navigation"><button class="secondary-button stage-prev" type="button">← Zurück</button><button class="primary-button stage-next" type="button">Weiter zum Quiz →</button></div>
+    </section>
+
+    <section class="lesson-section lesson-stage quiz-section" id="quiz" data-stage="7">
+      <div class="section-heading">
+        <span class="section-number star">★</span>
+        <div><p class="kicker">MINI-QUIZ</p><h2>Bist du ein Begrüßungs-Profi?</h2></div>
+      </div>
+      <div id="quizBox" class="quiz-box">
+        <div class="quiz-meta"><span id="quizCounter">Frage 1 von 5</span><span id="quizScore">0 Punkte</span></div>
+        <div class="quiz-progress"><span id="quizProgress"></span></div>
+        <div class="quiz-visual" id="quizVisual">🌅</div>
+        <h3 id="quizQuestion"></h3>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p id="quizFeedback" class="result-message" aria-live="polite"></p>
+        <button class="secondary-button hidden" id="nextQuiz" type="button">Nächste Frage →</button>
+      </div>
+      <div class="quiz-finish hidden" id="quizFinish" aria-live="polite">
+        <span class="trophy">🏆</span><h3 id="finishTitle"></h3><p id="finishText"></p>
+        <div class="finish-score" id="finishScore"></div>
+        <button class="primary-button" id="restartQuiz" type="button">Noch einmal</button>
+        <button class="secondary-button audio-trigger" type="button" data-audio="abschluss.mp3">🔊 Abschluss hören</button>
+        <button class="primary-button stage-next" id="finishLessonButton" type="button">Zum Abschluss →</button>
+      </div>
+      <div class="stage-navigation quiz-back"><button class="secondary-button stage-prev" type="button">← Zurück</button></div>
+    </section>
+
+    <!-- Lecția se încheie cu bannerul cerut; după el nu mai există activități. -->
+    <section class="farewell-banner lesson-stage" data-stage="8" aria-label="Lektionsabschluss">
+      <img src="../assets/images/lessons/begruessung/begruessung-aufwiedersehen-banner.webp" alt="Die Kinder verlassen fröhlich die Klasse und winken Felix zum Abschied">
+      <div class="farewell-overlay">
+        <h2>Super gemacht!</h2>
+        <p>Auf Wiedersehen! Bis bald!</p>
+        <button class="primary-button audio-trigger" type="button" data-audio="auf-wiedersehen.mp3">🔊 Auf Wiedersehen!</button>
+        <button class="secondary-button stage-prev" type="button">← Zurück</button>
+        <a class="home-button farewell-home" href="../index.html">⌂ Home</a>
+      </div>
+    </section>
+  </main>
+
+  <audio id="lessonAudio" preload="none"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
