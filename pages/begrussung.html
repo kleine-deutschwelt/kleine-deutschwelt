@@ -1,193 +1,233 @@
-:root {
-  --navy: #23395d;
-  --navy-2: #152a4b;
-  --gold: #f7c948;
-  --orange: #f39c12;
-  --red: #e85d4a;
-  --green: #5eae72;
-  --blue: #7cc7e8;
-  --cream: #fffaf0;
-  --paper: #ffffff;
-  --ink-soft: #5f6f87;
-  --line: #dfe7f2;
-  --shadow: 0 12px 30px rgba(35, 57, 93, .13);
-  --radius: 24px;
-}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interaktive Deutschlektion: Begrüßung und Verabschiedung">
+  <title>Begrüßung | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="begrussung.css">
+  <script src="begrussung.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#lesson">Zum Inhalt springen</a>
 
-* { box-sizing: border-box; }
-html { scroll-behavior: smooth; scroll-padding-top: 96px; }
-body { margin: 0; color: var(--navy); background: #f7fbff; font-family: "Nunito", sans-serif; font-weight: 600; }
-button, select { font: inherit; }
-button, a { -webkit-tap-highlight-color: transparent; }
-button { color: inherit; }
-img { display: block; max-width: 100%; }
-.hidden { display: none !important; }
+  <header class="lesson-header">
+    <a class="brand" href="../index.html" aria-label="Zur Startseite">
+      <span class="brand-mark">🦊</span>
+      <span><strong>Kleine Deutschwelt</strong><small>Deutsch lernen mit Spaß!</small></span>
+    </a>
+    <div class="header-actions">
+      <div class="lesson-progress" aria-label="Lektionsfortschritt">
+        <span id="progressText">0 %</span>
+        <span class="progress-track"><span id="progressBar"></span></span>
+      </div>
+      <button class="icon-button" id="soundToggle" type="button" aria-label="Ton ausschalten" aria-pressed="false">🔊</button>
+      <a class="home-button" href="../index.html">⌂ <span>Home</span></a>
+    </div>
+  </header>
 
-.skip-link { position: fixed; top: -80px; left: 16px; z-index: 999; padding: 10px 16px; background: var(--navy); color: #fff; border-radius: 12px; }
-.skip-link:focus { top: 12px; }
+  <main id="lesson">
+    <!-- Lecția începe cu bannerul cerut. -->
+    <section class="hero" aria-labelledby="lessonTitle">
+      <img src="../assets/images/lessons/begrussung/begrussung-banner.webp" alt="Felix begrüßt zwei Kinder auf dem Schulhof">
+      <div class="hero-overlay">
+        <span class="eyebrow">START · A1.1</span>
+        <h1 id="lessonTitle">Begrüßung</h1>
+        <p>Hallo! Guten Morgen! Tschüss!</p>
+        <button class="primary-button audio-trigger" type="button" data-audio="intro.mp3">
+          <span aria-hidden="true">▶</span> Lektion starten
+        </button>
+      </div>
+    </section>
 
-.lesson-header { position: sticky; top: 0; z-index: 50; min-height: 74px; padding: 10px clamp(16px, 4vw, 56px); display: flex; align-items: center; justify-content: space-between; gap: 20px; background: rgba(255,255,255,.96); border-bottom: 3px solid var(--gold); box-shadow: 0 4px 18px rgba(35,57,93,.09); backdrop-filter: blur(10px); }
-.brand { display: flex; align-items: center; gap: 10px; color: var(--navy); text-decoration: none; }
-.brand-mark { display: grid; place-items: center; width: 46px; height: 46px; font-size: 28px; border: 2px solid var(--navy); border-radius: 50%; background: #fff4d6; }
-.brand strong { display: block; font-family: "Baloo 2", sans-serif; font-size: 20px; line-height: 1; }
-.brand small { display: block; margin-top: 3px; color: var(--ink-soft); font-size: 11px; }
-.header-actions { display: flex; align-items: center; gap: 10px; }
-.lesson-progress { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 800; }
-.progress-track { width: 120px; height: 10px; overflow: hidden; background: #e8eef6; border-radius: 99px; }
-.progress-track span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--gold), var(--orange)); transition: width .35s ease; }
-.icon-button, .home-button { min-height: 42px; border: 2px solid var(--navy); border-radius: 14px; background: #fff; box-shadow: 0 3px 0 var(--navy); }
-.icon-button { width: 44px; cursor: pointer; }
-.home-button { display: flex; align-items: center; gap: 6px; padding: 7px 13px; color: var(--navy); text-decoration: none; font-weight: 800; }
+    <nav class="step-nav" aria-label="Aktivitäten">
+      <a href="#hoeren">1<span>Hören</span></a>
+      <a href="#zuordnen">2<span>Zuordnen</span></a>
+      <a href="#hallo-tschuess">3<span>Hallo & Tschüss</span></a>
+      <a href="#waehlen">4<span>Wählen</span></a>
+      <a href="#dialoge">5<span>Dialoge</span></a>
+      <a href="#lied">6<span>Lied</span></a>
+      <a href="#quiz">★<span>Quiz</span></a>
+    </nav>
 
-main { overflow: hidden; }
-.hero { position: relative; width: min(1500px, calc(100% - 32px)); margin: 24px auto 0; overflow: hidden; border: 3px solid var(--navy); border-radius: 30px; box-shadow: var(--shadow); }
-.hero > img { width: 100%; aspect-ratio: 8/3; object-fit: cover; }
-.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(21,42,75,.78) 0%, rgba(21,42,75,.3) 40%, transparent 70%); pointer-events: none; }
-.hero-overlay { position: absolute; z-index: 2; top: 50%; left: clamp(24px, 7vw, 100px); width: min(520px, 44%); color: #fff; transform: translateY(-50%); text-shadow: 0 2px 5px rgba(0,0,0,.25); }
-.eyebrow, .kicker { margin: 0 0 4px; color: var(--red); font-size: 13px; font-weight: 900; letter-spacing: .13em; }
-.hero .eyebrow { display: inline-block; padding: 5px 10px; color: var(--navy); background: var(--gold); border-radius: 999px; text-shadow: none; }
-.hero h1 { margin: 4px 0 0; font-family: "Baloo 2", sans-serif; font-size: clamp(42px, 6vw, 80px); line-height: .95; }
-.hero p { margin: 8px 0 18px; font-size: clamp(17px, 2vw, 25px); }
+    <section class="lesson-section" id="hoeren" data-step="1">
+      <div class="section-heading">
+        <span class="section-number">1</span>
+        <div><p class="kicker">HÖREN UND SPRECHEN</p><h2>Hör zu und sprich nach.</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="hoer-zu.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
 
-.primary-button, .secondary-button, .done-button, .song-button { min-height: 46px; padding: 10px 20px; border: 2px solid var(--navy); border-radius: 15px; font-weight: 900; cursor: pointer; transition: transform .15s, box-shadow .15s; }
-.primary-button { color: var(--navy); background: linear-gradient(135deg, var(--gold), #ffd86a); box-shadow: 0 4px 0 var(--navy); }
-.secondary-button { color: var(--navy); background: #fff; box-shadow: 0 4px 0 var(--navy); }
-.done-button { display: block; margin: 22px auto 0; background: #fff; box-shadow: 0 4px 0 var(--navy); }
-.done-button.completed { color: #fff; background: var(--green); }
-button:hover { transform: translateY(-2px); }
-button:active { transform: translateY(2px); box-shadow: none !important; }
-button:focus-visible, a:focus-visible, select:focus-visible { outline: 4px solid rgba(247,201,72,.65); outline-offset: 3px; }
-.audio-trigger.playing { animation: audioPulse 1s infinite; }
-@keyframes audioPulse { 50% { box-shadow: 0 0 0 8px rgba(247,201,72,.28); } }
+      <div class="greeting-grid">
+        <article class="greeting-card morning">
+          <img src="../assets/images/lessons/begrussung/guten-morgen.webp" alt="Ein Kind wacht am Morgen auf">
+          <div><span class="time-icon">🌅</span><h3>Guten Morgen!</h3><p>am Morgen</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="guten-morgen.mp3" aria-label="Guten Morgen anhören">🔊</button>
+        </article>
+        <article class="greeting-card daytime">
+          <img src="../assets/images/lessons/begrussung/guten-tag.webp" alt="Ein Kind begrüßt am Tag eine Lehrerin">
+          <div><span class="time-icon">☀️</span><h3>Guten Tag!</h3><p>am Tag</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="guten-tag.mp3" aria-label="Guten Tag anhören">🔊</button>
+        </article>
+        <article class="greeting-card evening">
+          <img src="../assets/images/lessons/begrussung/guten-abend.webp" alt="Ein Kind begrüßt am Abend eine Lehrerin">
+          <div><span class="time-icon">🌇</span><h3>Guten Abend!</h3><p>am Abend</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="guten-abend.mp3" aria-label="Guten Abend anhören">🔊</button>
+        </article>
+        <article class="greeting-card night">
+          <img src="../assets/images/lessons/begrussung/gute-nacht.webp" alt="Ein Kind schläft in der Nacht">
+          <div><span class="time-icon">🌙</span><h3>Gute Nacht!</h3><p>in der Nacht</p></div>
+          <button class="round-audio audio-trigger" type="button" data-audio="gute-nacht.mp3" aria-label="Gute Nacht anhören">🔊</button>
+        </article>
+      </div>
+      <button class="done-button" type="button" data-complete="1">✓ Ich habe nachgesprochen</button>
+    </section>
 
-.step-nav { position: sticky; top: 75px; z-index: 40; width: min(980px, calc(100% - 30px)); margin: 22px auto; padding: 8px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; background: #fff; border: 2px solid var(--navy); border-radius: 20px; box-shadow: var(--shadow); }
-.step-nav a { display: grid; place-items: center; min-height: 48px; color: var(--navy); text-decoration: none; border-radius: 13px; font-family: "Baloo 2", sans-serif; font-size: 20px; font-weight: 800; }
-.step-nav a:hover { background: #fff3c2; }
-.step-nav span { display: block; font-family: "Nunito", sans-serif; font-size: 9px; line-height: 1; }
+    <section class="lesson-section soft-green" id="zuordnen" data-step="2">
+      <div class="section-heading">
+        <span class="section-number">2</span>
+        <div><p class="kicker">WAS PASST ZUSAMMEN?</p><h2>Ordne die Begrüßungen zu.</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="was-passt.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <p class="section-help">Wähle unter jedem Bild die passende Begrüßung.</p>
+      <div class="match-grid" id="matchGrid">
+        <article class="match-card" data-answer="Guten Morgen!">
+          <img src="../assets/images/lessons/begrussung/guten-morgen.webp" alt="Morgenszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Guten Abend!</option><option>Gute Nacht!</option><option>Guten Morgen!</option><option>Guten Tag!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+        <article class="match-card" data-answer="Guten Tag!">
+          <img src="../assets/images/lessons/begrussung/guten-tag.webp" alt="Tagesszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Gute Nacht!</option><option>Guten Morgen!</option><option>Guten Tag!</option><option>Guten Abend!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+        <article class="match-card" data-answer="Guten Abend!">
+          <img src="../assets/images/lessons/begrussung/guten-abend.webp" alt="Abendszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Guten Tag!</option><option>Guten Abend!</option><option>Guten Morgen!</option><option>Gute Nacht!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+        <article class="match-card" data-answer="Gute Nacht!">
+          <img src="../assets/images/lessons/begrussung/gute-nacht.webp" alt="Nachtszene">
+          <label>Was passt?<select><option value="">Bitte wählen</option><option>Guten Morgen!</option><option>Gute Nacht!</option><option>Guten Abend!</option><option>Guten Tag!</option></select></label>
+          <span class="answer-state" aria-live="polite"></span>
+        </article>
+      </div>
+      <div class="activity-actions"><button class="primary-button" id="checkMatches" type="button">Antworten prüfen</button><p id="matchResult" class="result-message" aria-live="polite"></p></div>
+    </section>
 
-.lesson-section { width: min(1120px, calc(100% - 30px)); margin: 34px auto; padding: clamp(22px, 4vw, 42px); background: var(--paper); border: 2px solid var(--navy); border-radius: var(--radius); box-shadow: var(--shadow); }
-.soft-green { background: #f1fbef; }
-.soft-blue { background: #edf8ff; }
-.section-heading { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
-.section-number { flex: 0 0 auto; display: grid; place-items: center; width: 54px; height: 54px; color: var(--navy); background: var(--gold); border: 2px solid var(--navy); border-radius: 17px; box-shadow: 0 4px 0 var(--navy); font-family: "Baloo 2", sans-serif; font-size: 28px; font-weight: 900; }
-.section-number.star { color: #fff; background: var(--red); }
-.section-heading h2 { margin: 0; font-family: "Baloo 2", sans-serif; font-size: clamp(26px, 4vw, 39px); line-height: 1; }
-.section-heading .instruction-button { margin-left: auto; }
-.instruction-button, .round-audio { flex: 0 0 auto; display: grid; place-items: center; border: 2px solid var(--navy); border-radius: 50%; background: #fff; box-shadow: 0 3px 0 var(--navy); cursor: pointer; }
-.instruction-button { width: 50px; height: 50px; }
-.round-audio { width: 46px; height: 46px; font-size: 19px; }
-.section-help { margin: -10px 0 20px 70px; color: var(--ink-soft); }
+    <section class="lesson-section" id="hallo-tschuess" data-step="3">
+      <div class="section-heading">
+        <span class="section-number">3</span>
+        <div><p class="kicker">TREFFEN UND VERABSCHIEDEN</p><h2>Hallo oder Tschüss?</h2></div>
+      </div>
+      <div class="scene-pair">
+        <article class="scene-card hello-card">
+          <img src="../assets/images/lessons/begrussung/hallo.webp" alt="Zwei Kinder treffen sich und winken">
+          <div class="scene-content"><span>👋</span><div><h3>Hallo!</h3><p>Wir treffen uns.</p></div><button class="round-audio audio-trigger" type="button" data-audio="hallo.mp3" aria-label="Hallo anhören">🔊</button></div>
+        </article>
+        <article class="scene-card bye-card">
+          <img src="../assets/images/lessons/begrussung/tschuess.webp" alt="Zwei Kinder gehen auseinander und winken">
+          <div class="scene-content"><span>🎒</span><div><h3>Tschüss!</h3><p>Wir verabschieden uns.</p></div><button class="round-audio audio-trigger" type="button" data-audio="tschuess.mp3" aria-label="Tschüss anhören">🔊</button></div>
+        </article>
+      </div>
+      <div class="quick-choice" id="quickChoice">
+        <p id="quickPrompt">Die Kinder treffen sich. Was sagen sie?</p>
+        <button type="button" data-choice="Hallo!">Hallo!</button>
+        <button type="button" data-choice="Tschüss!">Tschüss!</button>
+        <span id="quickFeedback" aria-live="polite"></span>
+      </div>
+    </section>
 
-.greeting-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
-.greeting-card { display: grid; grid-template-columns: 150px 1fr auto; align-items: center; gap: 16px; padding: 12px; border: 2px solid var(--navy); border-radius: 20px; background: #fff; box-shadow: 0 5px 0 rgba(35,57,93,.12); }
-.greeting-card img { width: 150px; height: 112px; object-fit: cover; border-radius: 14px; }
-.greeting-card h3 { margin: 0; font-family: "Baloo 2", sans-serif; font-size: 25px; line-height: 1; }
-.greeting-card p { margin: 4px 0 0; color: var(--ink-soft); font-size: 13px; }
-.time-icon { font-size: 21px; }
-.morning { background: #fff9dc; }.daytime { background: #eefaff; }.evening { background: #f5efff; }.night { background: #edf0fb; }
+    <section class="lesson-section soft-blue" id="waehlen" data-step="4">
+      <div class="section-heading">
+        <span class="section-number">4</span>
+        <div><p class="kicker">HÖREN UND WÄHLEN</p><h2>Was hörst du?</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="hoer-und-waehle.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <div class="listening-game">
+        <div class="listening-top"><span id="listeningRound">1 / 4</span><button class="big-listen" id="playListening" type="button"><span>🔊</span> Audio hören</button><span id="listeningScore">0 ⭐</span></div>
+        <div class="listening-options" id="listeningOptions"></div>
+        <p id="listeningFeedback" class="result-message" aria-live="polite"></p>
+        <button class="secondary-button hidden" id="nextListening" type="button">Weiter →</button>
+      </div>
+    </section>
 
-.match-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-.match-card { overflow: hidden; padding: 10px; background: #fff; border: 2px solid var(--navy); border-radius: 18px; }
-.match-card img { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 11px; }
-.match-card label { display: grid; gap: 5px; margin-top: 10px; font-size: 12px; font-weight: 900; }
-.match-card select { width: 100%; padding: 10px; color: var(--navy); background: #fff; border: 2px solid #bdc9da; border-radius: 11px; }
-.match-card.correct { border-color: var(--green); box-shadow: 0 0 0 4px rgba(94,174,114,.18); }
-.match-card.wrong { border-color: var(--red); }
-.answer-state { min-height: 20px; display: block; padding-top: 5px; font-size: 12px; font-weight: 900; }
-.activity-actions { margin-top: 22px; display: flex; align-items: center; justify-content: center; gap: 18px; }
-.result-message { min-height: 26px; margin: 12px 0 0; font-weight: 900; }
-.result-message.good { color: #297943; }.result-message.bad { color: #b83e31; }
+    <section class="lesson-section" id="dialoge" data-step="5">
+      <div class="section-heading">
+        <span class="section-number">5</span>
+        <div><p class="kicker">MINI-DIALOGE</p><h2>Hör zu und sprich mit.</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="dialog-aufgabe.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <div class="dialog-tabs" role="tablist" aria-label="Dialog auswählen">
+        <button class="active" type="button" role="tab" aria-selected="true" data-dialog="meeting">Treffen</button>
+        <button type="button" role="tab" aria-selected="false" data-dialog="bye">Tschüss</button>
+        <button type="button" role="tab" aria-selected="false" data-dialog="formal">Auf Wiedersehen</button>
+      </div>
+      <div class="dialog-stage" id="dialogStage">
+        <div class="speaker child-a"><span>👧</span><p>Hallo, Mia!</p></div>
+        <div class="speaker child-b"><span>👦</span><p>Hallo, Jonas!</p></div>
+        <button class="primary-button audio-trigger" type="button" id="dialogAudio" data-audio="dialog-hallo.mp3">▶ Dialog hören</button>
+      </div>
+      <button class="done-button" type="button" data-complete="5">✓ Wir haben den Dialog gesprochen</button>
+    </section>
 
-.scene-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-.scene-card { overflow: hidden; border: 2px solid var(--navy); border-radius: 22px; background: #fff; }
-.scene-card > img { width: 100%; aspect-ratio: 7/5; object-fit: cover; }
-.scene-content { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; padding: 14px; }
-.scene-content > span { font-size: 30px; }
-.scene-content h3 { margin: 0; font-family: "Baloo 2", sans-serif; font-size: 28px; }
-.scene-content p { margin: 0; color: var(--ink-soft); }
-.quick-choice { margin-top: 20px; padding: 18px; text-align: center; background: #fff8dc; border: 2px dashed var(--navy); border-radius: 18px; }
-.quick-choice p { margin: 0 0 12px; font-size: 19px; font-weight: 900; }
-.quick-choice button { min-width: 125px; margin: 4px; padding: 9px 16px; border: 2px solid var(--navy); border-radius: 13px; background: #fff; box-shadow: 0 3px 0 var(--navy); cursor: pointer; }
-.quick-choice span { display: block; min-height: 22px; margin-top: 10px; font-weight: 900; }
+    <section class="lesson-section song-section" id="lied" data-step="6">
+      <div class="section-heading">
+        <span class="section-number">6</span>
+        <div><p class="kicker">HÖR ZU UND SING MIT</p><h2>Das Begrüßungslied</h2></div>
+        <button class="instruction-button audio-trigger" type="button" data-audio="sing-mit.mp3" aria-label="Arbeitsanweisung anhören">🔊</button>
+      </div>
+      <div class="song-layout">
+        <img src="../assets/images/lessons/begrussung/begrussung-lied.webp" alt="Felix und Kinder singen in der Klasse">
+        <div class="lyrics-card">
+          <span class="music-notes">♪ ♫ ♪</span>
+          <p>Hallo, hallo, guten Morgen!</p>
+          <p>Hallo, hallo, guten Tag!</p>
+          <p>Guten Abend, gute Nacht,</p>
+          <p>Tschüss, bis bald, das hat Spaß gemacht!</p>
+          <button class="song-button audio-trigger" type="button" data-audio="begrussung-lied.mp3"><span>▶</span> Lied abspielen</button>
+          <small>Das Lied wird zweimal wiederholt.</small>
+        </div>
+      </div>
+      <button class="done-button" type="button" data-complete="6">✓ Ich habe mitgesungen</button>
+    </section>
 
-.listening-game { max-width: 760px; margin: auto; padding: clamp(18px, 3vw, 30px); text-align: center; background: #fff; border: 2px solid var(--navy); border-radius: 22px; }
-.listening-top { display: flex; align-items: center; justify-content: space-between; gap: 14px; font-weight: 900; }
-.big-listen { display: flex; align-items: center; gap: 10px; padding: 14px 26px; color: #fff; background: var(--navy); border: 2px solid var(--navy); border-radius: 16px; box-shadow: 0 4px 0 #0a1930; cursor: pointer; }
-.big-listen span { font-size: 24px; }
-.listening-options, .quiz-options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin: 24px 0 12px; }
-.listening-options button, .quiz-options button { min-height: 56px; padding: 10px; background: #fff; border: 2px solid var(--navy); border-radius: 15px; box-shadow: 0 3px 0 var(--navy); font-weight: 900; cursor: pointer; }
-.listening-options button.correct, .quiz-options button.correct { color: #fff; background: var(--green); }
-.listening-options button.wrong, .quiz-options button.wrong { color: #fff; background: var(--red); }
+    <section class="lesson-section quiz-section" id="quiz">
+      <div class="section-heading">
+        <span class="section-number star">★</span>
+        <div><p class="kicker">MINI-QUIZ</p><h2>Bist du ein Begrüßungs-Profi?</h2></div>
+      </div>
+      <div id="quizBox" class="quiz-box">
+        <div class="quiz-meta"><span id="quizCounter">Frage 1 von 5</span><span id="quizScore">0 Punkte</span></div>
+        <div class="quiz-progress"><span id="quizProgress"></span></div>
+        <div class="quiz-visual" id="quizVisual">🌅</div>
+        <h3 id="quizQuestion"></h3>
+        <div class="quiz-options" id="quizOptions"></div>
+        <p id="quizFeedback" class="result-message" aria-live="polite"></p>
+        <button class="secondary-button hidden" id="nextQuiz" type="button">Nächste Frage →</button>
+      </div>
+      <div class="quiz-finish hidden" id="quizFinish" aria-live="polite">
+        <span class="trophy">🏆</span><h3 id="finishTitle"></h3><p id="finishText"></p>
+        <div class="finish-score" id="finishScore"></div>
+        <button class="primary-button" id="restartQuiz" type="button">Noch einmal</button>
+        <button class="secondary-button audio-trigger" type="button" data-audio="abschluss.mp3">🔊 Abschluss hören</button>
+      </div>
+    </section>
 
-.dialog-tabs { display: flex; justify-content: center; gap: 8px; }
-.dialog-tabs button { padding: 9px 18px; background: #fff; border: 2px solid var(--navy); border-radius: 13px; cursor: pointer; }
-.dialog-tabs button.active { background: var(--gold); font-weight: 900; }
-.dialog-stage { max-width: 760px; margin: 18px auto 0; padding: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: #fff7e2; border: 2px solid var(--navy); border-radius: 22px; }
-.speaker { display: flex; align-items: center; gap: 10px; padding: 14px; background: #fff; border: 2px solid var(--navy); border-radius: 18px; }
-.speaker span { font-size: 44px; }.speaker p { margin: 0; font-size: 18px; font-weight: 900; }
-.dialog-stage .primary-button { grid-column: 1 / -1; justify-self: center; }
+    <!-- Lecția se încheie cu bannerul cerut; după el nu mai există activități. -->
+    <section class="farewell-banner" aria-label="Lektionsabschluss">
+      <img src="../assets/images/lessons/begrussung/begrussung-aufwiedersehen-banner.webp" alt="Die Kinder verlassen fröhlich die Klasse und winken Felix zum Abschied">
+      <div class="farewell-overlay">
+        <h2>Super gemacht!</h2>
+        <p>Auf Wiedersehen! Bis bald!</p>
+        <button class="primary-button audio-trigger" type="button" data-audio="auf-wiedersehen.mp3">🔊 Auf Wiedersehen!</button>
+      </div>
+    </section>
+  </main>
 
-.song-section { background: linear-gradient(135deg, #fff9df, #fff0df); }
-.song-layout { display: grid; grid-template-columns: 1.3fr 1fr; gap: 24px; align-items: stretch; }
-.song-layout > img { width: 100%; height: 100%; min-height: 390px; object-fit: cover; border: 2px solid var(--navy); border-radius: 22px; }
-.lyrics-card { position: relative; display: grid; align-content: center; padding: clamp(20px, 4vw, 34px); text-align: center; background: #fff; border: 2px solid var(--navy); border-radius: 22px; box-shadow: 0 6px 0 rgba(35,57,93,.12); }
-.lyrics-card p { margin: 5px 0; font-family: "Baloo 2", sans-serif; font-size: clamp(18px, 2.3vw, 25px); font-weight: 800; }
-.music-notes { color: var(--red); font-size: 34px; }
-.song-button { margin: 18px auto 8px; background: var(--gold); box-shadow: 0 4px 0 var(--navy); }
-.lyrics-card small { color: var(--ink-soft); }
-
-.quiz-section { background: #fff8df; }
-.quiz-box, .quiz-finish { max-width: 720px; margin: auto; padding: 28px; text-align: center; background: #fff; border: 2px solid var(--navy); border-radius: 24px; }
-.quiz-meta { display: flex; justify-content: space-between; font-size: 13px; font-weight: 900; }
-.quiz-progress { height: 10px; margin: 9px 0 22px; overflow: hidden; background: #e9eef5; border-radius: 99px; }
-.quiz-progress span { display: block; width: 20%; height: 100%; background: linear-gradient(90deg, var(--gold), var(--orange)); transition: width .3s; }
-.quiz-visual { font-size: 58px; }
-.quiz-box h3 { margin: 8px 0; font-family: "Baloo 2", sans-serif; font-size: 27px; }
-.quiz-finish .trophy { font-size: 72px; }
-.quiz-finish h3 { margin: 4px; font-family: "Baloo 2", sans-serif; font-size: 36px; }
-.finish-score { margin: 16px auto; font-size: 30px; font-weight: 900; }
-
-.farewell-banner { position: relative; width: min(1500px, calc(100% - 32px)); margin: 44px auto 30px; overflow: hidden; border: 3px solid var(--navy); border-radius: 30px; box-shadow: var(--shadow); }
-.farewell-banner img { width: 100%; aspect-ratio: 8/3; object-fit: cover; }
-.farewell-overlay { position: absolute; top: 50%; left: clamp(20px, 5vw, 72px); padding: 20px 26px; color: var(--navy); background: rgba(255,255,255,.9); border: 2px solid var(--navy); border-radius: 22px; box-shadow: 0 5px 0 var(--navy); transform: translateY(-50%); }
-.farewell-overlay h2 { margin: 0; font-family: "Baloo 2", sans-serif; font-size: clamp(27px, 4vw, 44px); }
-.farewell-overlay p { margin: 2px 0 14px; font-size: 18px; }
-
-.toast { position: fixed; z-index: 100; left: 50%; bottom: 24px; min-width: 220px; padding: 12px 18px; color: #fff; text-align: center; background: var(--navy); border-radius: 14px; box-shadow: var(--shadow); opacity: 0; pointer-events: none; transform: translate(-50%, 30px); transition: .25s; }
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-@media (max-width: 900px) {
-  .brand small, .lesson-progress, .home-button span { display: none; }
-  .step-nav { overflow-x: auto; grid-template-columns: repeat(7, minmax(74px, 1fr)); justify-content: start; }
-  .greeting-grid, .song-layout { grid-template-columns: 1fr; }
-  .match-grid { grid-template-columns: repeat(2, 1fr); }
-  .hero-overlay { width: 55%; }
-  .song-layout > img { min-height: 0; }
-}
-
-@media (max-width: 640px) {
-  .lesson-header { min-height: 64px; padding: 8px 12px; }
-  .brand strong { font-size: 16px; }.brand-mark { width: 40px; height: 40px; }
-  .step-nav { top: 65px; margin: 12px auto; }
-  .hero, .farewell-banner { width: calc(100% - 20px); margin-top: 12px; border-radius: 20px; }
-  .hero > img, .farewell-banner img { min-height: 310px; aspect-ratio: auto; }
-  .hero > img { object-position: 62% center; filter: brightness(.82); }
-  .hero::after { background: linear-gradient(0deg, rgba(21,42,75,.84), transparent 75%); }
-  .hero-overlay { top: auto; bottom: 18px; left: 18px; width: calc(100% - 36px); transform: none; }
-  .hero h1 { font-size: 45px; }
-  .lesson-section { width: calc(100% - 20px); margin: 20px auto; padding: 19px 14px; border-radius: 19px; }
-  .section-heading { align-items: flex-start; gap: 11px; }.section-number { width: 45px; height: 45px; font-size: 23px; }
-  .section-heading h2 { font-size: 25px; }.section-heading .instruction-button { width: 43px; height: 43px; }
-  .section-help { margin-left: 0; }
-  .greeting-card { grid-template-columns: 105px 1fr auto; gap: 9px; }.greeting-card img { width: 105px; height: 88px; }.greeting-card h3 { font-size: 19px; }
-  .match-grid, .scene-pair, .listening-options, .quiz-options, .dialog-stage { grid-template-columns: 1fr; }
-  .dialog-stage .primary-button { grid-column: auto; }
-  .listening-top { flex-wrap: wrap; justify-content: center; }.big-listen { order: 3; width: 100%; justify-content: center; }
-  .activity-actions { flex-direction: column; }
-  .farewell-banner img { object-position: center; }
-  .farewell-overlay { right: 14px; left: 14px; top: auto; bottom: 14px; padding: 13px 16px; transform: none; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
-}
+  <audio id="lessonAudio" preload="none"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
