@@ -2,11 +2,15 @@
 
 document.addEventListener("DOMContentLoaded", () => {
   const AUDIO_PATH = "../audio/begruessung/";
+
   const audio = document.getElementById("lessonAudio");
   const soundToggle = document.getElementById("soundToggle");
   const toast = document.getElementById("toast");
+
   const completedSteps = new Set(
-    JSON.parse(localStorage.getItem("begruessungSteps") || "[]")
+    JSON.parse(
+      localStorage.getItem("begruessungSteps") || "[]"
+    )
   );
 
   let activeAudioButton = null;
@@ -29,21 +33,49 @@ document.addEventListener("DOMContentLoaded", () => {
     "Abschluss"
   ];
 
+  /* AFIȘAREA ETAPELOR */
+
   const showStage = (stage) => {
-    currentStage = Math.max(0, Math.min(totalStages, stage));
+    currentStage = Math.max(
+      0,
+      Math.min(totalStages, stage)
+    );
 
-    document.querySelectorAll(".lesson-stage").forEach((panel) => {
-      const active = Number(panel.dataset.stage) === currentStage;
-      panel.classList.toggle("active", active);
-      panel.setAttribute("aria-hidden", String(!active));
-    });
+    document
+      .querySelectorAll(".lesson-stage")
+      .forEach((panel) => {
+        const active =
+          Number(panel.dataset.stage) ===
+          currentStage;
 
-    document.querySelectorAll(".stage-dots i").forEach((dot, index) => {
-      dot.classList.toggle("current", index === currentStage);
-      dot.classList.toggle("visited", index < currentStage);
-    });
+        panel.classList.toggle(
+          "active",
+          active
+        );
 
-    document.getElementById("stageLabel").textContent =
+        panel.setAttribute(
+          "aria-hidden",
+          String(!active)
+        );
+      });
+
+    document
+      .querySelectorAll(".stage-dots i")
+      .forEach((dot, index) => {
+        dot.classList.toggle(
+          "current",
+          index === currentStage
+        );
+
+        dot.classList.toggle(
+          "visited",
+          index < currentStage
+        );
+      });
+
+    document.getElementById(
+      "stageLabel"
+    ).textContent =
       stageNames[currentStage];
 
     updateProgress();
@@ -53,6 +85,8 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: "smooth"
     });
   };
+
+  /* MESAJ TEMPORAR */
 
   const showToast = (message) => {
     toast.textContent = message;
@@ -65,30 +99,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 2200);
   };
 
+  /* EVIDENȚIEREA VERSURILOR */
+
   const clearLyrics = () => {
-    document.querySelectorAll(".lyric-line").forEach((line) => {
-      line.classList.remove("active");
-    });
+    document
+      .querySelectorAll(".lyric-line")
+      .forEach((line) => {
+        line.classList.remove("active");
+      });
   };
 
-  const playFile = (file, button = null, keepQueue = false) => {
+  /* REDAREA UNUI FIȘIER AUDIO */
+
+  const playFile = (
+    file,
+    button = null,
+    keepQueue = false
+  ) => {
     if (muted) {
-      showToast("Der Ton ist ausgeschaltet.");
+      showToast(
+        "Der Ton ist ausgeschaltet."
+      );
+
       return;
     }
 
-    if (!file) return;
+    if (!file) {
+      return;
+    }
 
     if (!keepQueue) {
       audioQueue = [];
     }
 
-    if (file !== "begruessung-lied.mp3") {
+    if (
+      file !== "begruessung-lied.mp3"
+    ) {
       clearLyrics();
     }
 
     if (activeAudioButton) {
-      activeAudioButton.classList.remove("playing");
+      activeAudioButton.classList.remove(
+        "playing"
+      );
     }
 
     activeAudioButton = button;
@@ -103,104 +156,171 @@ document.addEventListener("DOMContentLoaded", () => {
 
     audio.play().catch(() => {
       if (button) {
-        button.classList.remove("playing");
+        button.classList.remove(
+          "playing"
+        );
       }
 
-      showToast("Audio konnte nicht geladen werden.");
+      showToast(
+        "Audio konnte nicht geladen werden."
+      );
     });
   };
 
-  const playSequence = (files, button) => {
+  /* REDAREA MAI MULTOR FIȘIERE AUDIO */
+
+  const playSequence = (
+    files,
+    button
+  ) => {
     audioQueue = files.slice(1);
-    playFile(files[0], button, true);
+
+    playFile(
+      files[0],
+      button,
+      true
+    );
   };
 
-  audio.addEventListener("ended", () => {
-    if (audioQueue.length) {
-      playFile(audioQueue.shift(), activeAudioButton, true);
-      return;
+  /* DUPĂ TERMINAREA UNUI AUDIO */
+
+  audio.addEventListener(
+    "ended",
+    () => {
+      if (audioQueue.length) {
+        playFile(
+          audioQueue.shift(),
+          activeAudioButton,
+          true
+        );
+
+        return;
+      }
+
+      if (activeAudioButton) {
+        activeAudioButton.classList.remove(
+          "playing"
+        );
+      }
+
+      activeAudioButton = null;
+      currentAudioFile = "";
+
+      clearLyrics();
     }
+  );
 
-    if (activeAudioButton) {
-      activeAudioButton.classList.remove("playing");
-    }
+  /* SINCRONIZAREA VERSURILOR */
 
-    activeAudioButton = null;
-    currentAudioFile = "";
-    clearLyrics();
-  });
+  audio.addEventListener(
+    "timeupdate",
+    () => {
+      if (
+        currentAudioFile !==
+          "begruessung-lied.mp3" ||
+        !audio.duration
+      ) {
+        return;
+      }
 
-  audio.addEventListener("timeupdate", () => {
-    if (
-      currentAudioFile !== "begruessung-lied.mp3" ||
-      !audio.duration
-    ) {
-      return;
-    }
+      const lines = [
+        ...document.querySelectorAll(
+          ".lyric-line"
+        )
+      ];
 
-    const lines = [
-      ...document.querySelectorAll(".lyric-line")
-    ];
-
-    const segment = Math.min(
-      7,
-      Math.floor(
-        audio.currentTime / (audio.duration / 8)
-      )
-    );
-
-    lines.forEach((line, index) => {
-      line.classList.toggle(
-        "active",
-        index === segment % 4
+      const segment = Math.min(
+        7,
+        Math.floor(
+          audio.currentTime /
+            (audio.duration / 8)
+        )
       );
-    });
-  });
 
-  document.addEventListener("click", (event) => {
-    const button = event.target.closest(".audio-trigger");
-
-    if (!button) return;
-
-    if (button.dataset.audioSequence) {
-      playSequence(
-        button.dataset.audioSequence.split(","),
-        button
+      lines.forEach(
+        (line, index) => {
+          line.classList.toggle(
+            "active",
+            index === segment % 4
+          );
+        }
       );
-    } else {
-      playFile(button.dataset.audio, button);
     }
-  });
+  );
 
-  soundToggle.addEventListener("click", () => {
-    muted = !muted;
-    audio.muted = muted;
+  /* BUTOANELE AUDIO */
 
-    if (muted) {
-      audio.pause();
+  document.addEventListener(
+    "click",
+    (event) => {
+      const button =
+        event.target.closest(
+          ".audio-trigger"
+        );
+
+      if (!button) {
+        return;
+      }
+
+      if (
+        button.dataset.audioSequence
+      ) {
+        playSequence(
+          button.dataset.audioSequence.split(
+            ","
+          ),
+          button
+        );
+      } else {
+        playFile(
+          button.dataset.audio,
+          button
+        );
+      }
     }
+  );
 
-    soundToggle.textContent = muted ? "🔇" : "🔊";
+  /* PORNIREA ȘI OPRIREA SUNETULUI */
 
-    soundToggle.setAttribute(
-      "aria-pressed",
-      String(muted)
-    );
+  soundToggle.addEventListener(
+    "click",
+    () => {
+      muted = !muted;
+      audio.muted = muted;
 
-    soundToggle.setAttribute(
-      "aria-label",
-      muted
-        ? "Ton einschalten"
-        : "Ton ausschalten"
-    );
-  });
+      if (muted) {
+        audio.pause();
+      }
+
+      soundToggle.textContent =
+        muted ? "🔇" : "🔊";
+
+      soundToggle.setAttribute(
+        "aria-pressed",
+        String(muted)
+      );
+
+      soundToggle.setAttribute(
+        "aria-label",
+        muted
+          ? "Ton einschalten"
+          : "Ton ausschalten"
+      );
+    }
+  );
+
+  /* SALVAREA PROGRESULUI */
 
   const markComplete = (step) => {
-    completedSteps.add(String(step));
+    completedSteps.add(
+      String(step)
+    );
 
     localStorage.setItem(
       "begruessungSteps",
-      JSON.stringify([...completedSteps])
+      JSON.stringify(
+        [...completedSteps]
+      )
     );
 
     updateProgress();
@@ -208,147 +328,219 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateProgress = () => {
     const percent = Math.round(
-      (currentStage / totalStages) * 100
+      (currentStage / totalStages) *
+        100
     );
 
     document.getElementById(
       "progressText"
-    ).textContent = percent + " %";
+    ).textContent =
+      percent + " %";
 
     document.getElementById(
       "progressBar"
-    ).style.width = percent + "%";
+    ).style.width =
+      percent + "%";
 
     document
-      .querySelectorAll("[data-complete]")
+      .querySelectorAll(
+        "[data-complete]"
+      )
       .forEach((button) => {
         if (
           completedSteps.has(
             button.dataset.complete
           )
         ) {
-          button.classList.add("completed");
-          button.textContent = "✓ Geschafft!";
+          button.classList.add(
+            "completed"
+          );
+
+          button.textContent =
+            "✓ Geschafft!";
         }
       });
   };
 
+  /* NAVIGAREA ÎNTRE ETAPE */
+
   document
     .querySelectorAll(".stage-next")
     .forEach((button) => {
-      button.addEventListener("click", () => {
-        showStage(currentStage + 1);
-      });
+      button.addEventListener(
+        "click",
+        () => {
+          showStage(
+            currentStage + 1
+          );
+        }
+      );
     });
 
   document
     .querySelectorAll(".stage-prev")
     .forEach((button) => {
-      button.addEventListener("click", () => {
-        showStage(currentStage - 1);
-      });
+      button.addEventListener(
+        "click",
+        () => {
+          showStage(
+            currentStage - 1
+          );
+        }
+      );
     });
+
+  /* BUTOANELE DE FINALIZARE */
 
   document
-    .querySelectorAll("[data-complete]")
+    .querySelectorAll(
+      "[data-complete]"
+    )
     .forEach((button) => {
-      button.addEventListener("click", () => {
-        markComplete(button.dataset.complete);
-        button.classList.add("completed");
-        button.textContent = "✓ Geschafft!";
-        playFile("success.mp3", button);
-      });
+      button.addEventListener(
+        "click",
+        () => {
+          markComplete(
+            button.dataset.complete
+          );
+
+          button.classList.add(
+            "completed"
+          );
+
+          button.textContent =
+            "✓ Geschafft!";
+
+          playFile(
+            "success.mp3",
+            button
+          );
+        }
+      );
     });
 
-  /* Activitatea 2: asocierea imaginilor */
+  /* ACTIVITATEA 2: ASOCIERE */
 
   document
     .getElementById("checkMatches")
-    .addEventListener("click", () => {
-      const cards = [
-        ...document.querySelectorAll(".match-card")
-      ];
+    .addEventListener(
+      "click",
+      () => {
+        const cards = [
+          ...document.querySelectorAll(
+            ".match-card"
+          )
+        ];
 
-      let correct = 0;
+        let correct = 0;
 
-      cards.forEach((card) => {
-        const select = card.querySelector("select");
-        const state =
-          card.querySelector(".answer-state");
+        cards.forEach((card) => {
+          const select =
+            card.querySelector(
+              "select"
+            );
 
-        const ok =
-          select.value === card.dataset.answer;
+          const state =
+            card.querySelector(
+              ".answer-state"
+            );
 
-        card.classList.toggle("correct", ok);
-        card.classList.toggle("wrong", !ok);
+          const ok =
+            select.value ===
+            card.dataset.answer;
 
-        state.textContent = ok
-          ? "✓ Richtig!"
-          : select.value
-            ? "Noch einmal!"
-            : "Bitte wählen.";
-
-        if (ok) {
-          correct++;
-        }
-      });
-
-      const result =
-        document.getElementById("matchResult");
-
-      result.textContent =
-        correct === 4
-          ? "Super! Alles ist richtig."
-          : `${correct} von 4 richtig.`;
-
-      result.className =
-        "result-message " +
-        (correct === 4 ? "good" : "bad");
-
-      playFile(
-        correct === 4
-          ? "correct.mp3"
-          : "try-again.mp3"
-      );
-
-      if (correct === 4) {
-        markComplete(2);
-      }
-    });
-
-  /* Activitatea 3: Hallo sau Tschüss */
-
-  document
-    .querySelectorAll("#quickChoice button")
-    .forEach((button) => {
-      button.addEventListener("click", () => {
-        const ok =
-          button.dataset.choice === "Hallo!";
-
-        const feedback =
-          document.getElementById(
-            "quickFeedback"
+          card.classList.toggle(
+            "correct",
+            ok
           );
 
-        feedback.textContent = ok
-          ? "✓ Richtig! Sie sagen: Hallo!"
-          : "Noch einmal. Sie treffen sich.";
+          card.classList.toggle(
+            "wrong",
+            !ok
+          );
 
-        feedback.style.color = ok
-          ? "#297943"
-          : "#b83e31";
+          state.textContent = ok
+            ? "✓ Richtig!"
+            : select.value
+              ? "Noch einmal!"
+              : "Bitte wählen.";
 
-        if (!ok) {
-          playFile("try-again.mp3");
+          if (ok) {
+            correct++;
+          }
+        });
+
+        const result =
+          document.getElementById(
+            "matchResult"
+          );
+
+        result.textContent =
+          correct === 4
+            ? "Super! Alles ist richtig."
+            : `${correct} von 4 richtig.`;
+
+        result.className =
+          "result-message " +
+          (
+            correct === 4
+              ? "good"
+              : "bad"
+          );
+
+        playFile(
+          correct === 4
+            ? "correct.mp3"
+            : "try-again.mp3"
+        );
+
+        if (correct === 4) {
+          markComplete(2);
         }
+      }
+    );
 
-        if (ok) {
-          markComplete(3);
+  /* ACTIVITATEA 3: HALLO SAU TSCHÜSS */
+
+  document
+    .querySelectorAll(
+      "#quickChoice button"
+    )
+    .forEach((button) => {
+      button.addEventListener(
+        "click",
+        () => {
+          const ok =
+            button.dataset.choice ===
+            "Hallo!";
+
+          const feedback =
+            document.getElementById(
+              "quickFeedback"
+            );
+
+          feedback.textContent = ok
+            ? "✓ Richtig! Sie sagen: Hallo!"
+            : "Noch einmal. Sie treffen sich.";
+
+          feedback.style.color = ok
+            ? "#297943"
+            : "#b83e31";
+
+          if (!ok) {
+            playFile(
+              "try-again.mp3"
+            );
+          }
+
+          if (ok) {
+            markComplete(3);
+          }
         }
-      });
+      );
     });
 
-  /* Activitatea 4: ascultă și alege */
+  /* ACTIVITATEA 4: ASCULTĂ ȘI ALEGE */
 
   const listeningItems = [
     {
@@ -371,7 +563,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let listeningOrder = [
     ...listeningItems
-  ].sort(() => Math.random() - 0.5);
+  ].sort(
+    () => Math.random() - 0.5
+  );
 
   let listeningIndex = 0;
   let listeningScore = 0;
@@ -382,11 +576,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById(
       "listeningRound"
-    ).textContent = `${listeningIndex + 1} / 4`;
+    ).textContent =
+      `${listeningIndex + 1} / 4`;
 
     document.getElementById(
       "listeningScore"
-    ).textContent = `${listeningScore} ⭐`;
+    ).textContent =
+      `${listeningScore} ⭐`;
 
     document.getElementById(
       "listeningFeedback"
@@ -404,13 +600,19 @@ document.addEventListener("DOMContentLoaded", () => {
     options.innerHTML = "";
 
     [...listeningItems]
-      .sort(() => Math.random() - 0.5)
+      .sort(
+        () =>
+          Math.random() - 0.5
+      )
       .forEach((item) => {
         const button =
-          document.createElement("button");
+          document.createElement(
+            "button"
+          );
 
         button.type = "button";
-        button.textContent = item.text;
+        button.textContent =
+          item.text;
 
         button.addEventListener(
           "click",
@@ -422,7 +624,9 @@ document.addEventListener("DOMContentLoaded", () => {
           }
         );
 
-        options.appendChild(button);
+        options.appendChild(
+          button
+        );
       });
   };
 
@@ -430,12 +634,16 @@ document.addEventListener("DOMContentLoaded", () => {
     answer,
     button
   ) => {
-    if (listeningAnswered) return;
+    if (listeningAnswered) {
+      return;
+    }
 
     listeningAnswered = true;
 
     const current =
-      listeningOrder[listeningIndex];
+      listeningOrder[
+        listeningIndex
+      ];
 
     const ok =
       answer === current.text;
@@ -459,7 +667,9 @@ document.addEventListener("DOMContentLoaded", () => {
           option.textContent ===
           current.text
         ) {
-          option.classList.add("correct");
+          option.classList.add(
+            "correct"
+          );
         }
       });
 
@@ -477,12 +687,15 @@ document.addEventListener("DOMContentLoaded", () => {
       (ok ? "good" : "bad");
 
     if (!ok) {
-      playFile("try-again.mp3");
+      playFile(
+        "try-again.mp3"
+      );
     }
 
     document.getElementById(
       "listeningScore"
-    ).textContent = `${listeningScore} ⭐`;
+    ).textContent =
+      `${listeningScore} ⭐`;
 
     const next =
       document.getElementById(
@@ -494,11 +707,15 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "Ergebnis zeigen"
         : "Weiter →";
 
-    next.classList.remove("hidden");
+    next.classList.remove(
+      "hidden"
+    );
   };
 
   document
-    .getElementById("playListening")
+    .getElementById(
+      "playListening"
+    )
     .addEventListener(
       "click",
       (event) => {
@@ -512,33 +729,49 @@ document.addEventListener("DOMContentLoaded", () => {
     );
 
   document
-    .getElementById("nextListening")
-    .addEventListener("click", () => {
-      if (listeningIndex < 3) {
-        listeningIndex++;
-        renderListening();
-      } else {
-        document.getElementById(
-          "listeningFeedback"
-        ).textContent =
-          `Geschafft: ${listeningScore} von 4 richtig!`;
+    .getElementById(
+      "nextListening"
+    )
+    .addEventListener(
+      "click",
+      () => {
+        if (
+          listeningIndex < 3
+        ) {
+          listeningIndex++;
+          renderListening();
+        } else {
+          document.getElementById(
+            "listeningFeedback"
+          ).textContent =
+            `Geschafft: ${listeningScore} von 4 richtig!`;
 
-        document.getElementById(
-          "nextListening"
-        ).classList.add("hidden");
+          document.getElementById(
+            "nextListening"
+          ).classList.add(
+            "hidden"
+          );
 
-        markComplete(4);
-        playFile("success.mp3");
+          markComplete(4);
+
+          playFile(
+            "success.mp3"
+          );
+        }
       }
-    });
+    );
 
-  /* Activitatea 5: mini-dialoguri */
+  /* ACTIVITATEA 5: MINI-DIALOGURI */
 
   const dialogs = {
     meeting: {
       image: "hallo.webp",
-      alt: "Zwei Kinder begrüßen sich",
-      speakers: ["Mia", "Jonas"],
+      alt:
+        "Zwei Kinder begrüßen sich",
+      speakers: [
+        "Mia",
+        "Jonas"
+      ],
       lines: [
         "Hallo, Jonas!",
         "Hallo, Mia!"
@@ -547,13 +780,18 @@ document.addEventListener("DOMContentLoaded", () => {
         "Salut, Jonas!",
         "Salut, Mia!"
       ],
-      audio: "dialog-hallo.mp3"
+      audio:
+        "dialog-hallo.mp3"
     },
 
     bye: {
       image: "tschuess.webp",
-      alt: "Zwei Kinder verabschieden sich",
-      speakers: ["Mia", "Jonas"],
+      alt:
+        "Zwei Kinder verabschieden sich",
+      speakers: [
+        "Mia",
+        "Jonas"
+      ],
       lines: [
         "Tschüss, Jonas!",
         "Tschüss, Mia!"
@@ -562,7 +800,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Pa, Jonas!",
         "Pa, Mia!"
       ],
-      audio: "dialog-tschuess.mp3"
+      audio:
+        "dialog-tschuess.mp3"
     },
 
     formal: {
@@ -591,76 +830,84 @@ document.addEventListener("DOMContentLoaded", () => {
       ".dialog-tabs button"
     )
     .forEach((tab) => {
-      tab.addEventListener("click", () => {
-        document
-          .querySelectorAll(
-            ".dialog-tabs button"
-          )
-          .forEach((item) => {
-            item.classList.toggle(
-              "active",
-              item === tab
+      tab.addEventListener(
+        "click",
+        () => {
+          document
+            .querySelectorAll(
+              ".dialog-tabs button"
+            )
+            .forEach((item) => {
+              item.classList.toggle(
+                "active",
+                item === tab
+              );
+
+              item.setAttribute(
+                "aria-selected",
+                String(
+                  item === tab
+                )
+              );
+            });
+
+          const selected =
+            dialogs[
+              tab.dataset.dialog
+            ];
+
+          const image =
+            document.getElementById(
+              "dialogImage"
             );
 
-            item.setAttribute(
-              "aria-selected",
-              String(item === tab)
-            );
-          });
+          image.src =
+            "../assets/images/lessons/" +
+            "begruessung/" +
+            selected.image;
 
-        const selected =
-          dialogs[tab.dataset.dialog];
+          image.alt =
+            selected.alt;
 
-        const image =
           document.getElementById(
-            "dialogImage"
-          );
+            "speakerOne"
+          ).textContent =
+            selected.speakers[0];
 
-        image.src =
-          "../assets/images/lessons/" +
-          "begruessung/" +
-          selected.image;
+          document.getElementById(
+            "speakerTwo"
+          ).textContent =
+            selected.speakers[1];
 
-        image.alt = selected.alt;
+          document.getElementById(
+            "dialogLineOne"
+          ).textContent =
+            selected.lines[0];
 
-        document.getElementById(
-          "speakerOne"
-        ).textContent =
-          selected.speakers[0];
+          document.getElementById(
+            "dialogLineTwo"
+          ).textContent =
+            selected.lines[1];
 
-        document.getElementById(
-          "speakerTwo"
-        ).textContent =
-          selected.speakers[1];
+          document.getElementById(
+            "dialogTranslationOne"
+          ).textContent =
+            selected.translations[0];
 
-        document.getElementById(
-          "dialogLineOne"
-        ).textContent =
-          selected.lines[0];
+          document.getElementById(
+            "dialogTranslationTwo"
+          ).textContent =
+            selected.translations[1];
 
-        document.getElementById(
-          "dialogLineTwo"
-        ).textContent =
-          selected.lines[1];
-
-        document.getElementById(
-          "dialogTranslationOne"
-        ).textContent =
-          selected.translations[0];
-
-        document.getElementById(
-          "dialogTranslationTwo"
-        ).textContent =
-          selected.translations[1];
-
-        document.getElementById(
-          "dialogAudio"
-        ).dataset.audio =
-          selected.audio;
-      });
+          document.getElementById(
+            "dialogAudio"
+          ).dataset.audio =
+            selected.audio;
+        }
+      );
     });
 
-  /* Mini-quiz */
+  /* MINI-QUIZ */
 
   const quizQuestions = [
     {
@@ -674,7 +921,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Guten Morgen!",
         "Guten Abend!"
       ],
-      answer: "Guten Morgen!"
+      answer:
+        "Guten Morgen!"
     },
 
     {
@@ -688,7 +936,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Tschüss!",
         "Gute Nacht!"
       ],
-      answer: "Hallo!"
+      answer:
+        "Hallo!"
     },
 
     {
@@ -702,7 +951,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Guten Morgen!",
         "Gute Nacht!"
       ],
-      answer: "Gute Nacht!"
+      answer:
+        "Gute Nacht!"
     },
 
     {
@@ -716,7 +966,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Hallo!",
         "Guten Morgen!"
       ],
-      answer: "Tschüss!"
+      answer:
+        "Tschüss!"
     },
 
     {
@@ -730,7 +981,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Auf Wiedersehen!",
         "Gute Nacht!"
       ],
-      answer: "Auf Wiedersehen!"
+      answer:
+        "Auf Wiedersehen!"
     }
   ];
 
@@ -761,11 +1013,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById(
       "quizVisual"
-    ).textContent = item.visual;
+    ).textContent =
+      item.visual;
 
     document.getElementById(
       "quizQuestion"
-    ).textContent = item.question;
+    ).textContent =
+      item.question;
 
     document.getElementById(
       "quizTranslation"
@@ -778,7 +1032,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.getElementById(
       "nextQuiz"
-    ).classList.add("hidden");
+    ).classList.add(
+      "hidden"
+    );
 
     const options =
       document.getElementById(
@@ -787,37 +1043,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
     options.innerHTML = "";
 
-    item.options.forEach((option) => {
-      const button =
-        document.createElement("button");
+    item.options.forEach(
+      (option) => {
+        const button =
+          document.createElement(
+            "button"
+          );
 
-      button.type = "button";
-      button.textContent = option;
+        button.type = "button";
+        button.textContent =
+          option;
 
-      button.addEventListener(
-        "click",
-        () => {
-          answerQuiz(option, button);
-        }
-      );
+        button.addEventListener(
+          "click",
+          () => {
+            answerQuiz(
+              option,
+              button
+            );
+          }
+        );
 
-      options.appendChild(button);
-    });
+        options.appendChild(
+          button
+        );
+      }
+    );
   };
 
   const answerQuiz = (
     answer,
     button
   ) => {
-    if (quizAnswered) return;
+    if (quizAnswered) {
+      return;
+    }
 
     quizAnswered = true;
 
     const correctAnswer =
-      quizQuestions[quizIndex].answer;
+      quizQuestions[
+        quizIndex
+      ].answer;
 
     const ok =
-      answer === correctAnswer;
+      answer ===
+      correctAnswer;
 
     if (ok) {
       quizScore++;
@@ -858,7 +1129,9 @@ document.addEventListener("DOMContentLoaded", () => {
       (ok ? "good" : "bad");
 
     if (!ok) {
-      playFile("try-again.mp3");
+      playFile(
+        "try-again.mp3"
+      );
     }
 
     document.getElementById(
@@ -876,17 +1149,23 @@ document.addEventListener("DOMContentLoaded", () => {
         ? "Ergebnis"
         : "Nächste Frage →";
 
-    next.classList.remove("hidden");
+    next.classList.remove(
+      "hidden"
+    );
   };
 
   const finishQuiz = () => {
     document.getElementById(
       "quizBox"
-    ).classList.add("hidden");
+    ).classList.add(
+      "hidden"
+    );
 
     document.getElementById(
       "quizFinish"
-    ).classList.remove("hidden");
+    ).classList.remove(
+      "hidden"
+    );
 
     document.getElementById(
       "finishTitle"
@@ -919,37 +1198,55 @@ document.addEventListener("DOMContentLoaded", () => {
         "5"
       );
 
-      playFile("success.mp3");
+      playFile(
+        "success.mp3"
+      );
     }
   };
 
   document
-    .getElementById("nextQuiz")
-    .addEventListener("click", () => {
-      if (quizIndex < 4) {
-        quizIndex++;
-        renderQuiz();
-      } else {
-        finishQuiz();
+    .getElementById(
+      "nextQuiz"
+    )
+    .addEventListener(
+      "click",
+      () => {
+        if (quizIndex < 4) {
+          quizIndex++;
+          renderQuiz();
+        } else {
+          finishQuiz();
+        }
       }
-    });
+    );
 
   document
-    .getElementById("restartQuiz")
-    .addEventListener("click", () => {
-      quizIndex = 0;
-      quizScore = 0;
+    .getElementById(
+      "restartQuiz"
+    )
+    .addEventListener(
+      "click",
+      () => {
+        quizIndex = 0;
+        quizScore = 0;
 
-      document.getElementById(
-        "quizFinish"
-      ).classList.add("hidden");
+        document.getElementById(
+          "quizFinish"
+        ).classList.add(
+          "hidden"
+        );
 
-      document.getElementById(
-        "quizBox"
-      ).classList.remove("hidden");
+        document.getElementById(
+          "quizBox"
+        ).classList.remove(
+          "hidden"
+        );
 
-      renderQuiz();
-    });
+        renderQuiz();
+      }
+    );
+
+  /* INIȚIALIZAREA LECȚIEI */
 
   showStage(0);
   renderListening();
