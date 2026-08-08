@@ -1,1 +1,187 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interaktive Deutschlektion über die Wochentage für Kinder">
+  <title>Wochentage | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="wochentage.css">
+  <script src="wochentage.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#lesson">Zum Inhalt springen</a>
 
+  <header class="lesson-header">
+    <a class="brand" href="../index.html" aria-label="Zur Startseite">
+      <img src="../assets/images/mascot/felix-default.png" alt="" class="brand-felix">
+      <span><strong>Kleine Deutschwelt</strong><small>Deutsch lernen mit Spaß!</small></span>
+    </a>
+    <div class="header-actions">
+      <div class="progress-wrap" aria-label="Lektionsfortschritt">
+        <span id="progressText">0 %</span>
+        <span class="progress-track"><span id="progressBar"></span></span>
+      </div>
+      <button id="soundToggle" class="header-button" type="button" aria-pressed="false">Ton aus</button>
+      <a class="header-button home-link" href="../index.html">Home</a>
+    </div>
+  </header>
+
+  <main id="lesson">
+    <section class="lesson-stage hero active" data-stage="0" aria-labelledby="lessonTitle">
+      <img src="../assets/images/banners/wochentage-banner.webp" alt="Ein Wochenkalender in einem freundlichen Lernraum">
+      <div class="hero-shade"></div>
+      <div class="hero-copy">
+        <span class="eyebrow">A1.1 · STARTER</span>
+        <h1 id="lessonTitle">Die Wochentage</h1>
+        <p>Montag, Dienstag, Mittwoch und mehr</p>
+        <p class="translation">Zilele săptămânii în limba germană</p>
+        <div class="hero-actions">
+          <button class="secondary-button audio-button" type="button" data-audio="intro.mp3">
+            <span class="speaker" aria-hidden="true"></span> Ce învățăm astăzi?
+          </button>
+          <button class="primary-button stage-next" type="button">Lektion starten</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="stage-tracker" aria-live="polite">
+      <span id="stageLabel">Start</span>
+      <div class="stage-dots" aria-hidden="true"></div>
+    </div>
+
+    <section class="lesson-stage section-card" data-stage="1" aria-labelledby="calendarTitle">
+      <div class="section-heading">
+        <span class="section-number">1</span>
+        <div><p class="kicker">HÖREN UND SPRECHEN</p><h2 id="calendarTitle">Blättere durch den Kalender.</h2></div>
+      </div>
+      <p class="instruction">Apasă pe zile, ascultă și repetă. Deschide toate cele șapte file.</p>
+
+      <div id="dayGrid" class="day-grid" aria-label="Wochentage"></div>
+
+      <article class="calendar-shell">
+        <div class="calendar-rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="calendar-page">
+          <img id="dayImage" class="day-image" src="../assets/images/lessons/wochentage/montag.webp" alt="">
+          <div class="day-copy">
+            <span id="dayCounter" class="day-counter">1 / 7</span>
+            <h3 id="dayGerman">der Montag</h3>
+            <p id="dayRomanian" class="day-translation">luni</p>
+            <div class="audio-row">
+              <button id="wordAudio" class="round-audio audio-button" type="button" data-audio="montag.mp3">
+                <span class="speaker" aria-hidden="true"></span><span>Wort</span>
+              </button>
+              <button id="sentenceAudio" class="round-audio audio-button" type="button" data-audio="montag-saetze.mp3">
+                <span class="speaker" aria-hidden="true"></span><span>Sätze</span>
+              </button>
+            </div>
+            <div class="sentences">
+              <p id="sentenceNow">Heute ist Montag.</p>
+              <small id="sentenceNowRo">Astăzi este luni.</small>
+              <p id="sentenceYesterday">Gestern war Sonntag.</p>
+              <small id="sentenceYesterdayRo">Ieri a fost duminică.</small>
+              <p id="sentenceTomorrow">Morgen ist Dienstag.</p>
+              <small id="sentenceTomorrowRo">Mâine este marți.</small>
+            </div>
+          </div>
+        </div>
+        <div class="calendar-controls">
+          <button id="dayPrev" class="secondary-button" type="button">Zurück</button>
+          <button id="dayNext" class="secondary-button" type="button">Weiter</button>
+        </div>
+      </article>
+
+      <p id="calendarStatus" class="status-message" aria-live="polite">0 von 7 Tagen entdeckt</p>
+      <div class="stage-navigation">
+        <button class="secondary-button stage-prev" type="button">Zurück</button>
+        <button id="calendarDone" class="primary-button stage-next" type="button" disabled>Weiter zur Übung</button>
+      </div>
+    </section>
+
+    <section class="lesson-stage section-card" data-stage="2" aria-labelledby="orderTitle">
+      <div class="section-heading">
+        <span class="section-number">2</span>
+        <div><p class="kicker">REIHENFOLGE</p><h2 id="orderTitle">Ordne die Woche.</h2></div>
+        <button class="instruction-audio audio-button" type="button" data-audio="tage-ordnen.mp3" aria-label="Arbeitsanweisung anhören"><span class="speaker" aria-hidden="true"></span></button>
+      </div>
+      <p class="instruction">Apasă zilele în ordine, începând cu Montag.</p>
+      <div id="orderPool" class="order-pool"></div>
+      <div id="orderAnswer" class="order-answer" aria-label="Deine Reihenfolge"></div>
+      <p id="orderFeedback" class="status-message" aria-live="polite"></p>
+      <button id="orderReset" class="secondary-button" type="button">Neu beginnen</button>
+      <div class="stage-navigation">
+        <button class="secondary-button stage-prev" type="button">Zurück</button>
+        <button id="orderDone" class="primary-button stage-next" type="button" disabled>Weiter</button>
+      </div>
+    </section>
+
+    <section class="lesson-stage section-card" data-stage="3" aria-labelledby="timeTitle">
+      <div class="section-heading">
+        <span class="section-number">3</span>
+        <div><p class="kicker">GESTERN · HEUTE · MORGEN</p><h2 id="timeTitle">Welcher Tag passt?</h2></div>
+        <button class="instruction-audio audio-button" type="button" data-audio="richtige-antwort.mp3" aria-label="Arbeitsanweisung anhören"><span class="speaker" aria-hidden="true"></span></button>
+      </div>
+      <article class="quiz-card">
+        <span id="timeCounter" class="question-counter">1 / 5</span>
+        <p id="timePrompt" class="quiz-prompt"></p>
+        <div id="timeOptions" class="choice-grid"></div>
+        <p id="timeFeedback" class="status-message" aria-live="polite"></p>
+      </article>
+      <div class="stage-navigation">
+        <button class="secondary-button stage-prev" type="button">Zurück</button>
+        <button id="timeDone" class="primary-button stage-next" type="button" disabled>Weiter zum Rätsel</button>
+      </div>
+    </section>
+
+    <section class="lesson-stage section-card rebus-section" data-stage="4" aria-labelledby="rebusTitle">
+      <div class="section-heading">
+        <span class="section-number">4</span>
+        <div><p class="kicker">WÖRTERRÄTSEL</p><h2 id="rebusTitle">Entdecke die Wochentage.</h2></div>
+        <button class="instruction-audio audio-button" type="button" data-audio="rebus-loesen.mp3" aria-label="Arbeitsanweisung anhören"><span class="speaker" aria-hidden="true"></span></button>
+      </div>
+      <p class="instruction">Asociază fiecare cuvânt german cu traducerea corectă. După toate răspunsurile apare cuvântul vertical.</p>
+      <div class="rebus-board">
+        <div class="vertical-word" aria-label="Wochentage">
+          <span>W</span><span>O</span><span>C</span><span>H</span><span>E</span><span>N</span><span>T</span><span>A</span><span>G</span><span>E</span>
+        </div>
+        <div id="rebusRows" class="rebus-rows"></div>
+      </div>
+      <p id="rebusFeedback" class="status-message" aria-live="polite"></p>
+      <div class="stage-navigation">
+        <button class="secondary-button stage-prev" type="button">Zurück</button>
+        <button id="rebusDone" class="primary-button stage-next" type="button" disabled>Weiter zum Test</button>
+      </div>
+    </section>
+
+    <section class="lesson-stage section-card" data-stage="5" aria-labelledby="testTitle">
+      <div class="section-heading">
+        <span class="section-number">5</span>
+        <div><p class="kicker">MINI-TEST</p><h2 id="testTitle">Was weißt du schon?</h2></div>
+      </div>
+      <article id="testCard" class="quiz-card">
+        <span id="testCounter" class="question-counter">1 / 7</span>
+        <p id="testPrompt" class="quiz-prompt"></p>
+        <div id="testOptions" class="choice-grid"></div>
+        <p id="testFeedback" class="status-message" aria-live="polite"></p>
+      </article>
+    </section>
+
+    <section class="lesson-stage final-card" data-stage="6" aria-labelledby="finishTitle">
+      <img src="../assets/images/lessons/wochentage/felix-calendar.webp" alt="Felix mit einem Kalender">
+      <div>
+        <span class="eyebrow">LEKTION GESCHAFFT</span>
+        <h2 id="finishTitle">Super gemacht!</h2>
+        <p>Du kennst jetzt die Wochentage.</p>
+        <p id="finalScore" class="final-score"></p>
+        <button id="restartLesson" class="secondary-button" type="button">Lektion wiederholen</button>
+        <a class="primary-button link-button" href="../index.html">Zur Lernreise</a>
+      </div>
+    </section>
+  </main>
+
+  <audio id="lessonAudio" preload="none"></audio>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
