@@ -1,1 +1,246 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interaktive Deutschlektion über die zwölf Monate für Kinder.">
+  <title>Die Monate | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/monate.css">
+  <script src="../js/monate.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
 
+  <header class="lesson-header">
+    <a class="home-button" href="../index.html" aria-label="Zur Startseite">
+      <img src="../assets/icons/monate/home.svg" alt="" width="38" height="38">
+      <span>Home</span>
+    </a>
+
+    <div class="header-title">
+      <p class="eyebrow">Kleine Deutschwelt · A1.1</p>
+      <h1>Die Monate</h1>
+      <p>Hören, sprechen, ordnen und spielen</p>
+    </div>
+
+    <div class="lesson-progress" aria-label="Lektionsfortschritt">
+      <span id="progress-label">0 %</span>
+      <div class="progress-track" aria-hidden="true">
+        <span id="progress-bar"></span>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" aria-labelledby="hero-title">
+      <img class="hero-background" src="../assets/images/lessons/monate/monate-banner.webp" alt="Felix zeigt den Jahreskreis mit den Monaten">
+      <div class="hero-overlay">
+        <p class="section-number">Lektion 1</p>
+        <h2 id="hero-title">Willkommen bei den Monaten!</h2>
+        <p>Astăzi învățăm cele douăsprezece luni ale anului.</p>
+        <div class="hero-actions">
+          <button class="primary-button audio-button" type="button" data-audio="../audio/monate/intro.mp3">
+            <img src="../assets/icons/monate/audio.svg" alt="" width="28" height="28">
+            <span>Einführung hören</span>
+          </button>
+          <a class="secondary-button" href="#monate-lernen">Lektion starten</a>
+        </div>
+      </div>
+    </section>
+
+    <div id="audio-status" class="audio-status" role="status" aria-live="polite"></div>
+
+    <nav class="lesson-nav" aria-label="Abschnitte der Lektion">
+      <a href="#monate-lernen">Monate lernen</a>
+      <a href="#reihenfolge">Reihenfolge</a>
+      <a href="#nachbarn">Davor und danach</a>
+      <a href="#hoeren">Hören</a>
+      <a href="#geburtstag">Geburtstag</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+
+    <section id="monate-lernen" class="lesson-section" data-progress-step="1" aria-labelledby="learn-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Schritt 1</p>
+          <h2 id="learn-title">Die zwölf Monate</h2>
+          <p>Apasă pe un card, ascultă și repetă cu voce tare.</p>
+        </div>
+        <button class="secondary-button audio-button" type="button" data-audio="../audio/monate/monate-alle.mp3">
+          <img src="../assets/icons/monate/audio.svg" alt="" width="26" height="26">
+          <span>Alle Monate hören</span>
+        </button>
+      </div>
+      <div id="months-grid" class="months-grid" aria-label="Die zwölf Monate"></div>
+    </section>
+
+    <section id="reihenfolge" class="lesson-section activity-section" data-progress-step="2" aria-labelledby="order-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Schritt 2</p>
+          <h2 id="order-title">Ordne die Monate</h2>
+          <p>Selectează lunile în ordine, începând cu Januar.</p>
+        </div>
+        <button id="reset-order" class="icon-text-button" type="button">
+          <img src="../assets/icons/monate/restart.svg" alt="" width="26" height="26">
+          <span>Neu starten</span>
+        </button>
+      </div>
+      <div class="order-board">
+        <div>
+          <h3>Wähle den nächsten Monat</h3>
+          <div id="order-options" class="compact-month-grid"></div>
+        </div>
+        <div>
+          <h3>Deine Reihenfolge</h3>
+          <ol id="order-result" class="order-result"></ol>
+        </div>
+      </div>
+      <div id="order-feedback" class="feedback" role="status" aria-live="polite"></div>
+    </section>
+
+    <section id="nachbarn" class="lesson-section activity-section" data-progress-step="3" aria-labelledby="neighbor-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Schritt 3</p>
+          <h2 id="neighbor-title">Was kommt davor oder danach?</h2>
+          <p>Alege luna care vine înainte sau după luna afișată.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <p id="neighbor-question" class="question-text"></p>
+        <div id="neighbor-options" class="answer-grid"></div>
+        <div id="neighbor-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <button id="next-neighbor" class="primary-button" type="button" hidden>
+          <span>Nächste Frage</span>
+          <img src="../assets/icons/monate/next.svg" alt="" width="27" height="27">
+        </button>
+      </div>
+    </section>
+
+    <section id="fehlt" class="lesson-section activity-section" data-progress-step="4" aria-labelledby="missing-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Schritt 4</p>
+          <h2 id="missing-title">Welcher Monat fehlt?</h2>
+          <p>Privește șirul și găsește luna lipsă.</p>
+        </div>
+      </div>
+      <div class="question-card">
+        <div id="missing-sequence" class="missing-sequence" aria-label="Monatsreihe"></div>
+        <div id="missing-options" class="answer-grid"></div>
+        <div id="missing-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <button id="next-missing" class="primary-button" type="button" hidden>
+          <span>Nächste Reihe</span>
+          <img src="../assets/icons/monate/next.svg" alt="" width="27" height="27">
+        </button>
+      </div>
+    </section>
+
+    <section id="hoeren" class="lesson-section activity-section" data-progress-step="5" aria-labelledby="listen-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Schritt 5</p>
+          <h2 id="listen-title">Höre und wähle</h2>
+          <p>Ascultă și selectează imaginea lunii corecte.</p>
+        </div>
+      </div>
+      <div class="question-card listen-card">
+        <button id="listen-month" class="round-audio-button" type="button" aria-label="Monat hören">
+          <img src="../assets/icons/monate/audio.svg" alt="" width="42" height="42">
+        </button>
+        <p>Welchen Monat hörst du?</p>
+        <div id="listen-options" class="picture-answer-grid"></div>
+        <div id="listen-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <button id="next-listen" class="primary-button" type="button" hidden>
+          <span>Nächste Aufgabe</span>
+          <img src="../assets/icons/monate/next.svg" alt="" width="27" height="27">
+        </button>
+      </div>
+    </section>
+
+    <section id="geburtstag" class="lesson-section birthday-section" data-progress-step="6" aria-labelledby="birthday-title">
+      <div class="birthday-picture">
+        <img src="../assets/images/lessons/monate/geburtstag-kinder.webp" alt="Kinder feiern gemeinsam Geburtstag">
+      </div>
+      <div class="birthday-content">
+        <p class="section-number">Schritt 6</p>
+        <h2 id="birthday-title">Wann hast du Geburtstag?</h2>
+        <p class="dialog-line"><strong>Frage:</strong> Wann hast du Geburtstag?</p>
+        <p class="translation">Când este ziua ta de naștere?</p>
+        <label for="birthday-month">Wähle deinen Monat:</label>
+        <select id="birthday-month">
+          <option value="">Bitte wählen</option>
+        </select>
+        <div id="birthday-answer" class="birthday-answer" aria-live="polite">Ich habe im … Geburtstag.</div>
+        <button id="birthday-audio" class="secondary-button" type="button" disabled>
+          <img src="../assets/icons/monate/audio.svg" alt="" width="26" height="26">
+          <span>Monat hören</span>
+        </button>
+      </div>
+    </section>
+
+    <section id="quiz" class="lesson-section quiz-section" data-progress-step="7" aria-labelledby="quiz-title">
+      <div class="section-heading">
+        <div>
+          <p class="section-number">Abschluss</p>
+          <h2 id="quiz-title">Monate-Quiz</h2>
+          <p>Rezolvă cele cinci întrebări. Pentru 5/5 primești diploma Monate-Meister.</p>
+        </div>
+        <div id="quiz-counter" class="quiz-counter">Frage 1 von 5</div>
+      </div>
+
+      <div id="quiz-panel" class="question-card">
+        <p id="quiz-question" class="question-text"></p>
+        <div id="quiz-options" class="answer-grid"></div>
+        <div id="quiz-feedback" class="feedback" role="status" aria-live="polite"></div>
+        <button id="quiz-next" class="primary-button" type="button" hidden>
+          <span>Weiter</span>
+          <img src="../assets/icons/monate/next.svg" alt="" width="27" height="27">
+        </button>
+      </div>
+
+      <div id="quiz-result" class="quiz-result" hidden>
+        <img id="result-icon" src="../assets/icons/monate/trophy.svg" alt="" width="82" height="82">
+        <h3 id="result-title"></h3>
+        <p id="result-score"></p>
+        <p id="result-message"></p>
+        <div class="result-actions">
+          <button id="restart-quiz" class="secondary-button" type="button">
+            <img src="../assets/icons/monate/restart.svg" alt="" width="26" height="26">
+            <span>Quiz wiederholen</span>
+          </button>
+          <button id="show-diploma" class="primary-button" type="button" hidden>
+            <img src="../assets/icons/monate/certificate.svg" alt="" width="27" height="27">
+            <span>Diplom öffnen</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="diploma-section" class="diploma-section" hidden aria-labelledby="diploma-title">
+      <div id="diploma" class="diploma">
+        <img src="../assets/images/lessons/monate/monate-diplom.webp" alt="" aria-hidden="true">
+        <div class="diploma-copy">
+          <p>Kleine Deutschwelt</p>
+          <h2 id="diploma-title">Monate-Meister</h2>
+          <p>Du kennst die zwölf Monate!</p>
+          <label for="student-name">Dein Name</label>
+          <input id="student-name" type="text" maxlength="40" placeholder="Name">
+          <strong>12 Monate · 5 von 5 Punkten</strong>
+        </div>
+      </div>
+      <button id="print-diploma" class="primary-button" type="button">Diplom drucken</button>
+    </section>
+  </main>
+
+  <footer>
+    <p>Kleine Deutschwelt · Deutsch lernen mit Spaß!</p>
+  </footer>
+
+  <audio id="lesson-audio" preload="none"></audio>
+</body>
+</html>
