@@ -6,36 +6,89 @@ document.addEventListener("DOMContentLoaded", () => {
   const AUDIO_PATH = "../audio/monate/";
 
   const months = [
-    { name: "Januar", ro: "ianuarie", file: "januar" },
-    { name: "Februar", ro: "februarie", file: "februar" },
-    { name: "März", ro: "martie", file: "maerz" },
-    { name: "April", ro: "aprilie", file: "april" },
-    { name: "Mai", ro: "mai", file: "mai" },
-    { name: "Juni", ro: "iunie", file: "juni" },
-    { name: "Juli", ro: "iulie", file: "juli" },
-    { name: "August", ro: "august", file: "august" },
-    { name: "September", ro: "septembrie", file: "september" },
-    { name: "Oktober", ro: "octombrie", file: "oktober" },
-    { name: "November", ro: "noiembrie", file: "november" },
-    { name: "Dezember", ro: "decembrie", file: "dezember" }
+    {
+      name: "Januar",
+      ro: "ianuarie",
+      file: "januar"
+    },
+    {
+      name: "Februar",
+      ro: "februarie",
+      file: "februar"
+    },
+    {
+      name: "März",
+      ro: "martie",
+      file: "maerz"
+    },
+    {
+      name: "April",
+      ro: "aprilie",
+      file: "april"
+    },
+    {
+      name: "Mai",
+      ro: "mai",
+      file: "mai"
+    },
+    {
+      name: "Juni",
+      ro: "iunie",
+      file: "juni"
+    },
+    {
+      name: "Juli",
+      ro: "iulie",
+      file: "juli"
+    },
+    {
+      name: "August",
+      ro: "august",
+      file: "august"
+    },
+    {
+      name: "September",
+      ro: "septembrie",
+      file: "september"
+    },
+    {
+      name: "Oktober",
+      ro: "octombrie",
+      file: "oktober"
+    },
+    {
+      name: "November",
+      ro: "noiembrie",
+      file: "november"
+    },
+    {
+      name: "Dezember",
+      ro: "decembrie",
+      file: "dezember"
+    }
   ];
 
   const audio = document.querySelector("#lesson-audio");
   const audioStatus = document.querySelector("#audio-status");
+
   const completedSteps = new Set();
 
   let activeAudioButton = null;
   let audioFinishedCallback = null;
 
+  /* FUNCȚII GENERALE */
+
   function shuffle(items) {
     const copy = [...items];
 
-    for (let i = copy.length - 1; i > 0; i -= 1) {
-      const j = Math.floor(Math.random() * (i + 1));
+    for (let index = copy.length - 1; index > 0; index -= 1) {
+      const randomIndex = Math.floor(
+        Math.random() * (index + 1)
+      );
 
-      [copy[i], copy[j]] = [
-        copy[j],
-        copy[i]
+      [copy[index], copy[randomIndex]] = [
+        copy[randomIndex],
+        copy[index]
       ];
     }
 
@@ -43,24 +96,24 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function setPlaying(button, playing) {
-    if (!button) return;
+    if (!button) {
+      return;
+    }
 
     const icon = button.querySelector("img");
 
     if (icon) {
-      icon.src =
-        `${ICON_PATH}${
-          playing
-            ? "audio-playing.svg"
-            : "audio.svg"
-        }`;
+      icon.src = `${ICON_PATH}${
+        playing
+          ? "audio-playing.svg"
+          : "audio.svg"
+      }`;
     }
 
-    const card =
-      button.closest(".month-card");
+    const monthCard = button.closest(".month-card");
 
-    if (card) {
-      card.classList.toggle(
+    if (monthCard) {
+      monthCard.classList.toggle(
         "is-playing",
         playing
       );
@@ -68,17 +121,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function playAudio(
-    src,
+    source,
     button = null,
     onFinished = null
   ) {
-    if (!audio || !src) return;
+    if (!audio || !source) {
+      return;
+    }
 
     if (activeAudioButton) {
-      setPlaying(
-        activeAudioButton,
-        false
-      );
+      setPlaying(activeAudioButton, false);
     }
 
     activeAudioButton = button;
@@ -87,10 +139,11 @@ document.addEventListener("DOMContentLoaded", () => {
     setPlaying(button, true);
 
     audio.pause();
-    audio.src = src;
+    audio.src = source;
     audio.currentTime = 0;
 
-    audio.play()
+    audio
+      .play()
       .then(() => {
         if (audioStatus) {
           audioStatus.textContent = "";
@@ -99,97 +152,74 @@ document.addEventListener("DOMContentLoaded", () => {
       .catch(() => {
         if (audioStatus) {
           const fileName =
-            src.split("/").pop();
+            source.split("/").pop();
 
           audioStatus.textContent =
-            `Audio indisponibil: ${fileName}. Verifică folderul audio/monate/.`;
+            `Audio indisponibil: ${fileName}. ` +
+            "Verifică folderul audio/monate/.";
         }
 
         setPlaying(button, false);
+        activeAudioButton = null;
+        audioFinishedCallback = null;
       });
   }
 
   if (audio) {
-    audio.addEventListener(
-      "ended",
-      () => {
-        setPlaying(
-          activeAudioButton,
-          false
-        );
+    audio.addEventListener("ended", () => {
+      setPlaying(activeAudioButton, false);
 
-        activeAudioButton = null;
+      activeAudioButton = null;
 
-        const callback =
-          audioFinishedCallback;
+      const callback = audioFinishedCallback;
 
-        audioFinishedCallback = null;
+      audioFinishedCallback = null;
 
-        if (
-          typeof callback ===
-          "function"
-        ) {
-          callback();
-        }
+      if (typeof callback === "function") {
+        callback();
       }
-    );
+    });
 
-    audio.addEventListener(
-      "error",
-      () => {
-        if (audioStatus) {
-          const fileName =
-            audio.src
-              .split("/")
-              .pop() ||
-            "fișier necunoscut";
+    audio.addEventListener("error", () => {
+      if (audioStatus) {
+        const fileName =
+          audio.src.split("/").pop() ||
+          "fișier necunoscut";
 
-          audioStatus.textContent =
-            `Audio indisponibil: ${fileName}.`;
-        }
-
-        setPlaying(
-          activeAudioButton,
-          false
-        );
-
-        activeAudioButton = null;
-        audioFinishedCallback = null;
+        audioStatus.textContent =
+          `Audio indisponibil: ${fileName}.`;
       }
-    );
+
+      setPlaying(activeAudioButton, false);
+
+      activeAudioButton = null;
+      audioFinishedCallback = null;
+    });
   }
 
   document
-    .querySelectorAll(
-      ".audio-button"
-    )
+    .querySelectorAll(".audio-button")
     .forEach((button) => {
-      button.addEventListener(
-        "click",
-        () => {
-          playAudio(
-            button.dataset.audio,
-            button
-          );
-        }
-      );
+      button.addEventListener("click", () => {
+        playAudio(
+          button.dataset.audio,
+          button
+        );
+      });
     });
+
+  /* PROGRESUL LECȚIEI */
 
   function updateProgress() {
     const percent = Math.round(
-      (completedSteps.size / 6) *
-        100
+      (completedSteps.size / 6) * 100
     );
 
     const progressLabel =
-      document.querySelector(
-        "#progress-label"
-      );
+      document.querySelector("#progress-label");
 
     const progressBar =
-      document.querySelector(
-        "#progress-bar"
-      );
+      document.querySelector("#progress-bar");
 
     if (progressLabel) {
       progressLabel.textContent =
@@ -208,16 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     messageId,
     message
   ) {
-    if (
-      completedSteps.has(step)
-    ) {
-      return;
-    }
-
-    completedSteps.add(step);
-    updateProgress();
-
-    const button =
+    const nextButton =
       document.querySelector(
         `#${nextButtonId}`
       );
@@ -227,25 +248,28 @@ document.addEventListener("DOMContentLoaded", () => {
         `#${messageId}`
       );
 
-    if (button) {
-      button.disabled = false;
+    if (nextButton) {
+      nextButton.disabled = false;
     }
 
     if (status) {
       status.textContent = message;
     }
 
-    if (button) {
-      const action =
-        button.closest(
-          ".step-action"
-        );
+    if (nextButton) {
+      const stepAction =
+        nextButton.closest(".step-action");
 
-      if (action) {
-        action.classList.add(
+      if (stepAction) {
+        stepAction.classList.add(
           "is-ready"
         );
       }
+    }
+
+    if (!completedSteps.has(step)) {
+      completedSteps.add(step);
+      updateProgress();
     }
   }
 
@@ -255,33 +279,31 @@ document.addEventListener("DOMContentLoaded", () => {
         `[data-step="${step}"]`
       );
 
-    const link =
+    const navigationLink =
       document.querySelector(
         `[data-step-link="${step}"]`
       );
 
-    if (!section) return;
+    if (!section) {
+      return;
+    }
 
     section.hidden = false;
 
-    if (link) {
-      link.removeAttribute(
+    if (navigationLink) {
+      navigationLink.removeAttribute(
         "aria-disabled"
       );
     }
 
     document
-      .querySelectorAll(
-        ".step-nav a"
-      )
-      .forEach((item) => {
-        item.classList.remove(
-          "active"
-        );
+      .querySelectorAll(".step-nav a")
+      .forEach((link) => {
+        link.classList.remove("active");
       });
 
-    if (link) {
-      link.classList.add("active");
+    if (navigationLink) {
+      navigationLink.classList.add("active");
     }
 
     window.setTimeout(() => {
@@ -302,36 +324,28 @@ document.addEventListener("DOMContentLoaded", () => {
         `#${buttonId}`
       );
 
-    if (!button) return;
+    if (!button) {
+      return;
+    }
 
-    button.addEventListener(
-      "click",
-      () => {
-        unlockStep(step);
+    button.addEventListener("click", () => {
+      unlockStep(step);
 
-        if (
-          typeof starter ===
-          "function"
-        ) {
-          window.setTimeout(
-            starter,
-            450
-          );
-        }
+      if (typeof starter === "function") {
+        window.setTimeout(
+          starter,
+          450
+        );
       }
-    );
+    });
   }
 
   function answerButton(label) {
     const button =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
     button.type = "button";
-    button.className =
-      "answer-button";
-
+    button.className = "answer-button";
     button.dataset.answer = label;
     button.textContent = label;
 
@@ -339,7 +353,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function lockAnswers(container) {
-    if (!container) return;
+    if (!container) {
+      return;
+    }
 
     container
       .querySelectorAll("button")
@@ -350,31 +366,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function markCorrect(
     container,
-    answer
+    correctAnswer
   ) {
-    if (!container) return;
-
-    const correct =
-      container.querySelector(
-        `[data-answer="${answer}"]`
-      );
-
-    if (correct) {
-      correct.classList.add(
-        "correct"
-      );
+    if (!container) {
+      return;
     }
+
+    const buttons =
+      container.querySelectorAll(
+        "[data-answer]"
+      );
+
+    buttons.forEach((button) => {
+      if (
+        button.dataset.answer ===
+        correctAnswer
+      ) {
+        button.classList.add("correct");
+      }
+    });
   }
 
-  /*
-   * SCHRITT 1
-   * Die zwölf Monate
-   */
+  /* SCHRITT 1: CELE 12 LUNI */
 
   const monthsGrid =
-    document.querySelector(
-      "#months-grid"
-    );
+    document.querySelector("#months-grid");
 
   const heardMonths = new Set();
 
@@ -385,9 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
     heardMonths.add(month.file);
 
     if (card) {
-      card.classList.add(
-        "is-learned"
-      );
+      card.classList.add("is-learned");
     }
 
     const learnedCount =
@@ -416,12 +430,9 @@ document.addEventListener("DOMContentLoaded", () => {
   if (monthsGrid) {
     months.forEach((month) => {
       const card =
-        document.createElement(
-          "article"
-        );
+        document.createElement("article");
 
-      card.className =
-        "month-card";
+      card.className = "month-card";
 
       card.innerHTML = `
         <button
@@ -481,28 +492,29 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  const allMonthsAudio =
+  const allMonthsAudioButton =
     document.querySelector(
       "#all-months-audio"
     );
 
-  if (allMonthsAudio) {
-    allMonthsAudio.addEventListener(
+  if (allMonthsAudioButton) {
+    allMonthsAudioButton.addEventListener(
       "click",
       () => {
         playAudio(
           `${AUDIO_PATH}monate-alle.mp3`,
-          allMonthsAudio,
+          allMonthsAudioButton,
           () => {
             months.forEach(
               (month, index) => {
+                const card =
+                  monthsGrid
+                    ? monthsGrid.children[index]
+                    : null;
+
                 registerHeardMonth(
                   month,
-                  monthsGrid
-                    ? monthsGrid.children[
-                        index
-                      ]
-                    : null
+                  card
                 );
               }
             );
@@ -512,10 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /*
-   * SCHRITT 2
-   * Davor und danach
-   */
+  /* SCHRITT 2: DAVOR ȘI DANACH */
 
   const neighborQuestion =
     document.querySelector(
@@ -547,6 +556,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "#neighbor-heading-icon"
     );
 
+  const neighborScore =
+    document.querySelector(
+      "#neighbor-score"
+    );
+
   let neighborRound = 0;
   let neighborCorrect = 0;
 
@@ -556,31 +570,29 @@ document.addEventListener("DOMContentLoaded", () => {
   function newNeighborQuestion(
     playInstruction = true
   ) {
-    if (
-      !neighborQuestion ||
-      !neighborOptions ||
-      !neighborFeedback ||
-      !nextNeighbor
-    ) {
-      return;
-    }
-
     const askAfter =
       neighborRound % 2 === 0;
 
     neighborRound += 1;
 
-    const baseIndex = askAfter
-      ? Math.floor(
+    let baseIndex;
+
+    if (askAfter) {
+      baseIndex =
+        Math.floor(
           Math.random() * 11
-        )
-      : Math.floor(
+        );
+    } else {
+      baseIndex =
+        Math.floor(
           Math.random() * 11
         ) + 1;
+    }
 
-    const answerIndex = askAfter
-      ? baseIndex + 1
-      : baseIndex - 1;
+    const answerIndex =
+      askAfter
+        ? baseIndex + 1
+        : baseIndex - 1;
 
     const answer =
       months[answerIndex];
@@ -599,38 +611,49 @@ document.addEventListener("DOMContentLoaded", () => {
         }`;
     }
 
-    neighborQuestion.textContent =
-      askAfter
-        ? `Welcher Monat kommt nach ${months[baseIndex].name}?`
-        : `Welcher Monat kommt vor ${months[baseIndex].name}?`;
+    if (neighborQuestion) {
+      neighborQuestion.textContent =
+        askAfter
+          ? `Welcher Monat kommt nach ${months[baseIndex].name}?`
+          : `Welcher Monat kommt vor ${months[baseIndex].name}?`;
+    }
+
+    if (!neighborOptions) {
+      return;
+    }
 
     neighborOptions.innerHTML = "";
-    neighborFeedback.textContent = "";
-    neighborFeedback.className =
-      "feedback";
 
-    nextNeighbor.hidden = true;
+    if (neighborFeedback) {
+      neighborFeedback.textContent = "";
+      neighborFeedback.className =
+        "feedback";
+    }
+
+    if (nextNeighbor) {
+      nextNeighbor.hidden = true;
+    }
 
     const distractors = shuffle(
       months.filter(
-        (_, index) =>
+        (month, index) =>
           index !== answerIndex
       )
     ).slice(0, 2);
 
-    shuffle([
+    const options = shuffle([
       answer,
       ...distractors
-    ]).forEach((month) => {
+    ]);
+
+    options.forEach((month) => {
       const button =
         answerButton(month.name);
 
       button.addEventListener(
         "click",
         () => {
-          lockAnswers(
-            neighborOptions
-          );
+          lockAnswers(neighborOptions);
 
           if (month === answer) {
             button.classList.add(
@@ -639,13 +662,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             neighborCorrect += 1;
 
-            const score =
-              document.querySelector(
-                "#neighbor-score"
-              );
-
-            if (score) {
-              score.textContent =
+            if (neighborScore) {
+              neighborScore.textContent =
                 String(
                   Math.min(
                     neighborCorrect,
@@ -654,19 +672,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            neighborFeedback.textContent =
-              `Richtig! ${answer.name}.`;
+            if (neighborFeedback) {
+              neighborFeedback.textContent =
+                `Richtig! ${answer.name}.`;
 
-            neighborFeedback.className =
-              "feedback success";
+              neighborFeedback.className =
+                "feedback success";
+            }
 
             playAudio(
               `${AUDIO_PATH}${answer.file}.mp3`
             );
 
-            if (
-              neighborCorrect >= 4
-            ) {
+            if (neighborCorrect >= 4) {
               completeStep(
                 "2",
                 "open-step-3",
@@ -684,14 +702,18 @@ document.addEventListener("DOMContentLoaded", () => {
               answer.name
             );
 
-            neighborFeedback.textContent =
-              `Die richtige Antwort ist ${answer.name}.`;
+            if (neighborFeedback) {
+              neighborFeedback.textContent =
+                `Die richtige Antwort ist ${answer.name}.`;
 
-            neighborFeedback.className =
-              "feedback error";
+              neighborFeedback.className =
+                "feedback error";
+            }
           }
 
-          nextNeighbor.hidden = false;
+          if (nextNeighbor) {
+            nextNeighbor.hidden = false;
+          }
         }
       );
 
@@ -727,10 +749,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /*
-   * SCHRITT 3
-   * Welcher Monat fehlt?
-   */
+  /* SCHRITT 3: LUNA LIPSĂ */
 
   const missingSequence =
     document.querySelector(
@@ -757,20 +776,16 @@ document.addEventListener("DOMContentLoaded", () => {
       "#missing-instruction"
     );
 
+  const missingScore =
+    document.querySelector(
+      "#missing-score"
+    );
+
   let missingCorrect = 0;
 
   function newMissingQuestion(
     playInstruction = false
   ) {
-    if (
-      !missingSequence ||
-      !missingOptions ||
-      !missingFeedback ||
-      !nextMissing
-    ) {
-      return;
-    }
-
     const start =
       Math.floor(
         Math.random() * 9
@@ -790,19 +805,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const answer =
       sequence[missingOffset];
 
+    if (
+      !missingSequence ||
+      !missingOptions
+    ) {
+      return;
+    }
+
     missingSequence.innerHTML = "";
 
     sequence.forEach(
       (month, index) => {
         const item =
-          document.createElement(
-            "span"
-          );
+          document.createElement("span");
 
         item.className =
           `sequence-item${
-            index ===
-            missingOffset
+            index === missingOffset
               ? " blank"
               : ""
           }`;
@@ -812,18 +831,21 @@ document.addEventListener("DOMContentLoaded", () => {
             ? "?"
             : month.name;
 
-        missingSequence.append(
-          item
-        );
+        missingSequence.append(item);
       }
     );
 
     missingOptions.innerHTML = "";
-    missingFeedback.textContent = "";
-    missingFeedback.className =
-      "feedback";
 
-    nextMissing.hidden = true;
+    if (missingFeedback) {
+      missingFeedback.textContent = "";
+      missingFeedback.className =
+        "feedback";
+    }
+
+    if (nextMissing) {
+      nextMissing.hidden = true;
+    }
 
     const distractors = shuffle(
       months.filter(
@@ -832,19 +854,19 @@ document.addEventListener("DOMContentLoaded", () => {
       )
     ).slice(0, 2);
 
-    shuffle([
+    const options = shuffle([
       answer,
       ...distractors
-    ]).forEach((month) => {
+    ]);
+
+    options.forEach((month) => {
       const button =
         answerButton(month.name);
 
       button.addEventListener(
         "click",
         () => {
-          lockAnswers(
-            missingOptions
-          );
+          lockAnswers(missingOptions);
 
           if (month === answer) {
             button.classList.add(
@@ -853,13 +875,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             missingCorrect += 1;
 
-            const score =
-              document.querySelector(
-                "#missing-score"
-              );
-
-            if (score) {
-              score.textContent =
+            if (missingScore) {
+              missingScore.textContent =
                 String(
                   Math.min(
                     missingCorrect,
@@ -868,19 +885,19 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            missingFeedback.textContent =
-              `Richtig! ${answer.name} fehlt.`;
+            if (missingFeedback) {
+              missingFeedback.textContent =
+                `Richtig! ${answer.name} fehlt.`;
 
-            missingFeedback.className =
-              "feedback success";
+              missingFeedback.className =
+                "feedback success";
+            }
 
             playAudio(
               `${AUDIO_PATH}${answer.file}.mp3`
             );
 
-            if (
-              missingCorrect >= 3
-            ) {
+            if (missingCorrect >= 3) {
               completeStep(
                 "3",
                 "open-step-4",
@@ -898,14 +915,18 @@ document.addEventListener("DOMContentLoaded", () => {
               answer.name
             );
 
-            missingFeedback.textContent =
-              `Hier fehlt ${answer.name}.`;
+            if (missingFeedback) {
+              missingFeedback.textContent =
+                `Hier fehlt ${answer.name}.`;
 
-            missingFeedback.className =
-              "feedback error";
+              missingFeedback.className =
+                "feedback error";
+            }
           }
 
-          nextMissing.hidden = false;
+          if (nextMissing) {
+            nextMissing.hidden = false;
+          }
         }
       );
 
@@ -941,10 +962,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /*
-   * SCHRITT 4
-   * Höre und wähle
-   */
+  /* SCHRITT 4: ASCULTĂ ȘI ALEGE */
 
   const listenOptions =
     document.querySelector(
@@ -966,26 +984,22 @@ document.addEventListener("DOMContentLoaded", () => {
       "#listen-month"
     );
 
+  const listenScore =
+    document.querySelector(
+      "#listen-score"
+    );
+
   let listenAnswer = null;
   let listenCorrect = 0;
 
   function newListenQuestion(
     autoPlay = false
   ) {
-    if (
-      !listenOptions ||
-      !listenFeedback ||
-      !nextListen ||
-      !listenMonthButton
-    ) {
-      return;
-    }
-
     listenAnswer =
       months[
         Math.floor(
           Math.random() *
-            months.length
+          months.length
         )
       ];
 
@@ -996,21 +1010,30 @@ document.addEventListener("DOMContentLoaded", () => {
       )
     ).slice(0, 2);
 
+    if (!listenOptions) {
+      return;
+    }
+
     listenOptions.innerHTML = "";
-    listenFeedback.textContent = "";
-    listenFeedback.className =
-      "feedback";
 
-    nextListen.hidden = true;
+    if (listenFeedback) {
+      listenFeedback.textContent = "";
+      listenFeedback.className =
+        "feedback";
+    }
 
-    shuffle([
+    if (nextListen) {
+      nextListen.hidden = true;
+    }
+
+    const options = shuffle([
       listenAnswer,
       ...distractors
-    ]).forEach((month) => {
+    ]);
+
+    options.forEach((month) => {
       const button =
-        document.createElement(
-          "button"
-        );
+        document.createElement("button");
 
       button.type = "button";
       button.className =
@@ -1030,26 +1053,17 @@ document.addEventListener("DOMContentLoaded", () => {
       button.addEventListener(
         "click",
         () => {
-          lockAnswers(
-            listenOptions
-          );
+          lockAnswers(listenOptions);
 
-          if (
-            month === listenAnswer
-          ) {
+          if (month === listenAnswer) {
             button.classList.add(
               "correct"
             );
 
             listenCorrect += 1;
 
-            const score =
-              document.querySelector(
-                "#listen-score"
-              );
-
-            if (score) {
-              score.textContent =
+            if (listenScore) {
+              listenScore.textContent =
                 String(
                   Math.min(
                     listenCorrect,
@@ -1058,15 +1072,15 @@ document.addEventListener("DOMContentLoaded", () => {
                 );
             }
 
-            listenFeedback.textContent =
-              `Richtig! Du hörst ${listenAnswer.name}.`;
+            if (listenFeedback) {
+              listenFeedback.textContent =
+                `Richtig! Du hörst ${listenAnswer.name}.`;
 
-            listenFeedback.className =
-              "feedback success";
+              listenFeedback.className =
+                "feedback success";
+            }
 
-            if (
-              listenCorrect >= 3
-            ) {
+            if (listenCorrect >= 3) {
               completeStep(
                 "4",
                 "open-step-5",
@@ -1084,14 +1098,18 @@ document.addEventListener("DOMContentLoaded", () => {
               listenAnswer.name
             );
 
-            listenFeedback.textContent =
-              `Du hörst ${listenAnswer.name}. Hör noch einmal gut zu.`;
+            if (listenFeedback) {
+              listenFeedback.textContent =
+                `Du hörst ${listenAnswer.name}. Hör noch einmal gut zu.`;
 
-            listenFeedback.className =
-              "feedback error";
+              listenFeedback.className =
+                "feedback error";
+            }
           }
 
-          nextListen.hidden = false;
+          if (nextListen) {
+            nextListen.hidden = false;
+          }
         }
       );
 
@@ -1129,10 +1147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /*
-   * SCHRITT 5
-   * Geburtstag
-   */
+  /* SCHRITT 5: ZIUA DE NAȘTERE */
 
   const birthdaySelect =
     document.querySelector(
@@ -1154,65 +1169,61 @@ document.addEventListener("DOMContentLoaded", () => {
       "#birthday-sentence-audio"
     );
 
-  let selectedBirthdayMonth =
-    null;
+  const openQuizButton =
+    document.querySelector(
+      "#open-quiz"
+    );
+
+  let selectedBirthdayMonth = null;
 
   if (birthdaySelect) {
     months.forEach(
       (month, index) => {
-        birthdaySelect.add(
-          new Option(
-            month.name,
-            String(index)
-          )
-        );
+        const option =
+          document.createElement("option");
+
+        option.value = String(index);
+        option.textContent = month.name;
+
+        birthdaySelect.append(option);
       }
     );
   }
 
   if (birthdayQuestionAudio) {
-    birthdayQuestionAudio
-      .addEventListener(
-        "click",
-        () => {
-          playAudio(
-            `${AUDIO_PATH}wann-hast-du-geburtstag.mp3`,
-            birthdayQuestionAudio
-          );
-        }
-      );
+    birthdayQuestionAudio.addEventListener(
+      "click",
+      () => {
+        playAudio(
+          `${AUDIO_PATH}wann-hast-du-geburtstag.mp3`,
+          birthdayQuestionAudio
+        );
+      }
+    );
   }
 
   if (birthdaySelect) {
     birthdaySelect.addEventListener(
       "change",
       () => {
-        const openQuiz =
-          document.querySelector(
-            "#open-quiz"
-          );
-
         if (
-          birthdaySelect.value ===
-          ""
+          birthdaySelect.value === ""
         ) {
-          selectedBirthdayMonth =
-            null;
+          selectedBirthdayMonth = null;
 
           if (birthdayAnswer) {
             birthdayAnswer.textContent =
               "Ich habe im … Geburtstag.";
           }
 
-          if (
-            birthdaySentenceAudio
-          ) {
+          if (birthdaySentenceAudio) {
             birthdaySentenceAudio.disabled =
               true;
           }
 
-          if (openQuiz) {
-            openQuiz.disabled = true;
+          if (openQuizButton) {
+            openQuizButton.disabled =
+              true;
           }
 
           return;
@@ -1232,7 +1243,9 @@ document.addEventListener("DOMContentLoaded", () => {
               ${selectedBirthdayMonth.name}
             </strong>
             Geburtstag.
+
             <br>
+
             <span class="translation">
               Ziua mea de naștere este în
               ${selectedBirthdayMonth.ro}.
@@ -1261,25 +1274,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (birthdaySentenceAudio) {
-    birthdaySentenceAudio
-      .addEventListener(
-        "click",
-        () => {
-          if (
-            selectedBirthdayMonth
-          ) {
-            playAudio(
-              `${AUDIO_PATH}geburtstag-${selectedBirthdayMonth.file}.mp3`,
-              birthdaySentenceAudio
-            );
-          }
+    birthdaySentenceAudio.addEventListener(
+      "click",
+      () => {
+        if (selectedBirthdayMonth) {
+          playAudio(
+            `${AUDIO_PATH}geburtstag-${selectedBirthdayMonth.file}.mp3`,
+            birthdaySentenceAudio
+          );
         }
-      );
+      }
+    );
   }
 
-  /*
-   * ABSCHLUSSQUIZ
-   */
+  /* QUIZUL FINAL */
 
   const quizQuestions = [
     {
@@ -1364,26 +1372,45 @@ document.addEventListener("DOMContentLoaded", () => {
       "#quiz-result"
     );
 
+  const quizCounter =
+    document.querySelector(
+      "#quiz-counter"
+    );
+
+  const resultIcon =
+    document.querySelector(
+      "#result-icon"
+    );
+
+  const resultTitle =
+    document.querySelector(
+      "#result-title"
+    );
+
+  const resultScore =
+    document.querySelector(
+      "#result-score"
+    );
+
+  const resultMessage =
+    document.querySelector(
+      "#result-message"
+    );
+
   let quizIndex = 0;
   let quizScore = 0;
 
   function renderQuiz() {
-    if (
-      !quizQuestion ||
-      !quizOptions ||
-      !quizFeedback ||
-      !quizNext
-    ) {
-      return;
-    }
-
     const question =
       quizQuestions[quizIndex];
 
-    const quizCounter =
-      document.querySelector(
-        "#quiz-counter"
-      );
+    if (
+      !question ||
+      !quizQuestion ||
+      !quizOptions
+    ) {
+      return;
+    }
 
     if (quizCounter) {
       quizCounter.textContent =
@@ -1394,112 +1421,94 @@ document.addEventListener("DOMContentLoaded", () => {
       question.text;
 
     quizOptions.innerHTML = "";
-    quizFeedback.textContent = "";
-    quizFeedback.className =
-      "feedback";
 
-    quizNext.hidden = true;
+    if (quizFeedback) {
+      quizFeedback.textContent = "";
+      quizFeedback.className =
+        "feedback";
+    }
 
-    shuffle(question.options)
-      .forEach((option) => {
-        const button =
-          answerButton(option);
+    if (quizNext) {
+      quizNext.hidden = true;
+    }
 
-        button.addEventListener(
-          "click",
-          () => {
-            lockAnswers(
-              quizOptions
+    const options =
+      shuffle(question.options);
+
+    options.forEach((option) => {
+      const button =
+        answerButton(option);
+
+      button.addEventListener(
+        "click",
+        () => {
+          lockAnswers(quizOptions);
+
+          if (
+            option ===
+            question.answer
+          ) {
+            quizScore += 1;
+
+            button.classList.add(
+              "correct"
             );
 
-            if (
-              option ===
-              question.answer
-            ) {
-              quizScore += 1;
-
-              button.classList.add(
-                "correct"
-              );
-
+            if (quizFeedback) {
               quizFeedback.textContent =
                 "Richtig! Sehr gut.";
 
               quizFeedback.className =
                 "feedback success";
-            } else {
-              button.classList.add(
-                "wrong"
-              );
+            }
+          } else {
+            button.classList.add(
+              "wrong"
+            );
 
-              markCorrect(
-                quizOptions,
-                question.answer
-              );
+            markCorrect(
+              quizOptions,
+              question.answer
+            );
 
+            if (quizFeedback) {
               quizFeedback.textContent =
                 `Die richtige Antwort ist ${question.answer}.`;
 
               quizFeedback.className =
                 "feedback error";
             }
+          }
 
+          if (quizNext) {
             quizNext.hidden = false;
 
-            const nextLabel =
-              quizNext.querySelector(
-                "span"
-              );
+            const buttonText =
+              quizNext.querySelector("span");
 
-            if (nextLabel) {
-              nextLabel.textContent =
+            if (buttonText) {
+              buttonText.textContent =
                 quizIndex ===
                 quizQuestions.length - 1
                   ? "Ergebnis"
                   : "Weiter";
             }
           }
-        );
+        }
+      );
 
-        quizOptions.append(button);
-      });
+      quizOptions.append(button);
+    });
   }
 
   function showQuizResult() {
-    if (
-      !quizPanel ||
-      !quizResult
-    ) {
-      return;
+    if (quizPanel) {
+      quizPanel.hidden = true;
     }
 
-    quizPanel.hidden = true;
-    quizResult.hidden = false;
-
-    const quizCounter =
-      document.querySelector(
-        "#quiz-counter"
-      );
-
-    const resultScore =
-      document.querySelector(
-        "#result-score"
-      );
-
-    const resultTitle =
-      document.querySelector(
-        "#result-title"
-      );
-
-    const resultMessage =
-      document.querySelector(
-        "#result-message"
-      );
-
-    const resultIcon =
-      document.querySelector(
-        "#result-icon"
-      );
+    if (quizResult) {
+      quizResult.hidden = false;
+    }
 
     if (quizCounter) {
       quizCounter.textContent =
@@ -1541,16 +1550,16 @@ document.addEventListener("DOMContentLoaded", () => {
       completedSteps.add("6");
       updateProgress();
 
-      const diploma =
+      const diplomaSection =
         document.querySelector(
           "#diploma-section"
         );
 
-      if (diploma) {
-        diploma.hidden = false;
+      if (diplomaSection) {
+        diplomaSection.hidden = false;
 
         window.setTimeout(() => {
-          diploma.scrollIntoView({
+          diplomaSection.scrollIntoView({
             behavior: "smooth",
             block: "start"
           });
@@ -1597,13 +1606,13 @@ document.addEventListener("DOMContentLoaded", () => {
           quizPanel.hidden = false;
         }
 
-        const diploma =
+        const diplomaSection =
           document.querySelector(
             "#diploma-section"
           );
 
-        if (diploma) {
-          diploma.hidden = true;
+        if (diplomaSection) {
+          diplomaSection.hidden = true;
         }
 
         renderQuiz();
@@ -1625,9 +1634,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
   }
 
-  /*
-   * CONECTAREA PAȘILOR
-   */
+  /* CONECTAREA PAȘILOR */
 
   connectUnlockButton(
     "open-step-2",
@@ -1671,4 +1678,6 @@ document.addEventListener("DOMContentLoaded", () => {
       renderQuiz();
     }
   );
+
+  updateProgress();
 });
