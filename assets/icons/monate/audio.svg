@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-labelledby="title">
+  <title id="title">Audio</title>
+  <path d="M7 16h7l8-6v20l-8-6H7z" fill="#F7C948" stroke="#23395D" stroke-width="2.4" stroke-linejoin="round"/>
+  <path d="M27 15c2.8 2.8 2.8 7.2 0 10M31 11c5 5 5 13 0 18" fill="none" stroke="#E85D4A" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

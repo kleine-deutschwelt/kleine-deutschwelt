@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-labelledby="title">
+  <title id="title">Trage</title>
+  <rect x="5" y="5" width="30" height="30" rx="8" fill="#FFF4D6" stroke="#23395D" stroke-width="2.2" stroke-dasharray="3.5 3.5"/>
+  <path d="M20 10v20M10 20h20" stroke="#23395D" stroke-width="2.4" stroke-linecap="round"/>
+  <path d="m20 10-3 3m3-3 3 3m7 7-3-3m3 3-3 3m-7 7-3-3m3 3 3-3m-13-7 3-3m-3 3 3 3" fill="none" stroke="#E85D4A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

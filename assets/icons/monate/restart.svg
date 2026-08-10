@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" role="img" aria-labelledby="title">
+  <title id="title">Reîncepe</title>
+  <path d="M12 12.5A13 13 0 1 1 8 22" fill="none" stroke="#23395D" stroke-width="3" stroke-linecap="round"/>
+  <path d="M6 10h8v8" fill="#F7C948" stroke="#23395D" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M20 13v8l5 3" fill="none" stroke="#E85D4A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
