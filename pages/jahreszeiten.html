@@ -1,1 +1,127 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#F7C948">
+  <title>Die Jahreszeiten | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="jahreszeiten.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="home-link" href="../index.html" aria-label="Zur Startseite">
+      <img src="../assets/icons/monate/home.svg" alt="">
+      <span>Kleine Deutschwelt</span>
+    </a>
+    <div class="lesson-progress" aria-label="Lektionsfortschritt">
+      <span id="progressText">Start</span>
+      <div class="progress-track"><span id="progressFill"></span></div>
+    </div>
+  </header>
 
+  <main class="lesson-shell">
+    <section class="hero" id="start">
+      <img class="hero-image" src="../assets/images/lessons/jahreszeiten/jahreszeiten-banner.webp" alt="Felix und die vier Jahreszeiten">
+      <div class="hero-overlay">
+        <p class="eyebrow">Starter · Lektion</p>
+        <h1>Die Jahreszeiten</h1>
+        <p>Frühling, Sommer, Herbst und Winter</p>
+        <button class="primary-btn" id="startLesson" type="button">Lektion starten</button>
+      </div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="1" aria-labelledby="s1-title">
+      <div class="stage-head"><span class="stage-number">1</span><div><p>Neue Wörter</p><h2 id="s1-title">Die vier Jahreszeiten</h2></div></div>
+      <div class="felix-guide">
+        <img src="../assets/images/lessons/jahreszeiten/felix-jahreszeiten.webp" alt="Felix zeigt die Jahreszeiten">
+        <div><p><strong>Ein Jahr hat vier Jahreszeiten.</strong></p><p>Ascultă, privește imaginile și repetă cuvintele.</p><button class="audio-btn" data-audio="intro.mp3" type="button"><img src="../assets/icons/monate/audio.svg" alt=""> Einführung hören</button></div>
+      </div>
+      <div class="season-tabs" role="tablist" aria-label="Jahreszeiten">
+        <button class="season-tab active" data-season="fruehling" type="button"><img src="../assets/icons/jahreszeiten/fruehling.svg" alt=""><span>der Frühling</span></button>
+        <button class="season-tab" data-season="sommer" type="button"><img src="../assets/icons/jahreszeiten/sommer.svg" alt=""><span>der Sommer</span></button>
+        <button class="season-tab" data-season="herbst" type="button"><img src="../assets/icons/jahreszeiten/herbst.svg" alt=""><span>der Herbst</span></button>
+        <button class="season-tab" data-season="winter" type="button"><img src="../assets/icons/jahreszeiten/winter.svg" alt=""><span>der Winter</span></button>
+      </div>
+      <article class="season-card" id="seasonCard"></article>
+      <div class="stage-actions"><button class="next-btn" data-next="2" type="button">Weiter</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="2" aria-labelledby="s2-title">
+      <div class="stage-head"><span class="stage-number">2</span><div><p>Monate und Jahreszeiten</p><h2 id="s2-title">Welche Monate gehören dazu?</h2></div></div>
+      <p class="instruction">Privește roata și apasă pe fiecare anotimp pentru a vedea lunile.</p>
+      <div class="wheel-layout">
+        <img class="season-wheel" src="../assets/images/lessons/jahreszeiten/jahreszeiten-rad.webp" alt="Jahreszeitenrad">
+        <div class="month-groups" id="monthGroups"></div>
+      </div>
+      <div class="stage-actions"><button class="next-btn" data-next="3" type="button">Weiter</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="3" aria-labelledby="s3-title">
+      <div class="stage-head"><span class="stage-number">3</span><div><p>Ordnungszahlen</p><h2 id="s3-title">Der wievielte Monat?</h2></div></div>
+      <div class="rule-box"><p><strong>Januar ist der erste Monat.</strong></p><p>Numerele <em>erste, zweite, dritte … zwölfte</em> sunt numere ordinale.</p></div>
+      <div class="ordinal-grid" id="ordinalGrid"></div>
+      <div class="stage-actions"><button class="next-btn" data-next="4" type="button">Weiter zu den Übungen</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="4" aria-labelledby="s4-title">
+      <div class="stage-head"><span class="stage-number">4</span><div><p>Übung</p><h2 id="s4-title">Welche Jahreszeit ist das?</h2></div></div>
+      <div class="question-card"><img id="recognizeImage" alt="Jahreszeit"><p id="recognizePrompt"></p><div class="answer-grid" id="recognizeAnswers"></div><p class="feedback" id="recognizeFeedback" aria-live="polite"></p></div>
+      <div class="stage-actions"><button class="next-btn locked" data-next="5" type="button" disabled>Weiter</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="5" aria-labelledby="s5-title">
+      <div class="stage-head"><span class="stage-number">5</span><div><p>Übung</p><h2 id="s5-title">Ordne die Monate zu</h2></div></div>
+      <p class="instruction">Alege anotimpul potrivit pentru fiecare lună.</p>
+      <div class="sorting-game" id="monthSorting"></div>
+      <p class="feedback" id="sortingFeedback" aria-live="polite"></p>
+      <div class="stage-actions"><button class="next-btn locked" data-next="6" type="button" disabled>Weiter</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="6" aria-labelledby="s6-title">
+      <div class="stage-head"><span class="stage-number">6</span><div><p>Übung</p><h2 id="s6-title">Felix’ Jahreszeiten-Koffer</h2></div></div>
+      <p class="instruction">Privește obiectul și alege anotimpul potrivit.</p>
+      <div class="suitcase-game"><img class="suitcase" src="../assets/images/lessons/jahreszeiten/jahreszeiten-koffer.webp" alt="Felix' Koffer"><div class="object-card" id="objectCard"></div><div class="answer-grid" id="objectAnswers"></div></div>
+      <p class="feedback" id="objectFeedback" aria-live="polite"></p>
+      <div class="stage-actions"><button class="next-btn locked" data-next="7" type="button" disabled>Weiter</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="7" aria-labelledby="s7-title">
+      <div class="stage-head"><span class="stage-number">7</span><div><p>Übung</p><h2 id="s7-title">Zieh Felix richtig an</h2></div></div>
+      <p class="instruction" id="dressPrompt"></p>
+      <div class="dress-game"><img id="dressFelix" src="../assets/images/lessons/jahreszeiten/felix-jahreszeiten.webp" alt="Felix"><div class="outfit-options" id="outfitOptions"></div></div>
+      <p class="feedback" id="dressFeedback" aria-live="polite"></p>
+      <div class="stage-actions"><button class="next-btn locked" data-next="8" type="button" disabled>Weiter</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="8" aria-labelledby="s8-title">
+      <div class="stage-head"><span class="stage-number">8</span><div><p>Übung</p><h2 id="s8-title">Baue den Satz</h2></div></div>
+      <p class="instruction">Apasă cuvintele în ordinea corectă.</p>
+      <div class="sentence-game"><div class="sentence-target" id="sentenceTarget"></div><div class="word-bank" id="wordBank"></div><button class="secondary-btn" id="resetSentence" type="button">Neu versuchen</button></div>
+      <p class="feedback" id="sentenceFeedback" aria-live="polite"></p>
+      <div class="stage-actions"><button class="next-btn locked" data-next="9" type="button" disabled>Weiter zum Quiz</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="9" aria-labelledby="s9-title">
+      <div class="stage-head"><span class="stage-number">9</span><div><p>Abschlussquiz</p><h2 id="s9-title">Jahreszeiten-Meister</h2></div></div>
+      <div class="quiz-intro"><img src="../assets/images/lessons/jahreszeiten/jahreszeiten-quiz.webp" alt="Felix beim Quiz"><p>Rezolvă toate cele 10 întrebări. Diploma se deschide de la 8 răspunsuri corecte.</p></div>
+      <div id="quizBox"></div>
+      <button class="primary-btn" id="submitQuiz" type="button">Quiz prüfen</button>
+      <p class="feedback" id="quizFeedback" aria-live="polite"></p>
+      <div class="stage-actions"><button class="next-btn locked" data-next="10" type="button" disabled>Zum Abschluss</button></div>
+    </section>
+
+    <section class="stage is-hidden" data-stage="10" aria-labelledby="s10-title">
+      <div class="stage-head"><span class="stage-number">10</span><div><p>Geschafft</p><h2 id="s10-title">Super gemacht!</h2></div></div>
+      <div class="final-card"><img src="../assets/images/lessons/jahreszeiten/felix-jahreszeiten.webp" alt="Felix"><div><h3>Du kennst jetzt die Jahreszeiten!</h3><p>Du kennst die vier Jahreszeiten, die Monate und die Ordnungszahlen.</p><p id="finalScore"></p></div></div>
+      <div class="certificate is-hidden" id="certificate"><img src="../assets/images/lessons/jahreszeiten/jahreszeiten-diplom.webp" alt="Urkunde"><div class="certificate-text"><h3>Urkunde</h3><p>Du bist ein</p><strong>Jahreszeiten-Meister!</strong><p id="certificateScore"></p></div></div>
+      <div class="stage-actions"><a class="secondary-btn" href="../index.html">Zur Lernreise</a><button class="primary-btn" id="restartLesson" type="button">Lektion wiederholen</button></div>
+    </section>
+  </main>
+
+  <audio id="lessonAudio" preload="none"></audio>
+  <script src="jahreszeiten.js"></script>
+</body>
+</html>
