@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Fruehling">
+  <g stroke="#23395D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M31.5 50V32" fill="none"/>
+    <path d="M31.5 43C23 42 18 37 17 29c8 0 13 4 14.5 10" fill="#8FD6A3"/>
+    <path d="M32 40c8-1 13-6 14-14-8 0-13 4-14.5 10" fill="#69C58A"/>
+    <path d="M32 32c-5.5 0-10-3.8-10-8.5 0-3.2 2.1-5.9 5.2-7.3.5-4.1 2.4-7.2 4.8-7.2s4.3 3.1 4.8 7.2c3.1 1.4 5.2 4.1 5.2 7.3 0 4.7-4.5 8.5-10 8.5Z" fill="#F7A8B8"/>
+    <circle cx="32" cy="23" r="5" fill="#F7C948"/>
+  </g>
+</svg>

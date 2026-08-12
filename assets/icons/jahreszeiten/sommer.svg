@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Sommer">
+  <g stroke="#23395D" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="32" cy="32" r="13" fill="#F7C948"/>
+    <path d="M32 8v6M32 50v6M8 32h6M50 32h6M15 15l4.5 4.5M44.5 44.5 49 49M49 15l-4.5 4.5M19.5 44.5 15 49" fill="none"/>
+  </g>
+</svg>
