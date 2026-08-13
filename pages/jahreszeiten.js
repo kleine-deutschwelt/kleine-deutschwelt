@@ -9,43 +9,36 @@ const seasons = {
     name: "der Frühling",
     ro: "primăvara",
     image: "fruehling.webp",
-    icon: "fruehling.svg",
     months: ["März", "April", "Mai"],
     sentence: "Im Frühling blühen die Blumen.",
     translation: "Primăvara înfloresc florile.",
     audio: "fruehling.mp3",
     sentenceAudio: "fruehling-satz.mp3"
   },
-
   sommer: {
     name: "der Sommer",
     ro: "vara",
     image: "sommer.webp",
-    icon: "sommer.svg",
     months: ["Juni", "Juli", "August"],
     sentence: "Im Sommer ist es warm.",
     translation: "Vara este cald.",
     audio: "sommer.mp3",
     sentenceAudio: "sommer-satz.mp3"
   },
-
   herbst: {
     name: "der Herbst",
     ro: "toamna",
     image: "herbst.webp",
-    icon: "herbst.svg",
     months: ["September", "Oktober", "November"],
     sentence: "Im Herbst fallen die Blätter.",
     translation: "Toamna cad frunzele.",
     audio: "herbst.mp3",
     sentenceAudio: "herbst-satz.mp3"
   },
-
   winter: {
     name: "der Winter",
     ro: "iarna",
     image: "winter.webp",
-    icon: "winter.svg",
     months: ["Dezember", "Januar", "Februar"],
     sentence: "Im Winter ist es kalt und es schneit.",
     translation: "Iarna este frig și ninge.",
@@ -74,17 +67,14 @@ const objects = [
   ["objekt-gummistiefel.webp", "die Gummistiefel", "fruehling"],
   ["objekt-tulpen.webp", "die Tulpen", "fruehling"],
   ["objekt-vogel.webp", "der Vogel", "fruehling"],
-
   ["objekt-sonnenbrille.webp", "die Sonnenbrille", "sommer"],
   ["objekt-eis.webp", "das Eis", "sommer"],
   ["objekt-badeanzug.webp", "der Badeanzug", "sommer"],
   ["objekt-kirschen.webp", "die Kirschen", "sommer"],
-
   ["objekt-blatt.webp", "das Blatt", "herbst"],
   ["objekt-drachen.webp", "der Drachen", "herbst"],
   ["objekt-kuerbis.webp", "der Kürbis", "herbst"],
   ["objekt-regenkleidung.webp", "die Regenjacke", "herbst"],
-
   ["objekt-muetze.webp", "die Mütze", "winter"],
   ["objekt-handschuhe.webp", "die Handschuhe", "winter"],
   ["objekt-schlitten.webp", "der Schlitten", "winter"],
@@ -162,7 +152,6 @@ const quizQuestions = [
 
 const audio = document.getElementById("lessonAudio");
 
-let currentStage = 0;
 let recognizeIndex = 0;
 let sortDone = 0;
 let objectIndex = 0;
@@ -170,6 +159,7 @@ let dressIndex = 0;
 let finalQuizScore = 0;
 let wheelSpinning = false;
 let wheelTurns = 0;
+let sentenceChoice = [];
 
 const packedObjects = [];
 
@@ -200,21 +190,18 @@ function setFeedback(element, text, type = "") {
   element.className = `feedback ${type}`.trim();
 }
 
-function playAudio(files, button, statusElement) {
-  const candidates = (
-    Array.isArray(files) ? files : [files]
-  ).filter(Boolean);
-
-  if (!audio || candidates.length === 0) {
+function playAudio(filename, button, statusElement) {
+  if (!audio || !filename) {
     return;
   }
+
+  audio.pause();
+  audio.currentTime = 0;
+  audio.src = AUDIO + filename;
 
   document
     .querySelectorAll(".audio-btn.playing")
     .forEach((item) => item.classList.remove("playing"));
-
-  audio.pause();
-  audio.currentTime = 0;
 
   if (button) {
     button.classList.add("playing");
@@ -224,78 +211,81 @@ function playAudio(files, button, statusElement) {
     statusElement.textContent = "";
   }
 
-  let candidateIndex = 0;
-  let finished = false;
-
-  function stopButtonAnimation() {
+  audio.onended = () => {
     if (button) {
       button.classList.remove("playing");
     }
-  }
-
-  function tryNextAudio() {
-    if (finished) {
-      return;
-    }
-
-    if (candidateIndex >= candidates.length) {
-      finished = true;
-      stopButtonAnimation();
-
-      if (statusElement) {
-        statusElement.textContent =
-          "Fișierul audio nu a fost găsit. Verifică denumirea MP3.";
-      }
-
-      return;
-    }
-
-    const filename = candidates[candidateIndex];
-    candidateIndex += 1;
-
-    audio.src = AUDIO + filename;
-    audio.load();
-
-    const playPromise = audio.play();
-
-    if (playPromise && typeof playPromise.catch === "function") {
-      playPromise.catch(() => {
-        tryNextAudio();
-      });
-    }
-  }
-
-  audio.onended = () => {
-    finished = true;
-    stopButtonAnimation();
   };
 
   audio.onerror = () => {
-    tryNextAudio();
+    if (button) {
+      button.classList.remove("playing");
+    }
+
+    if (statusElement) {
+      statusElement.textContent =
+        `Audio indisponibil: ${filename}`;
+    }
   };
 
-  tryNextAudio();
+  const playPromise = audio.play();
+
+  if (playPromise && typeof playPromise.catch === "function") {
+    playPromise.catch(() => {
+      if (button) {
+        button.classList.remove("playing");
+      }
+
+      if (statusElement) {
+        statusElement.textContent =
+          `Nu poate fi redat: ${filename}`;
+      }
+    });
+  }
+}
+
+function setImageWithFallback(image, candidates, altText) {
+  const sources = [...candidates];
+
+  image.alt = altText;
+
+  function loadNext() {
+    if (sources.length === 0) {
+      image.onerror = null;
+      image.src = IMAGE + "felix-jahreszeiten.webp";
+      return;
+    }
+
+    image.src = sources.shift();
+  }
+
+  image.onerror = loadNext;
+  loadNext();
 }
 
 function updateProgress(stage) {
-  currentStage = stage;
-
   const progressFill = document.getElementById("progressFill");
   const progressText = document.getElementById("progressText");
-  const percent = stage === 0 ? 0 : Math.round((stage / 10) * 100);
+
+  const percentage =
+    stage === 0 ? 0 : Math.round((stage / 10) * 100);
 
   if (progressFill) {
-    progressFill.style.width = `${percent}%`;
+    progressFill.style.width = `${percentage}%`;
   }
 
   if (progressText) {
     progressText.textContent =
-      stage === 0 ? "Start" : `Schritt ${stage} von 10`;
+      stage === 0
+        ? "Start"
+        : `Schritt ${stage} von 10`;
   }
 }
 
 function showStage(stage) {
-  const target = document.querySelector(`[data-stage="${stage}"]`);
+  const target = document.querySelector(
+    `[data-stage="${stage}"]`
+  );
 
   if (!target) {
     return;
@@ -346,10 +336,7 @@ function renderSeason(key) {
   }
 
   card.innerHTML = `
-    <img
-      src="${IMAGE}${season.image}"
-      alt="${season.name}"
-    >
+    <img src="${IMAGE}${season.image}" alt="${season.name}">
 
     <div class="season-info">
       <h3>${season.name}</h3>
@@ -357,7 +344,9 @@ function renderSeason(key) {
 
       <div class="month-chips">
         ${season.months
-          .map((month) => `<span class="chip">${month}</span>`)
+          .map((month) => {
+            return `<span class="chip">${month}</span>`;
+          })
           .join("")}
       </div>
 
@@ -399,19 +388,25 @@ function toggleWheel() {
 
   if (!wheelSpinning) {
     wheelSpinning = true;
+
     button.classList.add("spinning");
     action.textContent = "Stoppen";
     result.classList.add("is-hidden");
+
     return;
   }
 
   wheelSpinning = false;
+
   button.classList.remove("spinning");
   action.textContent = "Noch einmal";
 
   const seasonKeys = Object.keys(seasons);
+
   const selectedKey =
-    seasonKeys[Math.floor(Math.random() * seasonKeys.length)];
+    seasonKeys[
+      Math.floor(Math.random() * seasonKeys.length)
+    ];
 
   const selectedSeason = seasons[selectedKey];
   const selectedIndex = seasonKeys.indexOf(selectedKey);
@@ -432,7 +427,9 @@ function toggleWheel() {
       <p class="translation">${selectedSeason.ro}</p>
 
       <p>
-        <strong>${selectedSeason.months.join(" · ")}</strong>
+        <strong>
+          ${selectedSeason.months.join(" · ")}
+        </strong>
       </p>
 
       <p>${selectedSeason.sentence}</p>
@@ -450,10 +447,7 @@ function toggleWheel() {
 
   result.classList.remove("is-hidden");
 
-  playAudio([
-    selectedSeason.sentenceAudio,
-    selectedSeason.audio
-  ]);
+  playAudio(selectedSeason.sentenceAudio);
 }
 
 function renderOrdinals() {
@@ -478,7 +472,7 @@ function renderOrdinals() {
             class="mini-audio"
             type="button"
             data-audio="ordinal-${number}.mp3"
-            aria-label="Audio: ${month}"
+            aria-label="${month} hören"
           >
             <img src="${ICON}audio.svg" alt="">
           </button>
@@ -500,8 +494,8 @@ function setupRecognition() {
     return;
   }
 
-  const key = order[recognizeIndex];
-  const season = seasons[key];
+  const selectedKey = order[recognizeIndex];
+  const selectedSeason = seasons[selectedKey];
 
   const image = document.getElementById("recognizeImage");
   const prompt = document.getElementById("recognizePrompt");
@@ -511,21 +505,22 @@ function setupRecognition() {
     return;
   }
 
-  image.src = IMAGE + season.image;
-  image.alt = season.name;
+  image.src = IMAGE + selectedSeason.image;
+  image.alt = selectedSeason.name;
 
   prompt.textContent =
-    `Frage ${recognizeIndex + 1}/4: Welche Jahreszeit ist das?`;
+    `Frage ${recognizeIndex + 1}/4: ` +
+    "Welche Jahreszeit ist das?";
 
   answers.innerHTML = shuffle(order)
-    .map((answerKey) => {
+    .map((key) => {
       return `
         <button
           class="answer-btn"
           type="button"
-          data-value="${answerKey}"
+          data-value="${key}"
         >
-          ${seasons[answerKey].name}
+          ${seasons[key].name}
         </button>
       `;
     })
@@ -541,7 +536,8 @@ function checkRecognition(button) {
   ];
 
   const correct = order[recognizeIndex];
-  const feedback = document.getElementById("recognizeFeedback");
+  const feedback =
+    document.getElementById("recognizeFeedback");
 
   if (button.dataset.value !== correct) {
     button.classList.add("wrong");
@@ -583,7 +579,8 @@ function checkRecognition(button) {
 }
 
 function setupSorting() {
-  const container = document.getElementById("monthSorting");
+  const container =
+    document.getElementById("monthSorting");
 
   if (!container) {
     return;
@@ -598,15 +595,15 @@ function setupSorting() {
 
   container.innerHTML = cards
     .map(([month, correctSeason]) => {
-      const buttons = Object.keys(seasons)
-        .map((seasonKey) => {
+      const options = Object.keys(seasons)
+        .map((key) => {
           return `
             <button
               class="sort-btn"
               type="button"
-              data-value="${seasonKey}"
+              data-value="${key}"
             >
-              ${seasons[seasonKey].name.replace("der ", "")}
+              ${seasons[key].name.replace("der ", "")}
             </button>
           `;
         })
@@ -618,7 +615,7 @@ function setupSorting() {
           data-correct="${correctSeason}"
         >
           <h3>${month}</h3>
-          <div class="sort-options">${buttons}</div>
+          <div class="sort-options">${options}</div>
         </div>
       `;
     })
@@ -627,7 +624,8 @@ function setupSorting() {
 
 function checkSorting(button) {
   const card = button.closest(".sort-card");
-  const feedback = document.getElementById("sortingFeedback");
+  const feedback =
+    document.getElementById("sortingFeedback");
 
   if (!card || card.classList.contains("done")) {
     return;
@@ -648,11 +646,9 @@ function checkSorting(button) {
   button.classList.add("correct");
   card.classList.add("done");
 
-  card
-    .querySelectorAll("button")
-    .forEach((item) => {
-      item.disabled = true;
-    });
+  card.querySelectorAll("button").forEach((item) => {
+    item.disabled = true;
+  });
 
   sortDone += 1;
 
@@ -674,16 +670,19 @@ function setupObject() {
     return;
   }
 
-  const objectCard = document.getElementById("objectCard");
-  const objectAnswers = document.getElementById("objectAnswers");
+  const objectCard =
+    document.getElementById("objectCard");
 
-  if (!objectCard || !objectAnswers) {
+  const answerContainer =
+    document.getElementById("objectAnswers");
+
+  if (!objectCard || !answerContainer) {
     return;
   }
 
   const [file, name] = objects[objectIndex];
 
-  const audioFile = file
+  const objectAudio = file
     .replace("objekt-", "")
     .replace(".webp", ".mp3");
 
@@ -691,22 +690,22 @@ function setupObject() {
     <img
       src="${IMAGE}${file}"
       alt="${escapeHtml(name)}"
-      data-object-audio="${audioFile}"
+      data-object-audio="${objectAudio}"
     >
 
     <strong>${escapeHtml(name)}</strong>
     <small>Bild berühren und hören</small>
   `;
 
-  objectAnswers.innerHTML = Object.keys(seasons)
-    .map((seasonKey) => {
+  answerContainer.innerHTML = Object.keys(seasons)
+    .map((key) => {
       return `
         <button
           class="answer-btn"
           type="button"
-          data-value="${seasonKey}"
+          data-value="${key}"
         >
-          ${seasons[seasonKey].name}
+          ${seasons[key].name}
         </button>
       `;
     })
@@ -714,7 +713,8 @@ function setupObject() {
 }
 
 function renderPackedObjects() {
-  const container = document.getElementById("packedObjects");
+  const container =
+    document.getElementById("packedObjects");
 
   if (!container) {
     return;
@@ -744,8 +744,9 @@ function checkObject(button) {
     return;
   }
 
-  const feedback = document.getElementById("objectFeedback");
   const correctSeason = objects[objectIndex][2];
+  const feedback =
+    document.getElementById("objectFeedback");
 
   if (button.dataset.value !== correctSeason) {
     button.classList.add("wrong");
@@ -775,7 +776,8 @@ function checkObject(button) {
 
   setFeedback(
     feedback,
-    `Richtig! ${name} passt zu ${seasons[correctSeason].name}.`,
+    `Richtig! ${name} passt zu ` +
+      `${seasons[correctSeason].name}.`,
     "success"
   );
 
@@ -788,8 +790,11 @@ function checkObject(button) {
       return;
     }
 
-    const objectCard = document.getElementById("objectCard");
-    const objectAnswers = document.getElementById("objectAnswers");
+    const objectCard =
+      document.getElementById("objectCard");
+
+    const answerContainer =
+      document.getElementById("objectAnswers");
 
     if (objectCard) {
       objectCard.innerHTML = `
@@ -801,13 +806,14 @@ function checkObject(button) {
       `;
     }
 
-    if (objectAnswers) {
-      objectAnswers.innerHTML = "";
+    if (answerContainer) {
+      answerContainer.innerHTML = "";
     }
 
     setFeedback(
       feedback,
-      "Gut gemacht! Alle 16 Gegenstände sind richtig eingeordnet.",
+      "Gut gemacht! Alle 16 Gegenstände " +
+        "sind richtig eingeordnet.",
       "success"
     );
 
@@ -830,39 +836,63 @@ function setupDress() {
   }
 
   const prompt = document.getElementById("dressPrompt");
-  const felixImage = document.getElementById("dressFelix");
+  const mainImage = document.getElementById("dressFelix");
   const options = document.getElementById("outfitOptions");
 
-  if (!prompt || !felixImage || !options) {
+  if (!prompt || !mainImage || !options) {
     return;
   }
 
   prompt.innerHTML = `
     Es ist
-    <strong>${seasons[target].name.replace("der ", "")}</strong>.
+    <strong>
+      ${seasons[target].name.replace("der ", "")}
+    </strong>.
     Welche Kleidung braucht Felix?
   `;
 
-  felixImage.src = IMAGE + `felix-${target}.webp`;
-  felixImage.alt = `Felix: ${seasons[target].name}`;
+  setImageWithFallback(
+    mainImage,
+    [
+      IMAGE + `felix-${target}.webp`,
+      IMAGE + `felix_${target}.webp`
+    ],
+    `Felix: ${seasons[target].name}`
+  );
 
   options.innerHTML = shuffle(order)
-    .map((seasonKey) => {
+    .map((key) => {
       return `
         <button
           class="outfit-btn"
-          data-value="${seasonKey}"
+          data-value="${key}"
           type="button"
         >
           <img
-            src="${IMAGE}felix-${seasonKey}.webp"
-            alt="Felix: ${seasons[seasonKey].name}"
+            data-felix-season="${key}"
+            alt="Felix: ${seasons[key].name}"
           >
-          <span>${seasons[seasonKey].name}</span>
+
+          <span>${seasons[key].name}</span>
         </button>
       `;
     })
     .join("");
+
+  document
+    .querySelectorAll("[data-felix-season]")
+    .forEach((image) => {
+      const key = image.dataset.felixSeason;
+
+      setImageWithFallback(
+        image,
+        [
+          IMAGE + `felix-${key}.webp`,
+          IMAGE + `felix_${key}.webp`
+        ],
+        `Felix: ${seasons[key].name}`
+      );
+    });
 }
 
 function checkDress(button) {
@@ -873,15 +903,17 @@ function checkDress(button) {
     "winter"
   ];
 
-  const correctSeason = order[dressIndex];
-  const feedback = document.getElementById("dressFeedback");
+  const correct = order[dressIndex];
+  const feedback =
+    document.getElementById("dressFeedback");
 
-  if (button.dataset.value !== correctSeason) {
+  if (button.dataset.value !== correct) {
     button.classList.add("wrong");
 
     setFeedback(
       feedback,
-      "Diese Kleidung passt nicht. Versuche es noch einmal.",
+      "Diese Kleidung passt nicht. " +
+        "Versuche es noch einmal.",
       "error"
     );
 
@@ -923,12 +955,15 @@ const sentenceWords = [
   "Blätter."
 ];
 
-let sentenceChoice = [];
-
 function setupSentence() {
-  const target = document.getElementById("sentenceTarget");
-  const wordBank = document.getElementById("wordBank");
-  const feedback = document.getElementById("sentenceFeedback");
+  const target =
+    document.getElementById("sentenceTarget");
+
+  const wordBank =
+    document.getElementById("wordBank");
+
+  const feedback =
+    document.getElementById("sentenceFeedback");
 
   sentenceChoice = [];
 
@@ -960,15 +995,18 @@ function chooseWord(button) {
   button.disabled = true;
   sentenceChoice.push(button.dataset.word);
 
-  const target = document.getElementById("sentenceTarget");
-  const feedback = document.getElementById("sentenceFeedback");
+  const target =
+    document.getElementById("sentenceTarget");
+
+  const feedback =
+    document.getElementById("sentenceFeedback");
 
   if (target) {
     target.insertAdjacentHTML(
       "beforeend",
-      `<span class="placed-word">${escapeHtml(
-        button.dataset.word
-      )}</span>`
+      `<span class="placed-word">${
+        escapeHtml(button.dataset.word)
+      }</span>`
     );
   }
 
@@ -976,7 +1014,10 @@ function chooseWord(button) {
     return;
   }
 
-  if (sentenceChoice.join(" ") === sentenceWords.join(" ")) {
+  if (
+    sentenceChoice.join(" ") ===
+    sentenceWords.join(" ")
+  ) {
     setFeedback(
       feedback,
       "Richtig! Im Herbst fallen die Blätter.",
@@ -989,14 +1030,16 @@ function chooseWord(button) {
 
   setFeedback(
     feedback,
-    "Die Reihenfolge stimmt noch nicht. Versuche es noch einmal.",
+    "Die Reihenfolge stimmt noch nicht. " +
+      "Versuche es noch einmal.",
     "error"
   );
 }
 
 function renderQuiz() {
   const quizBox = document.getElementById("quizBox");
-  const submitButton = document.getElementById("submitQuiz");
+  const submitButton =
+    document.getElementById("submitQuiz");
 
   if (!quizBox || !submitButton) {
     return;
@@ -1021,8 +1064,13 @@ function renderQuiz() {
 
       return `
         <article class="quiz-question">
-          <h3>${questionIndex + 1}. ${item.q}</h3>
-          <div class="quiz-options">${answers}</div>
+          <h3>
+            ${questionIndex + 1}. ${item.q}
+          </h3>
+
+          <div class="quiz-options">
+            ${answers}
+          </div>
         </article>
       `;
     })
@@ -1034,8 +1082,11 @@ function renderQuiz() {
 }
 
 function submitQuiz() {
-  const submitButton = document.getElementById("submitQuiz");
-  const feedback = document.getElementById("quizFeedback");
+  const submitButton =
+    document.getElementById("submitQuiz");
+
+  const feedback =
+    document.getElementById("quizFeedback");
 
   if (!submitButton) {
     return;
@@ -1043,10 +1094,6 @@ function submitQuiz() {
 
   if (submitButton.dataset.mode === "retry") {
     renderQuiz();
-
-    submitButton.dataset.mode = "check";
-    submitButton.textContent = "Quiz prüfen";
-
     setFeedback(feedback, "");
     return;
   }
@@ -1054,9 +1101,9 @@ function submitQuiz() {
   let answered = 0;
   let score = 0;
 
-  quizQuestions.forEach((item, questionIndex) => {
+  quizQuestions.forEach((item, index) => {
     const chosen = document.querySelector(
-      `input[name="q${questionIndex}"]:checked`
+      `input[name="q${index}"]:checked`
     );
 
     if (!chosen) {
@@ -1077,42 +1124,18 @@ function submitQuiz() {
       "error"
     );
 
-    const firstMissing = quizQuestions.findIndex(
-      (item, questionIndex) => {
-        return !document.querySelector(
-          `input[name="q${questionIndex}"]:checked`
-        );
-      }
-    );
-
-    if (firstMissing >= 0) {
-      const missingQuestion =
-        document.querySelectorAll(".quiz-question")[firstMissing];
-
-      if (missingQuestion) {
-        missingQuestion.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }
-    }
-
     return;
   }
 
   finalQuizScore = score;
 
-  quizQuestions.forEach((item, questionIndex) => {
+  quizQuestions.forEach((item, index) => {
     document
-      .querySelectorAll(`input[name="q${questionIndex}"]`)
+      .querySelectorAll(`input[name="q${index}"]`)
       .forEach((input) => {
         input.disabled = true;
 
         const label = input.closest("label");
-
-        if (!label) {
-          return;
-        }
 
         if (Number(input.value) === item.correct) {
           label.classList.add("correct");
@@ -1127,43 +1150,42 @@ function submitQuiz() {
   setFeedback(
     feedback,
     passed
-      ? `Sehr gut! ${score}/10 Punkte. Die Urkunde ist freigeschaltet.`
-      : `Du hast ${score}/10 Punkte. Wiederhole das Quiz und erreiche mindestens 8 Punkte.`,
+      ? `Sehr gut! ${score}/10 Punkte. ` +
+        "Die Urkunde ist freigeschaltet."
+      : `Du hast ${score}/10 Punkte. ` +
+        "Wiederhole das Quiz und erreiche " +
+        "mindestens 8 Punkte.",
     passed ? "success" : "error"
   );
 
   if (passed) {
     unlockNext(9);
     submitButton.disabled = true;
-    return;
+  } else {
+    submitButton.dataset.mode = "retry";
+    submitButton.textContent = "Quiz wiederholen";
   }
-
-  submitButton.dataset.mode = "retry";
-  submitButton.textContent = "Quiz wiederholen";
 }
 
 document.addEventListener("click", (event) => {
-  const startButton = event.target.closest("#startLesson");
+  const startButton =
+    event.target.closest("#startLesson");
 
   if (startButton) {
-    const hero = document.querySelector(".hero");
-
-    if (hero) {
-      hero.classList.add("completed");
-    }
-
     showStage(1);
     return;
   }
 
-  const nextButton = event.target.closest(".next-btn");
+  const nextButton =
+    event.target.closest(".next-btn");
 
   if (nextButton && !nextButton.disabled) {
     showStage(Number(nextButton.dataset.next));
     return;
   }
 
-  const seasonTab = event.target.closest(".season-tab");
+  const seasonTab =
+    event.target.closest(".season-tab");
 
   if (seasonTab) {
     document
@@ -1179,25 +1201,20 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  const wheelButton = event.target.closest("#wheelButton");
+  const wheelButton =
+    event.target.closest("#wheelButton");
 
   if (wheelButton) {
     toggleWheel();
     return;
   }
 
-  const introButton = event.target.closest(
-    "#introAudioButton"
-  );
+  const introButton =
+    event.target.closest("#introAudioButton");
 
   if (introButton) {
     playAudio(
-      [
-        "intro.mp3",
-        "aktivitaet-1.mp3",
-        "einfuehrung.mp3",
-        "einfuhrung.mp3"
-      ],
+      "intro.mp3",
       introButton,
       document.getElementById("introAudioStatus")
     );
@@ -1205,22 +1222,16 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  const objectAudio = event.target.closest(
-    "[data-object-audio]"
-  );
+  const objectAudio =
+    event.target.closest("[data-object-audio]");
 
   if (objectAudio) {
-    const filename = objectAudio.dataset.objectAudio;
-
-    playAudio([
-      filename,
-      `objekt-${filename}`
-    ]);
-
+    playAudio(objectAudio.dataset.objectAudio);
     return;
   }
 
-  const audioButton = event.target.closest("[data-audio]");
+  const audioButton =
+    event.target.closest("[data-audio]");
 
   if (audioButton) {
     playAudio(
@@ -1231,39 +1242,44 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  const recognitionAnswer = event.target.closest(
-    "#recognizeAnswers .answer-btn"
-  );
+  const recognitionAnswer =
+    event.target.closest(
+      "#recognizeAnswers .answer-btn"
+    );
 
   if (recognitionAnswer) {
     checkRecognition(recognitionAnswer);
     return;
   }
 
-  const sortingAnswer = event.target.closest(".sort-btn");
+  const sortingAnswer =
+    event.target.closest(".sort-btn");
 
   if (sortingAnswer) {
     checkSorting(sortingAnswer);
     return;
   }
 
-  const objectAnswer = event.target.closest(
-    "#objectAnswers .answer-btn"
-  );
+  const objectAnswer =
+    event.target.closest(
+      "#objectAnswers .answer-btn"
+    );
 
   if (objectAnswer) {
     checkObject(objectAnswer);
     return;
   }
 
-  const outfitAnswer = event.target.closest(".outfit-btn");
+  const outfitAnswer =
+    event.target.closest(".outfit-btn");
 
   if (outfitAnswer) {
     checkDress(outfitAnswer);
     return;
   }
 
-  const wordButton = event.target.closest(".word-btn");
+  const wordButton =
+    event.target.closest(".word-btn");
 
   if (wordButton) {
     chooseWord(wordButton);
@@ -1309,15 +1325,17 @@ if (restartLessonButton) {
   );
 }
 
-const finalButton = document.querySelector(
-  '[data-next="10"]'
-);
+const finalButton =
+  document.querySelector('[data-next="10"]');
 
 if (finalButton) {
   finalButton.addEventListener("click", () => {
-    const finalScore = document.getElementById("finalScore");
+    const finalScore =
+      document.getElementById("finalScore");
+
     const certificateScore =
       document.getElementById("certificateScore");
+
     const certificate =
       document.getElementById("certificate");
 
@@ -1338,10 +1356,7 @@ if (finalButton) {
       );
     }
 
-    playAudio([
-      "abschluss.mp3",
-      "super-gemacht.mp3"
-    ]);
+    playAudio("abschluss.mp3");
   });
 }
 
