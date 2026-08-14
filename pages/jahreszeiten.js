@@ -2,26 +2,26 @@
 
 const IMAGE = "../assets/images/lessons/jahreszeiten/";
 const AUDIO = "../audio/jahreszeiten/";
-const ICON = "../assets/icons/monate/";
+const AUDIO_ICON = "../assets/icons/monate/audio.svg";
 
 const seasons = {
   fruehling: {
-    name: "der Fr\u00fchling",
-    ro: "prim\u0103vara",
+    name: "der Frühling",
+    shortName: "Frühling",
+    ro: "primăvara",
     image: "fruehling.webp",
-    icon: "fruehling.svg",
-    months: ["M\u00e4rz", "April", "Mai"],
-    sentence: "Im Fr\u00fchling bl\u00fchen die Blumen.",
-    translation: "Prim\u0103vara \u00eenfloresc florile.",
+    months: ["März", "April", "Mai"],
+    sentence: "Im Frühling blühen die Blumen.",
+    translation: "Primăvara înfloresc florile.",
     audio: "fruehling.mp3",
     sentenceAudio: "fruehling-satz.mp3"
   },
 
   sommer: {
     name: "der Sommer",
+    shortName: "Sommer",
     ro: "vara",
     image: "sommer.webp",
-    icon: "sommer.svg",
     months: ["Juni", "Juli", "August"],
     sentence: "Im Sommer ist es warm.",
     translation: "Vara este cald.",
@@ -31,11 +31,11 @@ const seasons = {
 
   herbst: {
     name: "der Herbst",
+    shortName: "Herbst",
     ro: "toamna",
     image: "herbst.webp",
-    icon: "herbst.svg",
     months: ["September", "Oktober", "November"],
-    sentence: "Im Herbst fallen die Bl\u00e4tter.",
+    sentence: "Im Herbst fallen die Blätter.",
     translation: "Toamna cad frunzele.",
     audio: "herbst.mp3",
     sentenceAudio: "herbst-satz.mp3"
@@ -43,114 +43,172 @@ const seasons = {
 
   winter: {
     name: "der Winter",
+    shortName: "Winter",
     ro: "iarna",
     image: "winter.webp",
-    icon: "winter.svg",
     months: ["Dezember", "Januar", "Februar"],
     sentence: "Im Winter ist es kalt und es schneit.",
-    translation: "Iarna este frig \u0219i ninge.",
+    translation: "Iarna este frig și ninge.",
     audio: "winter.mp3",
     sentenceAudio: "winter-satz.mp3"
   }
 };
 
+const seasonKeys = Object.keys(seasons);
+
 const ordinals = [
   ["Januar", "erste"],
   ["Februar", "zweite"],
-  ["M\u00e4rz", "dritte"],
+  ["März", "dritte"],
   ["April", "vierte"],
-  ["Mai", "f\u00fcnfte"],
+  ["Mai", "fünfte"],
   ["Juni", "sechste"],
   ["Juli", "siebte"],
   ["August", "achte"],
   ["September", "neunte"],
   ["Oktober", "zehnte"],
   ["November", "elfte"],
-  ["Dezember", "zw\u00f6lfte"]
+  ["Dezember", "zwölfte"]
 ];
 
-const objects = [
-  ["objekt-regenschirm.webp", "der Regenschirm", "fruehling"],
-  ["objekt-gummistiefel.webp", "die Gummistiefel", "fruehling"],
-  ["objekt-tulpen.webp", "die Tulpen", "fruehling"],
-  ["objekt-vogel.webp", "der Vogel", "fruehling"],
+const monthSeason = {
+  Januar: "winter",
+  Februar: "winter",
+  März: "fruehling",
+  April: "fruehling",
+  Mai: "fruehling",
+  Juni: "sommer",
+  Juli: "sommer",
+  August: "sommer",
+  September: "herbst",
+  Oktober: "herbst",
+  November: "herbst",
+  Dezember: "winter"
+};
 
-  ["objekt-sonnenbrille.webp", "die Sonnenbrille", "sommer"],
-  ["objekt-eis.webp", "das Eis", "sommer"],
-  ["objekt-badeanzug.webp", "der Badeanzug", "sommer"],
-  ["objekt-kirschen.webp", "die Kirschen", "sommer"],
-
-  ["objekt-blatt.webp", "das Blatt", "herbst"],
-  ["objekt-drachen.webp", "der Drachen", "herbst"],
-  ["objekt-kuerbis.webp", "der K\u00fcrbis", "herbst"],
-  ["objekt-regenkleidung.webp", "die Regenjacke", "herbst"],
-
-  ["objekt-muetze.webp", "die M\u00fctze", "winter"],
-  ["objekt-handschuhe.webp", "die Handschuhe", "winter"],
-  ["objekt-schlitten.webp", "der Schlitten", "winter"],
-  ["objekt-schneemann.webp", "der Schneemann", "winter"]
+const suitcaseObjects = [
+  {
+    file: "objekt-regenschirm.webp",
+    name: "der Regenschirm",
+    season: "fruehling"
+  },
+  {
+    file: "objekt-gummistiefel.webp",
+    name: "die Gummistiefel",
+    season: "fruehling"
+  },
+  {
+    file: "objekt-tulpen.webp",
+    name: "die Tulpen",
+    season: "fruehling"
+  },
+  {
+    file: "objekt-vogel.webp",
+    name: "der Vogel",
+    season: "fruehling"
+  },
+  {
+    file: "objekt-sonnenbrille.webp",
+    name: "die Sonnenbrille",
+    season: "sommer"
+  },
+  {
+    file: "objekt-eis.webp",
+    name: "das Eis",
+    season: "sommer"
+  },
+  {
+    file: "objekt-badeanzug.webp",
+    name: "der Badeanzug",
+    season: "sommer"
+  },
+  {
+    file: "objekt-kirschen.webp",
+    name: "die Kirschen",
+    season: "sommer"
+  },
+  {
+    file: "objekt-blatt.webp",
+    name: "das Blatt",
+    season: "herbst"
+  },
+  {
+    file: "objekt-drachen.webp",
+    name: "der Drachen",
+    season: "herbst"
+  },
+  {
+    file: "objekt-kuerbis.webp",
+    name: "der Kürbis",
+    season: "herbst"
+  },
+  {
+    file: "objekt-regenkleidung.webp",
+    name: "die Regenjacke",
+    season: "herbst"
+  },
+  {
+    file: "objekt-muetze.webp",
+    name: "die Mütze",
+    season: "winter"
+  },
+  {
+    file: "objekt-handschuhe.webp",
+    name: "die Handschuhe",
+    season: "winter"
+  },
+  {
+    file: "objekt-schlitten.webp",
+    name: "der Schlitten",
+    season: "winter"
+  },
+  {
+    file: "objekt-schneemann.webp",
+    name: "der Schneemann",
+    season: "winter"
+  }
 ];
 
 const clothing = [
   {
     file: "kleidung-jacke.webp",
-    name: "die Jacke",
-    seasons: ["fruehling", "herbst"]
+    name: "die Jacke"
   },
   {
     file: "objekt-gummistiefel.webp",
-    name: "die Gummistiefel",
-    seasons: ["fruehling"]
+    name: "die Gummistiefel"
   },
   {
     file: "kleidung-pullover.webp",
-    name: "der Pullover",
-    seasons: ["fruehling", "herbst"]
+    name: "der Pullover"
   },
   {
     file: "kleidung-tshirt.webp",
-    name: "das T-Shirt",
-    seasons: ["sommer"]
+    name: "das T-Shirt"
   },
   {
     file: "kleidung-shorts.webp",
-    name: "die Shorts",
-    seasons: ["sommer"]
+    name: "die Shorts"
   },
   {
     file: "objekt-sonnenbrille.webp",
-    name: "die Sonnenbrille",
-    seasons: ["sommer"]
+    name: "die Sonnenbrille"
   },
   {
     file: "kleidung-stiefel.webp",
-    name: "die Stiefel",
-    seasons: ["herbst"]
+    name: "die Stiefel"
   },
   {
     file: "objekt-muetze.webp",
-    name: "die M\u00fctze",
-    seasons: ["winter"]
+    name: "die Mütze"
   },
   {
     file: "kleidung-schal.webp",
-    name: "der Schal",
-    seasons: ["winter"]
+    name: "der Schal"
   },
   {
     file: "objekt-handschuhe.webp",
-    name: "die Handschuhe",
-    seasons: ["winter"]
-  },
-  {
-    file: "objekt-badeanzug.webp",
-    name: "der Badeanzug",
-    seasons: []
-  },
-  {
-    file: "objekt-regenkleidung.webp",
-    name: "die Regenjacke",
-    seasons: []
+    name: "die Handschuhe"
   }
 ];
 
@@ -180,266 +238,144 @@ const dressTasks = {
   ]
 };
 
+const sentenceTasks = [
+  ["Im", "Frühling", "blühen", "die", "Blumen."],
+  ["Im", "Sommer", "ist", "es", "warm."],
+  ["Im", "Herbst", "fallen", "die", "Blätter."],
+  ["Im", "Winter", "ist", "es", "kalt."]
+];
+
 const quizQuestions = [
   {
-    q: "Wie viele Jahreszeiten hat ein Jahr?",
-    a: ["zwei", "vier", "zw\u00f6lf"],
-    correct: 1
+    question: "Wie viele Jahreszeiten hat ein Jahr?",
+    options: ["zwei", "drei", "vier", "fünf"],
+    answer: "vier"
   },
   {
-    q: "Welche Monate geh\u00f6ren zum Fr\u00fchling?",
-    a: [
-      "M\u00e4rz, April, Mai",
+    question: "Welche Jahreszeit kommt nach dem Frühling?",
+    options: ["der Winter", "der Sommer", "der Herbst", "der Frühling"],
+    answer: "der Sommer"
+  },
+  {
+    question: "Welche Monate gehören zum Sommer?",
+    options: [
       "Juni, Juli, August",
+      "März, April, Mai",
+      "September, Oktober, November",
       "Dezember, Januar, Februar"
     ],
-    correct: 0
+    answer: "Juni, Juli, August"
   },
   {
-    q: "Welche Jahreszeit kommt nach dem Sommer?",
-    a: ["der Winter", "der Herbst", "der Fr\u00fchling"],
-    correct: 1
+    question: "Welche Jahreszeit ist kalt?",
+    options: ["der Sommer", "der Winter", "der Frühling", "der Herbst"],
+    answer: "der Winter"
   },
   {
-    q: "In welcher Jahreszeit schneit es?",
-    a: ["im Sommer", "im Fr\u00fchling", "im Winter"],
-    correct: 2
+    question: "Der Januar ist der ... Monat.",
+    options: ["erste", "zweite", "dritte", "vierte"],
+    answer: "erste"
   },
   {
-    q: "Der wievielte Monat ist M\u00e4rz?",
-    a: ["der zweite", "der dritte", "der vierte"],
-    correct: 1
+    question: "Der Dezember ist der ... Monat.",
+    options: ["zehnte", "elfte", "zwölfte", "neunte"],
+    answer: "zwölfte"
   },
   {
-    q: "August ist \u2026",
-    a: [
-      "der achte Monat",
-      "der neunte Monat",
-      "der elfte Monat"
+    question: "Wann fallen die Blätter?",
+    options: [
+      "im Frühling",
+      "im Sommer",
+      "im Herbst",
+      "im Winter"
     ],
-    correct: 0
+    answer: "im Herbst"
   },
   {
-    q: "Welche Monate geh\u00f6ren zum Herbst?",
-    a: [
-      "April, Mai, Juni",
-      "September, Oktober, November",
-      "Januar, Februar, M\u00e4rz"
+    question: "Wann blühen die Blumen?",
+    options: [
+      "im Frühling",
+      "im Sommer",
+      "im Herbst",
+      "im Winter"
     ],
-    correct: 1
+    answer: "im Frühling"
   },
   {
-    q: "Was passt zum Sommer?",
-    a: [
-      "der Schlitten",
-      "die Sonnenbrille",
-      "die M\u00fctze"
-    ],
-    correct: 1
+    question: "Zu welcher Jahreszeit gehört der Juli?",
+    options: ["Frühling", "Sommer", "Herbst", "Winter"],
+    answer: "Sommer"
   },
   {
-    q: "Dezember ist \u2026",
-    a: [
-      "der zehnte Monat",
-      "der elfte Monat",
-      "der zw\u00f6lfte Monat"
-    ],
-    correct: 2
-  },
-  {
-    q: "Im Fr\u00fchling \u2026",
-    a: [
-      "bl\u00fchen die Blumen",
-      "fallen die Bl\u00e4tter",
-      "bauen wir einen Schneemann"
-    ],
-    correct: 0
+    question: "Zu welcher Jahreszeit gehört der November?",
+    options: ["Frühling", "Sommer", "Herbst", "Winter"],
+    answer: "Herbst"
   }
 ];
 
-const audio = document.getElementById("lessonAudio");
+let currentAudio = null;
+let wheelBusy = false;
 
-let currentStage = 0;
 let recognizeIndex = 0;
-let sortDone = 0;
+let sortingSolved = 0;
+
 let objectIndex = 0;
+let packedCount = 0;
+
 let dressIndex = 0;
+let selectedClothes = new Set();
+
+let sentenceIndex = 0;
+let placedWords = [];
+
 let finalQuizScore = 0;
 
-let wheelSpinning = false;
-let wheelTurns = 0;
-let wheelTimer = null;
-let selectedWheelSeason = null;
+function shuffle(items) {
+  const copy = [...items];
 
-let selectedClothes = new Set();
-let sentenceChoice = [];
+  for (let index = copy.length - 1; index > 0; index -= 1) {
+    const randomIndex = Math.floor(Math.random() * (index + 1));
 
-const packedObjects = [];
+    [copy[index], copy[randomIndex]] = [
+      copy[randomIndex],
+      copy[index]
+    ];
+  }
 
-function escapeHtml(value) {
-  return String(value).replace(
-    /[&<>'"]/g,
-    (character) => {
-      const replacements = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "'": "&#39;",
-        '"': "&quot;"
-      };
-
-      return replacements[character];
-    }
-  );
+  return copy;
 }
 
-function shuffle(array) {
-  return [...array].sort(() => Math.random() - 0.5);
-}
+function setFeedback(element, message, type = "") {
+  if (!element) {
+    return;
+  }
 
-function setFeedback(element, text, type = "") {
-  if (!element) return;
-
-  element.textContent = text;
+  element.textContent = message;
   element.className = `feedback ${type}`.trim();
 }
 
-function playAudio(files, button = null, statusElement = null) {
-  const candidates = (
-    Array.isArray(files) ? files : [files]
-  ).filter(Boolean);
-
-  if (!candidates.length || !audio) return;
-
-  document
-    .querySelectorAll(".audio-btn.playing, .mini-audio.playing")
-    .forEach((item) => {
-      item.classList.remove("playing");
-    });
-
-  audio.pause();
-  audio.currentTime = 0;
-
-  if (button) {
-    button.classList.add("playing");
-  }
-
-  if (statusElement) {
-    statusElement.textContent = "";
-  }
-
-  let index = 0;
-
-  function tryNext() {
-    if (index >= candidates.length) {
-      if (button) {
-        button.classList.remove("playing");
-      }
-
-      if (statusElement) {
-        statusElement.textContent =
-          "Fi\u0219ierul audio nu a fost g\u0103sit. " +
-          "Verific\u0103 denumirea MP3.";
-      }
-
-      return;
-    }
-
-    audio.src = AUDIO + candidates[index];
-    index += 1;
-    audio.load();
-
-    const playPromise = audio.play();
-
-    if (playPromise) {
-      playPromise.catch(() => {
-        tryNext();
-      });
-    }
-  }
-
-  audio.onended = () => {
-    if (button) {
-      button.classList.remove("playing");
-    }
-
-    if (statusElement) {
-      statusElement.textContent = "";
-    }
-  };
-
-  audio.onerror = () => {
-    tryNext();
-  };
-
-  tryNext();
-}
-
-function setImageWithFallback(image, candidates, altText) {
-  const sources = [...candidates];
-
-  image.alt = altText;
-
-  function loadNext() {
-    if (!sources.length) {
-      image.onerror = null;
-      image.src = IMAGE + "felix-jahreszeiten.webp";
-      image.title =
-        "Imaginea sezonier\u0103 lipse\u0219te. " +
-        "Verific\u0103 denumirea fi\u0219ierului \u00een GitHub.";
-      return;
-    }
-
-    image.src = sources.shift();
-  }
-
-  image.onerror = loadNext;
-  loadNext();
-}
-
 function updateProgress(stage) {
-  currentStage = stage;
+  const percent = stage === 0
+    ? 0
+    : Math.round((stage / 10) * 100);
 
-  const percent =
-    stage === 0 ? 0 : Math.round((stage / 10) * 100);
+  const fill = document.getElementById("progressFill");
+  const text = document.getElementById("progressText");
+  const track = fill?.parentElement;
 
-  document.getElementById("progressFill").style.width =
-    `${percent}%`;
+  if (fill) {
+    fill.style.width = `${percent}%`;
+  }
 
-  document.getElementById("progressText").textContent =
-    stage === 0
+  if (text) {
+    text.textContent = stage === 0
       ? "Start"
       : `Schritt ${stage} von 10`;
-}
-
-function showStage(stage) {
-  const target = document.querySelector(
-    `[data-stage="${stage}"]`
-  );
-
-  if (!target) return;
-
-  target.classList.remove("is-hidden");
-  updateProgress(stage);
-
-  if (stage === 6) {
-    setupObject();
   }
 
-  if (stage === 7) {
-    setupDress();
+  if (track) {
+    track.setAttribute("aria-valuenow", String(percent));
   }
-
-  if (stage === 9) {
-    renderQuiz();
-  }
-
-  requestAnimationFrame(() => {
-    target.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  });
 }
 
 function unlockNext(stage) {
@@ -447,16 +383,133 @@ function unlockNext(stage) {
     `[data-stage="${stage}"] .next-btn`
   );
 
-  if (!button) return;
+  if (!button) {
+    return;
+  }
 
   button.disabled = false;
   button.classList.remove("locked");
 }
 
+function showStage(stage) {
+  const target = document.querySelector(
+    `[data-stage="${stage}"]`
+  );
+
+  if (!target) {
+    return;
+  }
+
+  target.classList.remove("is-hidden");
+  updateProgress(stage);
+
+  if (stage === 6 && objectIndex === 0) {
+    setupObject();
+  }
+
+  if (stage === 7 && dressIndex === 0) {
+    setupDress();
+  }
+
+  if (stage === 9) {
+    renderQuiz();
+  }
+
+  if (stage === 10) {
+    document.getElementById("finalScore").textContent =
+      `Quiz: ${finalQuizScore}/10 Punkte`;
+
+    document.getElementById("certificateScore").textContent =
+      `Ergebnis: ${finalQuizScore}/10`;
+
+    document
+      .getElementById("certificate")
+      .classList.toggle("is-hidden", finalQuizScore < 8);
+
+    playAudio(["abschluss.mp3", "super-gemacht.mp3"]);
+  }
+
+  window.setTimeout(() => {
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }, 80);
+}
+
+function playAudio(files, button = null, status = null) {
+  const fileList = Array.isArray(files) ? files : [files];
+
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  let fileIndex = 0;
+
+  function tryFile() {
+    if (fileIndex >= fileList.length) {
+      if (button) {
+        button.classList.remove("playing");
+      }
+
+      if (status) {
+        status.textContent = "Fișierul audio nu a fost găsit.";
+      }
+
+      return;
+    }
+
+    const audio = new Audio(AUDIO + fileList[fileIndex]);
+    currentAudio = audio;
+
+    if (button) {
+      button.classList.add("playing");
+    }
+
+    if (status) {
+      status.textContent = "Audio wird abgespielt.";
+    }
+
+    audio.addEventListener("ended", () => {
+      if (button) {
+        button.classList.remove("playing");
+      }
+
+      if (status) {
+        status.textContent = "";
+      }
+    });
+
+    audio.addEventListener("error", () => {
+      fileIndex += 1;
+      tryFile();
+    });
+
+    audio.play().catch(() => {
+      if (button) {
+        button.classList.remove("playing");
+      }
+
+      if (status) {
+        status.textContent =
+          "Apasă din nou butonul pentru a porni sunetul.";
+      }
+    });
+  }
+
+  tryFile();
+}
+
 function renderSeason(key) {
   const season = seasons[key];
+  const card = document.getElementById("seasonCard");
 
-  document.getElementById("seasonCard").innerHTML = `
+  if (!season || !card) {
+    return;
+  }
+
+  card.innerHTML = `
     <img
       src="${IMAGE}${season.image}"
       alt="${season.name}"
@@ -464,558 +517,381 @@ function renderSeason(key) {
 
     <div class="season-info">
       <h3>${season.name}</h3>
-
-      <p class="translation">
-        ${season.ro}
-      </p>
+      <p class="translation">${season.ro}</p>
 
       <div class="month-chips">
         ${season.months
-          .map((month) => {
-            return `<span class="chip">${month}</span>`;
-          })
+          .map((month) => `<span class="chip">${month}</span>`)
           .join("")}
       </div>
 
-      <p>
-        <strong>${season.sentence}</strong><br>
-        ${season.translation}
-      </p>
+      <p><strong>${season.sentence}</strong></p>
+      <p class="translation">${season.translation}</p>
 
       <button
         class="audio-btn"
-        type="button"
         data-audio="${season.audio}"
+        type="button"
       >
-        <img src="${ICON}audio.svg" alt="">
-        Wort h\u00f6ren
+        <img src="${AUDIO_ICON}" alt="">
+        Wort hören
       </button>
 
       <button
         class="audio-btn"
-        type="button"
         data-audio="${season.sentenceAudio}"
+        type="button"
       >
-        <img src="${ICON}audio.svg" alt="">
-        Satz h\u00f6ren
+        <img src="${AUDIO_ICON}" alt="">
+        Satz hören
       </button>
     </div>
   `;
 }
 
-function startWheel() {
-  const button = document.getElementById("wheelButton");
-  const action = document.getElementById("wheelAction");
-  const result = document.getElementById("wheelResult");
-
-  if (
-    wheelSpinning ||
-    !button ||
-    !action ||
-    !result
-  ) {
-    return;
-  }
-
-  wheelSpinning = true;
-  selectedWheelSeason = null;
-
-  button.disabled = true;
-  button.classList.add("spinning");
-  action.textContent = "Dreht sich ...";
-
-  result.className =
-    "wheel-result wheel-result--waiting";
-
-  result.innerHTML = `
-    <div class="wheel-result-content">
-      <h3>Das Rad dreht sich ...</h3>
-      <p>Warte 3 Sekunden.</p>
-    </div>
-  `;
-
-  clearTimeout(wheelTimer);
-
-  wheelTimer = window.setTimeout(
-    stopWheel,
-    3000
-  );
-}
-
-function stopWheel() {
-  const button = document.getElementById("wheelButton");
-  const wheel = document.getElementById("seasonWheel");
-  const action = document.getElementById("wheelAction");
-  const result = document.getElementById("wheelResult");
-
-  if (
-    !button ||
-    !wheel ||
-    !action ||
-    !result
-  ) {
-    wheelSpinning = false;
-    return;
-  }
-
-  const keys = Object.keys(seasons);
-  const key =
-    keys[Math.floor(Math.random() * keys.length)];
-
+function renderWheelResult(key) {
   const season = seasons[key];
-
-  const stopAngles = {
-    fruehling: 45,
-    sommer: 315,
-    herbst: 135,
-    winter: 225
-  };
-
-  wheelSpinning = false;
-  selectedWheelSeason = key;
-
-  button.classList.remove("spinning");
-  button.disabled = false;
-
-  action.textContent = "Noch einmal";
-
-  wheelTurns += 4;
-
-  wheel.style.transform =
-    `rotate(${wheelTurns * 360 + stopAngles[key]}deg)`;
-
-  result.className = "wheel-result";
+  const result = document.getElementById("wheelResult");
 
   result.innerHTML = `
-    <button
-      class="wheel-season-choice"
-      type="button"
-      data-wheel-season="${key}"
-      aria-label="${season.name}: Informationen anzeigen"
-    >
+    <article class="wheel-result-card selected">
       <img
         src="${IMAGE}${season.image}"
         alt="${season.name}"
       >
 
-      <strong>
-        ${season.name}<br>
-        <small>Bild anklicken</small>
-      </strong>
-    </button>
-  `;
-}
-
-function showWheelSeason(key) {
-  if (
-    !key ||
-    key !== selectedWheelSeason
-  ) {
-    return;
-  }
-
-  const result = document.getElementById("wheelResult");
-  const season = seasons[key];
-
-  if (!result || !season) return;
-
-  result.className = "wheel-result";
-
-  result.innerHTML = `
-    <img
-      class="wheel-info-image"
-      src="${IMAGE}${season.image}"
-      alt="${season.name}"
-    >
-
-    <div class="wheel-result-content">
       <h3>${season.name}</h3>
+      <p class="translation">${season.ro}</p>
 
-      <p class="translation">
-        ${season.ro}
-      </p>
+      <div class="month-chips">
+        ${season.months
+          .map((month) => `<span class="chip">${month}</span>`)
+          .join("")}
+      </div>
 
-      <p>
-        <strong>
-          ${season.months.join(" \u00b7 ")}
-        </strong>
-      </p>
-
-      <p>${season.sentence}</p>
+      <p><strong>${season.sentence}</strong></p>
       <p>${season.translation}</p>
 
       <button
         class="audio-btn"
+        data-audio="${season.audio}"
         type="button"
-        data-audio="${season.sentenceAudio}"
       >
-        <img src="${ICON}audio.svg" alt="">
-        Anh\u00f6ren
+        <img src="${AUDIO_ICON}" alt="">
+        ${season.name} hören
       </button>
-    </div>
+    </article>
   `;
+}
+
+function startWheel() {
+  if (wheelBusy) {
+    return;
+  }
+
+  wheelBusy = true;
+
+  const wheel = document.getElementById("seasonWheel");
+  const button = document.getElementById("wheelButton");
+  const status = document.getElementById("wheelAction");
+
+  button.disabled = true;
+  wheel.classList.add("spinning");
+  status.textContent = "Das Rad dreht sich …";
+
+  window.setTimeout(() => {
+    wheel.classList.remove("spinning");
+
+    const selectedKey =
+      seasonKeys[Math.floor(Math.random() * seasonKeys.length)];
+
+    const selectedIndex = seasonKeys.indexOf(selectedKey);
+    const finalRotation = 1440 + selectedIndex * 90;
+
+    wheel.style.transform = `rotate(${finalRotation}deg)`;
+
+    status.textContent =
+      `Das Rad zeigt: ${seasons[selectedKey].name}.`;
+
+    renderWheelResult(selectedKey);
+    unlockNext(2);
+
+    button.disabled = false;
+    wheelBusy = false;
+  }, 3000);
 }
 
 function renderOrdinals() {
   const grid = document.getElementById("ordinalGrid");
 
-  if (!grid) return;
-
   grid.innerHTML = ordinals
-    .map(([month, ordinal], index) => {
-      const audioNumber =
-        String(index + 1).padStart(2, "0");
-
-      return `
-        <div class="ordinal-card">
-          <span>
-            <b>${month}</b><br>
-            der ${ordinal} Monat
-          </span>
-
-          <button
-            class="mini-audio"
-            type="button"
-            data-audio="ordinal-${audioNumber}.mp3"
-            aria-label="Audio: ${month}"
-          >
-            <img src="${ICON}audio.svg" alt="">
-          </button>
-        </div>
-      `;
-    })
+    .map(([month, ordinal], index) => `
+      <article class="ordinal-card">
+        <span>${index + 1}. ${month}</span>
+        <strong>der ${ordinal}</strong>
+      </article>
+    `)
     .join("");
 }
 
 function setupRecognition() {
-  const order = [
-    "fruehling",
-    "sommer",
-    "herbst",
-    "winter"
-  ];
+  const tasks = shuffle(seasonKeys).map((key) => ({
+    key,
+    ...seasons[key]
+  }));
 
-  if (recognizeIndex >= order.length) return;
+  function renderTask() {
+    const task = tasks[recognizeIndex];
 
-  const key = order[recognizeIndex];
-  const season = seasons[key];
-
-  document.getElementById("recognizeImage").src =
-    IMAGE + season.image;
-
-  document.getElementById("recognizePrompt").textContent =
-    `Frage ${recognizeIndex + 1}/4: ` +
-    "Welche Jahreszeit ist das?";
-
-  document.getElementById("recognizeAnswers").innerHTML =
-    shuffle(order)
-      .map((seasonKey) => {
-        return `
-          <button
-            class="answer-btn"
-            type="button"
-            data-value="${seasonKey}"
-          >
-            ${seasons[seasonKey].name}
-          </button>
-        `;
-      })
-      .join("");
-}
-
-function checkRecognition(button) {
-  const order = [
-    "fruehling",
-    "sommer",
-    "herbst",
-    "winter"
-  ];
-
-  const correct = order[recognizeIndex];
-  const feedback =
-    document.getElementById("recognizeFeedback");
-
-  if (button.dataset.value !== correct) {
-    button.classList.add("wrong");
-
-    setFeedback(
-      feedback,
-      "Versuche es noch einmal.",
-      "error"
-    );
-
-    return;
-  }
-
-  button.classList.add("correct");
-
-  setFeedback(
-    feedback,
-    `Richtig! Das ist ${seasons[correct].name}.`,
-    "success"
-  );
-
-  playAudio(seasons[correct].audio);
-
-  window.setTimeout(() => {
-    recognizeIndex += 1;
-
-    if (recognizeIndex < 4) {
-      setupRecognition();
-      setFeedback(feedback, "");
-    } else {
+    if (!task) {
       setFeedback(
-        feedback,
-        "Sehr gut! Du kennst die vier Jahreszeiten.",
+        document.getElementById("recognizeFeedback"),
+        "Sehr gut! Du hast alle Jahreszeiten erkannt.",
         "success"
       );
 
       unlockNext(4);
-    }
-  }, 650);
-}
-
-function setupSorting() {
-  sortDone = 0;
-
-  const cards = shuffle([
-    ["Januar", "winter"],
-    ["April", "fruehling"],
-    ["Juli", "sommer"],
-    ["Oktober", "herbst"]
-  ]);
-
-  const container =
-    document.getElementById("monthSorting");
-
-  if (!container) return;
-
-  container.innerHTML = cards
-    .map(([month, correct]) => {
-      return `
-        <div
-          class="sort-card"
-          data-correct="${correct}"
-        >
-          <h3>${month}</h3>
-
-          <div class="sort-options">
-            ${Object.keys(seasons)
-              .map((key) => {
-                return `
-                  <button
-                    class="sort-btn"
-                    type="button"
-                    data-value="${key}"
-                  >
-                    ${seasons[key].name.replace("der ", "")}
-                  </button>
-                `;
-              })
-              .join("")}
-          </div>
-        </div>
-      `;
-    })
-    .join("");
-}
-
-function checkSorting(button) {
-  const card = button.closest(".sort-card");
-  const feedback =
-    document.getElementById("sortingFeedback");
-
-  if (!card || card.classList.contains("done")) {
-    return;
-  }
-
-  if (button.dataset.value !== card.dataset.correct) {
-    button.classList.add("wrong");
-
-    setFeedback(
-      feedback,
-      "Fast richtig. Versuche es noch einmal.",
-      "error"
-    );
-
-    return;
-  }
-
-  button.classList.add("correct");
-  card.classList.add("done");
-
-  card.querySelectorAll("button").forEach((item) => {
-    item.disabled = true;
-  });
-
-  sortDone += 1;
-
-  setFeedback(
-    feedback,
-    "Richtig!",
-    "success"
-  );
-
-  if (sortDone === 4) {
-    setFeedback(
-      feedback,
-      "Prima! Alle Monate sind richtig zugeordnet.",
-      "success"
-    );
-
-    unlockNext(5);
-  }
-}
-
-function setupObject() {
-  if (objectIndex >= objects.length) return;
-
-  const objectCard =
-    document.getElementById("objectCard");
-
-  const objectAnswers =
-    document.getElementById("objectAnswers");
-
-  if (!objectCard || !objectAnswers) return;
-
-  const [file, name] = objects[objectIndex];
-
-  const objectAudio = file
-    .replace("objekt-", "")
-    .replace(".webp", ".mp3");
-
-  objectCard.innerHTML = `
-    <img
-      src="${IMAGE}${file}"
-      alt="${escapeHtml(name)}"
-      data-object-audio="${objectAudio}"
-    >
-
-    <strong>${escapeHtml(name)}</strong>
-
-    <small>
-      Bild ber\u00fchren und h\u00f6ren
-    </small>
-  `;
-
-  objectAnswers.innerHTML =
-    Object.keys(seasons)
-      .map((key) => {
-        return `
-          <button
-            class="answer-btn"
-            type="button"
-            data-value="${key}"
-          >
-            ${seasons[key].name}
-          </button>
-        `;
-      })
-      .join("");
-}
-
-function renderPackedObjects() {
-  const container =
-    document.getElementById("packedObjects");
-
-  if (!container) return;
-
-  container.innerHTML = packedObjects
-    .map((item) => {
-      return `
-        <button
-          class="packed-item"
-          type="button"
-          data-object-audio="${item.audio}"
-          aria-label="${escapeHtml(item.name)} h\u00f6ren"
-        >
-          <img
-            src="${IMAGE}${item.file}"
-            alt="${escapeHtml(item.name)}"
-          >
-        </button>
-      `;
-    })
-    .join("");
-}
-
-function checkObject(button) {
-  if (objectIndex >= objects.length) return;
-
-  const feedback =
-    document.getElementById("objectFeedback");
-
-  const [file, name, correctSeason] =
-    objects[objectIndex];
-
-  if (button.dataset.value !== correctSeason) {
-    button.classList.add("wrong");
-
-    setFeedback(
-      feedback,
-      "Das passt noch nicht. Versuche es noch einmal.",
-      "error"
-    );
-
-    return;
-  }
-
-  button.classList.add("correct");
-
-  const objectAudio = file
-    .replace("objekt-", "")
-    .replace(".webp", ".mp3");
-
-  packedObjects.push({
-    file,
-    name,
-    audio: objectAudio
-  });
-
-  renderPackedObjects();
-  playAudio([objectAudio, `objekt-${objectAudio}`]);
-
-  setFeedback(
-    feedback,
-    `Richtig! ${name} passt zu ${seasons[correctSeason].name}.`,
-    "success"
-  );
-
-  document
-    .querySelectorAll("#objectAnswers button")
-    .forEach((answer) => {
-      answer.disabled = true;
-    });
-
-  window.setTimeout(() => {
-    objectIndex += 1;
-
-    if (objectIndex < objects.length) {
-      setupObject();
-      setFeedback(feedback, "");
       return;
     }
 
-    document.getElementById("objectCard").innerHTML = `
-      <strong>Der Koffer ist fertig!</strong>
+    document.getElementById("recognizeImage").src =
+      IMAGE + task.image;
 
-      <small>
-        Ber\u00fchre die Gegenst\u00e4nde im Koffer
-        und h\u00f6re sie noch einmal.
-      </small>
-    `;
+    document.getElementById("recognizeImage").alt =
+      task.name;
 
-    document.getElementById("objectAnswers").innerHTML = "";
+    document.getElementById("recognizePrompt").textContent =
+      `Aufgabe ${recognizeIndex + 1} von 4`;
+
+    const answers =
+      document.getElementById("recognizeAnswers");
+
+    answers.innerHTML = seasonKeys
+      .map((key) => `
+        <button
+          class="answer-btn"
+          data-recognize="${key}"
+          type="button"
+        >
+          ${seasons[key].name}
+        </button>
+      `)
+      .join("");
+  }
+
+  document
+    .getElementById("recognizeAnswers")
+    .addEventListener("click", (event) => {
+      const button = event.target.closest("[data-recognize]");
+
+      if (!button) {
+        return;
+      }
+
+      const task = tasks[recognizeIndex];
+
+      if (button.dataset.recognize !== task.key) {
+        button.classList.add("wrong");
+
+        setFeedback(
+          document.getElementById("recognizeFeedback"),
+          "Versuche es noch einmal.",
+          "error"
+        );
+
+        return;
+      }
+
+      button.classList.add("correct");
+
+      setFeedback(
+        document.getElementById("recognizeFeedback"),
+        "Richtig!",
+        "success"
+      );
+
+      recognizeIndex += 1;
+
+      window.setTimeout(renderTask, 650);
+    });
+
+  renderTask();
+}
+
+function setupSorting() {
+  const container = document.getElementById("monthSorting");
+
+  const months = shuffle(Object.keys(monthSeason));
+
+  container.innerHTML = months
+    .map((month) => `
+      <article
+        class="month-question"
+        data-month-card="${month}"
+      >
+        <h3>${month}</h3>
+
+        <div class="month-options">
+          ${seasonKeys
+            .map((key) => `
+              <button
+                class="sort-btn"
+                data-month="${month}"
+                data-month-season="${key}"
+                type="button"
+              >
+                ${seasons[key].shortName}
+              </button>
+            `)
+            .join("")}
+        </div>
+      </article>
+    `)
+    .join("");
+
+  container.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-month-season]");
+
+    if (!button || button.disabled) {
+      return;
+    }
+
+    const month = button.dataset.month;
+    const selected = button.dataset.monthSeason;
+    const correct = monthSeason[month];
+    const card = button.closest(".month-question");
+
+    if (selected !== correct) {
+      button.classList.add("wrong");
+
+      setFeedback(
+        document.getElementById("sortingFeedback"),
+        "Noch einmal versuchen.",
+        "error"
+      );
+
+      return;
+    }
+
+    button.classList.add("correct");
+    card.classList.add("done");
+
+    card
+      .querySelectorAll("button")
+      .forEach((item) => {
+        item.disabled = true;
+      });
+
+    sortingSolved += 1;
 
     setFeedback(
-      feedback,
-      "Gut gemacht! Alle 16 Gegenst\u00e4nde " +
-      "sind richtig eingeordnet.",
+      document.getElementById("sortingFeedback"),
+      `${month} gehört zum ${seasons[correct].shortName}.`,
+      "success"
+    );
+
+    if (sortingSolved === 12) {
+      setFeedback(
+        document.getElementById("sortingFeedback"),
+        "Sehr gut! Alle Monate sind richtig zugeordnet.",
+        "success"
+      );
+
+      unlockNext(5);
+    }
+  });
+}
+
+function setupObject() {
+  const object = suitcaseObjects[objectIndex];
+  const objectCard = document.getElementById("objectCard");
+  const answers = document.getElementById("objectAnswers");
+
+  if (!object) {
+    objectCard.innerHTML = `
+      <strong>Der Koffer ist fertig!</strong>
+      <span>Alle Gegenstände sind eingepackt.</span>
+    `;
+
+    answers.innerHTML = "";
+
+    setFeedback(
+      document.getElementById("objectFeedback"),
+      "Gut gemacht! Alle Gegenstände sind richtig eingeordnet.",
       "success"
     );
 
     unlockNext(6);
-  }, 600);
+    return;
+  }
+
+  objectCard.style.display = "grid";
+
+  objectCard.innerHTML = `
+    <img
+      src="${IMAGE}${object.file}"
+      alt="${object.name}"
+    >
+    <strong>${object.name}</strong>
+  `;
+
+  answers.innerHTML = seasonKeys
+    .map((key) => `
+      <button
+        class="answer-btn"
+        data-object-season="${key}"
+        type="button"
+      >
+        ${seasons[key].name}
+      </button>
+    `)
+    .join("");
+
+  answers.onclick = (event) => {
+    const button = event.target.closest("[data-object-season]");
+
+    if (!button) {
+      return;
+    }
+
+    const selected = button.dataset.objectSeason;
+
+    if (selected !== object.season) {
+      button.classList.add("wrong");
+
+      setFeedback(
+        document.getElementById("objectFeedback"),
+        "Versuche es noch einmal.",
+        "error"
+      );
+
+      return;
+    }
+
+    button.classList.add("correct");
+
+    const packed = document.createElement("img");
+
+    packed.className = "packed-object";
+    packed.src = IMAGE + object.file;
+    packed.alt = object.name;
+    packed.title = object.name;
+
+    document.getElementById("packedObjects").append(packed);
+
+    packedCount += 1;
+    objectIndex += 1;
+
+    setFeedback(
+      document.getElementById("objectFeedback"),
+      `Richtig! ${packedCount} von ${suitcaseObjects.length}.`,
+      "success"
+    );
+
+    objectCard.style.display = "none";
+
+    window.setTimeout(setupObject, 550);
+  };
 }
 
 function setupDress() {
@@ -1028,97 +904,108 @@ function setupDress() {
 
   const target = order[dressIndex];
 
-  if (!target) return;
+  if (!target) {
+    setFeedback(
+      document.getElementById("dressFeedback"),
+      "Felix ist für alle Jahreszeiten richtig angezogen.",
+      "success"
+    );
+
+    unlockNext(7);
+    return;
+  }
 
   selectedClothes = new Set();
 
   document.getElementById("dressPrompt").innerHTML = `
-    Es ist
-    <strong>
-      ${seasons[target].name.replace("der ", "")}
-    </strong>.
-    W\u00e4hle genau drei passende Kleidungsst\u00fccke.
+    Es ist <strong>${seasons[target].shortName}</strong>.
+    Wähle genau drei passende Kleidungsstücke.
   `;
 
   document.getElementById("dressSeasonName").textContent =
     seasons[target].name;
 
   document.getElementById("dressCounter").textContent =
-    "0 von 3 ausgew\u00e4hlt";
+    "0 von 3 ausgewählt";
 
-  const checkButton =
-    document.getElementById("checkDress");
+  document.getElementById("checkDress").disabled = true;
 
-  checkButton.disabled = true;
+  const felixImage = document.getElementById("dressFelix");
 
-  const mainImage =
-    document.getElementById("dressFelix");
+  felixImage.src =
+    `${IMAGE}felix-${target}.webp`;
 
-  setImageWithFallback(
-    mainImage,
-    [
-      IMAGE + `felix-${target}.webp`,
-      IMAGE + `felix_${target}.webp`
-    ],
-    `Felix: ${seasons[target].name}`
-  );
+  felixImage.onerror = () => {
+    felixImage.onerror = null;
+    felixImage.src =
+      `${IMAGE}felix-jahreszeiten.webp`;
+  };
 
   const correctFiles = dressTasks[target];
+  const correctItems = clothing.filter((item) =>
+    correctFiles.includes(item.file)
+  );
 
-  const correctChoices = clothing.filter((item) => {
-    return correctFiles.includes(item.file);
-  });
-
-  const distractors = shuffle(
-    clothing.filter((item) => {
-      return !correctFiles.includes(item.file);
-    })
+  const incorrectItems = shuffle(
+    clothing.filter((item) =>
+      !correctFiles.includes(item.file)
+    )
   ).slice(0, 3);
 
-  const choices = shuffle([
-    ...correctChoices,
-    ...distractors
+  const options = shuffle([
+    ...correctItems,
+    ...incorrectItems
   ]);
 
-  document.getElementById("outfitOptions").innerHTML =
-    choices
-      .map((item) => {
-        return `
-          <button
-            class="outfit-btn"
-            data-clothing="${item.file}"
-            type="button"
-            aria-pressed="false"
-          >
-            <img
-              src="${IMAGE}${item.file}"
-              alt="${escapeHtml(item.name)}"
-            >
+  const container =
+    document.getElementById("outfitOptions");
 
-            <span>${escapeHtml(item.name)}</span>
-          </button>
-        `;
-      })
-      .join("");
+  container.innerHTML = options
+    .map((item) => `
+      <button
+        class="outfit-btn"
+        data-clothing="${item.file}"
+        type="button"
+      >
+        <img
+          src="${IMAGE}${item.file}"
+          alt="${item.name}"
+        >
+        <span>${item.name}</span>
+      </button>
+    `)
+    .join("");
+
+  setFeedback(
+    document.getElementById("dressFeedback"),
+    "",
+    ""
+  );
 }
 
-function toggleClothing(button) {
+function chooseClothing(button) {
   const file = button.dataset.clothing;
-
-  if (!file || button.disabled) return;
 
   if (selectedClothes.has(file)) {
     selectedClothes.delete(file);
     button.classList.remove("selected");
-    button.setAttribute("aria-pressed", "false");
-  } else if (selectedClothes.size < 3) {
+  } else {
+    if (selectedClothes.size >= 3) {
+      setFeedback(
+        document.getElementById("dressFeedback"),
+        "Alege exact trei haine.",
+        "error"
+      );
+
+      return;
+    }
+
     selectedClothes.add(file);
     button.classList.add("selected");
-    button.setAttribute("aria-pressed", "true");
   }
 
   document.getElementById("dressCounter").textContent =
-    `${selectedClothes.size} von 3 ausgew\u00e4hlt`;
+    `${selectedClothes.size} von 3 ausgewählt`;
 
   document.getElementById("checkDress").disabled =
     selectedClothes.size !== 3;
@@ -1133,256 +1020,209 @@ function checkDress() {
   ];
 
   const target = order[dressIndex];
+  const correct = new Set(dressTasks[target]);
 
-  if (!target) return;
+  const isCorrect =
+    selectedClothes.size === correct.size &&
+    [...selectedClothes].every((file) => correct.has(file));
 
-  const correct = dressTasks[target];
-
-  const success =
-    selectedClothes.size === 3 &&
-    correct.every((file) => {
-      return selectedClothes.has(file);
-    });
-
-  document
-    .querySelectorAll("#outfitOptions .outfit-btn")
-    .forEach((button) => {
-      const file = button.dataset.clothing;
-
-      if (
-        correct.includes(file) &&
-        selectedClothes.has(file)
-      ) {
-        button.classList.add("correct");
-      } else if (selectedClothes.has(file)) {
-        button.classList.add("wrong");
-      }
-    });
-
-  if (!success) {
+  if (!isCorrect) {
     setFeedback(
       document.getElementById("dressFeedback"),
-      "Noch nicht richtig. W\u00e4hle drei andere Kleidungsst\u00fccke.",
+      "Noch nicht richtig. Tausche die unpassenden Kleidungsstücke.",
       "error"
     );
 
+    return;
+  }
+
+  const felixImage = document.getElementById("dressFelix");
+
+  felixImage.src =
+    `${IMAGE}felix-${target}-angezogen.webp`;
+
+  felixImage.onerror = () => {
+    felixImage.onerror = null;
+    felixImage.src = `${IMAGE}felix-${target}.webp`;
+  };
+
+  setFeedback(
+    document.getElementById("dressFeedback"),
+    `Richtig! Felix ist für den ${seasons[target].shortName} angezogen.`,
+    "success"
+  );
+
+  document
+    .querySelectorAll("#outfitOptions button")
+    .forEach((button) => {
+      button.disabled = true;
+
+      if (correct.has(button.dataset.clothing)) {
+        button.classList.add("correct");
+      }
+    });
+
+  document.getElementById("checkDress").disabled = true;
+
+  dressIndex += 1;
+
+  if (dressIndex >= order.length) {
     window.setTimeout(() => {
-      selectedClothes.clear();
+      setFeedback(
+        document.getElementById("dressFeedback"),
+        "Sehr gut! Felix ist für alle Jahreszeiten vorbereitet.",
+        "success"
+      );
 
-      document
-        .querySelectorAll("#outfitOptions .outfit-btn")
-        .forEach((button) => {
-          button.classList.remove(
-            "selected",
-            "correct",
-            "wrong"
-          );
-
-          button.setAttribute(
-            "aria-pressed",
-            "false"
-          );
-        });
-
-      document.getElementById("dressCounter").textContent =
-        "0 von 3 ausgew\u00e4hlt";
-
-      document.getElementById("checkDress").disabled =
-        true;
+      unlockNext(7);
     }, 900);
 
     return;
   }
 
-  document
-    .querySelectorAll("#outfitOptions .outfit-btn")
-    .forEach((button) => {
-      button.disabled = true;
-    });
-
-  document.getElementById("checkDress").disabled = true;
-
-  setFeedback(
-    document.getElementById("dressFeedback"),
-    "Richtig! Diese drei Kleidungsst\u00fccke passen.",
-    "success"
-  );
-
-  playAudio(seasons[target].audio);
-
-  window.setTimeout(() => {
-    dressIndex += 1;
-
-    if (dressIndex < 4) {
-      setupDress();
-
-      setFeedback(
-        document.getElementById("dressFeedback"),
-        ""
-      );
-    } else {
-      setFeedback(
-        document.getElementById("dressFeedback"),
-        "Super! Du hast Felix f\u00fcr alle " +
-        "Jahreszeiten richtig angezogen.",
-        "success"
-      );
-
-      unlockNext(7);
-    }
-  }, 1100);
+  window.setTimeout(setupDress, 1200);
 }
-
-const sentenceWords = [
-  "Im",
-  "Herbst",
-  "fallen",
-  "die",
-  "Bl\u00e4tter."
-];
 
 function setupSentence() {
-  sentenceChoice = [];
+  const sentence = sentenceTasks[sentenceIndex];
 
-  document.getElementById("sentenceTarget").innerHTML = "";
-
-  document.getElementById("wordBank").innerHTML =
-    shuffle(sentenceWords)
-      .map((word, index) => {
-        return `
-          <button
-            class="word-btn"
-            type="button"
-            data-word="${escapeHtml(word)}"
-            data-id="${index}"
-          >
-            ${escapeHtml(word)}
-          </button>
-        `;
-      })
-      .join("");
-
-  setFeedback(
-    document.getElementById("sentenceFeedback"),
-    ""
-  );
-}
-
-function chooseWord(button) {
-  button.disabled = true;
-  sentenceChoice.push(button.dataset.word);
-
-  document
-    .getElementById("sentenceTarget")
-    .insertAdjacentHTML(
-      "beforeend",
-      `
-        <span class="placed-word">
-          ${escapeHtml(button.dataset.word)}
-        </span>
-      `
-    );
-
-  if (sentenceChoice.length !== sentenceWords.length) {
-    return;
-  }
-
-  if (
-    sentenceChoice.join(" ") ===
-    sentenceWords.join(" ")
-  ) {
+  if (!sentence) {
     setFeedback(
       document.getElementById("sentenceFeedback"),
-      "Richtig! Im Herbst fallen die Bl\u00e4tter.",
+      "Sehr gut! Alle Sätze sind richtig.",
       "success"
     );
 
-    playAudio("herbst-satz.mp3");
     unlockNext(8);
-  } else {
-    setFeedback(
-      document.getElementById("sentenceFeedback"),
-      "Die Reihenfolge stimmt noch nicht. " +
-      "Versuche es noch einmal.",
-      "error"
-    );
-  }
-}
-
-function renderQuiz() {
-  document.getElementById("quizBox").innerHTML =
-    quizQuestions
-      .map((item, index) => {
-        return `
-          <article class="quiz-question">
-            <h3>
-              ${index + 1}. ${item.q}
-            </h3>
-
-            <div class="quiz-options">
-              ${item.a
-                .map((answer, answerIndex) => {
-                  return `
-                    <label class="quiz-option">
-                      <input
-                        type="radio"
-                        name="q${index}"
-                        value="${answerIndex}"
-                      >
-
-                      <span>${answer}</span>
-                    </label>
-                  `;
-                })
-                .join("")}
-            </div>
-          </article>
-        `;
-      })
-      .join("");
-
-  const submit =
-    document.getElementById("submitQuiz");
-
-  submit.disabled = false;
-  submit.dataset.mode = "check";
-  submit.textContent = "Quiz pr\u00fcfen";
-}
-
-function submitQuiz() {
-  const submitButton =
-    document.getElementById("submitQuiz");
-
-  const feedback =
-    document.getElementById("quizFeedback");
-
-  if (submitButton.dataset.mode === "retry") {
-    renderQuiz();
-    setFeedback(feedback, "");
     return;
   }
 
+  placedWords = [];
+
+  document.getElementById("sentenceTarget").innerHTML = "";
+  document.getElementById("sentenceFeedback").textContent = "";
+
+  document.getElementById("wordBank").innerHTML =
+    shuffle(sentence)
+      .map((word, index) => `
+        <button
+          class="word-btn"
+          data-word="${word}"
+          data-word-index="${index}"
+          type="button"
+        >
+          ${word}
+        </button>
+      `)
+      .join("");
+}
+
+function chooseWord(button) {
+  const sentence = sentenceTasks[sentenceIndex];
+
+  if (!sentence || button.disabled) {
+    return;
+  }
+
+  const word = button.dataset.word;
+  placedWords.push(word);
+  button.disabled = true;
+
+  const placed = document.createElement("span");
+  placed.className = "placed-word";
+  placed.textContent = word;
+
+  document.getElementById("sentenceTarget").append(placed);
+
+  if (placedWords.length !== sentence.length) {
+    return;
+  }
+
+  const correct =
+    placedWords.join(" ") === sentence.join(" ");
+
+  if (!correct) {
+    setFeedback(
+      document.getElementById("sentenceFeedback"),
+      "Ordinea nu este corectă. Încearcă din nou.",
+      "error"
+    );
+
+    return;
+  }
+
+  setFeedback(
+    document.getElementById("sentenceFeedback"),
+    "Richtig!",
+    "success"
+  );
+
+  sentenceIndex += 1;
+
+  window.setTimeout(setupSentence, 900);
+}
+
+function renderQuiz() {
+  const quizBox = document.getElementById("quizBox");
+
+  if (quizBox.dataset.rendered === "true") {
+    return;
+  }
+
+  quizBox.dataset.rendered = "true";
+
+  quizBox.innerHTML = quizQuestions
+    .map((question, questionIndex) => `
+      <article class="quiz-question">
+        <h3>
+          ${questionIndex + 1}. ${question.question}
+        </h3>
+
+        <div class="quiz-options">
+          ${question.options
+            .map((option) => `
+              <label class="quiz-option">
+                <input
+                  type="radio"
+                  name="quiz-${questionIndex}"
+                  value="${option}"
+                >
+                <span>${option}</span>
+              </label>
+            `)
+            .join("")}
+        </div>
+      </article>
+    `)
+    .join("");
+}
+
+function submitQuiz() {
   let answered = 0;
   let score = 0;
 
-  quizQuestions.forEach((item, index) => {
-    const chosen = document.querySelector(
-      `input[name="q${index}"]:checked`
+  quizQuestions.forEach((question, index) => {
+    const selected = document.querySelector(
+      `input[name="quiz-${index}"]:checked`
     );
 
-    if (chosen) {
-      answered += 1;
+    if (!selected) {
+      return;
+    }
 
-      if (Number(chosen.value) === item.correct) {
-        score += 1;
-      }
+    answered += 1;
+
+    if (selected.value === question.answer) {
+      score += 1;
     }
   });
+
+  const feedback = document.getElementById("quizFeedback");
 
   if (answered < quizQuestions.length) {
     setFeedback(
       feedback,
-      "Beantworte bitte alle 10 Fragen.",
+      "Răspunde la toate cele 10 întrebări.",
       "error"
     );
 
@@ -1391,93 +1231,39 @@ function submitQuiz() {
 
   finalQuizScore = score;
 
-  quizQuestions.forEach((item, questionIndex) => {
-    document
-      .querySelectorAll(
-        `input[name="q${questionIndex}"]`
-      )
-      .forEach((input) => {
-        input.disabled = true;
-
-        const label = input.closest("label");
-        const value = Number(input.value);
-
-        if (value === item.correct) {
-          label.classList.add("correct");
-        } else if (input.checked) {
-          label.classList.add("wrong");
-        }
-      });
-  });
-
-  const passed = score >= 8;
-
   setFeedback(
     feedback,
-    passed
-      ? `Sehr gut! ${score}/10 Punkte. ` +
-        "Die Urkunde ist freigeschaltet."
-      : `Du hast ${score}/10 Punkte. ` +
-        "Wiederhole das Quiz und erreiche " +
-        "mindestens 8 Punkte.",
-    passed ? "success" : "error"
+    `Du hast ${score} von 10 Punkten erreicht.`,
+    score >= 8 ? "success" : "error"
   );
 
-  if (passed) {
-    unlockNext(9);
-    submitButton.disabled = true;
-  } else {
-    submitButton.dataset.mode = "retry";
-    submitButton.textContent = "Quiz wiederholen";
-  }
+  unlockNext(9);
+
+  document
+    .querySelectorAll("#quizBox input")
+    .forEach((input) => {
+      input.disabled = true;
+    });
+
+  document.getElementById("submitQuiz").disabled = true;
 }
 
 document.addEventListener("click", (event) => {
-  const startButton =
-    event.target.closest("#startLesson");
+  const startButton = event.target.closest("#startLesson");
 
   if (startButton) {
-    document
-      .querySelector(".hero")
-      .classList.add("completed");
-
     showStage(1);
     return;
   }
 
-  const nextButton =
-    event.target.closest(".next-btn");
+  const nextButton = event.target.closest(".next-btn");
 
   if (nextButton && !nextButton.disabled) {
-    const nextStage =
-      Number(nextButton.dataset.next);
-
-    showStage(nextStage);
-
-    if (nextStage === 10) {
-      document.getElementById("finalScore").textContent =
-        `Quiz: ${finalQuizScore}/10 Punkte`;
-
-      document.getElementById(
-        "certificateScore"
-      ).textContent =
-        `Ergebnis: ${finalQuizScore}/10`;
-
-      document
-        .getElementById("certificate")
-        .classList.toggle(
-          "is-hidden",
-          finalQuizScore < 8
-        );
-
-      playAudio("abschluss.mp3");
-    }
-
+    showStage(Number(nextButton.dataset.next));
     return;
   }
 
-  const seasonTab =
-    event.target.closest(".season-tab");
+  const seasonTab = event.target.closest(".season-tab");
 
   if (seasonTab) {
     document
@@ -1493,44 +1279,7 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  const wheelButton =
-    event.target.closest("#wheelButton");
-
-  if (wheelButton) {
-    startWheel();
-    return;
-  }
-
-  const wheelSeason =
-    event.target.closest("[data-wheel-season]");
-
-  if (wheelSeason) {
-    showWheelSeason(
-      wheelSeason.dataset.wheelSeason
-    );
-
-    return;
-  }
-
-  const introButton =
-    event.target.closest("#introAudioButton");
-
-  if (introButton) {
-    playAudio(
-      [
-        "intro.mp3",
-        "jahreszeiten-intro.mp3",
-        "einfuehrung.mp3"
-      ],
-      introButton,
-      document.getElementById("introAudioStatus")
-    );
-
-    return;
-  }
-
-  const audioButton =
-    event.target.closest("[data-audio]");
+  const audioButton = event.target.closest("[data-audio]");
 
   if (audioButton) {
     playAudio(
@@ -1541,59 +1290,39 @@ document.addEventListener("click", (event) => {
     return;
   }
 
-  const objectAudio =
-    event.target.closest("[data-object-audio]");
+  const introAudioButton =
+    event.target.closest("#introAudioButton");
 
-  if (objectAudio) {
+  if (introAudioButton) {
     playAudio(
       [
-        objectAudio.dataset.objectAudio,
-        `objekt-${objectAudio.dataset.objectAudio}`
+        "intro.mp3",
+        "jahreszeiten-intro.mp3",
+        "einfuehrung.mp3"
       ],
-      objectAudio
+      introAudioButton,
+      document.getElementById("introAudioStatus")
     );
 
     return;
   }
 
-  const recognitionButton =
-    event.target.closest(
-      "#recognizeAnswers .answer-btn"
-    );
+  const wheelButton = event.target.closest("#wheelButton");
 
-  if (recognitionButton) {
-    checkRecognition(recognitionButton);
-    return;
-  }
-
-  const sortingButton =
-    event.target.closest(".sort-btn");
-
-  if (sortingButton) {
-    checkSorting(sortingButton);
-    return;
-  }
-
-  const objectButton =
-    event.target.closest(
-      "#objectAnswers .answer-btn"
-    );
-
-  if (objectButton) {
-    checkObject(objectButton);
+  if (wheelButton) {
+    startWheel();
     return;
   }
 
   const outfitButton =
-    event.target.closest(".outfit-btn");
+    event.target.closest("[data-clothing]");
 
   if (outfitButton) {
-    toggleClothing(outfitButton);
+    chooseClothing(outfitButton);
     return;
   }
 
-  const wordButton =
-    event.target.closest(".word-btn");
+  const wordButton = event.target.closest(".word-btn");
 
   if (wordButton) {
     chooseWord(wordButton);
@@ -1601,25 +1330,16 @@ document.addEventListener("click", (event) => {
 });
 
 document
+  .getElementById("checkDress")
+  .addEventListener("click", checkDress);
+
+document
   .getElementById("resetSentence")
-  .addEventListener(
-    "click",
-    setupSentence
-  );
+  .addEventListener("click", setupSentence);
 
 document
   .getElementById("submitQuiz")
-  .addEventListener(
-    "click",
-    submitQuiz
-  );
-
-document
-  .getElementById("checkDress")
-  .addEventListener(
-    "click",
-    checkDress
-  );
+  .addEventListener("click", submitQuiz);
 
 document
   .getElementById("restartLesson")
@@ -1630,7 +1350,7 @@ document
     });
 
     window.setTimeout(() => {
-      location.reload();
+      window.location.reload();
     }, 350);
   });
 
