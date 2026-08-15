@@ -1,1 +1,2174 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Interaktive Deutschlektion Zahlen von 0 bis 20 für Kinder."
+  >
+
+  <title>Zahlen 0–20 | Kleine Deutschwelt</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="zahlen.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">
+    Zum Inhalt springen
+  </a>
+
+  <!-- ==================================================
+       HEADER
+  =================================================== -->
+  <header class="lesson-header">
+    <div class="header-inner">
+      <a
+        class="brand-link"
+        href="../index.html"
+        aria-label="Zur Startseite von Kleine Deutschwelt"
+      >
+        <img
+          class="brand-logo"
+          src="../assets/images/logo/logo-full.svg"
+          alt="Kleine Deutschwelt"
+        >
+      </a>
+
+      <div class="header-lesson-info">
+        <p class="header-level">Starter · A1.1</p>
+        <h1 class="header-title">Zahlen 0–20</h1>
+      </div>
+
+      <a
+        class="home-button"
+        href="../index.html"
+        aria-label="Zur Startseite"
+      >
+        <svg
+          class="button-svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 11.5 12 4l9 7.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M5.5 10.5V20h5v-5.5h3V20h5v-9.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <span>Startseite</span>
+      </a>
+    </div>
+
+    <div
+      class="lesson-progress"
+      aria-label="Lektionsfortschritt"
+    >
+      <div class="progress-track">
+        <div
+          id="progress-fill"
+          class="progress-fill"
+          style="width: 0%"
+        ></div>
+      </div>
+
+      <p
+        id="progress-text"
+        class="progress-text"
+        aria-live="polite"
+      >
+        0 % geschafft
+      </p>
+    </div>
+  </header>
+
+  <!-- ==================================================
+       MAIN
+  =================================================== -->
+  <main id="main-content">
+
+    <!-- ==================================================
+         INTRODUCERE
+    =================================================== -->
+    <section
+      id="lesson-intro"
+      class="lesson-hero"
+      aria-labelledby="hero-title"
+    >
+      <img
+        class="hero-background"
+        src="../assets/images/lessons/zahlen/zahlen-banner.webp"
+        alt=""
+        aria-hidden="true"
+      >
+
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <p class="section-kicker">Starter · Lektion</p>
+
+        <h2 id="hero-title" class="hero-title">
+          Zahlen von 0 bis 20
+        </h2>
+
+        <p class="hero-subtitle">
+          Lerne die Zahlen mit Felix!
+        </p>
+
+        <p class="hero-translation" lang="ro">
+          Învață numerele împreună cu Felix!
+        </p>
+
+        <div class="hero-actions">
+          <button
+            id="play-intro-button"
+            class="primary-button audio-trigger"
+            type="button"
+            data-audio="../audio/zahlen/intro.mp3"
+            aria-label="Einführung anhören"
+          >
+            <svg
+              class="button-svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 10v4h4l5 4V6l-5 4H5Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 9a4 4 0 0 1 0 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+              <path
+                d="M19.5 6.5a8 8 0 0 1 0 11"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <span>Einführung hören</span>
+          </button>
+
+          <button
+            id="start-lesson-button"
+            class="primary-button start-button"
+            type="button"
+          >
+            <span>Lektion starten</span>
+
+            <svg
+              class="button-svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="m9 5 7 7-7 7"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </button>
+        </div>
+
+        <p
+          id="intro-audio-status"
+          class="audio-status"
+          aria-live="polite"
+        ></p>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         NAVIGAREA ETAPELOR
+    =================================================== -->
+    <nav
+      id="lesson-navigation"
+      class="lesson-navigation"
+      aria-label="Lektionsabschnitte"
+      hidden
+    >
+      <ol class="stage-navigation-list">
+        <li>
+          <button
+            class="stage-navigation-button active"
+            type="button"
+            data-target="stage-1"
+            data-stage="1"
+          >
+            <span class="stage-navigation-number">1</span>
+            <span>Entdecke</span>
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="stage-navigation-button locked"
+            type="button"
+            data-target="stage-2"
+            data-stage="2"
+            disabled
+          >
+            <span class="stage-navigation-number">2</span>
+            <span>Zähle</span>
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="stage-navigation-button locked"
+            type="button"
+            data-target="stage-3"
+            data-stage="3"
+            disabled
+          >
+            <span class="stage-navigation-number">3</span>
+            <span>Paare</span>
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="stage-navigation-button locked"
+            type="button"
+            data-target="stage-4"
+            data-stage="4"
+            disabled
+          >
+            <span class="stage-navigation-number">4</span>
+            <span>Hören</span>
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="stage-navigation-button locked"
+            type="button"
+            data-target="stage-5"
+            data-stage="5"
+            disabled
+          >
+            <span class="stage-navigation-number">5</span>
+            <span>Zahlenreihe</span>
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="stage-navigation-button locked"
+            type="button"
+            data-target="stage-6"
+            data-stage="6"
+            disabled
+          >
+            <span class="stage-navigation-number">6</span>
+            <span>Einkaufen</span>
+          </button>
+        </li>
+
+        <li>
+          <button
+            class="stage-navigation-button locked"
+            type="button"
+            data-target="stage-7"
+            data-stage="7"
+            disabled
+          >
+            <span class="stage-navigation-number">7</span>
+            <span>Quiz</span>
+          </button>
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ==================================================
+         CONȚINUTUL LECȚIEI
+    =================================================== -->
+    <div
+      id="lesson-content"
+      class="lesson-content"
+      hidden
+    >
+
+      <!-- ==================================================
+           ETAPA 1 – NUMERELE 0–20
+      =================================================== -->
+      <section
+        id="stage-1"
+        class="lesson-stage active-stage"
+        data-stage="1"
+        aria-labelledby="stage-1-title"
+      >
+        <div class="stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">1</div>
+
+            <div>
+              <p class="section-kicker">Hören und nachsprechen</p>
+
+              <h2 id="stage-1-title">
+                Entdecke die Zahlen
+              </h2>
+
+              <p class="stage-instruction">
+                Klicke auf eine Zahl, höre gut zu und sprich sie laut nach.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Apasă pe un număr, ascultă cu atenție și repetă-l cu voce tare.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/aufgabe-1.mp3"
+              aria-label="Aufgabe 1 anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="discover-layout">
+            <div class="felix-number-panel">
+              <div class="felix-card-wrapper">
+                <img
+                  id="felix-number-image"
+                  class="felix-number-image"
+                  src="../assets/images/lessons/zahlen/felix-zeigt-zahl.webp"
+                  alt="Felix zeigt eine Zahl"
+                >
+
+                <div
+                  id="felix-number-display"
+                  class="felix-number-display"
+                  aria-live="polite"
+                >
+                  0
+                </div>
+              </div>
+
+              <div class="selected-number-information">
+                <p
+                  id="selected-number-digit"
+                  class="selected-number-digit"
+                >
+                  0
+                </p>
+
+                <p
+                  id="selected-number-word"
+                  class="selected-number-word"
+                >
+                  null
+                </p>
+
+                <p
+                  id="selected-number-translation"
+                  class="selected-number-translation"
+                  lang="ro"
+                >
+                  zero
+                </p>
+
+                <button
+                  id="repeat-selected-number"
+                  class="secondary-button"
+                  type="button"
+                  data-audio="../audio/zahlen/null.mp3"
+                >
+                  <svg
+                    class="button-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M5 10v4h4l5 4V6l-5 4H5Z"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linejoin="round"
+                    />
+                    <path
+                      d="M17 9a4 4 0 0 1 0 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                  </svg>
+
+                  <span>Noch einmal</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="numbers-learning-area">
+              <div
+                id="numbers-grid"
+                class="numbers-grid"
+                aria-label="Zahlen von null bis zwanzig"
+              >
+                <!-- Cardurile 0–20 sunt generate prin zahlen.js -->
+              </div>
+
+              <p
+                id="numbers-progress-text"
+                class="activity-progress-text"
+                aria-live="polite"
+              >
+                0 von 21 Zahlen gehört
+              </p>
+            </div>
+          </div>
+
+          <div class="number-pattern-box">
+            <div class="pattern-heading">
+              <h3>So entstehen die Zahlen</h3>
+
+              <p lang="ro">
+                Așa se formează numerele
+              </p>
+            </div>
+
+            <div class="pattern-examples">
+              <div class="pattern-example">
+                <span>drei</span>
+                <span class="pattern-sign" aria-hidden="true">+</span>
+                <span>zehn</span>
+                <span class="pattern-sign" aria-hidden="true">=</span>
+                <strong>dreizehn</strong>
+              </div>
+
+              <div class="pattern-example">
+                <span>vier</span>
+                <span class="pattern-sign" aria-hidden="true">+</span>
+                <span>zehn</span>
+                <span class="pattern-sign" aria-hidden="true">=</span>
+                <strong>vierzehn</strong>
+              </div>
+
+              <div class="pattern-example special-pattern">
+                <span>sechs</span>
+                <span class="pattern-arrow" aria-hidden="true">→</span>
+                <strong>sechzehn</strong>
+              </div>
+
+              <div class="pattern-example special-pattern">
+                <span>sieben</span>
+                <span class="pattern-arrow" aria-hidden="true">→</span>
+                <strong>siebzehn</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="number-line-wrapper">
+            <h3>Zahlen von 0 bis 20</h3>
+
+            <div class="number-line-image-wrapper">
+              <img
+                class="number-line-image"
+                src="../assets/images/lessons/zahlen/number-line-0-20.webp"
+                alt="Zahlenweg mit 21 Stationen"
+              >
+
+              <div
+                id="number-line-overlay"
+                class="number-line-overlay"
+                aria-hidden="true"
+              >
+                <!-- Numerele vor fi poziționate prin JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <div class="stage-completion">
+            <p
+              id="stage-1-feedback"
+              class="stage-feedback"
+              aria-live="polite"
+            ></p>
+
+            <button
+              id="complete-stage-1"
+              class="next-stage-button"
+              type="button"
+              disabled
+            >
+              <span>Weiter zu Aufgabe 2</span>
+
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m9 5 7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           ETAPA 2 – NUMĂRĂ OBIECTELE
+      =================================================== -->
+      <section
+        id="stage-2"
+        class="lesson-stage locked-stage"
+        data-stage="2"
+        aria-labelledby="stage-2-title"
+        aria-hidden="true"
+      >
+        <div class="stage-lock-overlay">
+          <div class="lock-message">
+            <svg
+              class="lock-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p>Schließe zuerst Aufgabe 1 ab.</p>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">2</div>
+
+            <div>
+              <p class="section-kicker">Zählen und wählen</p>
+
+              <h2 id="stage-2-title">
+                Zähle mit Felix
+              </h2>
+
+              <p class="stage-instruction">
+                Zähle die Gegenstände und wähle die richtige Zahl.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Numără obiectele și alege cifra corectă.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/aufgabe-2.mp3"
+              aria-label="Aufgabe 2 anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="counting-activity-layout">
+            <div class="activity-image-panel">
+              <img
+                class="activity-main-image"
+                src="../assets/images/lessons/zahlen/zahlen-objects.webp"
+                alt="Gruppen mit Äpfeln, Bleistiften, Bällen, Bauklötzen und Blumen"
+              >
+            </div>
+
+            <div
+              id="counting-question-panel"
+              class="question-panel"
+            >
+              <div class="question-counter">
+                <span id="counting-current-question">1</span>
+                <span aria-hidden="true">/</span>
+                <span id="counting-total-questions">5</span>
+              </div>
+
+              <p class="question-label">Wie viele sind es?</p>
+
+              <h3 id="counting-object-name">
+                Äpfel
+              </h3>
+
+              <p
+                id="counting-object-translation"
+                class="question-translation"
+                lang="ro"
+              >
+                mere
+              </p>
+
+              <div
+                id="counting-answer-options"
+                class="answer-options"
+                role="group"
+                aria-label="Antwortmöglichkeiten"
+              >
+                <!-- Variantele sunt generate prin JavaScript -->
+              </div>
+
+              <p
+                id="counting-feedback"
+                class="activity-feedback"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+
+          <div class="stage-completion">
+            <button
+              id="restart-counting"
+              class="secondary-button"
+              type="button"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 11a8 8 0 1 1 2 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M4 5v6h6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <span>Neu starten</span>
+            </button>
+
+            <button
+              id="complete-stage-2"
+              class="next-stage-button"
+              type="button"
+              disabled
+            >
+              <span>Weiter zu Aufgabe 3</span>
+
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m9 5 7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           ETAPA 3 – ASOCIERE CIFRĂ–CUVÂNT
+      =================================================== -->
+      <section
+        id="stage-3"
+        class="lesson-stage locked-stage"
+        data-stage="3"
+        aria-labelledby="stage-3-title"
+        aria-hidden="true"
+      >
+        <div class="stage-lock-overlay">
+          <div class="lock-message">
+            <svg
+              class="lock-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p>Schließe zuerst Aufgabe 2 ab.</p>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">3</div>
+
+            <div>
+              <p class="section-kicker">Zahl und Zahlwort</p>
+
+              <h2 id="stage-3-title">
+                Finde die Paare
+              </h2>
+
+              <p class="stage-instruction">
+                Ordne jede Zahl dem richtigen Zahlwort zu.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Asociază fiecare cifră cu numărul scris corect.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/aufgabe-3.mp3"
+              aria-label="Aufgabe 3 anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="matching-layout">
+            <div class="matching-felix-panel">
+              <img
+                class="matching-felix-image"
+                src="../assets/images/lessons/zahlen/felix-denkt.webp"
+                alt="Felix denkt nach"
+              >
+
+              <p>
+                Welche Karten gehören zusammen?
+              </p>
+            </div>
+
+            <div class="matching-game">
+              <p
+                id="matching-round-counter"
+                class="activity-progress-text"
+                aria-live="polite"
+              >
+                0 von 6 Paaren gefunden
+              </p>
+
+              <div
+                id="matching-cards"
+                class="matching-cards"
+                aria-label="Zahlen-Memory"
+              >
+                <!-- Cardurile sunt generate prin JavaScript -->
+              </div>
+            </div>
+          </div>
+
+          <p
+            id="matching-feedback"
+            class="activity-feedback centered-feedback"
+            aria-live="polite"
+          ></p>
+
+          <div class="stage-completion">
+            <button
+              id="restart-matching"
+              class="secondary-button"
+              type="button"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 11a8 8 0 1 1 2 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M4 5v6h6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <span>Neu mischen</span>
+            </button>
+
+            <button
+              id="complete-stage-3"
+              class="next-stage-button"
+              type="button"
+              disabled
+            >
+              <span>Weiter zu Aufgabe 4</span>
+
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m9 5 7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           ETAPA 4 – EXERCIȚIU AUDIO
+      =================================================== -->
+      <section
+        id="stage-4"
+        class="lesson-stage locked-stage"
+        data-stage="4"
+        aria-labelledby="stage-4-title"
+        aria-hidden="true"
+      >
+        <div class="stage-lock-overlay">
+          <div class="lock-message">
+            <svg
+              class="lock-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p>Schließe zuerst Aufgabe 3 ab.</p>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">4</div>
+
+            <div>
+              <p class="section-kicker">Hören und erkennen</p>
+
+              <h2 id="stage-4-title">
+                Was hörst du?
+              </h2>
+
+              <p class="stage-instruction">
+                Höre die Zahl und wähle die richtige Antwort.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Ascultă numărul și alege răspunsul corect.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/aufgabe-4.mp3"
+              aria-label="Aufgabe 4 anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="listening-activity">
+            <div class="listening-image-wrapper">
+              <img
+                class="listening-image"
+                src="../assets/images/lessons/zahlen/zahlen-hoeren.webp"
+                alt="Felix hört aufmerksam zu"
+              >
+
+              <div
+                id="listening-card-overlay"
+                class="listening-card-overlay"
+              >
+                <!-- Butoanele sunt poziționate prin CSS și JS -->
+              </div>
+            </div>
+
+            <div class="listening-controls">
+              <p
+                id="listening-question-counter"
+                class="activity-progress-text"
+              >
+                Frage 1 von 6
+              </p>
+
+              <button
+                id="play-listening-number"
+                class="large-audio-button"
+                type="button"
+              >
+                <svg
+                  class="button-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 10v4h4l5 4V6l-5 4H5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 9a4 4 0 0 1 0 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M19.5 6.5a8 8 0 0 1 0 11"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+
+                <span>Zahl hören</span>
+              </button>
+
+              <p
+                id="listening-feedback"
+                class="activity-feedback"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+
+          <div class="stage-completion">
+            <button
+              id="restart-listening"
+              class="secondary-button"
+              type="button"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 11a8 8 0 1 1 2 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M4 5v6h6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <span>Neu starten</span>
+            </button>
+
+            <button
+              id="complete-stage-4"
+              class="next-stage-button"
+              type="button"
+              disabled
+            >
+              <span>Weiter zu Aufgabe 5</span>
+
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m9 5 7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           ETAPA 5 – ȘIRURI NUMERICE
+      =================================================== -->
+      <section
+        id="stage-5"
+        class="lesson-stage locked-stage"
+        data-stage="5"
+        aria-labelledby="stage-5-title"
+        aria-hidden="true"
+      >
+        <div class="stage-lock-overlay">
+          <div class="lock-message">
+            <svg
+              class="lock-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p>Schließe zuerst Aufgabe 4 ab.</p>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">5</div>
+
+            <div>
+              <p class="section-kicker">Ergänzen</p>
+
+              <h2 id="stage-5-title">
+                Welche Zahl fehlt?
+              </h2>
+
+              <p class="stage-instruction">
+                Sieh dir die Zahlenreihe an und ergänze die fehlenden Zahlen.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Privește șirul și completează numerele lipsă.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/aufgabe-5.mp3"
+              aria-label="Aufgabe 5 anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="sequence-activity">
+            <p
+              id="sequence-round-counter"
+              class="activity-progress-text"
+            >
+              Reihe 1 von 5
+            </p>
+
+            <div class="sequence-image-wrapper">
+              <img
+                class="sequence-image"
+                src="../assets/images/lessons/zahlen/zahlenreihe.webp"
+                alt="Zahlenweg mit zehn leeren Steinen"
+              >
+
+              <div
+                id="sequence-overlay"
+                class="sequence-overlay"
+              >
+                <!-- Șirul este generat și poziționat prin JavaScript -->
+              </div>
+            </div>
+
+            <div class="sequence-actions">
+              <button
+                id="check-sequence-button"
+                class="primary-button"
+                type="button"
+              >
+                <svg
+                  class="button-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m5 12 4 4L19 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+
+                <span>Prüfen</span>
+              </button>
+
+              <p
+                id="sequence-feedback"
+                class="activity-feedback"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+
+          <div class="stage-completion">
+            <button
+              id="restart-sequence"
+              class="secondary-button"
+              type="button"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 11a8 8 0 1 1 2 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M4 5v6h6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <span>Neu starten</span>
+            </button>
+
+            <button
+              id="complete-stage-5"
+              class="next-stage-button"
+              type="button"
+              disabled
+            >
+              <span>Weiter zu Aufgabe 6</span>
+
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m9 5 7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           ETAPA 6 – FELIX LA CUMPĂRĂTURI
+      =================================================== -->
+      <section
+        id="stage-6"
+        class="lesson-stage locked-stage"
+        data-stage="6"
+        aria-labelledby="stage-6-title"
+        aria-hidden="true"
+      >
+        <div class="stage-lock-overlay">
+          <div class="lock-message">
+            <svg
+              class="lock-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p>Schließe zuerst Aufgabe 5 ab.</p>
+          </div>
+        </div>
+
+        <div class="stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">6</div>
+
+            <div>
+              <p class="section-kicker">Hören und zählen</p>
+
+              <h2 id="stage-6-title">
+                Felix kauft ein
+              </h2>
+
+              <p class="stage-instruction">
+                Höre gut zu, zähle die Gegenstände und wähle die richtige Zahl.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Ascultă cu atenție, numără obiectele și alege cifra corectă.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/aufgabe-6.mp3"
+              aria-label="Aufgabe 6 anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div class="shopping-activity">
+            <div class="shopping-image-wrapper">
+              <img
+                class="shopping-image"
+                src="../assets/images/lessons/zahlen/felix-einkaufen.webp"
+                alt="Felix an einem Marktstand"
+              >
+
+              <div
+                id="shopping-answer-overlay"
+                class="shopping-answer-overlay"
+              >
+                <!-- Răspunsurile sunt poziționate prin CSS și JavaScript -->
+              </div>
+            </div>
+
+            <div class="shopping-controls">
+              <p
+                id="shopping-question-counter"
+                class="activity-progress-text"
+              >
+                Aufgabe 1 von 4
+              </p>
+
+              <button
+                id="play-shopping-audio"
+                class="large-audio-button"
+                type="button"
+              >
+                <svg
+                  class="button-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 10v4h4l5 4V6l-5 4H5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 9a4 4 0 0 1 0 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                  <path
+                    d="M19.5 6.5a8 8 0 0 1 0 11"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+
+                <span>Satz hören</span>
+              </button>
+
+              <p
+                id="shopping-sentence"
+                class="shopping-sentence"
+                aria-live="polite"
+              ></p>
+
+              <p
+                id="shopping-translation"
+                class="shopping-translation"
+                lang="ro"
+              ></p>
+
+              <p
+                id="shopping-feedback"
+                class="activity-feedback"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+
+          <div class="stage-completion">
+            <button
+              id="restart-shopping"
+              class="secondary-button"
+              type="button"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4 11a8 8 0 1 1 2 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M4 5v6h6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+
+              <span>Neu starten</span>
+            </button>
+
+            <button
+              id="complete-stage-6"
+              class="next-stage-button"
+              type="button"
+              disabled
+            >
+              <span>Weiter zum Quiz</span>
+
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="m9 5 7 7-7 7"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.4"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           ETAPA 7 – QUIZ FINAL
+      =================================================== -->
+      <section
+        id="stage-7"
+        class="lesson-stage locked-stage"
+        data-stage="7"
+        aria-labelledby="stage-7-title"
+        aria-hidden="true"
+      >
+        <div class="stage-lock-overlay">
+          <div class="lock-message">
+            <svg
+              class="lock-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <rect
+                x="5"
+                y="10"
+                width="14"
+                height="10"
+                rx="2"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+              />
+              <path
+                d="M8 10V7a4 4 0 0 1 8 0v3"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <p>Schließe zuerst Aufgabe 6 ab.</p>
+          </div>
+        </div>
+
+        <div class="stage-card quiz-stage-card">
+          <div class="stage-heading">
+            <div class="stage-number" aria-hidden="true">7</div>
+
+            <div>
+              <p class="section-kicker">Abschluss</p>
+
+              <h2 id="stage-7-title">
+                Zahlen-Quiz
+              </h2>
+
+              <p class="stage-instruction">
+                Zeig, was du gelernt hast.
+              </p>
+
+              <p class="stage-translation" lang="ro">
+                Arată ce ai învățat.
+              </p>
+            </div>
+
+            <button
+              class="round-audio-button audio-trigger"
+              type="button"
+              data-audio="../audio/zahlen/quiz-intro.mp3"
+              aria-label="Quiz-Einführung anhören"
+            >
+              <svg
+                class="button-svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  d="M5 10v4h4l5 4V6l-5 4H5Z"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M17 9a4 4 0 0 1 0 6"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+              </svg>
+            </button>
+          </div>
+
+          <div
+            id="quiz-start-screen"
+            class="quiz-start-screen"
+          >
+            <img
+              class="quiz-start-image"
+              src="../assets/images/lessons/zahlen/zahlen-quiz.webp"
+              alt="Felix neben einer leeren Quiztafel"
+            >
+
+            <div class="quiz-start-content">
+              <h3>Bist du bereit?</h3>
+
+              <p>
+                Das Quiz hat 10 Fragen.
+              </p>
+
+              <p lang="ro">
+                Quizul conține 10 întrebări.
+              </p>
+
+              <button
+                id="start-quiz-button"
+                class="primary-button"
+                type="button"
+              >
+                <span>Quiz starten</span>
+
+                <svg
+                  class="button-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="m9 5 7 7-7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div
+            id="quiz-game"
+            class="quiz-game"
+            hidden
+          >
+            <div class="quiz-status">
+              <p>
+                Frage
+                <strong id="quiz-current-question">1</strong>
+                von
+                <strong id="quiz-total-questions">10</strong>
+              </p>
+
+              <p>
+                Punkte:
+                <strong id="quiz-score">0</strong>
+              </p>
+            </div>
+
+            <div class="quiz-question-card">
+              <p
+                id="quiz-question-type"
+                class="quiz-question-type"
+              >
+                Wähle die richtige Antwort.
+              </p>
+
+              <h3
+                id="quiz-question"
+                class="quiz-question"
+              ></h3>
+
+              <p
+                id="quiz-question-translation"
+                class="quiz-question-translation"
+                lang="ro"
+              ></p>
+
+              <button
+                id="quiz-audio-button"
+                class="large-audio-button"
+                type="button"
+                hidden
+              >
+                <svg
+                  class="button-svg"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M5 10v4h4l5 4V6l-5 4H5Z"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linejoin="round"
+                  />
+                  <path
+                    d="M17 9a4 4 0 0 1 0 6"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                  />
+                </svg>
+
+                <span>Hören</span>
+              </button>
+
+              <div
+                id="quiz-answer-options"
+                class="quiz-answer-options"
+                role="group"
+                aria-label="Quiz-Antwortmöglichkeiten"
+              >
+                <!-- Variantele sunt generate prin JavaScript -->
+              </div>
+
+              <p
+                id="quiz-feedback"
+                class="activity-feedback"
+                aria-live="polite"
+              ></p>
+            </div>
+          </div>
+
+          <div
+            id="quiz-result"
+            class="quiz-result"
+            hidden
+          >
+            <img
+              class="quiz-result-felix"
+              src="../assets/images/lessons/zahlen/felix-feiert.webp"
+              alt="Felix feiert"
+            >
+
+            <div class="quiz-result-content">
+              <h3>Quiz geschafft!</h3>
+
+              <p class="quiz-result-score">
+                <span id="final-score">0</span>
+                von
+                <span>10</span>
+                Punkten
+              </p>
+
+              <p
+                id="quiz-result-message"
+                class="quiz-result-message"
+              ></p>
+
+              <div class="quiz-result-actions">
+                <button
+                  id="restart-quiz-button"
+                  class="secondary-button"
+                  type="button"
+                >
+                  <svg
+                    class="button-svg"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M4 11a8 8 0 1 1 2 6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <path
+                      d="M4 5v6h6"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+
+                  <span>Noch einmal</span>
+                </button>
+
+                <button
+                  id="open-diploma-button"
+                  class="primary-button"
+                  type="button"
+                  hidden
+                >
+                  <span>Diplom öffnen</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================================================
+           FINALUL LECȚIEI
+      =================================================== -->
+      <section
+        id="lesson-complete"
+        class="lesson-complete"
+        hidden
+        aria-labelledby="lesson-complete-title"
+      >
+        <img
+          class="lesson-complete-felix"
+          src="../assets/images/lessons/zahlen/felix-feiert.webp"
+          alt="Felix feiert den Abschluss der Lektion"
+        >
+
+        <div>
+          <p class="section-kicker">Lektion geschafft</p>
+
+          <h2 id="lesson-complete-title">
+            Super gemacht!
+          </h2>
+
+          <p>
+            Du kennst jetzt die Zahlen von null bis zwanzig.
+          </p>
+
+          <p lang="ro">
+            Acum cunoști numerele de la zero la douăzeci.
+          </p>
+
+          <button
+            class="secondary-button audio-trigger"
+            type="button"
+            data-audio="../audio/zahlen/super-gemacht.mp3"
+          >
+            <svg
+              class="button-svg"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path
+                d="M5 10v4h4l5 4V6l-5 4H5Z"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M17 9a4 4 0 0 1 0 6"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+              />
+            </svg>
+
+            <span>Abschluss hören</span>
+          </button>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ==================================================
+       DIPLOMĂ
+  =================================================== -->
+  <div
+    id="diploma-modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="diploma-modal-title"
+    hidden
+  >
+    <div
+      class="modal-backdrop"
+      data-close-modal
+    ></div>
+
+    <div class="modal-dialog diploma-dialog">
+      <button
+        id="close-diploma-button"
+        class="modal-close-button"
+        type="button"
+        aria-label="Diplom schließen"
+      >
+        <svg
+          class="button-svg"
+          viewBox="0 0 24 24"
+          aria-hidden="true"
+        >
+          <path
+            d="m6 6 12 12M18 6 6 18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.4"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+      <div
+        id="diploma"
+        class="diploma"
+      >
+        <img
+          class="diploma-background"
+          src="../assets/images/lessons/zahlen/zahlen-diplom.webp"
+          alt=""
+          aria-hidden="true"
+        >
+
+        <div class="diploma-content">
+          <p class="diploma-brand">
+            Kleine Deutschwelt
+          </p>
+
+          <h2 id="diploma-modal-title">
+            Zahlen-Meister
+          </h2>
+
+          <p class="diploma-award-text">
+            Dieses Diplom erhält
+          </p>
+
+          <p
+            id="diploma-student-name"
+            class="diploma-student-name"
+          >
+            Deutschlernkind
+          </p>
+
+          <p class="diploma-description">
+            für den erfolgreichen Abschluss der Lektion
+          </p>
+
+          <h3>Zahlen von 0 bis 20</h3>
+
+          <div class="diploma-details">
+            <p>
+              Ergebnis:
+              <strong id="diploma-score">10/10</strong>
+            </p>
+
+            <p>
+              Datum:
+              <strong id="diploma-date"></strong>
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="diploma-name-form">
+        <label for="student-name-input">
+          Dein Name
+        </label>
+
+        <input
+          id="student-name-input"
+          type="text"
+          maxlength="32"
+          autocomplete="name"
+          placeholder="Name eingeben"
+        >
+
+        <button
+          id="apply-student-name"
+          class="secondary-button"
+          type="button"
+        >
+          Name übernehmen
+        </button>
+      </div>
+
+      <div class="modal-actions">
+        <button
+          id="print-diploma-button"
+          class="primary-button"
+          type="button"
+        >
+          <svg
+            class="button-svg"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M7 9V4h10v5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <rect
+              x="5"
+              y="14"
+              width="14"
+              height="6"
+              rx="1"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            />
+            <path
+              d="M5 16H3v-6h18v6h-2"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <span>Diplom drucken</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================================================
+       TEMPLATE PENTRU CARDURILE NUMERELOR
+  =================================================== -->
+  <template id="number-card-template">
+    <button
+      class="number-card"
+      type="button"
+    >
+      <span class="number-card-digit"></span>
+
+      <span class="number-card-word"></span>
+
+      <span
+        class="number-card-translation"
+        lang="ro"
+      ></span>
+
+      <span
+        class="number-card-audio-indicator"
+        aria-hidden="true"
+      >
+        <svg
+          class="button-svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M5 10v4h4l5 4V6l-5 4H5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M17 9a4 4 0 0 1 0 6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </span>
+    </button>
+  </template>
+
+  <!-- ==================================================
+       FEEDBACK GLOBAL
+  =================================================== -->
+  <div
+    id="feedback-toast"
+    class="feedback-toast"
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+    <p id="feedback-toast-text"></p>
+  </div>
+
+  <!-- ==================================================
+       ELEMENTUL AUDIO CENTRAL
+  =================================================== -->
+  <audio
+    id="lesson-audio"
+    preload="none"
+  ></audio>
+
+  <script src="zahlen.js" defer></script>
+</body>
+</html>
