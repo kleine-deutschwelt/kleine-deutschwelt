@@ -14,12 +14,13 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const state = {
-    currentStep: 1,
-    completedSteps: new Set(),
-    weekdaySelection: [],
-    soundEnabled: true,
-    activeSpeechButton: null
-  };
+  currentStep: 1,
+  completedSteps: new Set(),
+  weekdaySelection: [],
+  soundEnabled: true,
+  activeAudio: null,
+  activeAudioButton: null
+};
 
   const startButton = document.getElementById("start-lesson");
   const restartButton = document.getElementById("restart-lesson");
@@ -57,11 +58,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    document.querySelectorAll("[data-speak]").forEach((button) => {
-      button.addEventListener("click", () => {
-        speakGerman(button.dataset.speak, button);
-      });
-    });
+    document.querySelectorAll("[data-audio]").forEach((button) => {
+  button.addEventListener("click", () => {
+    playAudioFile(button.dataset.audio, button);
+  });
+});
 
     document.querySelectorAll("input[type='text']").forEach((input) => {
       input.addEventListener("input", () => {
@@ -209,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
         false
       );
 
-      speakFeedback("Bitte löse zuerst alle Aufgaben.");
+      playFeedbackAudio("wrong");
       return;
     }
 
@@ -220,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
         false
       );
 
-      speakFeedback("Versuche es noch einmal.");
+      playFeedbackAudio("wrong");
       return;
     }
 
@@ -361,7 +362,7 @@ document.addEventListener("DOMContentLoaded", () => {
       true
     );
 
-    speakFeedback("Richtig! Super gemacht.");
+    playFeedbackAudio("correct");
 
     updateProgress();
 
@@ -418,10 +419,6 @@ document.addEventListener("DOMContentLoaded", () => {
       finalMessage.textContent =
         "Du hast die Übung beendet. Wiederhole die Aufgaben, um alle Sterne zu sammeln.";
     }
-
-    speakFeedback(
-      "Super gemacht! Du hast Übung eins erfolgreich abgeschlossen."
-    );
 
     finalCard.scrollIntoView({
       behavior: prefersReducedMotion() ? "auto" : "smooth",
