@@ -1,1 +1,761 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <meta
+    name="description"
+    content="Interaktive Wiederholungsübungen für die Starter-Lektionen der Kleinen Deutschwelt."
+  >
+
+  <title>Übung 1 | Kleine Deutschwelt</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="uebung1.css">
+</head>
+
+<body>
+  <a class="skip-link" href="#main-content">Zum Inhalt springen</a>
+
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Zur Startseite">
+      <img
+        src="../assets/images/logo/logo-icon.png"
+        alt=""
+        class="brand__logo"
+        onerror="this.style.display='none'"
+      >
+
+      <span class="brand__text">
+        <strong>Kleine Deutschwelt</strong>
+        <small>Deutsch lernen mit Spaß!</small>
+      </span>
+    </a>
+
+    <nav class="topbar__actions" aria-label="Seitennavigation">
+      <a class="topbar__link" href="../index.html">Home</a>
+      <button class="sound-toggle" id="sound-toggle" type="button" aria-pressed="true">
+        <span aria-hidden="true">♪</span>
+        <span id="sound-toggle-text">Ton an</span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero__content">
+        <p class="eyebrow">Starter · Wiederholung</p>
+
+        <h1 id="page-title">Übung 1</h1>
+
+        <p class="hero__subtitle">
+          Wiederhole die acht Starter-Themen und sammle acht goldene Sterne.
+        </p>
+
+        <div class="hero__topics" aria-label="Themen dieser Übung">
+          <span>Vorstellung</span>
+          <span>Begrüßung</span>
+          <span>Alphabet</span>
+          <span>Wochentage</span>
+          <span>Monate</span>
+          <span>Jahreszeiten</span>
+          <span>Zahlen</span>
+          <span>Farben</span>
+        </div>
+
+        <button class="primary-button hero__button" id="start-lesson" type="button">
+          Übung starten
+        </button>
+      </div>
+
+      <div class="hero__visual" aria-hidden="true">
+        <div class="hero__sun"></div>
+
+        <span class="floating-shape floating-shape--one">A</span>
+        <span class="floating-shape floating-shape--two">7</span>
+        <span class="floating-shape floating-shape--three">B</span>
+
+        <img
+          src="../assets/images/mascot/felix-default.png"
+          alt=""
+          class="hero__felix"
+          onerror="this.style.display='none'; document.querySelector('.felix-fallback').hidden=false;"
+        >
+
+        <div class="felix-fallback" hidden>
+          <div class="felix-fallback__face">
+            <span class="felix-fallback__eye"></span>
+            <span class="felix-fallback__eye"></span>
+            <span class="felix-fallback__nose"></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROGRESS -->
+    <section class="progress-panel" id="progress-panel" hidden aria-label="Fortschritt">
+      <div class="progress-panel__top">
+        <div>
+          <span class="progress-panel__label">Dein Fortschritt</span>
+          <strong id="progress-text">Aufgabe 1 von 8</strong>
+        </div>
+
+        <div class="star-counter" aria-live="polite">
+          <span class="star-counter__star" aria-hidden="true">★</span>
+          <strong id="star-count">0</strong>
+          <span>/ 8</span>
+        </div>
+      </div>
+
+      <div
+        class="progress-track"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="8"
+        aria-valuenow="0"
+        aria-label="Gelöste Aufgaben"
+      >
+        <span class="progress-track__fill" id="progress-fill"></span>
+      </div>
+
+      <div class="step-dots" id="step-dots" aria-label="Aufgabenübersicht"></div>
+    </section>
+
+    <!-- EXERCISES -->
+    <section class="lesson-area" id="lesson-area" hidden>
+      <!-- 1. VORSTELLUNG -->
+      <article class="exercise-card is-active" data-step="1">
+        <div class="exercise-card__header">
+          <div class="step-number">1</div>
+
+          <div>
+            <p class="exercise-card__topic">Vorstellung</p>
+            <h2>Wer ist das?</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Hallo! Ich heiße Mia. Ich bin neun Jahre alt."
+            aria-label="Text auf Deutsch anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <div class="speech-box">
+          <p>Hallo! Ich heiße Mia. Ich bin neun Jahre alt.</p>
+        </div>
+
+        <fieldset class="question-block" data-question="intro-name">
+          <legend>Wie heißt das Mädchen?</legend>
+
+          <label class="choice-card">
+            <input type="radio" name="intro-name" value="Leonie">
+            <span>Leonie</span>
+          </label>
+
+          <label class="choice-card">
+            <input type="radio" name="intro-name" value="Mia">
+            <span>Mia</span>
+          </label>
+
+          <label class="choice-card">
+            <input type="radio" name="intro-name" value="Johanna">
+            <span>Johanna</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="question-block" data-question="intro-age">
+          <legend>Wie alt ist Mia?</legend>
+
+          <label class="choice-card">
+            <input type="radio" name="intro-age" value="8">
+            <span>acht Jahre alt</span>
+          </label>
+
+          <label class="choice-card">
+            <input type="radio" name="intro-age" value="9">
+            <span>neun Jahre alt</span>
+          </label>
+
+          <label class="choice-card">
+            <input type="radio" name="intro-age" value="10">
+            <span>zehn Jahre alt</span>
+          </label>
+        </fieldset>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="1">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-1" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 2. BEGRÜSSUNG -->
+      <article class="exercise-card" data-step="2" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">2</div>
+
+          <div>
+            <p class="exercise-card__topic">Begrüßung</p>
+            <h2>Welche Begrüßung passt?</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Guten Morgen! Guten Tag! Guten Abend! Gute Nacht!"
+            aria-label="Begrüßungen anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Wähle für jede Situation den passenden Ausdruck.
+        </p>
+
+        <div class="select-grid">
+          <label class="select-task">
+            <span class="select-task__time">07:30 Uhr</span>
+            <span class="select-task__description">Du kommst morgens in die Schule.</span>
+
+            <select data-answer="Guten Morgen">
+              <option value="">Bitte wählen</option>
+              <option>Guten Morgen</option>
+              <option>Guten Abend</option>
+              <option>Gute Nacht</option>
+            </select>
+          </label>
+
+          <label class="select-task">
+            <span class="select-task__time">14:00 Uhr</span>
+            <span class="select-task__description">Du triffst deine Lehrerin.</span>
+
+            <select data-answer="Guten Tag">
+              <option value="">Bitte wählen</option>
+              <option>Gute Nacht</option>
+              <option>Guten Tag</option>
+              <option>Tschüss</option>
+            </select>
+          </label>
+
+          <label class="select-task">
+            <span class="select-task__time">19:00 Uhr</span>
+            <span class="select-task__description">Du begrüßt einen Gast.</span>
+
+            <select data-answer="Guten Abend">
+              <option value="">Bitte wählen</option>
+              <option>Guten Abend</option>
+              <option>Guten Morgen</option>
+              <option>Auf Wiedersehen</option>
+            </select>
+          </label>
+
+          <label class="select-task">
+            <span class="select-task__time">21:30 Uhr</span>
+            <span class="select-task__description">Du gehst schlafen.</span>
+
+            <select data-answer="Gute Nacht">
+              <option value="">Bitte wählen</option>
+              <option>Guten Tag</option>
+              <option>Gute Nacht</option>
+              <option>Hallo</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="2">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-2" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 3. ALPHABET -->
+      <article class="exercise-card" data-step="3" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">3</div>
+
+          <div>
+            <p class="exercise-card__topic">Alphabet</p>
+            <h2>Welcher Buchstabe fehlt?</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Apfel. Ball. Computer. Fisch."
+            aria-label="Wörter anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Schreibe den fehlenden Anfangsbuchstaben.
+        </p>
+
+        <div class="letter-grid">
+          <label class="letter-task">
+            <input
+              type="text"
+              maxlength="1"
+              autocomplete="off"
+              data-answer="A"
+              aria-label="Anfangsbuchstabe für Apfel"
+            >
+            <span>pfel</span>
+          </label>
+
+          <label class="letter-task">
+            <input
+              type="text"
+              maxlength="1"
+              autocomplete="off"
+              data-answer="B"
+              aria-label="Anfangsbuchstabe für Ball"
+            >
+            <span>all</span>
+          </label>
+
+          <label class="letter-task">
+            <input
+              type="text"
+              maxlength="1"
+              autocomplete="off"
+              data-answer="C"
+              aria-label="Anfangsbuchstabe für Computer"
+            >
+            <span>omputer</span>
+          </label>
+
+          <label class="letter-task">
+            <input
+              type="text"
+              maxlength="1"
+              autocomplete="off"
+              data-answer="F"
+              aria-label="Anfangsbuchstabe für Fisch"
+            >
+            <span>isch</span>
+          </label>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="3">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-3" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 4. WOCHENTAGE -->
+      <article class="exercise-card" data-step="4" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">4</div>
+
+          <div>
+            <p class="exercise-card__topic">Wochentage</p>
+            <h2>Baue die Woche!</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag."
+            aria-label="Wochentage anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Klicke die Wochentage in der richtigen Reihenfolge an.
+        </p>
+
+        <div class="order-workspace">
+          <div class="word-bank" id="weekday-bank" aria-label="Wochentage"></div>
+
+          <div class="answer-sequence">
+            <p>Deine Woche:</p>
+            <ol id="weekday-answer" aria-live="polite"></ol>
+          </div>
+        </div>
+
+        <div class="exercise-actions exercise-actions--split">
+          <button class="secondary-button" id="reset-weekdays" type="button">
+            Neu ordnen
+          </button>
+
+          <button class="check-button" type="button" data-check-step="4">
+            Reihenfolge prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-4" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 5. MONATE -->
+      <article class="exercise-card" data-step="5" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">5</div>
+
+          <div>
+            <p class="exercise-card__topic">Monate</p>
+            <h2>Welche Monate fehlen?</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Januar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember."
+            aria-label="Monate anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Ergänze die vier fehlenden Monate.
+        </p>
+
+        <div class="month-line">
+          <span>Januar</span>
+
+          <label>
+            <span class="sr-only">Monat nach Januar</span>
+            <input type="text" data-answer="Februar" autocomplete="off">
+          </label>
+
+          <span>März</span>
+          <span>April</span>
+
+          <label>
+            <span class="sr-only">Monat nach April</span>
+            <input type="text" data-answer="Mai" autocomplete="off">
+          </label>
+
+          <span>Juni</span>
+          <span>Juli</span>
+
+          <label>
+            <span class="sr-only">Monat nach Juli</span>
+            <input type="text" data-answer="August" autocomplete="off">
+          </label>
+
+          <span>September</span>
+          <span>Oktober</span>
+          <span>November</span>
+
+          <label>
+            <span class="sr-only">Monat nach November</span>
+            <input type="text" data-answer="Dezember" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="5">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-5" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 6. JAHRESZEITEN -->
+      <article class="exercise-card" data-step="6" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">6</div>
+
+          <div>
+            <p class="exercise-card__topic">Jahreszeiten</p>
+            <h2>Welche Jahreszeit ist das?</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Frühling, Sommer, Herbst und Winter."
+            aria-label="Jahreszeiten anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Ordne jeder Beschreibung die richtige Jahreszeit zu.
+        </p>
+
+        <div class="season-grid">
+          <label class="season-task season-task--spring">
+            <span class="season-task__symbol" aria-hidden="true">✿</span>
+            <span>Die Blumen blühen.</span>
+
+            <select data-answer="Frühling">
+              <option value="">Jahreszeit wählen</option>
+              <option>Frühling</option>
+              <option>Sommer</option>
+              <option>Herbst</option>
+              <option>Winter</option>
+            </select>
+          </label>
+
+          <label class="season-task season-task--summer">
+            <span class="season-task__symbol" aria-hidden="true">☀</span>
+            <span>Es ist heiß. Wir essen Eis.</span>
+
+            <select data-answer="Sommer">
+              <option value="">Jahreszeit wählen</option>
+              <option>Frühling</option>
+              <option>Sommer</option>
+              <option>Herbst</option>
+              <option>Winter</option>
+            </select>
+          </label>
+
+          <label class="season-task season-task--autumn">
+            <span class="season-task__symbol" aria-hidden="true">◆</span>
+            <span>Die Blätter fallen.</span>
+
+            <select data-answer="Herbst">
+              <option value="">Jahreszeit wählen</option>
+              <option>Frühling</option>
+              <option>Sommer</option>
+              <option>Herbst</option>
+              <option>Winter</option>
+            </select>
+          </label>
+
+          <label class="season-task season-task--winter">
+            <span class="season-task__symbol" aria-hidden="true">❄</span>
+            <span>Es schneit. Wir tragen Handschuhe.</span>
+
+            <select data-answer="Winter">
+              <option value="">Jahreszeit wählen</option>
+              <option>Frühling</option>
+              <option>Sommer</option>
+              <option>Herbst</option>
+              <option>Winter</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="6">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-6" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 7. ZAHLEN -->
+      <article class="exercise-card" data-step="7" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">7</div>
+
+          <div>
+            <p class="exercise-card__topic">Zahlen 0–20</p>
+            <h2>Rechne und schreibe!</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Drei plus vier ist sieben. Zehn minus zwei ist acht."
+            aria-label="Beispiele anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Löse die Aufgaben. Schreibe die Ergebnisse als deutsche Wörter.
+        </p>
+
+        <div class="number-grid">
+          <label class="number-task">
+            <span>3 + 4 =</span>
+            <input type="text" data-answer="sieben" autocomplete="off">
+          </label>
+
+          <label class="number-task">
+            <span>10 − 2 =</span>
+            <input type="text" data-answer="acht" autocomplete="off">
+          </label>
+
+          <label class="number-task">
+            <span>6 + 5 =</span>
+            <input type="text" data-answer="elf" autocomplete="off">
+          </label>
+
+          <label class="number-task">
+            <span>20 − 8 =</span>
+            <input type="text" data-answer="zwölf|zwoelf" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="7">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-7" role="status" aria-live="polite"></div>
+      </article>
+
+      <!-- 8. FARBEN -->
+      <article class="exercise-card" data-step="8" hidden>
+        <div class="exercise-card__header">
+          <div class="step-number">8</div>
+
+          <div>
+            <p class="exercise-card__topic">Farben</p>
+            <h2>Welche Farbe passt?</h2>
+          </div>
+
+          <button
+            class="listen-button"
+            type="button"
+            data-speak="Die Sonne ist gelb. Das Gras ist grün. Die Kirsche ist rot. Der Schnee ist weiß."
+            aria-label="Farbsätze anhören"
+          >
+            <span aria-hidden="true">♪</span>
+            Hören
+          </button>
+        </div>
+
+        <p class="instruction">
+          Ergänze die passende Farbe.
+        </p>
+
+        <div class="color-grid">
+          <label class="color-task color-task--sun">
+            <span class="color-preview"></span>
+            <span>Die Sonne ist …</span>
+
+            <select data-answer="gelb">
+              <option value="">Farbe wählen</option>
+              <option>blau</option>
+              <option>gelb</option>
+              <option>grün</option>
+            </select>
+          </label>
+
+          <label class="color-task color-task--grass">
+            <span class="color-preview"></span>
+            <span>Das Gras ist …</span>
+
+            <select data-answer="grün">
+              <option value="">Farbe wählen</option>
+              <option>rot</option>
+              <option>grün</option>
+              <option>schwarz</option>
+            </select>
+          </label>
+
+          <label class="color-task color-task--cherry">
+            <span class="color-preview"></span>
+            <span>Die Kirsche ist …</span>
+
+            <select data-answer="rot">
+              <option value="">Farbe wählen</option>
+              <option>rot</option>
+              <option>weiß</option>
+              <option>braun</option>
+            </select>
+          </label>
+
+          <label class="color-task color-task--snow">
+            <span class="color-preview"></span>
+            <span>Der Schnee ist …</span>
+
+            <select data-answer="weiß|weiss">
+              <option value="">Farbe wählen</option>
+              <option>orange</option>
+              <option>weiß</option>
+              <option>lila</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="exercise-actions">
+          <button class="check-button" type="button" data-check-step="8">
+            Antworten prüfen
+          </button>
+        </div>
+
+        <div class="feedback" id="feedback-8" role="status" aria-live="polite"></div>
+      </article>
+    </section>
+
+    <!-- FINAL -->
+    <section class="final-card" id="final-card" hidden aria-labelledby="final-title">
+      <div class="confetti confetti--one"></div>
+      <div class="confetti confetti--two"></div>
+      <div class="confetti confetti--three"></div>
+      <div class="confetti confetti--four"></div>
+
+      <div class="final-card__content">
+        <p class="eyebrow">Übung abgeschlossen</p>
+        <h2 id="final-title">Super gemacht!</h2>
+
+        <p id="final-message">
+          Du hast alle acht Starter-Themen wiederholt.
+        </p>
+
+        <div class="final-score" aria-label="Endergebnis">
+          <span class="final-score__star" aria-hidden="true">★</span>
+          <strong id="final-score-value">8 / 8</strong>
+        </div>
+
+        <div class="final-card__actions">
+          <button class="secondary-button" id="restart-lesson" type="button">
+            Noch einmal
+          </button>
+
+          <a class="primary-button is-link" href="uebung2.html">
+            Weiter zu Übung 2
+          </a>
+        </div>
+      </div>
+
+      <img
+        src="../assets/images/mascot/felix-feiert.png"
+        alt="Felix freut sich über das Ergebnis."
+        class="final-card__felix"
+        onerror="this.src='../assets/images/mascot/felix-default.png';"
+      >
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Kleine Deutschwelt · Deutsch lernen mit Spaß!</p>
+  </footer>
+
+  <script src="uebung1.js"></script>
+</body>
+</html>
