@@ -1,1 +1,186 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Kleine Deutschwelt – Übung 2 für Starter A1.1">
+  <title>Übung 2 | Kleine Deutschwelt</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="uebungen2.css">
+  <script src="uebungen2.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="../index.html" aria-label="Zur Startseite">
+      <img src="../assets/images/logo/logo-icon.png" alt="Kleine Deutschwelt">
+      <span>Kleine Deutschwelt</span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-button" id="soundToggle" type="button" aria-label="Ton ausschalten" aria-pressed="false">Ton an</button>
+      <a class="home-button" href="../index.html">Home</a>
+    </div>
+  </header>
 
+  <main class="page-shell">
+    <section class="hero" id="hero">
+      <div class="hero-copy">
+        <span class="eyebrow">A1.1 · Starter</span>
+        <h1>Übung 2</h1>
+        <p class="hero-subtitle">Jetzt wird es ein bisschen schwieriger!</p>
+        <p>Verbinde Wörter, Sätze und Dialoge. Hör gut zu und zeig Felix, was du schon kannst.</p>
+        <button class="primary-button" id="startLesson" type="button">Übung starten</button>
+      </div>
+      <img class="hero-felix" src="../assets/images/mascot/felix-default.png" alt="Felix begleitet dich durch die Übungen">
+    </section>
+
+    <section class="lesson-area hidden" id="lessonArea" aria-live="polite">
+      <div class="progress-card">
+        <div class="progress-heading">
+          <span id="progressLabel">Aufgabe 1 von 11</span>
+          <strong id="progressPercent">0%</strong>
+        </div>
+        <div class="progress-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+      </div>
+
+      <div id="stages">
+        <section class="stage active" data-stage="0" data-complete="false">
+          <div class="stage-title"><span class="step-number">1</span><div><h2>Ergänze den Dialog</h2><p>Tippe zuerst auf eine Lücke und dann auf das passende Wort.</p></div></div>
+          <div class="dialog-card fill-dialog" id="fillDialog">
+            <p><b>Mia:</b> Hallo! Ich <button class="blank" data-answer="heiße" type="button">___</button> Mia.</p>
+            <p><b>Lukas:</b> Hallo, Mia! Ich <button class="blank" data-answer="bin" type="button">___</button> Lukas.</p>
+            <p><b>Mia:</b> Wie <button class="blank" data-answer="geht" type="button">___</button> es dir?</p>
+            <p><b>Lukas:</b> Mir geht es gut, danke!</p>
+          </div>
+          <div class="word-bank" data-for="fillDialog"><button type="button">geht</button><button type="button">heiße</button><button type="button">bin</button></div>
+          <div class="stage-actions"><button class="secondary-button speak-button" type="button" data-speak="Hallo! Ich heiße Mia. Hallo, Mia! Ich bin Lukas. Wie geht es dir? Mir geht es gut, danke!">Dialog hören</button><button class="check-button" type="button" data-check="fill">Prüfen</button></div>
+          <p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="1" data-complete="false">
+          <div class="stage-title"><span class="step-number">2</span><div><h2>Ordne den Dialog</h2><p>Bringe die sechs Sätze in die richtige Reihenfolge.</p></div></div>
+          <div class="sortable-list" id="dialogOrder" data-answer="Hallo, Emma!|Hallo, Paul! Wie geht es dir?|Mir geht es gut, danke. Und dir?|Auch gut, danke!|Tschüss! Bis bald!|Tschüss!">
+            <button type="button">Auch gut, danke!</button><button type="button">Tschüss!</button><button type="button">Hallo, Emma!</button><button type="button">Mir geht es gut, danke. Und dir?</button><button type="button">Hallo, Paul! Wie geht es dir?</button><button type="button">Tschüss! Bis bald!</button>
+          </div>
+          <p class="move-help">Wähle einen Satz und verschiebe ihn mit den Pfeilen.</p>
+          <div class="reorder-controls"><button type="button" data-move="up">Nach oben</button><button type="button" data-move="down">Nach unten</button></div>
+          <div class="stage-actions"><button class="secondary-button speak-button" type="button" data-speak="Hallo, Emma! Hallo, Paul! Wie geht es dir? Mir geht es gut, danke. Und dir? Auch gut, danke! Tschüss! Bis bald! Tschüss!">Dialog hören</button><button class="check-button" type="button" data-check="order">Prüfen</button></div>
+          <p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="2" data-complete="false">
+          <div class="stage-title"><span class="step-number">3</span><div><h2>Höre zu und wähle</h2><p>Du darfst den Text zweimal hören. Beantworte danach alle Fragen.</p></div></div>
+          <button class="listen-big" id="listeningPlay" type="button">Text hören <span id="listenCount">0/2</span></button>
+          <div class="question-grid listening-questions">
+            <fieldset data-correct="Leonie"><legend>Wie heißt das Mädchen?</legend><label><input type="radio" name="l1" value="Mia"> Mia</label><label><input type="radio" name="l1" value="Leonie"> Leonie</label><label><input type="radio" name="l1" value="Emma"> Emma</label></fieldset>
+            <fieldset data-correct="acht"><legend>Wie alt ist sie?</legend><label><input type="radio" name="l2" value="neun"> neun</label><label><input type="radio" name="l2" value="acht"> acht</label><label><input type="radio" name="l2" value="zehn"> zehn</label></fieldset>
+            <fieldset data-correct="Rot"><legend>Was ist ihre Lieblingsfarbe?</legend><label><input type="radio" name="l3" value="Blau"> Blau</label><label><input type="radio" name="l3" value="Gelb"> Gelb</label><label><input type="radio" name="l3" value="Rot"> Rot</label></fieldset>
+            <fieldset data-correct="Mai"><legend>Wann hat sie Geburtstag?</legend><label><input type="radio" name="l4" value="Mai"> im Mai</label><label><input type="radio" name="l4" value="Juni"> im Juni</label><label><input type="radio" name="l4" value="März"> im März</label></fieldset>
+          </div>
+          <div class="stage-actions"><button class="check-button" type="button" data-check="listening">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="3" data-complete="false">
+          <div class="stage-title"><span class="step-number">4</span><div><h2>Finde die Fehler</h2><p>Wähle in jeder Zeile die richtige Verbesserung.</p></div></div>
+          <div class="error-list">
+            <fieldset data-correct="bin"><legend>Ich <mark>heiße</mark> acht Jahre alt.</legend><label><input type="radio" name="e1" value="bin"> bin</label><label><input type="radio" name="e1" value="habe"> habe</label></fieldset>
+            <fieldset data-correct="Dienstag"><legend>Nach Montag kommt <mark>Mittwoch</mark>.</legend><label><input type="radio" name="e2" value="Dienstag"> Dienstag</label><label><input type="radio" name="e2" value="Sonntag"> Sonntag</label></fieldset>
+            <fieldset data-correct="Winter"><legend>Der <mark>Sommer</mark> ist kalt und weiß.</legend><label><input type="radio" name="e3" value="Winter"> Winter</label><label><input type="radio" name="e3" value="Frühling"> Frühling</label></fieldset>
+            <fieldset data-correct="Rot"><legend>Meine Lieblingsfarbe ist <mark>fünf</mark>.</legend><label><input type="radio" name="e4" value="Rot"> Rot</label><label><input type="radio" name="e4" value="Montag"> Montag</label></fieldset>
+            <fieldset data-correct="Monat"><legend>Dezember ist ein <mark>Wochentag</mark>.</legend><label><input type="radio" name="e5" value="Monat"> Monat</label><label><input type="radio" name="e5" value="Zahl"> Zahl</label></fieldset>
+          </div>
+          <div class="stage-actions"><button class="check-button" type="button" data-check="radios">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="4" data-complete="false">
+          <div class="stage-title"><span class="step-number">5</span><div><h2>Was fehlt?</h2><p>Schreibe das fehlende Wort. Achte auf die Rechtschreibung.</p></div></div>
+          <div class="missing-list">
+            <label>Nach Montag kommt <input data-answer="Dienstag" autocomplete="off">.</label>
+            <label>Der Monat nach April ist <input data-answer="Mai" autocomplete="off">.</label>
+            <label>Im Winter ist es oft <input data-answer="kalt" autocomplete="off">.</label>
+            <label>Die Sonne ist <input data-answer="gelb" autocomplete="off">.</label>
+            <label>Zehn plus fünf ist <input data-answer="fünfzehn|15" autocomplete="off">.</label>
+            <label>Guten <input data-answer="Morgen" autocomplete="off"> sagen wir am Morgen.</label>
+          </div>
+          <div class="stage-actions"><button class="check-button" type="button" data-check="inputs">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="5" data-complete="false">
+          <div class="stage-title"><span class="step-number">6</span><div><h2>Lies und löse</h2><p>Lies den Text und löse alle drei Schritte.</p></div></div>
+          <article class="reading-card">Hallo! Ich heiße Jonas und bin neun Jahre alt. Heute ist Mittwoch. Es ist Herbst. Meine Jacke ist blau und mein Schal ist rot. Mein Geburtstag ist im Oktober. Meine Lieblingszahl ist zwölf.</article>
+          <div class="question-grid reading-questions">
+            <fieldset data-correct="Jonas"><legend>1. Wie heißt das Kind?</legend><label><input type="radio" name="r1" value="Jonas"> Jonas</label><label><input type="radio" name="r1" value="Paul"> Paul</label></fieldset>
+            <fieldset data-correct="neun"><legend>1. Wie alt ist Jonas?</legend><label><input type="radio" name="r2" value="acht"> acht</label><label><input type="radio" name="r2" value="neun"> neun</label></fieldset>
+            <fieldset data-correct="Mittwoch"><legend>2. Welcher Tag ist heute?</legend><label><input type="radio" name="r3" value="Mittwoch"> Mittwoch</label><label><input type="radio" name="r3" value="Montag"> Montag</label></fieldset>
+            <fieldset data-correct="Herbst"><legend>2. Welche Jahreszeit ist es?</legend><label><input type="radio" name="r4" value="Winter"> Winter</label><label><input type="radio" name="r4" value="Herbst"> Herbst</label></fieldset>
+            <fieldset data-correct="Oktober"><legend>2. Wann hat er Geburtstag?</legend><label><input type="radio" name="r5" value="Oktober"> Oktober</label><label><input type="radio" name="r5" value="November"> November</label></fieldset>
+            <fieldset data-correct="zwölf"><legend>3. Was ist seine Lieblingszahl?</legend><label><input type="radio" name="r6" value="zwölf"> zwölf</label><label><input type="radio" name="r6" value="zehn"> zehn</label></fieldset>
+          </div>
+          <div class="stage-actions"><button class="secondary-button speak-button" type="button" data-speak="Hallo! Ich heiße Jonas und bin neun Jahre alt. Heute ist Mittwoch. Es ist Herbst. Meine Jacke ist blau und mein Schal ist rot. Mein Geburtstag ist im Oktober. Meine Lieblingszahl ist zwölf.">Text hören</button><button class="check-button" type="button" data-check="radios">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="6" data-complete="false">
+          <div class="stage-title"><span class="step-number">7</span><div><h2>Baue richtige Sätze</h2><p>Tippe die Wörter in der richtigen Reihenfolge an.</p></div></div>
+          <div class="sentence-builders" id="sentenceBuilders"></div>
+          <div class="stage-actions"><button class="secondary-button" id="resetSentences" type="button">Neu ordnen</button><button class="check-button" type="button" data-check="sentences">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="7" data-complete="false">
+          <div class="stage-title"><span class="step-number">8</span><div><h2>Welcher Satz passt?</h2><p>Lies alle Details und wähle den passenden Satz.</p></div></div>
+          <div class="scene-card"><div class="winter-scene"><span class="snow">*</span><div class="child-figure"><span class="head"></span><span class="scarf"></span><span class="coat">11</span></div></div><div class="scene-options" data-correct="b"><button type="button" data-value="a">Es ist Sommer. Der Junge ist neun Jahre alt.</button><button type="button" data-value="b">Es ist Winter. Der Schal ist rot. Der Junge ist elf Jahre alt.</button><button type="button" data-value="c">Es ist Herbst. Die Jacke ist gelb.</button></div></div>
+          <div class="stage-actions"><button class="check-button" type="button" data-check="choice">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="8" data-complete="false">
+          <div class="stage-title"><span class="step-number">9</span><div><h2>Antworte selbst</h2><p>Schreibe vollständige Antworten über dich.</p></div></div>
+          <div class="personal-form">
+            <label>Wie heißt du?<input data-prefix="ich heiße" placeholder="Ich heiße ..."></label>
+            <label>Wie alt bist du?<input data-prefix="ich bin" data-contains="jahre alt" placeholder="Ich bin ... Jahre alt."></label>
+            <label>Wann hast du Geburtstag?<input data-prefix="mein geburtstag ist im" placeholder="Mein Geburtstag ist im ..."></label>
+            <label>Was ist deine Lieblingsfarbe?<input data-prefix="meine lieblingsfarbe ist" placeholder="Meine Lieblingsfarbe ist ..."></label>
+            <label>Welcher Wochentag ist heute?<input data-prefix="heute ist" placeholder="Heute ist ..."></label>
+            <label>Welche Jahreszeit magst du?<input data-prefix="ich mag" placeholder="Ich mag ..."></label>
+          </div>
+          <div class="stage-actions"><button class="check-button" type="button" data-check="personal">Antworten prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage" data-stage="9" data-complete="false">
+          <div class="stage-title"><span class="step-number">10</span><div><h2>Der große Starter-Dialog</h2><p>Wähle für jede Lücke eine passende Antwort.</p></div></div>
+          <div class="dialog-builder" id="dialogBuilder">
+            <label>Begrüßung<select><option value="">Bitte wählen</option><option>Guten Tag!</option><option>Gute Nacht!</option></select></label>
+            <label>Vorstellung<select><option value="">Bitte wählen</option><option>Ich heiße Mia. Wie heißt du?</option><option>Ich bin Montag.</option></select></label>
+            <label>Alter<select><option value="">Bitte wählen</option><option>Ich bin zehn Jahre alt.</option><option>Ich heiße zehn.</option></select></label>
+            <label>Lieblingsfarbe<select><option value="">Bitte wählen</option><option>Meine Lieblingsfarbe ist Blau.</option><option>Meine Farbe ist zwölf.</option></select></label>
+            <label>Abschied<select><option value="">Bitte wählen</option><option>Tschüss! Bis bald!</option><option>Guten Morgen!</option></select></label>
+          </div>
+          <div class="dialog-preview" id="dialogPreview">Dein Dialog erscheint hier.</div>
+          <div class="stage-actions"><button class="secondary-button" id="playBuiltDialog" type="button">Dialog hören</button><button class="check-button" type="button" data-check="dialog-builder">Prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage quiz-stage" data-stage="10" data-complete="false">
+          <div class="stage-title"><span class="step-number">11</span><div><h2>Abschlussquiz</h2><p>Acht Fragen – eine aus jedem Starter-Thema.</p></div></div>
+          <div id="quizBox"></div>
+          <div class="stage-actions"><button class="check-button" id="checkQuiz" type="button">Quiz prüfen</button></div><p class="feedback" aria-live="assertive"></p>
+        </section>
+
+        <section class="stage result-stage" data-stage="11">
+          <img src="../assets/images/mascot/felix-default.png" alt="Felix gratuliert">
+          <h2 id="resultTitle">Super gemacht!</h2><p id="resultText"></p><div class="score-ring" id="scoreRing">0/8</div>
+          <div class="stage-actions centered"><button class="secondary-button" id="restartLesson" type="button">Noch einmal</button><a class="primary-button link-button" href="../index.html">Zur Lernreise</a></div>
+        </section>
+      </div>
+
+      <nav class="lesson-navigation" aria-label="Navigation zwischen den Aufgaben">
+        <button class="nav-button" id="prevStage" type="button">Zurück</button>
+        <button class="nav-button next" id="nextStage" type="button" disabled>Weiter</button>
+      </nav>
+    </section>
+  </main>
+
+  <audio id="correctAudio" preload="auto" src="../audio/uebungen1/richtig.mp3"></audio>
+  <audio id="wrongAudio" preload="auto" src="../audio/uebungen1/versuch-es-noch-mal.mp3"></audio>
+</body>
+</html>
