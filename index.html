@@ -160,7 +160,9 @@
     const chapterLessons = [
       ...Array.from({ length: 8 }, (_, index) => ({ title: `Lektion ${index + 1}`, emoji: ["📕","📗","📘","📙"][index % 4], soon: true })),
       { title: "Übungen 1", emoji: "✏️", href: "pages/uebung1.html" },
-      { title: "Übungen 2", emoji: "🧩", soon: true },
+      { title: "Übungen 2", emoji: "🧩", href: "pages/uebungen2.html",
+  soon: false
+}
       { title: "Prüfung", emoji: "🏆", soon: true }
     ];
 
